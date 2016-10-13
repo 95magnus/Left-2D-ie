@@ -3,12 +3,12 @@ project(Left2Die)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp
-        states/StateBase.h
-        states/StateBase.cpp
-        states/StateMachine.cpp
-        states/StateMachine.h
-        states/StateMainMenu.cpp states/StateMainMenu.h util/ResourceLoader.cpp util/ResourceLoader.h Game.cpp Game.h states/StateSinglePlayer.cpp states/StateSinglePlayer.h states/StateMultiPlayer.cpp states/StateMultiPlayer.h states/StateHighScore.cpp states/StateHighScore.h states/StateSettings.cpp states/StateSettings.h)
+set(SOURCE_FILES src/main.cpp
+        src/states/StateBase.h
+        src/states/StateBase.cpp
+        src/states/StateMachine.cpp
+        src/states/StateMachine.h
+        src/states/StateMainMenu.cpp src/states/StateMainMenu.h src/util/ResourceLoader.cpp src/util/ResourceLoader.h src/Game.cpp src/Game.h src/states/StateSinglePlayer.cpp src/states/StateSinglePlayer.h src/states/StateMultiPlayer.cpp src/states/StateMultiPlayer.h src/states/StateHighScore.cpp src/states/StateHighScore.h src/states/StateSettings.cpp src/states/StateSettings.h)
 add_executable(Left2Die ${SOURCE_FILES})
 
 target_link_libraries (Left2Die sfml-graphics sfml-window sfml-system)
