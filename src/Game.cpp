@@ -92,6 +92,7 @@ void Game::update() {
 }
 
 void Game::draw() {
+
     window->clear(sf::Color::Black);
 
     stateMachine->draw();
