@@ -4,6 +4,8 @@
 #include "StateBase.h"
 #include "../Game.h"
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/OpenGL.hpp>
+
 
 class StateMainMenu : public StateBase {
 public:
@@ -12,6 +14,9 @@ public:
 
     void update();
     void draw();
+
+protected:
+
 };
 
 #endif //LEFT2DIE_STATEMAINMENU_H

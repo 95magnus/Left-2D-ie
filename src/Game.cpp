@@ -20,10 +20,12 @@ void Game::init() {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 4;
 
-    window = new sf::RenderWindow(sf::VideoMode(width, height), title, sf::Style::Default, settings);
+    window = new sf::RenderWindow(sf::VideoMode(width, height), title, sf::Style::Titlebar | sf::Style::Close, settings);
 
     // Makes the window move weird on Linux for some reason
     // window->setVerticalSyncEnabled(true);
+
+    // window->setActive(true);
 
     window->setFramerateLimit(60);
 
@@ -46,7 +48,10 @@ void Game::start() {
     run();
 }
 
+
 void Game::run() {
+    sf::Clock clock;
+
     while (window->isOpen() && running)
     {
         sf::Event event;
@@ -75,8 +80,12 @@ void Game::run() {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num5)) {
                 stateMachine->setState(StateMachine::StateID::SETTINGS);
             }
+            else{
+                desktop.HandleEvent(event);
+            }
         }
 
+        desktop.Update(clock.restart().asMicroseconds());
         update();
         draw();
     }
@@ -92,10 +101,9 @@ void Game::update() {
 }
 
 void Game::draw() {
-
     window->clear(sf::Color::Black);
-
     stateMachine->draw();
 
+    sfgui.Display(*window);
     window->display();
 }

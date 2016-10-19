@@ -3,6 +3,8 @@
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include <SFGUI/SFGUI.hpp>
+#include <SFGUI/Widgets.hpp>
 #include "states/StateMachine.h"
 #include "util/ResourceLoader.h"
 
@@ -27,6 +29,9 @@ public:
     sf::Font& getFont() const { return *font; }
     sf::RenderWindow& getWindow() const { return *window; }
     StateMachine& getStateMachine() const {return *stateMachine; }
+
+    sfg::Desktop desktop;
+    sfg::SFGUI sfgui;
 
 protected:
     unsigned int width, height;
