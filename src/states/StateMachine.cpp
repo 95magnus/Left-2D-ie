@@ -29,13 +29,17 @@ void StateMachine::draw() {
 }
 
 void StateMachine::pause() {
-    currentState->pause();
-    paused = true;
+    if (!paused){
+        currentState->pause();
+        paused = true;
+    }
 }
 
 void StateMachine::resume() {
-    currentState->resume();
-    paused = false;
+    if (paused) {
+        currentState->resume();
+        paused = false;
+    }
 }
 
 void StateMachine::setState(StateID state) {
