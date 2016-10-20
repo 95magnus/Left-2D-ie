@@ -4,6 +4,8 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "states/StateMachine.h"
+#include "util/ResourceLoader.h"
 
 typedef std::string String;
 
@@ -32,6 +34,9 @@ public:
     sf::Vector2f getWindowCenter() const {
         return sf::Vector2f(getWindow().getSize().x/2, getWindow().getSize().y/2);
     };
+
+    //sfg::Desktop desktop;
+    //sfg::SFGUI sfgui;
 
 protected:
     unsigned int width, height;

@@ -3,9 +3,10 @@
 #include "../util/VectorUtil.h"
 
 InputTester::InputTester(InputManager* inputManager) : InputObserver(inputManager) {
-    shape = sf::CircleShape(radius);
+    shape = sf::RectangleShape(sf::Vector2f(200, 100));
     shape.setFillColor(sf::Color::Green);
-    shape.setOrigin(radius, radius);
+    //shape.setOrigin(radius, radius);
+    shape.setOrigin(shape.getSize().x/2, shape.getSize().y/2);
 
     heading = sf::RectangleShape(sf::Vector2f(radius, 2));
     heading.setFillColor(sf::Color::Blue);
@@ -18,7 +19,7 @@ void InputTester::draw(sf::RenderTarget& target, sf::RenderStates states) const 
     states.transform *= getTransform();
 
     target.draw(shape, states);
-    target.draw(heading, states);
+    //target.draw(heading, states);
 }
 
 void InputTester::mousePressed(int x, int y, sf::Mouse::Button button) {
@@ -37,7 +38,7 @@ void InputTester::mousePressed(int x, int y, sf::Mouse::Button button) {
 void InputTester::mouseMoved(int x, int y) {
     mousePos = sf::Vector2f(x, y);
     auto test = shape.getOrigin();
-    headingAngle = 30;
+    headingAngle = 0;
 
     shape.setRotation(headingAngle);
     heading.setRotation(headingAngle);

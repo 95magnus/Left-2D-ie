@@ -38,7 +38,7 @@ void Game::init() {
     loader.loadFont(font, "deathrattlebb_reg.ttf"); // Font source: http://www.1001fonts.com/deathrattle-bb-font.html
     //font = &loader.loadFont("deathrattlebb_reg.ttf");
 
-    inputTester->setTexture(&loader.loadTexture("ball.png"));
+    inputTester->setTexture(&loader.loadTexture("player.png"));
 }
 
 void Game::start() {
@@ -47,6 +47,7 @@ void Game::start() {
     run();
 }
 
+
 void Game::run() {
     while (window->isOpen() && running) {
         // Returns false when window is close requested
@@ -54,6 +55,7 @@ void Game::run() {
             stop();
         }
 
+        //desktop.Update(clock.restart().asMicroseconds());
         update();
         draw();
     }
@@ -75,5 +77,6 @@ void Game::draw() {
     window->draw(*inputTester);
     stateMachine->draw();
 
+    //sfgui.Display(*window);
     window->display();
 }

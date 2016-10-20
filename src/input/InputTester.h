@@ -16,13 +16,14 @@ public:
     void setTexture(sf::Texture *texture);
 
 private:
-    int radius = 30;
-    float movementSpeed = 7.0f;
+    int radius = 100;
+    float movementSpeed = 5.0f;
 
     sf::Vector2f mousePos;
     int headingAngle;
 
-    sf::CircleShape shape;
+    //sf::CircleShape shape;
+    sf::RectangleShape shape;
     sf::RectangleShape heading;
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
