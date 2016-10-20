@@ -37,6 +37,8 @@ void Game::init() {
 
     loader.loadFont(font, "deathrattlebb_reg.ttf"); // Font source: http://www.1001fonts.com/deathrattle-bb-font.html
     //font = &loader.loadFont("deathrattlebb_reg.ttf");
+
+    inputTester->setTexture(&loader.loadTexture("ball.png"));
 }
 
 void Game::start() {
@@ -63,14 +65,15 @@ void Game::stop() {
 }
 
 void Game::update() {
+    inputManager->update();
     stateMachine->update();
 }
 
 void Game::draw() {
     window->clear(sf::Color::Black);
 
-    stateMachine->draw();
     window->draw(*inputTester);
+    stateMachine->draw();
 
     window->display();
 }

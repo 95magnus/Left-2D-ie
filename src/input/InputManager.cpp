@@ -16,6 +16,25 @@ InputManager::~InputManager() {
     observers.clear();
 }
 
+void InputManager::update() {
+    // TODO: Create player controller class for handling movement
+    moveDirection = sf::Vector2f(0, 0);
+
+    if (actionState[Action::MOVE_UP])
+        moveDirection += sf::Vector2f(0.0f, -1.0f);
+    if (actionState[Action::MOVE_DOWN])
+        moveDirection += sf::Vector2f(0.0f, 1.0f);
+    if (actionState[Action::MOVE_LEFT])
+        moveDirection += sf::Vector2f(-1.0f, 0.0f);
+    if (actionState[Action::MOVE_RIGHT])
+        moveDirection += sf::Vector2f(1.0f, 0.0f);
+
+    for (auto &obs : observers) {
+        obs->actionMove(moveDirection);
+    }
+    //------------------------------------------------
+}
+
 void InputManager::setDefaultMappings() {
     actionKeyMappings[Action::MOVE_UP]    = Key::W;
     actionKeyMappings[Action::MOVE_DOWN]  = Key::S;
@@ -24,7 +43,7 @@ void InputManager::setDefaultMappings() {
     actionKeyMappings[Action::USE]        = Key::E;
 
     // Populate the reverse lookup table
-    // Key - key, value - action
+    // Key -> sf::Key, value -> Action
     for (auto &actionKey : actionKeyMappings)
         keyActionMappings[actionKey.second] = actionKey.first;
 }
@@ -39,7 +58,6 @@ void InputManager::initActionStates() {
 
 bool InputManager::checkForInput() {
     sf::Event event;
-    sf::Vector2f dir(0, 0);
 
     while(window->pollEvent(event)) {
         switch(event.type) {
@@ -54,6 +72,9 @@ bool InputManager::checkForInput() {
                 }
 
                 switch (event.key.code) {
+                    case Key::Escape:
+                        return false;
+
                     case Key::Num1:
                         stateMachine->setState(StateMachine::StateID::MAIN_MENU);
                         break;
@@ -157,27 +178,7 @@ bool InputManager::checkForInput() {
                 break;
 
             default:
-                /*
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1)) {
-                    game->getStateMachine().setState(StateMachine::StateID::MAIN_MENU);
-                }
 
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2)) {
-                    game->getStateMachine().setState(StateMachine::StateID::SINGLE_PLAYER);
-                }
-
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3)) {
-                    game->getStateMachine().setState(StateMachine::StateID::MULTI_PLAYER);
-                }
-
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num4)) {
-                    game->getStateMachine().setState(StateMachine::StateID::HIGH_SCORE);
-                }
-
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num5)) {
-                    game->getStateMachine().setState(StateMachine::StateID::SETTINGS);
-                }
-                */
                 break;
 
         }

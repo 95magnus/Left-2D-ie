@@ -24,6 +24,8 @@ public:
     InputManager(sf::RenderWindow* window, StateMachine* stateMachine);
     virtual ~InputManager();
 
+    void update();
+
     bool checkForInput();
     void setDefaultMappings();
     void initActionStates();
@@ -34,14 +36,14 @@ public:
 
 protected:
     const float joystickThreshold = 0.1f;
-
     unsigned int connectedJoysticks;
+
+    sf::Vector2f moveDirection;
 
     std::vector<InputObserver*> observers;
 
     std::map<Action, Key> actionKeyMappings;
     std::map<Key, Action> keyActionMappings;
-
     std::map<Action, bool> actionState;
 
     sf::RenderWindow *window;
