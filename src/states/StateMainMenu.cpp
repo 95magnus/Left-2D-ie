@@ -26,7 +26,7 @@ void StateMainMenu::draw() {
     game->getWindow().draw(text);
     game->getWindow().draw(title);
 
-    auto app_window = sfg::Window::Create();
-    game->desktop.Add(app_window);
+   // auto app_window = sfg::Window::Create();
+   // game->desktop.Add(app_window);
 }
 
