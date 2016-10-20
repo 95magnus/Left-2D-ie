@@ -16,9 +16,13 @@ public:
     sf::Texture& loadTexture(const String &fileName) const;
     void loadTexture(sf::Texture* texture, const String &fileName);
 
+    sf::Image& loadGuiImage(const String &fileName) const;
+    void loadGuiImage(sf::Image* image, const String &fileName);
+
 protected:
     const String fontDir = "fonts/";
     const String textureDir = "textures/";
+    const String guiDir = "gui/";
     String resourceDir;
 };
 

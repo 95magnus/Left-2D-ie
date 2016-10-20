@@ -6,6 +6,7 @@
 #include <map>
 #include "../Game.h"
 #include "StateMainMenu.h"
+#include "StatePlayGame.h"
 #include "StateSinglePlayer.h"
 #include "StateMultiPlayer.h"
 #include "StateHighScore.h"
@@ -18,6 +19,7 @@ class StateMachine {
 public:
     enum class StateID {
         MAIN_MENU,
+        PLAY_GAME,
         SINGLE_PLAYER,
         MULTI_PLAYER,
         HIGH_SCORE,

@@ -4,6 +4,7 @@ StateMachine::StateMachine(Game* game) {
     this->game = game;
 
     states[StateID::MAIN_MENU] = new StateMainMenu(game);
+    states[StateID::PLAY_GAME] = new StatePlayGame(game);
     states[StateID::SINGLE_PLAYER] = new StateSinglePlayer(game);
     states[StateID::MULTI_PLAYER] = new StateMultiPlayer(game);
     states[StateID::HIGH_SCORE] = new StateHighScore(game);

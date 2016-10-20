@@ -61,6 +61,10 @@ void Game::run() {
             if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 stop();
 
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num0)) {
+                stateMachine->setState(StateMachine::StateID::PLAY_GAME);
+            }
+
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1)) {
                 stateMachine->setState(StateMachine::StateID::MAIN_MENU);
             }
