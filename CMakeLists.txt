@@ -28,7 +28,8 @@ set(SOURCE_FILES src/main.cpp
         src/input/InputTester.h
         src/util/VectorUtil.h
         src/util/ResourceLoader.cpp
-        src/util/ResourceLoader.h src/level/Level.cpp src/level/Level.h)
+        src/util/ResourceLoader.h)
+
 add_executable(Left2Die ${SOURCE_FILES})
 
 target_link_libraries (Left2Die sfml-graphics sfml-window sfml-system sfgui)
