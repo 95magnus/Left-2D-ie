@@ -1,6 +1,8 @@
 #include "Game.h"
-
-#define DEBUG 1
+#include "states/StateMachine.h"
+#include "util/ResourceLoader.h"
+#include "input/InputManager.h"
+#include "input/InputTester.h"
 
 Game::Game(const unsigned int width, const unsigned int height, const String &title) {
     this->width = width;
@@ -12,34 +14,31 @@ Game::Game(const unsigned int width, const unsigned int height, const String &ti
 
 Game::~Game() {
     delete stateMachine;
+    delete inputManager;
     delete window;
     delete font;
+    delete inputTester;
 }
 
 void Game::init() {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 4;
 
-    window = new sf::RenderWindow(sf::VideoMode(width, height), title, sf::Style::Titlebar | sf::Style::Close, settings);
-
-    // Makes the window move weird on Linux for some reason
-    // window->setVerticalSyncEnabled(true);
-
-    // window->setActive(true);
-
+    window = new sf::RenderWindow(sf::VideoMode(width, height), title, sf::Style::Default, settings);
     window->setFramerateLimit(60);
 
     stateMachine = new StateMachine(this);
+    inputManager = new InputManager(window, stateMachine);
     font = new sf::Font();
+
+    inputTester = new InputTester(inputManager);
 
     ResourceLoader loader("resources/");
 
-#if DEBUG
     loader.loadFont(font, "deathrattlebb_reg.ttf"); // Font source: http://www.1001fonts.com/deathrattle-bb-font.html
-#else
-    font = &loader.loadFont("deathrattlebb_reg.ttf");
-#endif
+    //font = &loader.loadFont("deathrattlebb_reg.ttf");
 
+    inputTester->setTexture(&loader.loadTexture("player.png"));
 }
 
 void Game::start() {
@@ -50,42 +49,13 @@ void Game::start() {
 
 
 void Game::run() {
-    sf::Clock clock;
-
-    while (window->isOpen() && running)
-    {
-        sf::Event event;
-
-        while (window->pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-                stop();
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1)) {
-                stateMachine->setState(StateMachine::StateID::MAIN_MENU);
-            }
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2)) {
-                stateMachine->setState(StateMachine::StateID::SINGLE_PLAYER);
-            }
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3)) {
-                stateMachine->setState(StateMachine::StateID::MULTI_PLAYER);
-            }
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num4)) {
-                stateMachine->setState(StateMachine::StateID::HIGH_SCORE);
-            }
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num5)) {
-                stateMachine->setState(StateMachine::StateID::SETTINGS);
-            }
-            else{
-                desktop.HandleEvent(event);
-            }
+    while (window->isOpen() && running) {
+        // Returns false when window is close requested
+        if (!inputManager->checkForInput()) {
+            stop();
         }
 
-        desktop.Update(clock.restart().asMicroseconds());
+        //desktop.Update(clock.restart().asMicroseconds());
         update();
         draw();
     }
@@ -97,13 +67,16 @@ void Game::stop() {
 }
 
 void Game::update() {
+    inputManager->update();
     stateMachine->update();
 }
 
 void Game::draw() {
     window->clear(sf::Color::Black);
+
+    window->draw(*inputTester);
     stateMachine->draw();
 
-    sfgui.Display(*window);
+    //sfgui.Display(*window);
     window->display();
 }

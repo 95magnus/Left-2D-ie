@@ -3,14 +3,15 @@
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Font.hpp>
-#include <SFGUI/SFGUI.hpp>
-#include <SFGUI/Widgets.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include "states/StateMachine.h"
 #include "util/ResourceLoader.h"
 
 typedef std::string String;
 
 class StateMachine;
+class InputManager;
+class InputTester;
 
 class Game {
 public:
@@ -29,19 +30,25 @@ public:
     sf::Font& getFont() const { return *font; }
     sf::RenderWindow& getWindow() const { return *window; }
     StateMachine& getStateMachine() const {return *stateMachine; }
+    InputManager& getInputManager() const {return *inputManager; }
+    sf::Vector2f getWindowCenter() const {
+        return sf::Vector2f(getWindow().getSize().x/2, getWindow().getSize().y/2);
+    };
 
-    sfg::Desktop desktop;
-    sfg::SFGUI sfgui;
+    //sfg::Desktop desktop;
+    //sfg::SFGUI sfgui;
 
 protected:
     unsigned int width, height;
     String title;
     bool running;
 
+    InputTester* inputTester;
+
     StateMachine* stateMachine;
+    InputManager* inputManager;
 
     sf::RenderWindow* window;
-
     sf::Font* font;
 };
 
