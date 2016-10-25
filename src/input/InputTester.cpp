@@ -3,7 +3,7 @@
 #include "../util/VectorUtil.h"
 
 InputTester::InputTester(InputManager* inputManager) : InputObserver(inputManager) {
-    shape = sf::RectangleShape(sf::Vector2f(200, 100));
+    shape = sf::RectangleShape(sf::Vector2f(150, 75));
     shape.setFillColor(sf::Color::Green);
     //shape.setOrigin(radius, radius);
     shape.setOrigin(shape.getSize().x/2, shape.getSize().y/2);
@@ -42,11 +42,12 @@ void InputTester::mouseMoved(int x, int y) {
 
     shape.setRotation(headingAngle);
     heading.setRotation(headingAngle);
-
+/*
     printf("Mouse(%d, %d) | Pos(%d, %d) -> Angle: %d\n",
            x, y, test.x, test.y,
            util::angleDegrees(test, mousePos)
     );
+    */
 }
 
 void InputTester::actionMove(sf::Vector2f direction) {

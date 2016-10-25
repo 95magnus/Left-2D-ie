@@ -1,3 +1,4 @@
+#include <iostream>
 #include "InputManager.h"
 #include "InputObserver.h"
 #include "../states/StateMachine.h"
@@ -96,6 +97,17 @@ bool InputManager::checkForInput() {
             }
 
             case sf::Event::KeyReleased: {
+                if (event.key.code == konamiCode[konamiIndex])
+                    konamiIndex++;
+                else
+                    konamiIndex  = 0;
+
+                if (konamiIndex >= konamiCode.size()){
+                    //printf("KONAMI CODE UNLEASHED!! AUBY INCOMING");
+                    std::cout << "KONAMI CODE UNLEASHED!! AUBY INCOMING!!11!1!|" << std::endl;
+                    konamiIndex = 0;
+                }
+
                 // Set action status(true) if corresponding button is pressed
                 for (auto &elem : keyActionMappings) {
                     if (event.key.code == elem.first)

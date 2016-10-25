@@ -35,6 +35,22 @@ public:
     void removeObserver(InputObserver* observer);
 
 protected:
+    std::vector<Key> konamiCode = {
+            Key::Up,
+            Key::Up,
+            Key::Down,
+            Key::Down,
+            Key::Left,
+            Key::Right,
+            Key::Left,
+            Key::Right,
+            Key::B,
+            Key::A,
+            Key::Return
+    };
+
+    int konamiIndex = 0;
+
     const float joystickThreshold = 0.1f;
     unsigned int connectedJoysticks;
 
