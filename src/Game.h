@@ -8,6 +8,7 @@
 #include "states/StateMachine.h"
 #include "util/ResourceLoader.h"
 
+
 typedef std::string String;
 
 class StateMachine;

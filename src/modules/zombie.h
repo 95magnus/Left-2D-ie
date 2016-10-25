@@ -2,25 +2,43 @@
 #define LEFT2DIE_ZOMBIE_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 class Zombie {
 public:
-    // Model
+    // Models
     sf::RectangleShape zom;
+    sf::RectangleShape hitbox;
+
+    // Sound elements
+    sf::SoundBuffer SBuffer;
+    sf::Sound sound;
+
+
+    // Move Actions
+    void moveUp(float dt);
+    void moveDown(float dt);
+    void moveRight(float dt);
+    void moveLeft(float dt);
 
 
     void death();
+    void hit();
     Zombie();
     virtual ~Zombie();
 
     // Getters & setters
-    int getHealt() const;
+    int getHealth() const;
+    void setHealth(int health);
+    int getSpeed() const;
+    void setSpeed(int speed);
 
-    void setHealt(int health);
 
 
 private:
     int health;
+    int speed;
+    int armor;
 
 };
 
