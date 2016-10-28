@@ -47,7 +47,6 @@ void Game::start() {
     run();
 }
 
-
 void Game::run() {
     while (window->isOpen() && running) {
         // Returns false when window is close requested

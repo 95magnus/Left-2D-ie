@@ -28,7 +28,10 @@ set(SOURCE_FILES src/main.cpp
         src/input/InputTester.h
         src/util/VectorUtil.h
         src/util/ResourceLoader.cpp
-        src/util/ResourceLoader.h)
+        src/util/ResourceLoader.h
+        src/level/Level.cpp
+        src/level/Level.h
+        src/level/tiles/TileBase.h src/level/tiles/TileBase.cpp src/level/tiles/TileStone.cpp src/level/tiles/TileStone.h)
 
 add_executable(Left2Die ${SOURCE_FILES})
 

@@ -2,12 +2,8 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Game.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Game.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/util/VectorUtil.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateMachine.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateMainMenu.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateHighScore.h" isTestSource="false" />
@@ -22,6 +18,16 @@
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateSinglePlayer.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateBase.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateMultiPlayer.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Game.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/util/VectorUtil.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileStone.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileStone.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileBase.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileBase.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/level/Level.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/level/Level.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputTester.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputManager.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputTester.h" isTestSource="false" />
