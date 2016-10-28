@@ -7,12 +7,17 @@
 
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 class Player {
 public:
     // Model
     sf::RectangleShape sprite;
     sf::RectangleShape hitbox;
+
+    // Sounds
+    sf::SoundBuffer SBuffer;
+    sf::Sound sound;
 
     // Actions
     void moveUp(float dt);
@@ -26,6 +31,7 @@ public:
     void specialWeapon;
      */
     void death();
+    void hit();
     Player();
     ~Player();
 

@@ -2,7 +2,7 @@
 
 int main()
 {
-    Game(800, 600, "Left[2D]ie").start();
+    Game(1024, 720, "Left[2D]ie").start();
 
     return 0;
 }
