@@ -3,23 +3,39 @@
 
 #include "StateBase.h"
 #include "../Game.h"
-#include "../GUI/Button.h"
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/OpenGL.hpp>
 #include <SFGUI/SFGUI.hpp>
 
+class Object;
+typedef std::string String;
 
-class StateMainMenu : public StateBase{
+class StateMainMenu : public StateBase, public sfg::Object{
 public:
-    StateMainMenu(Game* game);
+    StateMainMenu(Game *game);
     virtual ~StateMainMenu();
 
     void update();
     void draw();
-    Button* button;
+
+    void loadButton(const sfg::Button::Ptr buttonName, const String &filename);
+    void setButtonPosition(const sfg::Button::Ptr buttonName, const sf::Vector2f &position);
+
+    //void buttonClicked(const sfg::Button::Ptr buttonName);
+    void buttonClicked();
 
 protected:
+    String filename;
+    sf::Image* guiImage;
+    sf::Vector2f position;
+    sfg::Image::Ptr sfgImage;
+
+    sfg::Button::Ptr buttonName;
+    sfg::Button::Ptr playButton;
+    sfg::Button::Ptr hiscoresButton;
+    sfg::Button::Ptr settingsButton;
+    sfg::Button::Ptr quitButton;
 
 };
 

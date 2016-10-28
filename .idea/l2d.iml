@@ -2,8 +2,11 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src/Game.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Game.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Game.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StatePlayGame.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateSettings.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateMachine.cpp" isTestSource="false" />
@@ -20,11 +23,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateMultiPlayer.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateBase.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateMachine.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/GUI/Button.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/GUI/Button.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />

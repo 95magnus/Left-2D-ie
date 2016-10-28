@@ -30,8 +30,10 @@ public:
     sf::RenderWindow& getWindow() const { return *window; }
     StateMachine& getStateMachine() const {return *stateMachine; }
 
-    sfg::Desktop desktop;
-    sfg::SFGUI sfgui;
+    // Create an SFGUI. This is required before doing anything with SFGUI.
+    sfg::SFGUI* sfgui;
+
+    sfg::Desktop sfgDesktop;
 
 protected:
     unsigned int width, height;
