@@ -6,7 +6,8 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "states/StateMachine.h"
 #include "util/ResourceLoader.h"
-
+#include <SFGUI/SFGUI.hpp>
+#include <SFGUI/Widgets.hpp>
 
 typedef std::string String;
 
@@ -30,14 +31,17 @@ public:
 
     sf::Font& getFont() const { return *font; }
     sf::RenderWindow& getWindow() const { return *window; }
+    sfg::Desktop& getDesktop() const { return *sfgDesktop; }
     StateMachine& getStateMachine() const {return *stateMachine; }
     InputManager& getInputManager() const {return *inputManager; }
     sf::Vector2f getWindowCenter() const {
         return sf::Vector2f(getWindow().getSize().x/2, getWindow().getSize().y/2);
     };
 
-    //sfg::Desktop desktop;
-    //sfg::SFGUI sfgui;
+    // Create an SFGUI. This is required before doing anything with SFGUI.
+    sfg::SFGUI* sfgui;
+
+
 
 protected:
     unsigned int width, height;
@@ -51,6 +55,9 @@ protected:
 
     sf::RenderWindow* window;
     sf::Font* font;
+
+    sf::Clock timer;
+    sfg::Desktop* sfgDesktop;
 };
 
 

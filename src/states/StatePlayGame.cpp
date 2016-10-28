@@ -13,14 +13,14 @@ void StatePlayGame::update() {
 }
 
 void StatePlayGame::draw() {
-    sf::Text title("Left[2D]ie", game->getFont(), 100);
-    title.setFillColor(sf::Color::Red);
-    title.setPosition(200, 50);
+//    sf::Text title("Left[2D]ie", game->getFont(), 100);
+//    title.setFillColor(sf::Color::Red);
+//    title.setPosition(200, 50);
 
     sf::Text text("Play", game->getFont());
     text.setFillColor(sf::Color::Red);
     text.setPosition(600, 200);
 
     game->getWindow().draw(text);
-    game->getWindow().draw(title);
+//    game->getWindow().draw(title);
 }
