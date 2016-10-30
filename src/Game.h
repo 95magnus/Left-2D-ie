@@ -6,6 +6,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "states/StateMachine.h"
 #include "util/ResourceLoader.h"
+#include <SFML/Config.hpp>
 
 
 typedef std::string String;
