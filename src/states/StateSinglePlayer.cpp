@@ -13,9 +13,9 @@ void StateSinglePlayer::update() {
 }
 
 void StateSinglePlayer::draw() {
-    sf::Text title("Left[2D]ie", game->getFont(), 100);
+    sf::Text title("Left[2D]ie", game->getFont(), 140);
     title.setFillColor(sf::Color::Red);
-    title.setPosition(200, 50);
+    title.setPosition(275, 50);
 
     sf::Text text("Single player state", game->getFont());
     text.setFillColor(sf::Color::Red);

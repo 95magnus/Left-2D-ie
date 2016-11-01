@@ -23,6 +23,7 @@ StateMachine::~StateMachine() {
 
 void StateMachine::update() {
     currentState->update();
+    currentState->updateDesktop();
 }
 
 void StateMachine::draw() {
@@ -45,4 +46,6 @@ void StateMachine::resume() {
 
 void StateMachine::setState(StateID state) {
     currentState = states[state];
+
+    currentState->resume();
 }

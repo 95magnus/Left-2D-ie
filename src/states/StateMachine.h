@@ -36,6 +36,7 @@ public:
     void resume();
 
     void setState(StateID state);
+    StateBase* getState() const { return currentState; }
 
     void togglePause() { paused = !paused; }
 

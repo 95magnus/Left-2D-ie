@@ -1,28 +1,27 @@
 #include "StateMainMenu.h"
 
 StateMainMenu::StateMainMenu(Game *game) : StateBase(game) {
-    sfgDesktop = &game->getDesktop();
+    //sfgDesktop = &game->getDesktop();
 
-//    playButton = sfg::Button::Create();
-//    loadButton(playButton, "PlayButton.png");
-//    setButtonPosition(playButton, sf::Vector2f(570.0f, 170.0f));
-//
-//    hiscoresButton = sfg::Button::Create();
-//    loadButton(hiscoresButton, "PlayButton.png");
-//    setButtonPosition(hiscoresButton, sf::Vector2f(570.0f, 250.0f));
-//
-//    settingsButton = sfg::Button::Create();
-//    loadButton(settingsButton, "PlayButton.png");
-//    setButtonPosition(settingsButton, sf::Vector2f(570.0f, 330.0f));
-//
-//    quitButton = sfg::Button::Create();
-//    loadButton(quitButton, "PlayButton.png");
-//    setButtonPosition(quitButton, sf::Vector2f(570.0f, 420.0f));
-//
-//    std::cout << "Hei" << std::endl;
+    // Some weird reason the first button don't match with sfgDesktop in x-axis: making an invisible button
+    auto invisibleButton = sfg::Button::Create("");
+    createButton(invisibleButton, sf::Vector2f(0.f, 0.f));
 
-    playButton = sfg::Button::Create();
-    createButton(playButton, sf::Vector2f(570.0f, 250.0f), "PlayButton.png");
+    auto playButton = sfg::Button::Create("Play");
+    createButton(playButton, sf::Vector2f(670.0f, 240.0f));
+    playButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonPlayClicked,this));
+
+    auto hiscoresButton = sfg::Button::Create("Hiscores");
+    createButton(hiscoresButton, sf::Vector2f(670.0f, 330.0f));
+    hiscoresButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonHiscoresClicked,this));
+
+    auto settingsButton = sfg::Button::Create("Settings");
+    createButton(settingsButton, sf::Vector2f(670.0f, 420.0f));
+    settingsButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonSettingsClicked,this));
+
+    auto quitButton = sfg::Button::Create("Quit");
+    createButton(quitButton, sf::Vector2f(670.0f, 510.0f));
+    quitButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonQuitClicked,this));
 }
 
 StateMainMenu::~StateMainMenu() {
@@ -30,50 +29,54 @@ StateMainMenu::~StateMainMenu() {
 }
 
 void StateMainMenu::update() {
-//    if(playButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonClicked,this))){
-//        game->getStateMachine().setState(StateMachine::StateID::PLAY_GAME);
-//    }
+    desktop->Refresh();
 }
 
 void StateMainMenu::draw() {
-    sf::Text title("Left[2D]ie", game->getFont(), 100);
+    sf::Text title("Left[2D]ie", game->getFont(), 140);
     title.setFillColor(sf::Color::Red);
-    title.setPosition(200, 50);
+    title.setPosition(275, 50);
 
+    sf::Text text("Main Menu state", game->getFont());
+    text.setFillColor(sf::Color::Red);
+    text.setPosition(300, 300);
+
+    game->getWindow().draw(text);
     game->getWindow().draw(title);
 }
-//
-//void StateMainMenu::loadButton(const sfg::Button::Ptr buttonName, const String &filename) {
-//    auto guiImage = new sf::Image();
-//    ResourceLoader loader("resources/");
-//    loader.loadGuiImage(guiImage, filename);
-//    buttonName->SetId(filename);
-//}
-//
-//void StateMainMenu::setButtonPosition(const sfg::Button::Ptr buttonName, const sf::Vector2f &position) {
-//    buttonName->SetPosition(position);
-//    auto sfgImage = sfg::Image::Create(guiImage);
-//    buttonName->SetImage(sfgImage);
-//
-//    sfgDesktop->Add(buttonName);
-//    sfgDesktop->LoadThemeFromFile("resources/gui/theme.css");
-//}
 
-void StateMainMenu::buttonClicked() {
-    // Get buttons
-}
+void StateMainMenu::createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position) {
+    desktop->SetProperty("Button#button", "FontSize", 70.f);
 
-void StateMainMenu::createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position, const String &filename) {
-    auto guiImage = new sf::Image();
-    ResourceLoader loader("resources/");
-    loader.loadGuiImage(guiImage, filename);
-    buttonName->SetId(filename);
-
+    buttonName->SetId("button");
     buttonName->SetPosition(position);
-    auto sfgImage = sfg::Image::Create(*guiImage);
-    buttonName->SetImage(sfgImage);
+    buttonName->SetRequisition(sf::Vector2f(0.f, 85.0f));
 
-    sfgDesktop->LoadThemeFromFile("resources/gui/theme.css");
-    sfgDesktop->Add(buttonName);
+    desktop->LoadThemeFromFile("resources/gui/theme.css");
+    desktop->Add(buttonName);
 }
+
+void StateMainMenu::buttonPlayClicked() {
+    desktop->RemoveAll();
+    game->getStateMachine().setState(StateMachine::StateID::PLAY_GAME);
+}
+
+void StateMainMenu::buttonHiscoresClicked() {
+    desktop->RemoveAll();
+    game->getStateMachine().setState(StateMachine::StateID::HIGH_SCORE);
+}
+
+void StateMainMenu::buttonSettingsClicked() {
+    desktop->RemoveAll();
+    game->getStateMachine().setState(StateMachine::StateID::SETTINGS);
+}
+
+void StateMainMenu::buttonQuitClicked() {
+    desktop->RemoveAll();
+    game->stop();
+}
+
+//void StateMainMenu::setButtonColor(const String &s, const sf::Color &color, const sf::Color &prelight) {
+//
+//}
 

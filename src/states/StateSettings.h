@@ -12,6 +12,9 @@ public:
 
     void update();
     void draw();
+
+    void showGui();
+    void hideGui();
 };
 
 #endif //LEFT2DIE_STATESETTINGS_H

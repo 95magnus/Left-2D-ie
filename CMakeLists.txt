@@ -34,7 +34,7 @@ set(SOURCE_FILES src/main.cpp
         src/modules/Player.cpp
         src/modules/Player.h
         src/modules/zombie.cpp
-        src/modules/zombie.h)
+        src/modules/zombie.h src/GUI/Button.cpp src/GUI/Button.h)
 
 find_package (OpenGL REQUIRED)
 add_executable(Left2Die ${SOURCE_FILES})

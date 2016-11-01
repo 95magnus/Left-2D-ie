@@ -3,6 +3,7 @@
 
 #include "StateBase.h"
 #include "../Game.h"
+#include "../GUI/Button.h"
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/OpenGL.hpp>
@@ -15,32 +16,32 @@ typedef std::string String;
 class StateMainMenu : public StateBase{
 public:
     StateMainMenu(Game *game);
+
     virtual ~StateMainMenu();
 
-    void update();
-    void draw();
+    virtual void update();
+    virtual void draw();
 
- //   void loadButton(const sfg::Button::Ptr buttonName, const String &filename);
-    void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position, const String &filename);
-  //  void setButtonPosition(const sfg::Button::Ptr buttonName, const sf::Vector2f &position);
+    void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);
+  //  inline void setButtonColor(const String& s, const sf::Color &color, const sf::Color &prelight);
 
-    //void buttonClicked(const sfg::Button::Ptr buttonName);
-    void buttonClicked();
+    void buttonPlayClicked();
+    void buttonHiscoresClicked();
+    void buttonSettingsClicked();
+    void buttonQuitClicked();
 
 protected:
-    String filename;
-   // sf::Image* guiImage;
     sf::Vector2f position;
-    sfg::Image::Ptr sfgImage;
-
     sfg::Button::Ptr buttonName;
+
+    sfg::Button::Ptr invisibleButton;
     sfg::Button::Ptr playButton;
     sfg::Button::Ptr hiscoresButton;
     sfg::Button::Ptr settingsButton;
     sfg::Button::Ptr quitButton;
 
-    sfg::Desktop *sfgDesktop;
-
+    Button* button;
+    sf::Font *font;
 };
 
 #endif //LEFT2DIE_STATEMAINMENU_H

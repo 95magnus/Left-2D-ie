@@ -27,13 +27,15 @@
       <sourceFolder url="file://$MODULE_DIR$/src/util/VectorUtil.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Game.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputManager.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputObserver.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputTester.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputTester.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputObserver.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Game.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/GUI/Button.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/GUI/Button.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
