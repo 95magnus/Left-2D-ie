@@ -13,8 +13,11 @@ public:
     void update();
     void draw();
 
-    void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);
     void buttonBackClicked();
+
+    void pause();
+    void resume();
+    void initButtons();
 
 protected:
     String filename;

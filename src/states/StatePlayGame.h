@@ -18,11 +18,14 @@ public:
     void update();
     void draw();
 
-    void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);
-
     void buttonSinglePlayerClicked();
     void buttonMultiplayerClicked();
     void buttonBackClicked();
+
+    void resume();
+    void pause();
+
+    void initButtons();
 
 protected:
     String filename;

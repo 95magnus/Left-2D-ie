@@ -1,11 +1,24 @@
 #include "StateSettings.h"
 
 StateSettings::StateSettings(Game* game) : StateBase(game) {
-
+    initButtons();
 }
 
 StateSettings::~StateSettings() {
 
+}
+
+void StateSettings::initButtons() {
+
+}
+
+void StateSettings::pause() {
+    desktop->RemoveAll();
+}
+
+void StateSettings::resume() {
+    StateBase::resume();
+    initButtons();
 }
 
 void StateSettings::update() {
@@ -23,12 +36,4 @@ void StateSettings::draw() {
 
     game->getWindow().draw(text);
     game->getWindow().draw(title);
-}
-
-void StateSettings::showGui() {
-
-}
-
-void StateSettings::hideGui() {
-
 }

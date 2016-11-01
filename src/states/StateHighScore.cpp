@@ -1,6 +1,14 @@
 #include "StateHighScore.h"
 
 StateHighScore::StateHighScore(Game* game) : StateBase(game) {
+    initButtons();
+}
+
+StateHighScore::~StateHighScore() {
+
+}
+
+void StateHighScore::initButtons() {
     // Some weird reason the first button don't match with sfgDesktop in x-axis: making an invisible button
     auto invisibleButton = sfg::Button::Create("");
     createButton(invisibleButton, sf::Vector2f(0.f, 0.f));
@@ -10,8 +18,13 @@ StateHighScore::StateHighScore(Game* game) : StateBase(game) {
     backButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateHighScore::buttonBackClicked,this));
 }
 
-StateHighScore::~StateHighScore() {
+void StateHighScore::pause() {
+    desktop->RemoveAll();
+}
 
+void StateHighScore::resume() {
+    StateBase::resume();
+    initButtons();
 }
 
 void StateHighScore::update() {
@@ -29,19 +42,8 @@ void StateHighScore::draw() {
 
     game->getWindow().draw(text);
     game->getWindow().draw(title);
-
 }
 
-void StateHighScore::createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position) {
-    desktop->SetProperty("Button#button", "FontSize", 70.f);
-
-    buttonName->SetId("button");
-    buttonName->SetPosition(position);
-    buttonName->SetRequisition(sf::Vector2f(0.f, 85.0f));
-
-    desktop->LoadThemeFromFile("resources/gui/theme.css");
-    desktop->Add(buttonName);
-}
 
 void StateHighScore::buttonBackClicked() {
     desktop->RemoveAll();

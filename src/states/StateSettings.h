@@ -13,8 +13,12 @@ public:
     void update();
     void draw();
 
-    void showGui();
-    void hideGui();
+    void pause();
+    void resume();
+    void initButtons();
+
+protected:
+
 };
 
 #endif //LEFT2DIE_STATESETTINGS_H

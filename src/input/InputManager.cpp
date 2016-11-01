@@ -62,8 +62,6 @@ bool InputManager::checkForInput() {
     sf::Event event;
 
     while(window->pollEvent(event)) {
-        stateMachine->getState()->getDesktop()->HandleEvent(event);
-
         switch(event.type) {
             case sf::Event::Closed:
                 return false;
@@ -198,7 +196,9 @@ bool InputManager::checkForInput() {
                 break;
 
         }
+        stateMachine->getState()->getDesktop()->HandleEvent(event);
     }
+
 
     return true;
 }

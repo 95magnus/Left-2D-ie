@@ -3,7 +3,6 @@
 
 #include "StateBase.h"
 #include "../Game.h"
-#include "../GUI/Button.h"
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/OpenGL.hpp>
@@ -22,13 +21,16 @@ public:
     virtual void update();
     virtual void draw();
 
-    void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);
   //  inline void setButtonColor(const String& s, const sf::Color &color, const sf::Color &prelight);
 
     void buttonPlayClicked();
     void buttonHiscoresClicked();
     void buttonSettingsClicked();
     void buttonQuitClicked();
+
+    void pause();
+    void resume();
+    void initButtons();
 
 protected:
     sf::Vector2f position;
@@ -40,7 +42,6 @@ protected:
     sfg::Button::Ptr settingsButton;
     sfg::Button::Ptr quitButton;
 
-    Button* button;
     sf::Font *font;
 };
 

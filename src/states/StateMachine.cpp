@@ -10,7 +10,7 @@ StateMachine::StateMachine(Game* game) {
     states[StateID::HIGH_SCORE] = new StateHighScore(game);
     states[StateID::SETTINGS] = new StateSettings(game);
 
-    setState(StateID::MAIN_MENU);
+    currentState = states[StateID::MAIN_MENU];
 
     paused = false;
 }
@@ -45,7 +45,7 @@ void StateMachine::resume() {
 }
 
 void StateMachine::setState(StateID state) {
+    currentState->pause();
     currentState = states[state];
-
     currentState->resume();
 }

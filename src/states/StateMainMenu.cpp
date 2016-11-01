@@ -2,7 +2,40 @@
 
 StateMainMenu::StateMainMenu(Game *game) : StateBase(game) {
     //sfgDesktop = &game->getDesktop();
+    initButtons();
+}
 
+StateMainMenu::~StateMainMenu() {
+
+}
+
+void StateMainMenu::update() {
+
+}
+
+void StateMainMenu::resume() {
+    StateBase::resume();
+    initButtons();
+}
+
+void StateMainMenu::pause() {
+    desktop->RemoveAll();
+}
+
+void StateMainMenu::draw() {
+    sf::Text title("Left[2D]ie", game->getFont(), 140);
+    title.setFillColor(sf::Color::Red);
+    title.setPosition(275, 50);
+
+    sf::Text text("Main Menu state", game->getFont());
+    text.setFillColor(sf::Color::Red);
+    text.setPosition(300, 300);
+
+    game->getWindow().draw(text);
+    game->getWindow().draw(title);
+}
+
+void StateMainMenu::initButtons() {
     // Some weird reason the first button don't match with sfgDesktop in x-axis: making an invisible button
     auto invisibleButton = sfg::Button::Create("");
     createButton(invisibleButton, sf::Vector2f(0.f, 0.f));
@@ -24,55 +57,19 @@ StateMainMenu::StateMainMenu(Game *game) : StateBase(game) {
     quitButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonQuitClicked,this));
 }
 
-StateMainMenu::~StateMainMenu() {
-
-}
-
-void StateMainMenu::update() {
-    desktop->Refresh();
-}
-
-void StateMainMenu::draw() {
-    sf::Text title("Left[2D]ie", game->getFont(), 140);
-    title.setFillColor(sf::Color::Red);
-    title.setPosition(275, 50);
-
-    sf::Text text("Main Menu state", game->getFont());
-    text.setFillColor(sf::Color::Red);
-    text.setPosition(300, 300);
-
-    game->getWindow().draw(text);
-    game->getWindow().draw(title);
-}
-
-void StateMainMenu::createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position) {
-    desktop->SetProperty("Button#button", "FontSize", 70.f);
-
-    buttonName->SetId("button");
-    buttonName->SetPosition(position);
-    buttonName->SetRequisition(sf::Vector2f(0.f, 85.0f));
-
-    desktop->LoadThemeFromFile("resources/gui/theme.css");
-    desktop->Add(buttonName);
-}
-
 void StateMainMenu::buttonPlayClicked() {
-    desktop->RemoveAll();
     game->getStateMachine().setState(StateMachine::StateID::PLAY_GAME);
 }
 
 void StateMainMenu::buttonHiscoresClicked() {
-    desktop->RemoveAll();
     game->getStateMachine().setState(StateMachine::StateID::HIGH_SCORE);
 }
 
 void StateMainMenu::buttonSettingsClicked() {
-    desktop->RemoveAll();
     game->getStateMachine().setState(StateMachine::StateID::SETTINGS);
 }
 
 void StateMainMenu::buttonQuitClicked() {
-    desktop->RemoveAll();
     game->stop();
 }
 
