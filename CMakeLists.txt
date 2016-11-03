@@ -39,4 +39,8 @@ set(SOURCE_FILES src/main.cpp
 find_package (OpenGL REQUIRED)
 add_executable(Left2Die ${SOURCE_FILES})
 
+if (UNIX)
+    find_library(sfgui NAMES library PATHS /lib/SFGUI-0.1.1-source)
+endif(UNIX)
+
 target_link_libraries (Left2Die sfml-graphics sfml-window sfml-system sfml-audio sfgui ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
