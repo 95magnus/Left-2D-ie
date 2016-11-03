@@ -22,10 +22,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/VectorUtil.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileStone.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileStone.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileDirt.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileBase.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileStone.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileDirt.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileBase.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileStone.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/level/Level.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/level/Level.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputTester.cpp" isTestSource="false" />

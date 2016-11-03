@@ -18,13 +18,13 @@ public:
         MOVE_DOWN,
         MOVE_LEFT,
         MOVE_RIGHT,
-        USE
+        USE,
     };
 
     InputManager(sf::RenderWindow* window, StateMachine* stateMachine);
     virtual ~InputManager();
 
-    void update();
+    void update(float deltaTime);
 
     bool checkForInput();
     void setDefaultMappings();

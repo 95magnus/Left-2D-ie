@@ -20,8 +20,8 @@ StateMachine::~StateMachine() {
     }
 }
 
-void StateMachine::update() {
-    currentState->update();
+void StateMachine::update(float deltaTime) {
+    currentState->update(deltaTime);
 }
 
 void StateMachine::draw() {

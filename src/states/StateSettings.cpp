@@ -8,7 +8,7 @@ StateSettings::~StateSettings() {
 
 }
 
-void StateSettings::update() {
+void StateSettings::update(float deltaTime) {
 
 }
 

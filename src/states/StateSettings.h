@@ -10,7 +10,7 @@ public:
     StateSettings(Game* game);
     virtual ~StateSettings();
 
-    void update();
+    void update(float deltaTime);
     void draw();
 };
 

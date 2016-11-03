@@ -1,13 +1,14 @@
 #ifndef LEFT2DIE_GAME_H
 #define LEFT2DIE_GAME_H
 
+#include <SFML/Config.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "states/StateMachine.h"
+#include "level/Level.h"
 #include "util/ResourceLoader.h"
-#include <SFML/Config.hpp>
-
+#include "SFGUI/SFGUI.hpp"
 
 typedef std::string String;
 
@@ -26,7 +27,7 @@ public:
     void run();
     void stop();
 
-    void update();
+    void update(float deltaTime);
     void draw();
 
     sf::Font& getFont() const { return *font; }
@@ -38,6 +39,7 @@ public:
     };
 
 protected:
+    const unsigned int updatesPerSecond = 60;
     unsigned int width, height;
     String title;
     bool running;

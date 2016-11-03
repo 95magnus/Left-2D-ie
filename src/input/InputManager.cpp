@@ -10,14 +10,14 @@ InputManager::InputManager(sf::RenderWindow* window, StateMachine* stateMachine)
     window->setJoystickThreshold(joystickThreshold);
 
     setDefaultMappings();
-    initActionStates();
+    //initActionStates();
 }
 
 InputManager::~InputManager() {
     observers.clear();
 }
 
-void InputManager::update() {
+void InputManager::update(float deltaTime) {
     // TODO: Create player controller class for handling movement
     moveDirection = sf::Vector2f(0, 0);
 
@@ -190,9 +190,7 @@ bool InputManager::checkForInput() {
                 break;
 
             default:
-
                 break;
-
         }
     }
 

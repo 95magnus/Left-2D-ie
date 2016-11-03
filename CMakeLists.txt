@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
 project(Left2Die)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -pedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES src/main.cpp
         src/Game.cpp
@@ -31,8 +31,17 @@ set(SOURCE_FILES src/main.cpp
         src/util/ResourceLoader.h
         src/level/Level.cpp
         src/level/Level.h
-        src/level/tiles/TileBase.h src/level/tiles/TileBase.cpp src/level/tiles/TileStone.cpp src/level/tiles/TileStone.h)
+        src/level/tiles/TileBase.h
+        src/level/tiles/TileBase.cpp
+        src/level/tiles/TileStone.cpp
+        src/level/tiles/TileStone.h
+        src/level/tiles/TileDirt.cpp
+        src/level/tiles/TileDirt.h)
 
 add_executable(Left2Die ${SOURCE_FILES})
 
-target_link_libraries (Left2Die sfml-graphics sfml-window sfml-system sfgui)
+if (UNIX)
+    find_library(sfgui NAMES library PATHS /lib/SFGUI-0.1.1-source)
+endif(UNIX)
+
+target_link_libraries (Left2Die sfml-graphics sfml-window sfml-system sfml-audio sfgui)

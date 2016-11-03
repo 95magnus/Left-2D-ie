@@ -10,7 +10,7 @@ StateMainMenu::~StateMainMenu() {
 
 }
 
-void StateMainMenu::update() {
+void StateMainMenu::update(float deltaTime) {
 
 }
 

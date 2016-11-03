@@ -5,9 +5,8 @@
 
 class TileStone : public TileBase {
 public:
-    TileStone(sf::Texture* texture);
-    virtual ~TileStone();
-
+    TileStone(unsigned int tileSize, sf::Texture &texture);
+    virtual ~TileStone() {}
 
 protected:
 

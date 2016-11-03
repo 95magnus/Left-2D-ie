@@ -8,7 +8,7 @@ StateMultiPlayer::~StateMultiPlayer() {
 
 }
 
-void StateMultiPlayer::update() {
+void StateMultiPlayer::update(float deltaTime) {
 
 }
 

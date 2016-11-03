@@ -1,7 +1,5 @@
 #include "TileStone.h"
 
-/*
-TileStone::TileStone(sf::Texture* texture) : TileBase(32, 32) {
-    setTexture(texture);
+TileStone::TileStone(unsigned int tileSize, sf::Texture &texture) : TileBase(tileSize, tileSize, texture) {
+
 }
- */

@@ -10,7 +10,7 @@ public:
     StateMultiPlayer(Game* game);
     virtual ~StateMultiPlayer();
 
-    void update();
+    void update(float deltaTime);
     void draw();
 };
 

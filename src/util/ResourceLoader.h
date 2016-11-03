@@ -22,6 +22,7 @@ public:
 protected:
     const String fontDir = "fonts/";
     const String textureDir = "textures/";
+    const String tileDir = "textures/tiles/";
     String resourceDir;
 };
 

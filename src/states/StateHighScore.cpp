@@ -8,7 +8,7 @@ StateHighScore::~StateHighScore() {
 
 }
 
-void StateHighScore::update() {
+void StateHighScore::update(float deltaTime) {
 
 }
 

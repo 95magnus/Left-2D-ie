@@ -6,28 +6,27 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 
-class TileBase : public sf::Drawable {
+class TileBase {
 public:
-    virtual ~TileBase() {}
+    virtual ~TileBase();
 
-    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) {
-        target.draw(rect);
-    }
+    void draw(sf::RenderWindow &window, int worldX, int worldY);
 
-    virtual bool isSolid() {
-        return false;
-    }
+    void setTexture(sf::Texture &texture);
 
-    void setTexture(sf::Texture *texture);
+    virtual bool isSolid() const;
 
 protected:
-    unsigned int width, height;
-
     sf::Texture* texture;
-    sf::RectangleShape rect;
+    sf::Sprite* sprite;
 
-    TileBase(unsigned int width, unsigned int height) : width(width), height(height) {}
+    sf::RectangleShape collisionBox;
+
+    TileBase(int width, int height);
+    TileBase(int width, int height, sf::Texture &texture);
 };
 
 #endif //LEFT2DIE_TILEBASE_H

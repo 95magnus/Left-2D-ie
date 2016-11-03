@@ -12,7 +12,7 @@ public:
     StateMainMenu(Game* game);
     virtual ~StateMainMenu();
 
-    void update();
+    void update(float deltaTime);
     void draw();
 
 protected:
