@@ -5,6 +5,8 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include "InputObserver.h"
+#include <stdlib.h>
+#include <time.h>
 
 class InputManager;
 

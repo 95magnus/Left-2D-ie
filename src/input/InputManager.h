@@ -5,6 +5,8 @@
 #include <SFML/Window/Event.hpp>
 #include <map>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFGUI/Widgets.hpp>
+
 
 class InputObserver;
 class StateMachine;
@@ -64,6 +66,7 @@ protected:
 
     sf::RenderWindow *window;
     StateMachine* stateMachine;
+    sfg::Desktop* desktop;
 };
 
 #endif //LEFT2DIE_INPUTMANAGER_H

@@ -1,0 +1,37 @@
+/*
+Using SFGUI built-in Widget class to style buttons
+*/
+
+Button
+{
+    BackgroundColor: #00000000;
+
+    BorderWidth: 0;
+}
+
+Button:PRELIGHT
+{
+    BorderColor: #00000000;
+    BackgroundColor: #00000000;
+    BorderWidth: 1;
+}
+
+/*Button:SELECTED*/
+/*{*/
+    /*BorderColor: #00DD00FF;*/
+    /*BackgroundColor: #009900FF;*/
+    /*BorderWidth: 1;*/
+/*}*/
+
+/*Button:ACTIVE*/
+/*{*/
+    /*BorderColor: #00DD00FF;*/
+    /*BackgroundColor: #009900FF;*/
+    /*BorderWidth: 0;*/
+/*}*/
+
+#button
+{
+    FontName: resources/fonts/deathrattlebb_reg.ttf;
+
+}

@@ -12,6 +12,13 @@ public:
 
     void update();
     void draw();
+
+    void pause();
+    void resume();
+    void initButtons();
+
+protected:
+
 };
 
 #endif //LEFT2DIE_STATESETTINGS_H

@@ -24,7 +24,13 @@ void Game::init() {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 4;
 
-    window = new sf::RenderWindow(sf::VideoMode(width, height), title, sf::Style::Default, settings);
+    window = new sf::RenderWindow(sf::VideoMode(width, height), title, sf::Style::Titlebar | sf::Style::Close, settings);
+
+    // We don't use SFML to draw the main menu
+    window->resetGLStates();
+    // Makes the window move weird on Linux for some reason
+    // window->setVerticalSyncEnabled(true);
+
     window->setFramerateLimit(60);
 
     stateMachine = new StateMachine(this);
@@ -54,8 +60,6 @@ void Game::run() {
         if (!inputManager->checkForInput()) {
             stop();
         }
-
-        //desktop.Update(clock.restart().asMicroseconds());
         update();
         draw();
     }
@@ -69,14 +73,14 @@ void Game::stop() {
 void Game::update() {
     inputManager->update();
     stateMachine->update();
+
 }
 
 void Game::draw() {
     window->clear(sf::Color::Black);
-
-    window->draw(*inputTester);
+  //  window->draw(*inputTester);
     stateMachine->draw();
 
-    //sfgui.Display(*window);
+    sfgui->Display(*window);
     window->display();
 }

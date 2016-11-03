@@ -15,6 +15,17 @@ void ResourceLoader::loadFont(sf::Font* font, const String &filename) {
     font->loadFromFile(resourceDir + fontDir + filename);
 }
 
+sf::Image& ResourceLoader::loadGuiImage(const String &filename) const{
+    sf::Image* guiImage = new sf::Image();
+    guiImage->loadFromFile(resourceDir + guiDir + filename);
+
+    return *guiImage;
+}
+
+void ResourceLoader::loadGuiImage(sf::Image* image, const String &filename){
+    image->loadFromFile(resourceDir + guiDir + filename);
+}
+
 sf::Texture& ResourceLoader::loadTexture(const String &fileName) const {
     sf::Texture* texture = new sf::Texture();
     texture->loadFromFile(resourceDir + textureDir + fileName);

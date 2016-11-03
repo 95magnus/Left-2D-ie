@@ -6,6 +6,7 @@
 InputManager::InputManager(sf::RenderWindow* window, StateMachine* stateMachine) {
     this->window = window;
     this->stateMachine = stateMachine;
+    this->desktop = desktop;
 
     window->setJoystickThreshold(joystickThreshold);
 
@@ -77,6 +78,7 @@ bool InputManager::checkForInput() {
                         return false;
 
                     case Key::Num1:
+                        desktop->Refresh();
                         stateMachine->setState(StateMachine::StateID::MAIN_MENU);
                         break;
                     case Key::Num2:
@@ -194,7 +196,9 @@ bool InputManager::checkForInput() {
                 break;
 
         }
+        stateMachine->getState()->getDesktop()->HandleEvent(event);
     }
+
 
     return true;
 }

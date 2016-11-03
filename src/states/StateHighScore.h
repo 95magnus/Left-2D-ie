@@ -12,6 +12,25 @@ public:
 
     void update();
     void draw();
+
+    void buttonBackClicked();
+
+    void pause();
+    void resume();
+    void initButtons();
+
+protected:
+    String filename;
+    sf::Vector2f position;
+
+    sfg::Button::Ptr buttonName;
+    sfg::Button::Ptr invisibleButton;
+    sfg::Button::Ptr backButton;
+
+    sf::Font *font;
+    sfg::Image::Ptr sfgImage;
+    sf::Image* guiImage;
+
 };
 
 #endif //LEFT2DIE_STATEHIGHSCORE_H

@@ -4,12 +4,13 @@ StateMachine::StateMachine(Game* game) {
     this->game = game;
 
     states[StateID::MAIN_MENU] = new StateMainMenu(game);
+    states[StateID::PLAY_GAME] = new StatePlayGame(game);
     states[StateID::SINGLE_PLAYER] = new StateSinglePlayer(game);
     states[StateID::MULTI_PLAYER] = new StateMultiPlayer(game);
     states[StateID::HIGH_SCORE] = new StateHighScore(game);
     states[StateID::SETTINGS] = new StateSettings(game);
 
-    setState(StateID::MAIN_MENU);
+    currentState = states[StateID::MAIN_MENU];
 
     paused = false;
 }
@@ -22,6 +23,7 @@ StateMachine::~StateMachine() {
 
 void StateMachine::update() {
     currentState->update();
+    currentState->updateDesktop();
 }
 
 void StateMachine::draw() {
@@ -43,5 +45,7 @@ void StateMachine::resume() {
 }
 
 void StateMachine::setState(StateID state) {
+    currentState->pause();
     currentState = states[state];
+    currentState->resume();
 }
