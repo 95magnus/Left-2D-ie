@@ -197,7 +197,6 @@ bool InputManager::checkForInput() {
         stateMachine->getState()->getDesktop()->HandleEvent(event);
     }
 
-
     return true;
 }
 
