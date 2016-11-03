@@ -5,12 +5,15 @@
 #ifndef LEFT2DIE_PLAYER_H
 #define LEFT2DIE_PLAYER_H
 
-
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
 class Player {
 public:
+    //public stats
+    int speed;
+    int x, y;
+
     // Model
     sf::RectangleShape sprite;
     sf::RectangleShape hitbox;
@@ -37,35 +40,30 @@ public:
 
     // Getters & setters for stats
     int getHealth() const;
-
     void setHealth(int health);
-
     int getSpeed() const;
-
     void setSpeed(int speed);
-
     int getScore() const;
-
     void setScore(int score);
-
     int getMoney() const;
-
     void setMoney(int money);
-
     int getArmor() const;
-
     void setArmor(int armor);
-
     int getKills() const;
-
     void setKills(int kills);
 
 private:
+    //Components
+    InputComponent input_;
+    GraphicsComponent graphics_;
+    PhysicsComponent physics_;
 
-    // Stats
+    // Sprites
+
+
+    // Private Stats
     int health;
     int armor;
-    int speed;
     int kills;
     int score;
     int money;
