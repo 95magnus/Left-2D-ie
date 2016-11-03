@@ -18,7 +18,7 @@ public:
 
     virtual ~StateMainMenu();
 
-    virtual void update();
+    virtual void update(float deltaTime);
     virtual void draw();
 
   //  inline void setButtonColor(const String& s, const sf::Color &color, const sf::Color &prelight);

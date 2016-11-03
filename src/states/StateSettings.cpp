@@ -21,7 +21,8 @@ void StateSettings::resume() {
     initButtons();
 }
 
-void StateSettings::update() {
+
+void StateSettings::update(float deltaTime) {
 
 }
 

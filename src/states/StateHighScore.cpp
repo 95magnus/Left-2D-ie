@@ -27,7 +27,8 @@ void StateHighScore::resume() {
     initButtons();
 }
 
-void StateHighScore::update() {
+
+void StateHighScore::update(float deltaTime) {
 
 }
 

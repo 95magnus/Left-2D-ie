@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
 project(Left2Die)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -pedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES src/main.cpp
         src/Game.cpp
@@ -34,7 +34,15 @@ set(SOURCE_FILES src/main.cpp
         src/modules/Player.cpp
         src/modules/Player.h
         src/modules/zombie.cpp
-        src/modules/zombie.h src)
+        src/modules/zombie.h src
+        src/level/Level.cpp
+        src/level/Level.h
+        src/level/tiles/TileBase.h
+        src/level/tiles/TileBase.cpp
+        src/level/tiles/TileStone.cpp
+        src/level/tiles/TileStone.h
+        src/level/tiles/TileDirt.cpp
+        src/level/tiles/TileDirt.h)
 
 find_package (OpenGL REQUIRED)
 add_executable(Left2Die ${SOURCE_FILES})
@@ -44,3 +52,4 @@ if (UNIX)
 endif(UNIX)
 
 target_link_libraries (Left2Die sfml-graphics sfml-window sfml-system sfml-audio sfgui ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+

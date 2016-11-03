@@ -1,10 +1,12 @@
 #ifndef LEFT2DIE_GAME_H
 #define LEFT2DIE_GAME_H
 
+#include <SFML/Config.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "states/StateMachine.h"
+#include "level/Level.h"
 #include "util/ResourceLoader.h"
 #include <SFGUI/SFGUI.hpp>
 #include <SFGUI/Widgets.hpp>
@@ -26,7 +28,7 @@ public:
     void run();
     void stop();
 
-    void update();
+    void update(float deltaTime);
     void draw();
 
     sfg::Label& getLabel() const { return *label; }
@@ -35,14 +37,13 @@ public:
     //sfg::Desktop& getDesktop() const { return *sfgDesktop; }
     StateMachine& getStateMachine() const {return *stateMachine; }
     InputManager& getInputManager() const {return *inputManager; }
+
     sf::Vector2f getWindowCenter() const {
         return sf::Vector2f(getWindow().getSize().x/2, getWindow().getSize().y/2);
     };
 
-    // Create an SFGUI. This is required before doing anything with SFGUI.
-    sfg::SFGUI* sfgui;
-
 protected:
+    const unsigned int updatesPerSecond = 60;
     unsigned int width, height;
     String title;
     bool running;
@@ -55,6 +56,9 @@ protected:
     sf::RenderWindow* window;
     sf::Font* font;
     sfg::Label* label;
+
+    // Create an SFGUI. This is required before doing anything with SFGUI.
+    sfg::SFGUI* sfgui;
 
     //sf::Clock timer;
     //sfg::Desktop* sfgDesktop;

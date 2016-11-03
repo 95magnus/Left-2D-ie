@@ -1,26 +1,17 @@
 #include "StateSinglePlayer.h"
 
 StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
-
+    level = new Level("testLevel.l2d");
 }
 
 StateSinglePlayer::~StateSinglePlayer() {
-
+    delete level;
 }
 
-void StateSinglePlayer::update() {
+void StateSinglePlayer::update(float deltaTime) {
 
 }
 
 void StateSinglePlayer::draw() {
-    sf::Text title("Left[2D]ie", game->getFont(), 140);
-    title.setColor(sf::Color::Red);
-    title.setPosition(275, 50);
-
-    sf::Text text("Single player state", game->getFont());
-    text.setColor(sf::Color::Red);
-    text.setPosition(300, 300);
-
-    game->getWindow().draw(text);
-    game->getWindow().draw(title);
+    level->draw(game->getWindow());
 }

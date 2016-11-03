@@ -7,7 +7,7 @@ StatePlayGame::StatePlayGame(Game *game) : StateBase(game) {
 StatePlayGame::~StatePlayGame() {
 }
 
-void StatePlayGame::update() {
+void StatePlayGame::update(float deltaTime) {
 
 }
 
