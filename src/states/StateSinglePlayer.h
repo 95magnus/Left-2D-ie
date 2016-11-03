@@ -4,9 +4,11 @@
 #include <SFML/Graphics/Text.hpp>
 #include "../Game.h"
 #include "StateBase.h"
+#include "../modules/MessageBox.h"
 
 class InputTester;
 class Level;
+class MessageBox;
 
 class StateSinglePlayer : public StateBase {
 public:
@@ -17,6 +19,8 @@ public:
     void draw();
 protected:
     Level* level;
+    MessageBox* mb;
+
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H

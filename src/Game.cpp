@@ -18,6 +18,7 @@ Game::~Game() {
     delete window;
     delete font;
     delete inputTester;
+    delete sfgui;
 }
 
 void Game::init() {
@@ -33,6 +34,8 @@ void Game::init() {
 
     // We don't use SFML to draw the main menu
     window->resetGLStates();
+
+    sfgui = new sfg::SFGUI();
 
     stateMachine = new StateMachine(this);
     inputManager = new InputManager(window, stateMachine);

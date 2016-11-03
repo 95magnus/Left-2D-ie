@@ -42,7 +42,7 @@ set(SOURCE_FILES src/main.cpp
         src/level/tiles/TileStone.cpp
         src/level/tiles/TileStone.h
         src/level/tiles/TileDirt.cpp
-        src/level/tiles/TileDirt.h)
+        src/level/tiles/TileDirt.h src/modules/MessageBox.cpp src/modules/MessageBox.h)
 
 find_package (OpenGL REQUIRED)
 add_executable(Left2Die ${SOURCE_FILES})
