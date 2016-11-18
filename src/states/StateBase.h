@@ -19,6 +19,7 @@ public:
 
     virtual void pause() { paused = true; }
     virtual void resume() { paused = false; }
+    virtual void switchedState() {};
 
     sfg::Desktop* getDesktop() const { return desktop; }
     void updateDesktop();

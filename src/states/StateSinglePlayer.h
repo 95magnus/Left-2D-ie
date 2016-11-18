@@ -16,6 +16,8 @@ public:
     void update(float deltaTime);
     void draw();
 protected:
+    sf::RenderWindow *window;
+    sf::View *view;
     Level* level;
 };
 
