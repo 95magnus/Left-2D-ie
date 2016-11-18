@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "../Game.h"
 
 class Player {
 public:
@@ -17,6 +18,36 @@ public:
     // Model
     sf::RectangleShape sprite;
     sf::RectangleShape hitbox;
+    sf::Texture texture;
+
+    // Animation rotation arrays, worst implementation, please forgive me
+
+    sf::IntRect left[5] = {{970, 635, 240, 630},
+                           {0, 0, 480, 630},
+                           {0, 1270, 315, 630},
+                           {485, 0, 480, 630},
+                           {970, 0, 480, 630}};
+
+    sf::IntRect right[5] = {{1215, 635, 240, 630},
+                       {1455, 0, 480, 630},
+                       {320, 1270, 315, 630},
+                       {0, 635, 480, 630},
+                       {485, 635, 480, 630}};
+
+    sf::IntRect up[5] = {{1195, 1270, 180, 630},
+                    {1645, 635, 480, 630},
+                     {1645, 635, 480, 630},
+                    {1010, 1270, 180, 630},
+                    {1010, 1270, 180, 630}};
+
+    sf::IntRect down[5] = {{1460, 635, 180 ,630},
+                      {640, 1270, 180, 630},
+                      {825, 1270, 180, 630},
+                      {825, 1270, 180, 630},
+                      {640, 1270, 180, 630}};
+
+
+
 
     // Sounds
     sf::SoundBuffer SBuffer;
@@ -27,6 +58,13 @@ public:
     void moveDown(float dt);
     void moveRight(float dt);
     void moveLeft(float dt);
+    void scale(float x);
+    void animationCycler(sf::IntRect dir[5]);
+
+    void draw(sf::RenderWindow &window);
+
+    //Inventory
+
     /*
      * TODO: Add weapon actions
     void primaryWeapon;
@@ -67,6 +105,12 @@ private:
     int kills;
     int score;
     int money;
+    float scaleFactor;
+    sf::Clock clock;
+    bool moving;
+    enum Direction {Left, Right, Up, Down};
+    Direction currentDir;
+    sf::Vector2f xy;
 
     // Inventory
     // TODO: 3 plasser o "bagen" til våpenobjekter

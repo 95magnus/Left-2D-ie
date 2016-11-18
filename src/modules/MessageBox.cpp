@@ -10,7 +10,7 @@ MessageBox::MessageBox(sf::RenderWindow &window) {
     message.setColor(sf::Color::White);
     message.setCharacterSize(30);
 
-    // Functions not found on Linux
+    // Functions not available on Linux
     //message.setOutlineColor(sf::Color::Black);
     //message.setOutlineThickness(3);
 

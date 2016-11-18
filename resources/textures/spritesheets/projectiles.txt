@@ -1,0 +1,5 @@
+buller_small = 140 140 90 45
+bullet_large = 0 0 225 105
+energyball1 = 0 110 135 135
+energyball2 = 230 0 135 135
+energyball3 = 370 0 135 135

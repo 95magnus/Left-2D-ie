@@ -37,6 +37,10 @@ set(SOURCE_FILES src/main.cpp
         src/modules/zombie.h src
         src/modules/MessageBox.cpp
         src/modules/MessageBox.h
+        src/modules/Weapon.cpp
+        src/modules/Weapon.h
+        src/modules/Projectile.cpp
+        src/modules/Projectile.h
         src/level/Level.cpp
         src/level/Level.h
         src/level/tiles/TileBase.h
