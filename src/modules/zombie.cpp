@@ -11,7 +11,7 @@ Zombie::Zombie(){
     sf::Texture texture;
     texture.setSmooth(false);
     texture.setRepeated(false);
-    if (!texture.loadFromFile("zombie_v1.0.png")){
+    if (!texture.loadFromFile("resources/character_models/zombie_v1.0.png")){
         // Zombien blir grønn hvis bildet ikke blir lastet
         zom.setFillColor((sf::Color::Green));
     }
@@ -29,23 +29,23 @@ Zombie::Zombie(){
 
 
 // Action functions
-void Zombie::moveUp(float dt) {
-    zom.move(0.f, speed * dt * -1);
+void Player::moveUp(float dt) {
+    sprite.move(0.f, speed * dt * -1);
     hitbox.move(0.f, speed * dt * -1);
 }
 
-void Zombie::moveDown(float dt) {
-    zom.move(0.f, speed * dt);
+void Player::moveDown(float dt) {
+    sprite.move(0.f, speed * dt);
     hitbox.move(0.f, speed * dt);
 }
 
-void Zombie::moveRight(float dt) {
-    zom.move(speed * dt, 0.f);
+void Player::moveRight(float dt) {
+    sprite.move(speed * dt, 0.f);
     hitbox.move(speed * dt, 0.f);
 }
 
-void Zombie::moveLeft(float dt) {
-    zom.move(speed * dt * -1, 0.f);
+void Player::moveLeft(float dt) {
+    sprite.move(speed * dt * -1, 0.f);
     hitbox.move(speed * dt * -1, 0.f);
 }
 
@@ -81,7 +81,7 @@ void Zombie::hit() {
 
 void Zombie::death() {
     //Death Sound effect.
-    SBuffer.loadFromFile("wilhelm_scream.wav");
+    SBuffer.loadFromFile("resources/sound_effect/wilhelm_scream.wav");
     sound.setBuffer(SBuffer);
     sound.play();
 
