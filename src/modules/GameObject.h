@@ -6,25 +6,17 @@
 #define LEFT2DIE_GAMEOBJECT_H
 
 #include <SFML/Graphics.hpp>
-#include "InputComponent.h"
-#include "GraphicsComponent.h"
-#include "PhysicsComponent.h"
-#include "PlayerInputComponent.h"
-#include "PlayerGraphicsComponent.h"
 #include "PlayerPhysicsComponent.h"
-#include "ZombieGraphicsComponent.h"
-#include "ZombiePhysicsComponent.h"
-#include "AIComponent.h"
-
+#include "InputComponent.h"
 
 class GameObject {
 public:
     int velocity;
     int x, y;
 
-    GameObject(InputComponent& input,
-               PhysicsComponent physics,
-               GraphicsComponent graphics): input_(input), physics_(physics), graphics_(graphics)
+    GameObject(InputComponent* input,
+               PhysicsComponent* physics,
+               GraphicsComponent* graphics): input_(input), physics_(physics), graphics_(graphics)
     {}
 
     void update(World& world, Graphics& graphics) {

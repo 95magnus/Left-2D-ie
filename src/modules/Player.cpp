@@ -57,7 +57,7 @@ void Player::moveLeft(float dt) {
     hitbox.move(speed * dt * -1, 0.f);
 }
 
-void hit() {
+void Player::hit() {
     //sounds effects on hit.
     SBuffer.loadFromFile("damage_hit1.wav");
     sound.setBuffer(SBuffer);
@@ -72,8 +72,9 @@ void Player::death() {
     sound.play();
     // TODO: Legge til dødsanimasjon når health = 0?
     // TODO: (kanskje player faller i bakken og blinker i 3 sek så forsvinner den slik som på gamle spill)
+
     // Kaller dekonstruktøren for player
-    Player::~Player();
+    //delete this;
 }
 
 // Getters & setters

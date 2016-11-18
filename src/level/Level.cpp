@@ -2,6 +2,8 @@
 
 Level::Level() {
     initTiles();
+
+    view = new sf::View();
 }
 
 Level::Level(int width, int height) : Level() {
@@ -16,6 +18,8 @@ Level::Level(const String fileName) : Level() {
 }
 
 Level::~Level() {
+    delete view;
+
     for (auto &row : testMap)
         for (auto &tile : row)
             delete tile;

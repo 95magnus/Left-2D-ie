@@ -29,22 +29,22 @@ Zombie::Zombie(){
 
 
 // Action functions
-void Player::moveUp(float dt) {
+void Zombie::moveUp(float dt) {
     sprite.move(0.f, speed * dt * -1);
     hitbox.move(0.f, speed * dt * -1);
 }
 
-void Player::moveDown(float dt) {
+void Zombie::moveDown(float dt) {
     sprite.move(0.f, speed * dt);
     hitbox.move(0.f, speed * dt);
 }
 
-void Player::moveRight(float dt) {
+void Zombie::moveRight(float dt) {
     sprite.move(speed * dt, 0.f);
     hitbox.move(speed * dt, 0.f);
 }
 
-void Player::moveLeft(float dt) {
+void Zombie::moveLeft(float dt) {
     sprite.move(speed * dt * -1, 0.f);
     hitbox.move(speed * dt * -1, 0.f);
 }

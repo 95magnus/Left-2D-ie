@@ -1,6 +1,4 @@
 #include "Game.h"
-#include "states/StateMachine.h"
-#include "util/ResourceLoader.h"
 #include "input/InputManager.h"
 #include "input/InputTester.h"
 
@@ -63,7 +61,7 @@ void Game::run() {
     sf::Time lastUpdate = sf::Time::Zero;
     sf::Clock updateClock, frameClock;
 
-    int updates = 0, frames;
+    int updates = 0, frames = 0;
 
     while (window->isOpen() && running) {
         // Returns false when window is close requested

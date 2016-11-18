@@ -7,10 +7,13 @@
 MessageBox::MessageBox(sf::RenderWindow &window) {
     font.loadFromFile("resources/fonts/PixelOperator8.ttf");
     message.setFont(font);
-    message.setFillColor(sf::Color::White);
+    message.setColor(sf::Color::White);
     message.setCharacterSize(30);
-    message.setOutlineColor(sf::Color::Black);
-    message.setOutlineThickness(3);
+
+    // Functions not found on Linux
+    //message.setOutlineColor(sf::Color::Black);
+    //message.setOutlineThickness(3);
+
     message.setOrigin(message.getLocalBounds().left / 2, message.getLocalBounds().top);
     displayed = false;
 

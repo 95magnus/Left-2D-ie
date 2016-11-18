@@ -36,6 +36,8 @@ public:
 
     int tileCoordToPixel();
 
+    sf::View &getView() { return *view; }
+
 protected:
     const std::string levelDirectory = "resources/levels/";
     const std::string tilesheetFileName = "spritesheet_tiles.png";
@@ -46,7 +48,7 @@ protected:
 
     Level();
 
-    sf::View view;
+    sf::View* view;
 
     std::map<Tile, TileBase*> tileRegistry;
     std::map<int, Tile> tileIDs;

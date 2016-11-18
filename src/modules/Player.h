@@ -54,9 +54,9 @@ public:
 
 private:
     //Components
-    InputComponent input_;
-    GraphicsComponent graphics_;
-    PhysicsComponent physics_;
+    //InputComponent input_;
+    //GraphicsComponent graphics_;
+    //PhysicsComponent physics_;
 
     // Sprites
 

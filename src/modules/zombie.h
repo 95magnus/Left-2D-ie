@@ -9,6 +9,7 @@ public:
     // Models
     sf::RectangleShape zom;
     sf::RectangleShape hitbox;
+    sf::RectangleShape sprite;
 
     // Sound elements
     sf::SoundBuffer SBuffer;
