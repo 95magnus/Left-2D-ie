@@ -18,7 +18,8 @@ Player::Player() {
 
     texture.setSmooth(false);
     texture.setRepeated(false);
-    texture.setSrgb(false);
+
+    //texture.setSrgb(false);
 
     hitbox.setOutlineColor(sf::Color::Red);
     hitbox.setOutlineThickness(1);
