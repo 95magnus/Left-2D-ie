@@ -15,7 +15,7 @@ Game::~Game() {
     delete inputManager;
     delete window;
     delete font;
-    delete inputTester;
+    //delete inputTester;
     delete sfgui;
 }
 
@@ -35,11 +35,11 @@ void Game::init() {
 
     sfgui = new sfg::SFGUI();
 
-    stateMachine = new StateMachine(this);
     inputManager = new InputManager(window, stateMachine);
+    stateMachine = new StateMachine(this);
     font = new sf::Font();
 
-    inputTester = new InputTester(inputManager);
+    //inputTester = new InputTester(inputManager);
 
     ResourceLoader loader("resources/");
 
@@ -47,7 +47,7 @@ void Game::init() {
     loader.loadFont(font, "deathrattlebb_reg.ttf");
     //font = &loader.loadFont("deathrattlebb_reg.ttf");
 
-    inputTester->setTexture(&loader.loadTexture("player.png"));
+    //inputTester->setTexture(&loader.loadTexture("player.png"));
 }
 
 void Game::start() {
@@ -64,7 +64,7 @@ void Game::run() {
     int updates = 0, frames = 0;
 
     while (window->isOpen() && running) {
-        // Returns false when window is close requested
+        // Returns false when window is closing
         if (!inputManager->checkForInput()) {
             stop();
         }
@@ -103,17 +103,18 @@ void Game::stop() {
     window->close();
 }
 
-
 void Game::update(float deltaTime) {
     inputManager->update(deltaTime);
     stateMachine->update(deltaTime);
+
+    //inputTester->update(deltaTime);
 }
 
 void Game::draw() {
     window->clear(sf::Color::Black);
 
     stateMachine->draw();
-    window->draw(*inputTester);
+    //window->draw(*inputTester);
 
     sfgui->Display(*window);
     window->display();

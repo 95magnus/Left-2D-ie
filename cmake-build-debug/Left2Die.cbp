@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Left2Die"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Left2Die">
+				<Option output="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/Left2Die" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 Left2Die"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Left2Die/fast">
+				<Option output="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/Left2Die" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 Left2Die/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/magnus/Dev\ environment/Dat220/l2d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/Game.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/Game.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/input/InputTester.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/input/InputTester.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/level/Level.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/level/Level.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileDirt.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileDirt.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/main.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/Player.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/zombie.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/zombie.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateMainMenu.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateMainMenu.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateMultiPlayer.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateMultiPlayer.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StatePlayGame.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StatePlayGame.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateSettings.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateSettings.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateSinglePlayer.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateSinglePlayer.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/util/VectorUtil.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -19,7 +19,7 @@ public:
     virtual void mouseMoved(int x, int y) {}
     virtual void mouseWheelScrolled(float delta) {}
 
-    virtual void joystickMoved(int x, int y) {}
+    virtual void joystickMoved(sf::Vector2f direction) {}
 
 protected:
     InputManager* inputManager;

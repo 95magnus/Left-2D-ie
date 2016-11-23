@@ -32,6 +32,7 @@ public:
     void generateTestLevel();
     void loadFromFile(const std::string &filename);
 
+    void update(float deltaTime);
     void draw(sf::RenderWindow &window);
 
     int tileCoordToPixel();

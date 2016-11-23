@@ -6,7 +6,6 @@
 InputManager::InputManager(sf::RenderWindow* window, StateMachine* stateMachine) {
     this->window = window;
     this->stateMachine = stateMachine;
-    this->desktop = desktop;
 
     window->setJoystickThreshold(joystickThreshold);
 
@@ -19,23 +18,9 @@ InputManager::~InputManager() {
 }
 
 void InputManager::update(float deltaTime) {
-    // TODO: Create player controller class for handling movement
-    moveDirection = sf::Vector2f(0, 0);
 
-    if (actionState[Action::MOVE_UP])
-        moveDirection += sf::Vector2f(0.0f, -1.0f);
-    if (actionState[Action::MOVE_DOWN])
-        moveDirection += sf::Vector2f(0.0f, 1.0f);
-    if (actionState[Action::MOVE_LEFT])
-        moveDirection += sf::Vector2f(-1.0f, 0.0f);
-    if (actionState[Action::MOVE_RIGHT])
-        moveDirection += sf::Vector2f(1.0f, 0.0f);
-
-    for (auto &obs : observers) {
-        obs->actionMove(moveDirection);
-    }
-    //------------------------------------------------
 }
+
 
 void InputManager::setDefaultMappings() {
     actionKeyMappings[Action::MOVE_UP]    = Key::W;
@@ -78,7 +63,6 @@ bool InputManager::checkForInput() {
                         return false;
 
                     case Key::Num1:
-                        desktop->Refresh();
                         stateMachine->setState(StateMachine::StateID::MAIN_MENU);
                         break;
                     case Key::Num2:
@@ -105,7 +89,6 @@ bool InputManager::checkForInput() {
                     konamiIndex  = 0;
 
                 if (konamiIndex >= konamiCode.size()){
-                    //printf("KONAMI CODE UNLEASHED!! AUBY INCOMING");
                     std::cout << "KONAMI CODE UNLEASHED!! AUBY INCOMING!!11!1!|" << std::endl;
                     konamiIndex = 0;
                 }
@@ -148,14 +131,15 @@ bool InputManager::checkForInput() {
             }
 
             case sf::Event::JoystickMoved: {
-                /*
                 auto joystick = event.joystickMove;
-                for(auto &observer : observers){
-                    if (joystick.axis == sf::Joystick::Axis::)
 
-                    observer->joystickMoved()
+                if (joystick.axis == sf::Joystick::Axis::R) {
+                    if (joystick.position > rTriggerThreshold) {
+                        for(auto &observer : observers)
+                            observer->actionShoot();
+                    }
                 }
-                */
+
                 break;
             }
 
@@ -194,7 +178,8 @@ bool InputManager::checkForInput() {
             default:
                 break;
         }
-        stateMachine->getState()->getDesktop()->HandleEvent(event);
+
+        stateMachine->getState()->desktop->HandleEvent(event);
     }
 
     return true;
@@ -217,4 +202,26 @@ void InputManager::removeObserver(InputObserver *observer) {
             observers.erase(it);
         }
     }
+}
+
+bool InputManager::isJoystickConnected(int joystickID) {
+    return sf::Joystick::isConnected(joystickID);
+}
+
+sf::Vector2f InputManager::getStickPosition(int joystickID, sf::Joystick::Axis xAxis, sf::Joystick::Axis yAxis) {
+    if (!isJoystickConnected(joystickID))
+        return sf::Vector2f();
+
+    sf::Vector2f direction;
+
+    float x = sf::Joystick::getAxisPosition(0, xAxis);
+    float y = sf::Joystick::getAxisPosition(0, yAxis);
+
+    direction.x = x / axisMaxPos;
+    direction.y = y / axisMaxPos;
+
+    if (abs(x) > joystickThreshold || abs(y) > joystickThreshold)
+        return direction;
+
+    return sf::Vector2f();
 }

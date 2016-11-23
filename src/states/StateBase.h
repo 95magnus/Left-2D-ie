@@ -21,11 +21,11 @@ public:
     virtual void resume() { paused = false; }
     virtual void switchedState() {};
 
-    sfg::Desktop* getDesktop() const { return desktop; }
+    sfg::Desktop& getDesktop() const;
     void updateDesktop();
-    sfg::Desktop* desktop;
-
     virtual void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);
+
+    sfg::Desktop* desktop;
 
 protected:
     StateBase(Game* game);

@@ -23,12 +23,12 @@ Button:PRELIGHT
     /*BorderWidth: 1;*/
 /*}*/
 
-/*Button:ACTIVE*/
-/*{*/
-    /*BorderColor: #00DD00FF;*/
-    /*BackgroundColor: #009900FF;*/
-    /*BorderWidth: 0;*/
-/*}*/
+Button:ACTIVE
+{
+    BorderColor: #00000000;
+    BackgroundColor: #00000000;
+    BorderWidth: 0;
+}
 
 #button
 {

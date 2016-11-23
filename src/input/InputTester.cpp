@@ -1,9 +1,8 @@
 
 #include "InputTester.h"
 #include "InputManager.h"
-#include "../util/VectorUtil.h"
 
-InputTester::InputTester(InputManager* inputManager) : InputObserver(inputManager) {
+InputTester::InputTester(InputManager* inputManager) : PlayerController(inputManager) {
     shape = sf::RectangleShape(sf::Vector2f(150, 75));
     shape.setFillColor(sf::Color::Green);
     //shape.setOrigin(radius, radius);
@@ -16,11 +15,26 @@ InputTester::InputTester(InputManager* inputManager) : InputObserver(inputManage
     srand(time(NULL));
 }
 
+void InputTester::update(float deltaTime) {
+    PlayerController::update(deltaTime);
+
+    shape.move(moveDirection * movementSpeed);
+    heading.move(moveDirection * movementSpeed);
+
+    setOrigin(getPosition());
+}
+
 void InputTester::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     states.transform *= getTransform();
 
     target.draw(shape, states);
     //target.draw(heading, states);
+}
+
+void InputTester::actionShoot() {
+    printf("Pew pew pew\n");
+
+    setRandomColor();
 }
 
 void InputTester::mousePressed(int x, int y, sf::Mouse::Button button) {
@@ -36,29 +50,22 @@ void InputTester::mousePressed(int x, int y, sf::Mouse::Button button) {
     }
 }
 
-void InputTester::mouseMoved(int x, int y) {
-    mousePos = sf::Vector2f(x, y);
-    auto test = shape.getOrigin();
-    headingAngle = 0;
-
-    shape.setRotation(headingAngle);
-    heading.setRotation(headingAngle);
 /*
-    printf("Mouse(%d, %d) | Pos(%d, %d) -> Angle: %d\n",
-           x, y, test.x, test.y,
-           util::angleDegrees(test, mousePos)
-    );
-    */
-}
-
 void InputTester::actionMove(sf::Vector2f direction) {
-    shape.move(direction * movementSpeed);
-    heading.move(direction * movementSpeed);
-
-    setOrigin(getPosition());
+    moveDirection = direction;
 }
+ */
+
 
 void InputTester::setTexture(sf::Texture *texture) {
     texture->setSmooth(true);
     shape.setTexture(texture);
+}
+
+void InputTester::setRandomColor() {
+    int r = rand() % 255;
+    int g = rand() % 255;
+    int b = rand() % 255;
+
+    shape.setFillColor(sf::Color(r, g, b));
 }

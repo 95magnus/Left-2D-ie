@@ -5,10 +5,12 @@
 #include "../Game.h"
 #include "StateBase.h"
 #include "../modules/MessageBox.h"
+#include "../modules/Player.h"
 
 class InputTester;
 class Level;
 class MessageBox;
+class Player;
 
 class StateSinglePlayer : public StateBase {
 public:
@@ -18,10 +20,14 @@ public:
     void update(float deltaTime);
     void draw();
 protected:
+    //InputManager* inputManager;
+
     sf::RenderWindow *window;
     sf::View *view;
     Level* level;
     MessageBox* mb;
+
+    Player* player;
 
 };
 

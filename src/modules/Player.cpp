@@ -3,9 +3,10 @@
 //
 
 #include "Player.h"
+#include "../input/InputManager.h"
 
 // Constructor
-Player::Player() {
+Player::Player(InputManager* inputManager) : PlayerController(inputManager) {
     health = 100;
     armor = 0;
     speed = 200;
@@ -49,6 +50,13 @@ Player::Player() {
 // Deconstructor
 Player::~Player() {
 
+}
+
+void Player::update(float deltaTime) {
+    sprite.move(0.f, speed * deltaTime * -1);
+    hitbox.move(0.f, speed * deltaTime * -1);
+
+    xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
 }
 
 // Action functions

@@ -8,8 +8,10 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "../Game.h"
+#include "../input/InputObserver.h"
+#include "../input/PlayerController.h"
 
-class Player {
+class Player : public PlayerController {
 public:
     //public stats
     int speed;
@@ -61,6 +63,7 @@ public:
     void scale(float x);
     void animationCycler(sf::IntRect dir[5]);
 
+    void update(float deltaTime);
     void draw(sf::RenderWindow &window);
 
     //Inventory
@@ -73,7 +76,7 @@ public:
      */
     void death();
     void hit();
-    Player();
+    Player(InputManager* inputManager);
     ~Player();
 
     // Getters & setters for stats
