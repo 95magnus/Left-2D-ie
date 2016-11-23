@@ -73,7 +73,6 @@ void Game::stop() {
 void Game::update() {
     inputManager->update();
     stateMachine->update();
-
 }
 
 void Game::draw() {

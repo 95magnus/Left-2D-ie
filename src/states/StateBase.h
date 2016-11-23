@@ -2,8 +2,8 @@
 #define LEFT2DIE_STATEBASE_H
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFGUI/Desktop.hpp>
-#include <SFGUI/Button.hpp>
+#include <SFGUI/Widgets.hpp>
+#include "../util/ResourceLoader.h"
 
 class Game;
 typedef std::string String;
@@ -22,20 +22,27 @@ public:
 
     sfg::Desktop* getDesktop() const { return desktop; }
     void updateDesktop();
-    sfg::Desktop* desktop;
 
     virtual void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);
+    virtual void createLabel(sfg::Label::Ptr labelName);
+    virtual void createSettingsButton(sfg::Button::Ptr buttonName);
+    virtual void createSettingsGuiButton(sfg::CheckButton::Ptr checkButtonName, sfg::Alignment::Ptr alignmentName);
+
+    virtual void createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position);
+
+    void createImageButton(sfg::Button::Ptr imageButton, const String &label, sfg::Alignment::Ptr alignmentName);
 
 protected:
     StateBase(Game* game);
 
     Game* game;
-
+    sfg::Desktop* desktop;
     sf::Clock timer;
 
     const String themePath = "resources/gui/theme.css";
 
     bool paused;
+
 };
 
 #endif //LEFT2DIE_STATEBASE_H

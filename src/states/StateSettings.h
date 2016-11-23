@@ -15,10 +15,37 @@ public:
 
     void pause();
     void resume();
-    void initButtons();
+    void initGui();
+
+    void itemPositionOneClicked();
+    void itemPositionTwoClicked();
+    void itemPositionThreeClicked();
+    void itemPositionFourClicked();
+    void itemPositionFiveClicked();
+    void itemPositionSixClicked();
+
+    void abilityOneClicked();
+    void abilityTwoClicked();
+    void abilityThreeClicked();
+    void abilityFourClicked();
+
+    void moveUpClicked();
+    void moveDownClicked();
+    void moveLeftClicked();
+    void moveRightClicked();
+
+    void buttonMuteSoundClicked();
+    void buttonMuteMusicClicked();
+
+    void buttonDefaultClicked();
+    void buttonApplyClicked();
+
+    void buttonBackClicked();
 
 protected:
 
+    StateBase* statebase;
+    sf::Font *font;
 };
 
 #endif //LEFT2DIE_STATESETTINGS_H

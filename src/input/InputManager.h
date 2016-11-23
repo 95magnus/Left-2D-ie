@@ -20,7 +20,17 @@ public:
         MOVE_DOWN,
         MOVE_LEFT,
         MOVE_RIGHT,
-        USE
+        USE,
+        ITEM_1,
+        ITEM_2,
+        ITEM_3,
+        ITEM_4,
+        ITEM_5,
+        ITEM_6,
+        ABILITY_1,
+        ABILITY_2,
+        ABILITY_3,
+        ABILITY_4
     };
 
     InputManager(sf::RenderWindow* window, StateMachine* stateMachine);
@@ -67,6 +77,7 @@ protected:
     sf::RenderWindow *window;
     StateMachine* stateMachine;
     sfg::Desktop* desktop;
+    sfg::Window::Ptr sfgWindow;
 };
 
 #endif //LEFT2DIE_INPUTMANAGER_H

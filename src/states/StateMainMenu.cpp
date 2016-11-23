@@ -1,15 +1,10 @@
 #include "StateMainMenu.h"
 
 StateMainMenu::StateMainMenu(Game *game) : StateBase(game) {
-    //sfgDesktop = &game->getDesktop();
     initButtons();
 }
 
 StateMainMenu::~StateMainMenu() {
-
-}
-
-void StateMainMenu::update() {
 
 }
 
@@ -22,17 +17,8 @@ void StateMainMenu::pause() {
     desktop->RemoveAll();
 }
 
-void StateMainMenu::draw() {
-    sf::Text title("Left[2D]ie", game->getFont(), 140);
-    title.setFillColor(sf::Color::Red);
-    title.setPosition(275, 50);
+void StateMainMenu::update() {
 
-    sf::Text text("Main Menu state", game->getFont());
-    text.setFillColor(sf::Color::Red);
-    text.setPosition(300, 300);
-
-    game->getWindow().draw(text);
-    game->getWindow().draw(title);
 }
 
 void StateMainMenu::initButtons() {
@@ -42,6 +28,7 @@ void StateMainMenu::initButtons() {
 
     auto playButton = sfg::Button::Create("Play");
     createButton(playButton, sf::Vector2f(670.0f, 240.0f));
+
     playButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonPlayClicked,this));
 
     auto hiscoresButton = sfg::Button::Create("Hiscores");
@@ -55,6 +42,19 @@ void StateMainMenu::initButtons() {
     auto quitButton = sfg::Button::Create("Quit");
     createButton(quitButton, sf::Vector2f(670.0f, 510.0f));
     quitButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonQuitClicked,this));
+}
+
+void StateMainMenu::draw() {
+    sf::Text title("Left[2D]ie", game->getFont(), 140);
+    title.setFillColor(sf::Color::Red);
+    title.setPosition(275, 50);
+
+    sf::Text text("Main Menu state", game->getFont());
+    text.setFillColor(sf::Color::Red);
+    text.setPosition(300, 300);
+
+    game->getWindow().draw(text);
+    game->getWindow().draw(title);
 }
 
 void StateMainMenu::buttonPlayClicked() {

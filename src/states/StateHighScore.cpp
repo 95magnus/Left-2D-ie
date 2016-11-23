@@ -8,16 +8,6 @@ StateHighScore::~StateHighScore() {
 
 }
 
-void StateHighScore::initButtons() {
-    // Some weird reason the first button don't match with sfgDesktop in x-axis: making an invisible button
-    auto invisibleButton = sfg::Button::Create("");
-    createButton(invisibleButton, sf::Vector2f(0.f, 0.f));
-
-    auto backButton = sfg::Button::Create("Back");
-    createButton(backButton, sf::Vector2f(20.0f, 600.0f));
-    backButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateHighScore::buttonBackClicked,this));
-}
-
 void StateHighScore::pause() {
     desktop->RemoveAll();
 }
@@ -29,6 +19,16 @@ void StateHighScore::resume() {
 
 void StateHighScore::update() {
 
+}
+
+void StateHighScore::initButtons() {
+    // Some weird reason the first button don't match with sfgDesktop in x-axis: making an invisible button
+    auto invisibleButton = sfg::Button::Create("");
+    createButton(invisibleButton, sf::Vector2f(0.f, 0.f));
+
+    auto backButton = sfg::Button::Create("Back");
+    createButton(backButton, sf::Vector2f(20.0f, 600.0f));
+    backButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateHighScore::buttonBackClicked,this));
 }
 
 void StateHighScore::draw() {
@@ -44,9 +44,7 @@ void StateHighScore::draw() {
     game->getWindow().draw(title);
 }
 
-
 void StateHighScore::buttonBackClicked() {
-    desktop->RemoveAll();
     game->getStateMachine().setState(StateMachine::StateID::MAIN_MENU);
 }
 

@@ -5,10 +5,11 @@ StatePlayGame::StatePlayGame(Game *game) : StateBase(game) {
 }
 
 StatePlayGame::~StatePlayGame() {
+
 }
 
-void StatePlayGame::update() {
-
+void StatePlayGame::pause() {
+    desktop->RemoveAll();
 }
 
 void StatePlayGame::resume() {
@@ -16,9 +17,8 @@ void StatePlayGame::resume() {
     initButtons();
 }
 
+void StatePlayGame::update() {
 
-void StatePlayGame::pause() {
-    desktop->RemoveAll();
 }
 
 void StatePlayGame::initButtons() {
@@ -44,11 +44,11 @@ void StatePlayGame::draw() {
     title.setFillColor(sf::Color::Red);
     title.setPosition(275, 50);
 
-    sf::Text text("Play", game->getFont());
-    text.setFillColor(sf::Color::Red);
-    text.setPosition(300, 300);
-
-    game->getWindow().draw(text);
+//    sf::Text text("Play", game->getFont());
+//    text.setFillColor(sf::Color::Red);
+//    text.setPosition(300, 300);
+//
+//    game->getWindow().draw(text);
     game->getWindow().draw(title);
 }
 

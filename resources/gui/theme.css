@@ -1,11 +1,10 @@
 /*
-Using SFGUI built-in Widget class to style buttons
+Using SFGUI built-in Widget class to style widgets like buttons and window
 */
 
 Button
 {
     BackgroundColor: #00000000;
-
     BorderWidth: 0;
 }
 
@@ -15,6 +14,20 @@ Button:PRELIGHT
     BackgroundColor: #00000000;
     BorderWidth: 1;
 }
+
+Window
+{
+    BackgroundColor: #696969FF;
+    BorderWidth: 7;
+    BorderColor: #3F3F3F3F;
+}
+
+SettingsButton
+{
+    BackgroundColor: #00000000;
+    BorderWidth: 0;
+}
+
 
 /*Button:SELECTED*/
 /*{*/
@@ -30,8 +43,27 @@ Button:PRELIGHT
     /*BorderWidth: 0;*/
 /*}*/
 
-#button
+#button, #frame, #settingsbutton, #settingsbuttongui, #guibutton, #settingslabel
 {
     FontName: resources/fonts/deathrattlebb_reg.ttf;
 
+}
+
+
+#settingsbutton
+{
+    FontSize: 50.0f;
+}
+
+
+#settingsbuttongui
+{
+    FontSize: 30.0f;
+}
+
+#imagebutton
+{
+    BackgroundColor: #00000000;
+    BorderWidth: 5;
+    FontSize: 40.0f;
 }
