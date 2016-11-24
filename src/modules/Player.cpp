@@ -74,7 +74,7 @@ void Player::move(float deltaTime) {
         xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
 
         if (abs(moveDirection.x) >= abs(moveDirection.y))
-            currentDir = (moveDirection.x < 0) ? Left : Right;
+            currentDir = (moveDirection.x < 0) ? Right : Left;
         else
             currentDir = (moveDirection.y < 0) ? Up : Down;
 
@@ -86,7 +86,7 @@ void Player::move(float deltaTime) {
 }
 
 void Player::draw(sf::RenderWindow &window) {
-    //window.draw(shadow);
+    window.draw(shadow);
     window.draw(sprite);
     window.draw(hitbox);
     //sprite.setPosition(xy);

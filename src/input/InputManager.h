@@ -61,7 +61,7 @@ protected:
 
     bool playWithJoystick = true;
 
-    const float joystickThreshold = 25.0f, axisMaxPos = 100.0f;
+    const float joystickThreshold = 15.0f, axisMaxPos = 100.0f;
     const int rTriggerThreshold = 10;
     unsigned int connectedJoysticks = 0;
 
