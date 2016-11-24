@@ -28,37 +28,37 @@ SettingsButton
     BorderWidth: 0;
 }
 
-
-/*Button:SELECTED*/
-/*{*/
-    /*BorderColor: #00DD00FF;*/
-    /*BackgroundColor: #009900FF;*/
-    /*BorderWidth: 1;*/
-/*}*/
-
-/*Button:ACTIVE*/
-/*{*/
-    /*BorderColor: #00DD00FF;*/
-    /*BackgroundColor: #009900FF;*/
-    /*BorderWidth: 0;*/
-/*}*/
-
-#button, #frame, #settingsbutton, #settingsbuttongui, #guibutton, #settingslabel
+#button, #frame, #settingsbutton, #settingsbuttongui, #guibutton, #settingsframe, #childsettingsframe, #settingscontrols
+    , #settingslabel
 {
     FontName: resources/fonts/deathrattlebb_reg.ttf;
-
 }
 
-
 #settingsbutton
+{
+    FontSize: 70.0f;
+}
+
+#settingsframe
+{
+    FontSize: 100.0f;
+    BorderWidth: 0.0f;
+}
+
+#childsettingsframe
+{
+    FontSize: 60.0f;
+    BorderWidth: 0.0f;
+}
+
+#settingsbuttongui
 {
     FontSize: 50.0f;
 }
 
-
-#settingsbuttongui
+#settingscontrols
 {
-    FontSize: 30.0f;
+    FontSize: 50.0f;
 }
 
 #imagebutton
@@ -66,4 +66,14 @@ SettingsButton
     BackgroundColor: #00000000;
     BorderWidth: 5;
     FontSize: 40.0f;
+}
+
+#notebook
+{
+    BorderWidth: 0;
+}
+
+#settingslabel
+{
+    FontSize: 50px;
 }

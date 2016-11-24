@@ -16,36 +16,40 @@ public:
     void pause();
     void resume();
     void initGui();
+    void initSoundSettingsClicked();
+    void initControlsSettings();
 
-    void itemPositionOneClicked();
-    void itemPositionTwoClicked();
-    void itemPositionThreeClicked();
-    void itemPositionFourClicked();
-    void itemPositionFiveClicked();
-    void itemPositionSixClicked();
+    void onItemOneButtonClick();
+    void onItemTwoButtonClick();
+    void onItemThreeButtonClick();
+    void onItemFourButtonClick();
+    void onItemFiveButtonClick();
+    void onItemSixButtonClick();
 
-    void abilityOneClicked();
-    void abilityTwoClicked();
-    void abilityThreeClicked();
-    void abilityFourClicked();
+    void onAbilityOneButtonClick();
+    void onAbilityTwoButtonClick();
+    void onAbilityThreeButtonClick();
+    void onAbilityFourButtonClick();
 
-    void moveUpClicked();
-    void moveDownClicked();
-    void moveLeftClicked();
-    void moveRightClicked();
+    void onMoveUpButtonClick();
+    void onMoveDownButtonClick();
+    void onMoveLeftButtonClick();
+    void onMoveRightButtonClick();
 
-    void buttonMuteSoundClicked();
-    void buttonMuteMusicClicked();
+    void onMuteSoundButtonClicked();
+    void onMuteMusicButtonClicked();
 
-    void buttonDefaultClicked();
-    void buttonApplyClicked();
+    void onDefaultButtonClick();
+    void onApplyButtonClick();
 
-    void buttonBackClicked();
+    void getToMainMenu();
+    void onDestroyClick();
 
 protected:
-
     StateBase* statebase;
     sf::Font *font;
+
+    sfg::Adjustment::Ptr adjustment;
 };
 
 #endif //LEFT2DIE_STATESETTINGS_H

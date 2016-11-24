@@ -24,12 +24,13 @@ public:
     void updateDesktop();
 
     virtual void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);
-    virtual void createLabel(sfg::Label::Ptr labelName);
     virtual void createSettingsButton(sfg::Button::Ptr buttonName);
-    virtual void createSettingsGuiButton(sfg::CheckButton::Ptr checkButtonName, sfg::Alignment::Ptr alignmentName);
+    virtual void createSoundGUIButton(sfg::CheckButton::Ptr checkButtonName);
+    virtual void createSettingsControlGUIButtons(sfg::Button::Ptr buttonName);
+    virtual void createSettingsControlButtons(sfg::Button::Ptr buttonName);
 
+    virtual void createLabel(sfg::Label::Ptr labelName);
     virtual void createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position);
-
     void createImageButton(sfg::Button::Ptr imageButton, const String &label, sfg::Alignment::Ptr alignmentName);
 
 protected:

@@ -22,165 +22,44 @@ void StateSettings::update() {
 }
 
 void StateSettings::initGui() {
+    // Main settings window
     auto settingsWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
-    createSettingsWindow(settingsWindow, sf::Vector2f(222.0f, 210.0f));
+    createSettingsWindow(settingsWindow, sf::Vector2f(222.0f, 200.0f));
 
-    auto separator = sfg::Separator::Create( sfg::Separator::Orientation::HORIZONTAL);
+    auto soundButton = sfg::Button::Create("Music & Sounds");
+    createSettingsButton(soundButton);
+    soundButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::initSoundSettingsClicked,this));
 
-    // 0 pixel spacing
-    auto box = sfg::Box::Create(sfg::Box::Orientation::VERTICAL, 10.f);
+    auto controlsButton = sfg::Button::Create("Controls");
+    createSettingsButton(controlsButton);
+    controlsButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::initControlsSettings,this));
 
-    auto settingsLabel = sfg::Label::Create("Settings");
-    createLabel(settingsLabel);
-
-    auto doneButton = sfg::Button::Create("Done");
+    auto doneButton = sfg::Button::Create("Back To Main Menu");
     createSettingsButton(doneButton);
+    doneButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::getToMainMenu,this));
 
-    auto fixed = sfg::Fixed::Create();
+    auto maintable = sfg::Table::Create();
+    maintable->Attach(soundButton, sf::Rect<sf::Uint32>(0,1,3,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+    maintable->Attach(controlsButton, sf::Rect<sf::Uint32>(0,2,3,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+    maintable->Attach(doneButton, sf::Rect<sf::Uint32>(0,3,3,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
 
-    fixed->Put(doneButton, sf::Vector2f(10.f, 400.f));
-    box->Pack(fixed);
+    auto box = sfg::Box::Create( sfg::Box::Orientation::HORIZONTAL );
 
-////    auto mainTable = sfg::Table::Create();
-//    auto semiTable = sfg::Table::Create();
-//    auto buttonTable = sfg::Table::Create();
-////
-////    auto backButton = sfg::Button::Create("Back");
-////    createButton(backButton, sf::Vector2f(20.0f, 600.0f));
-////    backButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::buttonBackClicked,this));
-//
-//    auto invisibleButton = sfg::Button::Create("");
-//    auto invisibleButtonAlignment = sfg::Alignment::Create();
-//    createSettingsButton(invisibleButton, invisibleButtonAlignment);
-//
-//    auto muteMusicButton = sfg::CheckButton::Create("Disable music");
-//    auto muteMusicButtonAlignment = sfg::Alignment::Create();
-//    createSettingsGuiButton(muteMusicButton, muteMusicButtonAlignment);
-//    muteMusicButton->GetSignal(sfg::CheckButton::OnToggle).Connect(std::bind(&StateSettings::buttonMuteMusicClicked, this));
-//
-//    auto muteSoundButton = sfg::CheckButton::Create("Disable sound");
-//    auto muteSoundButtonAlignment = sfg::Alignment::Create();
-//    createSettingsGuiButton(muteSoundButton, muteSoundButtonAlignment);
-//    muteSoundButton->GetSignal(sfg::CheckButton::OnToggle).Connect(std::bind(&StateSettings::buttonMuteSoundClicked, this));
-//
-////    auto applyButton = sfg::Button::Create("Apply");
-////    auto applyButtonAlignment = sfg::Alignment::Create();
-////    createSettingsButton(applyButton, applyButtonAlignment);
-////    applyButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::buttonApplyClicked,this));
-////
-////    auto defaultButton = sfg::Button::Create("Restore default");
-////    auto defaultButtonAlignment = sfg::Alignment::Create();
-////    createSettingsButton(defaultButton, defaultButtonAlignment);
-////    defaultButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::buttonDefaultClicked,this));
-//
-//    /* item buttons */
-////    auto itemOneButton = sfg::Button::Create();
-////    auto itemOneButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(itemOneButton, "  1  ",itemOneButtonAlignment);
-////
-////    auto itemTwoButton = sfg::Button::Create();
-////    auto itemTwoButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(itemTwoButton, "  2  ",itemTwoButtonAlignment);
-////
-////    auto itemThreeButton = sfg::Button::Create();
-////    auto itemThreeButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(itemThreeButton, "  3  ",itemThreeButtonAlignment);
-////
-////    auto itemFourButton = sfg::Button::Create();
-////    auto itemFourButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(itemFourButton, "  4  ",itemFourButtonAlignment);
-////
-////    auto itemFiveButton = sfg::Button::Create();
-////    auto itemFiveButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(itemFiveButton, "  5  ", itemFiveButtonAlignment);
-////
-////    auto itemSixButton = sfg::Button::Create();
-////    auto itemSixButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(itemSixButton, "  6  ", itemSixButtonAlignment);
-////
-////    /* ability buttons */
-////    auto abilityOneButton = sfg::Button::Create();
-////    auto abilityOneButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(abilityOneButton, "  7  ", abilityOneButtonAlignment);
-////
-////    auto abilityTwoButton = sfg::Button::Create();
-////    auto abilityTwoButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(abilityOneButton, "  8  ", abilityTwoButtonAlignment);
-////
-////    auto abilityThreeButton = sfg::Button::Create();
-////    auto abilityThreeButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(abilityThreeButton, "  9  ", abilityThreeButtonAlignment);
-////
-////    auto abilityFourButton = sfg::Button::Create();
-////    auto abilityFourButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(abilityFourButton, "  0  ", abilityFourButtonAlignment);
-//
-//    /* Move buttons */
-////    auto moveUpButton = sfg::Button::Create();
-////    auto moveUpButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(moveUpButton, "  UP  ", moveUpButtonAlignment);
-////
-////    auto moveDownButton = sfg::Button::Create();
-////    auto moveDownButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(moveDownButton, "  DOWN  ", moveDownButtonAlignment);
-////
-////    auto moveLeftButton = sfg::Button::Create();
-////    auto moveLeftButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(moveLeftButton, "  LEFT  ", moveLeftButtonAlignment);
-////
-////    auto moveRightButton = sfg::Button::Create();
-////    auto moveRightButtonAlignment = sfg::Alignment::Create();
-////    createImageButton(moveRightButton, "  RIGHT  ", moveRightButtonAlignment);
-//
-//    // It is a 4-tuple (ignore the fact that it is a rect) containing
-//    // in order: column index, row index, column span, row span.
-//
-//    semiTable->Attach(muteMusicButton, sf::Rect<sf::Uint32>(2,0,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-//    semiTable->Attach(muteSoundButton, sf::Rect<sf::Uint32>(0,0,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-//
-////    buttonTable->Attach(itemOneButton, sf::Rect<sf::Uint32>(0,1,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////    buttonTable->Attach(itemTwoButton, sf::Rect<sf::Uint32>(1,1,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////    buttonTable->Attach(itemThreeButton, sf::Rect<sf::Uint32>(2,1,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////    buttonTable->Attach(itemFourButton, sf::Rect<sf::Uint32>(3,1,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////    buttonTable->Attach(itemFiveButton, sf::Rect<sf::Uint32>(4,1,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////    buttonTable->Attach(itemSixButton, sf::Rect<sf::Uint32>(5,1,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////
-////    buttonTable->Attach(abilityOneButton, sf::Rect<sf::Uint32>(0,4,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////    buttonTable->Attach(abilityTwoButton, sf::Rect<sf::Uint32>(1,4,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////    buttonTable->Attach(abilityThreeButton, sf::Rect<sf::Uint32>(2,4,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////    buttonTable->Attach(abilityFourButton, sf::Rect<sf::Uint32>(3,4,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////
-////    buttonTable->Attach(moveUpButton, sf::Rect<sf::Uint32>(0,6,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////    buttonTable->Attach(moveDownButton, sf::Rect<sf::Uint32>(1,6,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////    buttonTable->Attach(moveLeftButton, sf::Rect<sf::Uint32>(2,6,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////    buttonTable->Attach(moveRightButton, sf::Rect<sf::Uint32>(3,6,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-//
-//    auto alignmentBox = sfg::Box::Create(sfg::Box::Orientation::HORIZONTAL);
-//    alignmentBox->Pack(semiTable);
-//
-//    auto alignmentButtonBox = sfg::Box::Create(sfg::Box::Orientation::HORIZONTAL);
-//    alignmentButtonBox->Pack(buttonTable);
-//
-////    mainTable->Attach(defaultButton, sf::Rect<sf::Uint32>(0,0,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-////    mainTable->Attach(applyButton, sf::Rect<sf::Uint32>(1,0,1,1), sfg::Table::EXPAND, sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-//
-//    desktop->SetProperty("Frame#frame", "FontSize", 50.f);
-//
-////    auto semiFrame = sfg::Frame::Create("Keybindings");
-////    semiFrame->SetId("frame");
-////    semiFrame->SetAlignment(sf::Vector2f(.5f, .5f));
-////    semiFrame->Add(alignmentButtonBox);
-//
-//
-//    auto mainFrame = sfg::Frame::Create("Settings");
-//    mainFrame->SetId("frame");
-//    mainFrame->SetAlignment(sf::Vector2f(.5f, .5f));
-//    mainFrame->Add(alignmentBox);
-////    mainFrame->Add(semiFrame);
-//
-//    box->Pack(mainFrame);
-////    box->Pack(semiFrame);
-    box->Pack(settingsLabel);
+    auto tableAlignment = sfg::Alignment::Create();
+
+    auto alignmentBox = sfg::Box::Create(sfg::Box::Orientation::HORIZONTAL);
+    alignmentBox->Pack(tableAlignment, true, true);
+
+    tableAlignment->Add(maintable);
+    tableAlignment->SetScale(sf::Vector2f(.0f, .0f));
+    tableAlignment->SetAlignment(sf::Vector2f(.5f, .5f));
+
+    auto settingsFrame = sfg::Frame::Create("Settings");
+    settingsFrame->SetId("settingsframe");
+    settingsFrame->SetAlignment(sf::Vector2f(.5f, .5f));
+    settingsFrame->Add(alignmentBox);
+
+    box->Pack(settingsFrame);
     settingsWindow->Add(box);
     desktop->Add(settingsWindow);
 }
@@ -193,80 +72,243 @@ void StateSettings::draw() {
     game->getWindow().draw(title);
 }
 
+void StateSettings::initSoundSettingsClicked() {
+    // Music and sounds settings window
+    auto soundSettingsWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
+    createSettingsWindow(soundSettingsWindow, sf::Vector2f(222.0f, 200.0f));
 
-void StateSettings::itemPositionOneClicked() {
+    auto backButton = sfg::Button::Create("Back");
+    createSettingsButton(backButton);
+    backButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDestroyClick,this));
 
+    auto muteSoundButton = sfg::CheckButton::Create("Mute Sound");
+    createSoundGUIButton(muteSoundButton);
+    muteSoundButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onMuteSoundButtonClicked,this));
+
+    auto muteMusicButton = sfg::CheckButton::Create("Mute Music");
+    createSoundGUIButton(muteMusicButton);
+    muteMusicButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onMuteMusicButtonClicked,this));
+
+    auto maintable = sfg::Table::Create();
+
+    auto box = sfg::Box::Create( sfg::Box::Orientation::HORIZONTAL );
+    maintable->Attach(muteSoundButton, sf::Rect<sf::Uint32>(0,0,3,2), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+    maintable->Attach(muteMusicButton, sf::Rect<sf::Uint32>(0,2,3,2), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+    maintable->Attach(backButton, sf::Rect<sf::Uint32>(0,6,3,2), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+
+    auto tableAlignment = sfg::Alignment::Create();
+
+    auto alignmentBox = sfg::Box::Create(sfg::Box::Orientation::HORIZONTAL);
+    alignmentBox->Pack(tableAlignment, true, true);
+
+    tableAlignment->Add(maintable);
+    tableAlignment->SetScale(sf::Vector2f(.0f, .0f));
+    tableAlignment->SetAlignment(sf::Vector2f(.5f, .5f));
+
+    auto soundSettingFrame = sfg::Frame::Create("Music & Sounds");
+    soundSettingFrame->SetId("childsettingsframe");
+    soundSettingFrame->SetAlignment(sf::Vector2f(.5f, .5f));
+    soundSettingFrame->Add(alignmentBox);
+
+    box->Pack(soundSettingFrame);
+    soundSettingsWindow->Add(box);
+    desktop->Add(soundSettingsWindow);
 }
 
-void StateSettings::itemPositionTwoClicked() {
+void StateSettings::initControlsSettings() {
+    auto controlsSettings = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
+    createSettingsWindow(controlsSettings, sf::Vector2f(222.0f, 200.0f));
 
+    auto notebook = sfg::Notebook::Create();
+    notebook->SetId("notebook");
+
+    auto labelGameplay = sfg::Label::Create("Gameplay  ");
+    createLabel(labelGameplay);
+
+    auto labelInventory = sfg::Label::Create("Inventory  ");
+    createLabel(labelInventory);
+
+    auto labelAbilities = sfg::Label::Create("Abilities ");
+    createLabel(labelAbilities);
+
+
+    auto maintable = sfg::Table::Create();
+
+    auto backButton = sfg::Button::Create("Back");
+    createSettingsControlButtons(backButton);
+    backButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDestroyClick,this));
+
+    auto applyButton = sfg::Button::Create("Apply");
+    createSettingsControlButtons(applyButton);
+    applyButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onApplyButtonClick,this));
+
+    auto defaultButton = sfg::Button::Create("Default");
+    createSettingsControlButtons(defaultButton);
+    defaultButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDefaultButtonClick,this));
+
+    maintable->Attach(backButton, sf::Rect<sf::Uint32>(0,0,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+    maintable->Attach(applyButton, sf::Rect<sf::Uint32>(1,0,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+    maintable->Attach(defaultButton, sf::Rect<sf::Uint32>(2,0,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+
+    // Inner table
+    auto itemTable = sfg::Table::Create();
+
+    auto itemOneButton = sfg::Button::Create("1");
+    createSettingsControlGUIButtons(itemOneButton);
+    itemOneButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onItemOneButtonClick,this));
+
+    auto itemTwoButton = sfg::Button::Create("2");
+    createSettingsControlGUIButtons(itemTwoButton);
+    itemTwoButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onItemTwoButtonClick,this));
+
+    auto itemThreeButton = sfg::Button::Create("3");
+    createSettingsControlGUIButtons(itemThreeButton);
+    itemThreeButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onItemThreeButtonClick,this));
+
+    auto itemFourButton = sfg::Button::Create("4");
+    createSettingsControlGUIButtons(itemFourButton);
+    itemFourButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onItemFourButtonClick,this));
+
+    auto itemFiveButton = sfg::Button::Create("5");
+    createSettingsControlGUIButtons(itemFiveButton);
+    itemFiveButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onItemFiveButtonClick,this));
+
+    auto itemSixButton = sfg::Button::Create("6");
+    createSettingsControlGUIButtons(itemSixButton);
+    itemSixButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onItemSixButtonClick,this));
+
+    itemTable->Attach(itemOneButton, sf::Rect<sf::Uint32>(0,0,5,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+    itemTable->Attach(itemTwoButton, sf::Rect<sf::Uint32>(0,1,5,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+    itemTable->Attach(itemThreeButton, sf::Rect<sf::Uint32>(0,2,5,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+    itemTable->Attach(itemFourButton, sf::Rect<sf::Uint32>(0,3,5,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+    itemTable->Attach(itemFiveButton, sf::Rect<sf::Uint32>(0,4,5,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+    itemTable->Attach(itemSixButton, sf::Rect<sf::Uint32>(0,5,5,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
+
+    // Main box
+    auto box = sfg::Box::Create( sfg::Box::Orientation::HORIZONTAL );
+
+    auto tableOneAlignment = sfg::Alignment::Create();
+
+    auto alignmentOneBox = sfg::Box::Create(sfg::Box::Orientation::HORIZONTAL);
+    alignmentOneBox->Pack(tableOneAlignment, true, true);
+
+    tableOneAlignment->Add(maintable);
+    tableOneAlignment->SetScale(sf::Vector2f(.0f, .0f));
+    tableOneAlignment->SetAlignment(sf::Vector2f(.5f, .5f));
+
+    auto tableTwoAlignment = sfg::Alignment::Create();
+
+    auto alignmentTwoBox = sfg::Box::Create(sfg::Box::Orientation::HORIZONTAL);
+    alignmentTwoBox->Pack(tableTwoAlignment, true, true);
+
+    tableTwoAlignment->Add(itemTable);
+    tableTwoAlignment->SetScale(sf::Vector2f(.0f, .0f));
+    tableTwoAlignment->SetAlignment(sf::Vector2f(.5f, .5f));
+
+    auto soundSettingFrame = sfg::Frame::Create("Controls");
+    soundSettingFrame->SetId("childsettingsframe");
+    soundSettingFrame->SetAlignment(sf::Vector2f(.5f, .5f));
+    soundSettingFrame->Add(alignmentOneBox);
+
+    alignmentOneBox->Pack(alignmentTwoBox);
+//    box->Pack(soundSettingFrame);
+    box->Pack(alignmentOneBox);
+  //  controlsSettings->Add(box);
+
+    notebook->AppendPage(box, labelGameplay);
+    notebook->AppendPage(sfg::Label::Create(), labelInventory);
+    notebook->AppendPage(sfg::Label::Create(), labelAbilities);
+
+    controlsSettings->Add(notebook);
+    desktop->Add(controlsSettings);
 }
 
-void StateSettings::itemPositionThreeClicked() {
+void StateSettings::onDestroyClick() {
+    // Obtain parent window
+    auto widget = sfg::Context::Get().GetActiveWidget();
 
+    while( widget->GetName() != "Window" ) {
+        widget = widget->GetParent();
+    }
+
+    // Remove window from desktop
+    desktop->Remove(widget);
 }
 
-void StateSettings::itemPositionFourClicked() {
-
+void StateSettings::getToMainMenu() {
+    // Return to main menu
+    game->getStateMachine().setState(StateMachine::StateID::MAIN_MENU);
 }
 
-void StateSettings::itemPositionFiveClicked() {
 
-}
-
-void StateSettings::itemPositionSixClicked() {
-
-}
-
-void StateSettings::abilityOneClicked() {
-
-}
-
-void StateSettings::abilityTwoClicked() {
-
-}
-
-void StateSettings::abilityThreeClicked() {
-
-}
-
-void StateSettings::abilityFourClicked() {
-
-}
-
-void StateSettings::moveUpClicked() {
-
-}
-
-void StateSettings::moveDownClicked() {
-
-}
-
-void StateSettings::moveLeftClicked() {
-
-}
-
-void StateSettings::moveRightClicked() {
-
-}
-
-void StateSettings::buttonMuteSoundClicked() {
+void StateSettings::onMuteSoundButtonClicked() {
     // Mute sound
 }
 
-void StateSettings::buttonMuteMusicClicked() {
+void StateSettings::onMuteMusicButtonClicked() {
     // Mute music
 }
 
-void StateSettings::buttonDefaultClicked() {
-    // Get default values
+void StateSettings::onDefaultButtonClick() {
+    // Default values
 }
 
-void StateSettings::buttonApplyClicked() {
-    // Save changes
+void StateSettings::onApplyButtonClick() {
+    // Apply changes
 }
 
-void StateSettings::buttonBackClicked() {
-    // Return to main menu
-    game->getStateMachine().setState(StateMachine::StateID::MAIN_MENU);
+void StateSettings::onItemOneButtonClick() {
+
+}
+
+void StateSettings::onItemTwoButtonClick() {
+
+}
+
+void StateSettings::onItemThreeButtonClick() {
+
+}
+
+void StateSettings::onItemFourButtonClick() {
+
+}
+
+void StateSettings::onItemFiveButtonClick() {
+
+}
+
+void StateSettings::onItemSixButtonClick() {
+
+}
+
+void StateSettings::onAbilityOneButtonClick() {
+
+}
+
+void StateSettings::onAbilityTwoButtonClick() {
+
+}
+
+void StateSettings::onAbilityThreeButtonClick() {
+
+}
+
+void StateSettings::onAbilityFourButtonClick() {
+
+}
+
+void StateSettings::onMoveUpButtonClick() {
+
+}
+
+void StateSettings::onMoveDownButtonClick() {
+
+}
+
+void StateSettings::onMoveLeftButtonClick() {
+
+}
+
+void StateSettings::onMoveRightButtonClick() {
+
 }
