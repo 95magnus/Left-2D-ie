@@ -9,6 +9,11 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "../Game.h"
+#include "Weapon.h"
+#include "Projectile.h"
+
+class Weapon;
+class Projectile;
 
 class Player {
 public:
@@ -16,6 +21,7 @@ public:
     sf::RectangleShape sprite;
     sf::RectangleShape hitbox;
     sf::Texture texture;
+    enum Direction {Left, Right, Up, Down};
 
     // Animation rotation arrays, worst implementation, please forgive me
 
@@ -82,6 +88,10 @@ public:
 
     void setSpeed(int speed);
 
+    Direction getCurrentDir() const;
+
+    void setCurrentDir(Direction currentDir);
+
     int getScore() const;
 
     void setScore(int score);
@@ -109,14 +119,17 @@ private:
     int money;
     float scaleFactor;
     sf::Clock clock;
+    //Speedclock is to ensure that the player doesnt move faster or slower due to
+    //differences in the power/workload the CPU has
+    sf::Clock speedClock;
     bool moving;
-    enum Direction {Left, Right, Up, Down};
     Direction currentDir;
     sf::Vector2f xy;
 
     // Inventory
     // TODO: 3 plasser o "bagen" til våpenobjekter
     // TODO: 1 primary, 1 secondary å 1 special
+    Weapon* currentWeapon;
 
 };
 

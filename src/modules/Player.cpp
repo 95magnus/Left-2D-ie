@@ -16,6 +16,8 @@ Player::Player() {
     sprite.setSize(sf::Vector2f(55, 55));
     scaleFactor = 0.25;
 
+    currentWeapon = new Weapon(0, 4, sprite.getPosition().x, sprite.getPosition().y);
+
     texture.setSmooth(false);
     texture.setRepeated(false);
     texture.setSrgb(false);
@@ -31,8 +33,6 @@ Player::Player() {
         sprite.setTexture(&texture);
     }
 
-
-
     hitbox.setOutlineThickness(2);
     hitbox.setOutlineColor(sf::Color::Red);
     hitbox.setFillColor(sf::Color(0,0,0,0));
@@ -42,6 +42,8 @@ Player::Player() {
     // Hitboxen ligger rundt karakterens føtter.
     hitbox.setPosition(sprite.getPosition().x, sprite.getPosition().y + 110);
 
+    sprite.setOrigin(sprite.getSize().x/2.2, sprite.getSize().y);
+    hitbox.setOrigin(sprite.getOrigin());
     scale(0.8);
 }
 
@@ -55,47 +57,54 @@ void Player::moveUp(float dt) {
     sprite.move(0.f, speed * dt * -1);
     hitbox.move(0.f, speed * dt * -1);
     xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
+    currentWeapon->setPosition(xy.x, xy.y);
 }
 
 void Player::moveDown(float dt) {
     sprite.move(0.f, speed * dt);
     hitbox.move(0.f, speed * dt);
     xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
+    currentWeapon->setPosition(xy.x, xy.y);
 }
 
 void Player::moveRight(float dt) {
     sprite.move(speed * dt, 0.f);
     hitbox.move(speed * dt, 0.f);
     xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
+    currentWeapon->setPosition(xy.x, xy.y);
 }
 
 void Player::moveLeft(float dt) {
     sprite.move(speed * dt * -1, 0.f);
     hitbox.move(speed * dt * -1, 0.f);
     xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
+    currentWeapon->setPosition(xy.x, xy.y);
 }
 
 void Player::draw(sf::RenderWindow &window) {
     moving = false;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        moveDown(0.004);
+        moveDown(speedClock.getElapsedTime().asSeconds());
         moving = true;
         currentDir = Down;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        moveUp(0.004);
+        moveUp(speedClock.getElapsedTime().asSeconds());
         moving = true;
         currentDir = Up;
+
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        moveLeft(0.004);
+        moveLeft(speedClock.getElapsedTime().asSeconds());
         moving = true;
         currentDir = Left;
+
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        moveRight(0.004);
+        moveRight(speedClock.getElapsedTime().asSeconds());
         moving = true;
         currentDir = Right;
+
     }
 
     if (currentDir == Up) {
@@ -111,8 +120,70 @@ void Player::draw(sf::RenderWindow &window) {
         animationCycler(right);
     }
 
-    window.draw(sprite);
-    window.draw(hitbox);
+    speedClock.restart();
+    currentWeapon->rotateWeapon();
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        currentWeapon->fire();
+    }
+
+    if (currentDir == Up) {
+        for (auto it = currentWeapon->getBullets().begin(); it != currentWeapon->getBullets().end();) {
+
+            if (it->getClock().getElapsedTime().asSeconds() >= 4) {
+                currentWeapon->getBullets().erase(it);
+            }
+            // Code below is commented out because it causes the progem to crash, dont know why
+            /*
+            if (it->getSprite().getPosition().x <= 0) {
+                currentWeapon->getBullets().erase(it);
+            }
+            if (it->getSprite().getPosition().x >= window.getSize().x) {
+                currentWeapon->getBullets().erase(it);
+            }
+            if (it->getSprite().getPosition().y <= 0) {
+                currentWeapon->getBullets().erase(it);
+            }
+            if (it->getSprite().getPosition().y <= window.getSize().y) {
+                currentWeapon->getBullets().erase(it);
+            }*/
+            else {
+                it->update();
+                window.draw(it->getSprite());
+                it++;
+            }
+        }
+        window.draw(currentWeapon->getSprite());
+        window.draw(sprite);
+        window.draw(hitbox);
+    } else {
+        window.draw(sprite);
+        window.draw(hitbox);
+        for (auto it = currentWeapon->getBullets().begin(); it != currentWeapon->getBullets().end();) {
+
+            if (it->getClock().getElapsedTime().asSeconds() >= 5) {
+                currentWeapon->getBullets().erase(it);
+            }
+            /*
+            if (it->getSprite().getPosition().x <= 0) {
+                currentWeapon->getBullets().erase(it);
+            }
+            if (it->getSprite().getPosition().x >= window.getSize().x) {
+                currentWeapon->getBullets().erase(it);
+            }
+            if (it->getSprite().getPosition().y <= 0) {
+                currentWeapon->getBullets().erase(it);
+            }
+            if (it->getSprite().getPosition().y <= window.getSize().y) {
+                currentWeapon->getBullets().erase(it);
+            }*/
+            else {
+                it->update();
+                window.draw(it->getSprite());
+                it++;
+            }
+        }
+        window.draw(currentWeapon->getSprite());
+    }
     sprite.setPosition(xy);
 }
 
@@ -237,18 +308,18 @@ void Player::animationCycler(sf::IntRect dir[5]) {
                 sprite.setPosition(xy.x + 3, xy.y);
             }
             if (clock.getElapsedTime().asSeconds() < 0.6) {
-                sprite.setSize(sf::Vector2f(dir[4].width*scaleFactor, dir[4].height*scaleFactor));
-                sprite.setTextureRect(dir[4]);
-                sprite.setPosition(xy.x + 3, xy.y);
-            }
-            if (clock.getElapsedTime().asSeconds() < 0.4) {
                 sprite.setSize(sf::Vector2f(dir[3].width*scaleFactor, dir[3].height*scaleFactor));
                 sprite.setTextureRect(dir[3]);
                 sprite.setPosition(xy.x + 3, xy.y);
             }
-            if (clock.getElapsedTime().asSeconds() < 0.2) {
+            if (clock.getElapsedTime().asSeconds() < 0.4) {
                 sprite.setSize(sf::Vector2f(dir[1].width*scaleFactor, dir[1].height*scaleFactor));
                 sprite.setTextureRect(dir[1]);
+                sprite.setPosition(xy.x + 3, xy.y);
+            }
+            if (clock.getElapsedTime().asSeconds() < 0.2) {
+                sprite.setSize(sf::Vector2f(dir[4].width*scaleFactor, dir[1].height*scaleFactor));
+                sprite.setTextureRect(dir[4]);
                 sprite.setPosition(xy.x + 3, xy.y);
 
             }
@@ -326,4 +397,12 @@ int Player::getKills() const {
 
 void Player::setKills(int kills) {
     Player::kills = kills;
+}
+
+Player::Direction Player::getCurrentDir() const {
+    return currentDir;
+}
+
+void Player::setCurrentDir(Player::Direction currentDir) {
+    Player::currentDir = currentDir;
 }
