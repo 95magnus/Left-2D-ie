@@ -26,7 +26,3 @@ void StateBase::createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &po
     desktop->LoadThemeFromFile(themePath);
     desktop->Add(buttonName);
 }
-
-sfg::Desktop& StateBase::getDesktop() const {
-    return *desktop;
-}

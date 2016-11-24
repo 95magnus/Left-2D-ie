@@ -7,6 +7,7 @@
 class PlayerController : public InputObserver {
 public:
     PlayerController(InputManager* inputManager);
+    PlayerController(InputManager* inputManager, int joystickID);
     virtual ~PlayerController();
 
     virtual void update(float deltaTime);

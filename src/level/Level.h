@@ -32,6 +32,12 @@ public:
     void generateTestLevel();
     void loadFromFile(const std::string &filename);
 
+    /**
+     *
+     * @return
+     */
+    sf::Vector2f checkCollision();
+
     void update(float deltaTime);
     void draw(sf::RenderWindow &window);
 

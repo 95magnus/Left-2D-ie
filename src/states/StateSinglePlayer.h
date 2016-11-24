@@ -17,8 +17,11 @@ public:
     StateSinglePlayer(Game* game);
     virtual ~StateSinglePlayer();
 
+    void init();
+
     void update(float deltaTime);
     void draw();
+
 protected:
     //InputManager* inputManager;
 

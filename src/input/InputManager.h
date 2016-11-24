@@ -33,7 +33,10 @@ public:
     void initActionStates();
     void mapKeyToAction(Action action, Key key);
 
+    sf::Vector2f checkActionMoveKeys();
+
     bool isJoystickConnected(int joystickID);
+    unsigned int connectedJoystickCount();
     sf::Vector2f getStickPosition(int joystickID, sf::Joystick::Axis xAxis, sf::Joystick::Axis yAxis);
 
     void addObserver(InputObserver* observer);
@@ -56,11 +59,11 @@ protected:
 
     int konamiIndex = 0;
 
+    bool playWithJoystick = true;
+
     const float joystickThreshold = 25.0f, axisMaxPos = 100.0f;
     const int rTriggerThreshold = 10;
-    unsigned int connectedJoysticks;
-
-    sf::Vector2f moveDirection;
+    unsigned int connectedJoysticks = 0;
 
     std::vector<InputObserver*> observers;
 

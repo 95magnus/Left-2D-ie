@@ -35,9 +35,11 @@ void Game::init() {
 
     sfgui = new sfg::SFGUI();
 
-    inputManager = new InputManager(window, stateMachine);
     stateMachine = new StateMachine(this);
+    inputManager = new InputManager(window, stateMachine);
     font = new sf::Font();
+
+    stateMachine->initStates();
 
     //inputTester = new InputTester(inputManager);
 

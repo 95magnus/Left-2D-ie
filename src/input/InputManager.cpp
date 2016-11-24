@@ -21,7 +21,6 @@ void InputManager::update(float deltaTime) {
 
 }
 
-
 void InputManager::setDefaultMappings() {
     actionKeyMappings[Action::MOVE_UP]    = Key::W;
     actionKeyMappings[Action::MOVE_DOWN]  = Key::S;
@@ -45,6 +44,7 @@ void InputManager::initActionStates() {
 
 bool InputManager::checkForInput() {
     sf::Event event;
+    bool actionMoveChanged = false;
 
     while(window->pollEvent(event)) {
         switch(event.type) {
@@ -54,8 +54,10 @@ bool InputManager::checkForInput() {
             case sf::Event::KeyPressed: {
                 // Set action status(true) if corresponding button is pressed
                 for (auto &elem : keyActionMappings) {
-                    if (event.key.code == elem.first)
+                    if (event.key.code == elem.first){
                         actionState[elem.second] = true;
+                        actionMoveChanged = true;
+                    }
                 }
 
                 switch (event.key.code) {
@@ -95,8 +97,10 @@ bool InputManager::checkForInput() {
 
                 // Set action status(true) if corresponding button is pressed
                 for (auto &elem : keyActionMappings) {
-                    if (event.key.code == elem.first)
+                    if (event.key.code == elem.first) {
                         actionState[elem.second] = false;
+                        actionMoveChanged = true;
+                    }
                 }
 
                 break;
@@ -179,7 +183,12 @@ bool InputManager::checkForInput() {
                 break;
         }
 
-        stateMachine->getState()->desktop->HandleEvent(event);
+        if (actionMoveChanged) {
+            for (auto &obs : observers)
+                obs->actionMove(checkActionMoveKeys());
+        }
+
+        stateMachine->getState()->getDesktop()->HandleEvent(event);
     }
 
     return true;
@@ -204,8 +213,30 @@ void InputManager::removeObserver(InputObserver *observer) {
     }
 }
 
+sf::Vector2f InputManager::checkActionMoveKeys() {
+    sf::Vector2f direction = sf::Vector2f(0, 0);
+
+    if (actionState[Action::MOVE_UP])
+        direction += sf::Vector2f(0, -1);
+
+    if (actionState[Action::MOVE_DOWN])
+        direction += sf::Vector2f(0, 1);
+
+    if (actionState[Action::MOVE_LEFT])
+        direction += sf::Vector2f(-1, 0);
+
+    if (actionState[Action::MOVE_RIGHT])
+        direction += sf::Vector2f(1, 0);
+
+    return direction;
+}
+
 bool InputManager::isJoystickConnected(int joystickID) {
-    return sf::Joystick::isConnected(joystickID);
+    return playWithJoystick && sf::Joystick::isConnected(joystickID);
+}
+
+unsigned int InputManager::connectedJoystickCount() {
+    return connectedJoysticks;
 }
 
 sf::Vector2f InputManager::getStickPosition(int joystickID, sf::Joystick::Axis xAxis, sf::Joystick::Axis yAxis) {

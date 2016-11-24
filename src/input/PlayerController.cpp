@@ -4,6 +4,11 @@ PlayerController::PlayerController(InputManager* inputManager) : InputObserver(i
     this->joystickID = 0;
 }
 
+PlayerController::PlayerController(InputManager* inputManager, int joystickID)
+        : PlayerController(inputManager){
+    this->joystickID = joystickID;
+}
+
 PlayerController::~PlayerController() {
 
 }
@@ -17,6 +22,7 @@ void PlayerController::actionMove(sf::Vector2f direction) {
 }
 
 void PlayerController::pollJoystick() {
+    //if (inputManager->connectedJoystickCount() == 0)
     if (!inputManager->isJoystickConnected(joystickID))
         return;
 

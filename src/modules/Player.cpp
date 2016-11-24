@@ -9,7 +9,6 @@
 Player::Player(InputManager* inputManager) : PlayerController(inputManager) {
     health = 100;
     armor = 0;
-    speed = 200;
     kills = 0;
     score = 0;
     money = 0;
@@ -33,7 +32,10 @@ Player::Player(InputManager* inputManager) : PlayerController(inputManager) {
         sprite.setTexture(&texture);
     }
 
-
+    animationDirections.emplace(Up, up);
+    animationDirections.emplace(Down, down);
+    animationDirections.emplace(Left, left);
+    animationDirections.emplace(Right, right);
 
     hitbox.setOutlineThickness(2);
     hitbox.setOutlineColor(sf::Color::Red);
@@ -44,85 +46,50 @@ Player::Player(InputManager* inputManager) : PlayerController(inputManager) {
     // Hitboxen ligger rundt karakterens føtter.
     hitbox.setPosition(sprite.getPosition().x, sprite.getPosition().y + 110);
 
+    //shadow.setOrigin(hitbox.getOrigin().x - hitbox.getSize().x/4, hitbox.getOrigin().y - hitbox.getSize().y/4);
+    shadow.setRadius(sprite.getSize().x/3);
+    shadow.setFillColor(sf::Color(0, 0, 0, 128));
+    shadow.setPosition(sprite.getPosition().x, sprite.getPosition().y + 110);
+
     scale(0.8);
 }
 
-// Deconstructor
+// Destructor
 Player::~Player() {
 
 }
 
 void Player::update(float deltaTime) {
-    sprite.move(0.f, speed * deltaTime * -1);
-    hitbox.move(0.f, speed * deltaTime * -1);
+    PlayerController::update(deltaTime);
 
-    xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
+    sprite.setPosition(xy);
 }
 
-// Action functions
-void Player::moveUp(float dt) {
-    sprite.move(0.f, speed * dt * -1);
-    hitbox.move(0.f, speed * dt * -1);
-    xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
-}
+void Player::move(float deltaTime) {
+    if (moveDirection.x != 0 || moveDirection.y != 0) {
+        sprite.move(moveDirection * speed * deltaTime);
+        hitbox.move(moveDirection * speed * deltaTime);
+        shadow.move(moveDirection * speed * deltaTime);
 
-void Player::moveDown(float dt) {
-    sprite.move(0.f, speed * dt);
-    hitbox.move(0.f, speed * dt);
-    xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
-}
+        xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
 
-void Player::moveRight(float dt) {
-    sprite.move(speed * dt, 0.f);
-    hitbox.move(speed * dt, 0.f);
-    xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
-}
+        if (abs(moveDirection.x) >= abs(moveDirection.y))
+            currentDir = (moveDirection.x < 0) ? Left : Right;
+        else
+            currentDir = (moveDirection.y < 0) ? Up : Down;
 
-void Player::moveLeft(float dt) {
-    sprite.move(speed * dt * -1, 0.f);
-    hitbox.move(speed * dt * -1, 0.f);
-    xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
+        animationCycler(animationDirections[currentDir]);
+        moving = true;
+    } else {
+        moving = false;
+    }
 }
 
 void Player::draw(sf::RenderWindow &window) {
-    moving = false;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        moveDown(0.004);
-        moving = true;
-        currentDir = Down;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        moveUp(0.004);
-        moving = true;
-        currentDir = Up;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        moveLeft(0.004);
-        moving = true;
-        currentDir = Left;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        moveRight(0.004);
-        moving = true;
-        currentDir = Right;
-    }
-
-    if (currentDir == Up) {
-        animationCycler(up);
-    }
-    if (currentDir == Down) {
-        animationCycler(down);
-    }
-    if (currentDir == Left) {
-        animationCycler(left);
-    }
-    if (currentDir == Right) {
-        animationCycler(right);
-    }
-
+    //window.draw(shadow);
     window.draw(sprite);
     window.draw(hitbox);
-    sprite.setPosition(xy);
+    //sprite.setPosition(xy);
 }
 
 void Player::scale(float x) {
@@ -130,6 +97,9 @@ void Player::scale(float x) {
     scaleFactor *= x;
     hitbox.setScale(x, x);
     hitbox.move(0, -50*x);
+
+    shadow.setScale(x, x);
+    shadow.move(0, -50*x);
 }
 
 void Player::animationCycler(sf::IntRect dir[5]) {
@@ -287,8 +257,8 @@ void Player::death() {
     // TODO: Legge til dødsanimasjon når health = 0?
     // TODO: (kanskje player faller i bakken og blinker i 3 sek så forsvinner den slik som på gamle spill)
 
-    // Kaller dekonstruktøren for player
-    //delete this;
+    // Kaller destruktøren for player
+    delete this;
 }
 
 // Getters & setters
