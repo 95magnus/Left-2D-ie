@@ -1,5 +1,5 @@
 /*
-Using SFGUI built-in Widget class to style widgets like buttons and window
+Using SFGUI built-in Widget class to style widgets like buttons and window, CSS lookalike
 */
 
 Button
@@ -17,7 +17,6 @@ Button:PRELIGHT
 
 Window
 {
-    BackgroundColor: #696969FF;
     BorderWidth: 7;
     BorderColor: #3F3F3F3F;
 }
@@ -28,15 +27,13 @@ SettingsButton
     BorderWidth: 0;
 }
 
-#button, #frame, #settingsbutton, #settingsbuttongui, #guibutton, #settingsframe, #childsettingsframe, #settingscontrols
-    , #settingslabel
+#window
 {
-    FontName: resources/fonts/deathrattlebb_reg.ttf;
+    BackgroundColor: #696969FF;
 }
-
 #settingsbutton
 {
-    FontSize: 70.0f;
+    FontSize: 50.0f;
 }
 
 #settingsframe
@@ -58,22 +55,32 @@ SettingsButton
 
 #settingscontrols
 {
-    FontSize: 50.0f;
+    FontSize: 30.0f;
+}
+
+#settingscontrolsgui
+{
+    FontSize: 30.0f;
 }
 
 #imagebutton
 {
     BackgroundColor: #00000000;
     BorderWidth: 5;
-    FontSize: 40.0f;
+    FontSize: 30.0f;
 }
 
-#notebook
+#notebook, #frame
 {
     BorderWidth: 0;
 }
 
+#label
+{
+    FontSize: 45px;
+}
+
 #settingslabel
 {
-    FontSize: 50px;
+    FontSize: 30px;
 }

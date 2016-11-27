@@ -22,6 +22,7 @@ void StateMainMenu::update() {
 }
 
 void StateMainMenu::initButtons() {
+    desktop->SetProperty("*", "FontName", "resources/fonts/feast-of-flesh-bb.italic.ttf");
     // Some weird reason the first button don't match with sfgDesktop in x-axis: making an invisible button
     auto invisibleButton = sfg::Button::Create("");
     createButton(invisibleButton, sf::Vector2f(0.f, 0.f));
@@ -29,18 +30,19 @@ void StateMainMenu::initButtons() {
     auto playButton = sfg::Button::Create("Play");
     createButton(playButton, sf::Vector2f(670.0f, 240.0f));
 
-    playButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonPlayClicked,this));
-
     auto hiscoresButton = sfg::Button::Create("Hiscores");
     createButton(hiscoresButton, sf::Vector2f(670.0f, 330.0f));
-    hiscoresButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonHiscoresClicked,this));
 
     auto settingsButton = sfg::Button::Create("Settings");
     createButton(settingsButton, sf::Vector2f(670.0f, 420.0f));
-    settingsButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonSettingsClicked,this));
 
     auto quitButton = sfg::Button::Create("Quit");
     createButton(quitButton, sf::Vector2f(670.0f, 510.0f));
+
+    // Signals
+    playButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonPlayClicked,this));
+    hiscoresButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonHiscoresClicked,this));
+    settingsButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonSettingsClicked,this));
     quitButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonQuitClicked,this));
 }
 
@@ -72,8 +74,4 @@ void StateMainMenu::buttonSettingsClicked() {
 void StateMainMenu::buttonQuitClicked() {
     game->stop();
 }
-
-//void StateMainMenu::setButtonColor(const String &s, const sf::Color &color, const sf::Color &prelight) {
-//
-//}
 

@@ -30,6 +30,7 @@ public:
     virtual void createSettingsControlButtons(sfg::Button::Ptr buttonName);
 
     virtual void createLabel(sfg::Label::Ptr labelName);
+    virtual void createSettingsLabel(sfg::Label::Ptr labelName);
     virtual void createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position);
     void createImageButton(sfg::Button::Ptr imageButton, const String &label, sfg::Alignment::Ptr alignmentName);
 
