@@ -75,7 +75,7 @@ void StateSettings::draw() {
 void StateSettings::initSoundSettingsClicked() {
     // Music and sounds settings window
     auto soundSettingsWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
-    createSettingsWindow(soundSettingsWindow, sf::Vector2f(222.0f, 200.0f));
+    createSettingsWindow(soundSettingsWindow, sf::Vector2f(222.0f, 85.0f));
 
     auto backButton = sfg::Button::Create("Back");
     createSettingsButton(backButton);
@@ -114,7 +114,6 @@ void StateSettings::initSoundSettingsClicked() {
     soundSettingsWindow->Add(box);
     desktop->Add(soundSettingsWindow);
 }
-
 
 void StateSettings::initControlsSettings() {
     // Gameplay window
@@ -386,6 +385,14 @@ void StateSettings::initControlsSettings() {
     backButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDestroyClick,this));
     applyButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onApplyButtonClick,this));
     defaultButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDefaultButtonClick,this));
+
+    backButton1->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDestroyClick,this));
+    applyButton1->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onApplyButtonClick,this));
+    defaultButton1->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDefaultButtonClick,this));
+
+    backButton2->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDestroyClick,this));
+    applyButton2->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onApplyButtonClick,this));
+    defaultButton2->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDefaultButtonClick,this));
 
     attackButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDestroyClick,this));
     moveUpButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onMoveUpButtonClick,this));

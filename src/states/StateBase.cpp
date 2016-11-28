@@ -27,38 +27,6 @@ void StateBase::createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &po
     desktop->Add(buttonName);
 }
 
-void StateBase::createSettingsButton(sfg::Button::Ptr buttonName) {
-    desktop->SetProperty("SettingsButton#settingsbutton", "FontSize", 0.f);
-    buttonName->SetAllocation(sf::FloatRect(100.f, 100.0f, 100.f, 100.f));
-    buttonName->SetId("settingsbutton");
-}
-
-void StateBase::createSettingsControlButtons(sfg::Button::Ptr buttonName) {
-    desktop->SetProperty("SettingsButton#settingscontrols", "FontSize", 50.f);
-    buttonName->SetAllocation(sf::FloatRect(100.f, 100.0f, 100.f, 100.f));
-    buttonName->SetId("settingscontrols");
-}
-
-void StateBase::createSoundGUIButton(sfg::CheckButton::Ptr checkButtonName) {
-    desktop->SetProperty("SettingsButtonGui#settingsbuttongui", "FontSize", 70.f);
-    checkButtonName->SetId("settingsbuttongui");
-}
-
-void StateBase::createSettingsControlGUIButtons(sfg::Button::Ptr buttonName) {
-    desktop->SetProperty("SettingsButtonGui#settingscontrols", "FontSize", 50.f);
-    buttonName->SetId("settingscontrolsgui");
-}
-
-void StateBase::createLabel(sfg::Label::Ptr labelName) {
-    desktop->SetProperty("Label#label", "FontSize", 35.f);
-    labelName->SetId("label");
-}
-
-void StateBase::createSettingsLabel(sfg::Label::Ptr labelName){
-    desktop->SetProperty("SettingsLabel#settingslabel", "FontSize", 40.f);
-    labelName->SetId("settingslabel");
-}
-
 void StateBase::createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position) {
     desktop->SetProperty("Window#window", "FontSize", 150.f);
 
@@ -69,6 +37,41 @@ void StateBase::createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vect
     windowName->SetRequisition(sf::Vector2f(580.f, 600.f));
     desktop->Add(windowName);
 }
+
+void StateBase::createSettingsButton(sfg::Button::Ptr buttonName) {
+    desktop->SetProperty("SettingsButton#settingsbutton", "FontSize", 0.f);
+    buttonName->SetAllocation(sf::FloatRect(100.f, 100.0f, 100.f, 100.f));
+    buttonName->SetId("settingsbutton");
+}
+
+void StateBase::createSoundGUIButton(sfg::CheckButton::Ptr checkButtonName) {
+    desktop->SetProperty("SettingsButtonGui#settingsbuttongui", "FontSize", 70.f);
+    checkButtonName->SetId("settingsbuttongui");
+}
+
+void StateBase::createSettingsControlButtons(sfg::Button::Ptr buttonName) {
+    desktop->SetProperty("SettingsButton#settingscontrols", "FontSize", 50.f);
+    buttonName->SetAllocation(sf::FloatRect(100.f, 100.0f, 100.f, 100.f));
+    buttonName->SetId("settingscontrols");
+}
+
+void StateBase::createLabel(sfg::Label::Ptr labelName) {
+    desktop->SetProperty("Label#label", "FontSize", 35.f);
+    labelName->SetId("label");
+}
+
+
+void StateBase::createSettingsLabel(sfg::Label::Ptr labelName){
+    desktop->SetProperty("SettingsLabel#settingslabel", "FontSize", 40.f);
+    labelName->SetId("settingslabel");
+}
+
+void StateBase::createSettingsControlGUIButtons(sfg::Button::Ptr buttonName) {
+    desktop->SetProperty("SettingsButtonGui#settingscontrols", "FontSize", 50.f);
+    buttonName->SetId("settingscontrolsgui");
+}
+
+
 
 void StateBase::createImageButton(sfg::Button::Ptr imageButton, const String &label, sfg::Alignment::Ptr alignmentName) {
     desktop->SetProperty("ImageButton#imagebutton", "FontSize", 0.f);
