@@ -23,31 +23,24 @@ public:
     sfg::Desktop* getDesktop() const { return desktop; }
     void updateDesktop();
 
-    // Main menu buttons
+    //// Single Player GUI
+    void createSinglePlayerWindow(sfg::Window::Ptr windowName);
+    void createBoxes(sfg::Button::Ptr boxName);
+    void createImageButton(sfg::Button::Ptr buttonName, const String &filename);
+    void createImage(sfg::Image::Ptr imageName, const String &filename);
+
+    //// Shop GUI
+    void createShopGUIWindow(sfg::Window::Ptr windowName);
+
+    //// Settings GUI
     virtual void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);
-
-    // Create settings winddows
     virtual void createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position);
-
-    // Settings button
     virtual void createSettingsButton(sfg::Button::Ptr buttonName);
-
-    // Sound settings checkbuttons
     virtual void createSoundGUIButton(sfg::CheckButton::Ptr checkButtonName);
-
-    // Back, default and apply buttons
     virtual void createSettingsControlButtons(sfg::Button::Ptr buttonName);
-
-    // Notebook labels
     virtual void createLabel(sfg::Label::Ptr labelName);
-
-    // All other settings label
     virtual void createSettingsLabel(sfg::Label::Ptr labelName);
-
-    // All other settings buttons
     virtual void createSettingsControlGUIButtons(sfg::Button::Ptr buttonName);
-
-    void createImageButton(sfg::Button::Ptr imageButton, const String &label, sfg::Alignment::Ptr alignmentName);
 
 protected:
     StateBase(Game* game);
@@ -59,7 +52,6 @@ protected:
     const String themePath = "resources/gui/theme.css";
 
     bool paused;
-
 };
 
 #endif //LEFT2DIE_STATEBASE_H

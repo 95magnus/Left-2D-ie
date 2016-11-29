@@ -26,17 +26,15 @@ void StateSettings::initGui() {
     auto settingsWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
     createSettingsWindow(settingsWindow, sf::Vector2f(222.0f, 85.0f));
 
+    // Widgets
     auto soundButton = sfg::Button::Create("Music & Sounds");
     createSettingsButton(soundButton);
-    soundButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::initSoundSettingsClicked,this));
 
     auto controlsButton = sfg::Button::Create("Controls");
     createSettingsButton(controlsButton);
-    controlsButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::initControlsSettings,this));
 
     auto doneButton = sfg::Button::Create("Back To Main Menu");
     createSettingsButton(doneButton);
-    doneButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::getToMainMenu,this));
 
     auto maintable = sfg::Table::Create();
     maintable->Attach(soundButton, sf::Rect<sf::Uint32>(0,1,3,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(10.f, 10.f));
@@ -62,6 +60,11 @@ void StateSettings::initGui() {
     box->Pack(settingsFrame);
     settingsWindow->Add(box);
     desktop->Add(settingsWindow);
+
+    // Signals
+    soundButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::initSoundSettingsClicked,this));
+    controlsButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::initControlsSettings,this));
+    doneButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::getToMainMenu,this));
 }
 
 void StateSettings::draw() {
@@ -77,17 +80,15 @@ void StateSettings::initSoundSettingsClicked() {
     auto soundSettingsWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
     createSettingsWindow(soundSettingsWindow, sf::Vector2f(222.0f, 85.0f));
 
+    // Widgets
     auto backButton = sfg::Button::Create("Back");
     createSettingsButton(backButton);
-    backButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDestroyClick,this));
 
     auto muteSoundButton = sfg::CheckButton::Create("  Mute Sound");
     createSoundGUIButton(muteSoundButton);
-    muteSoundButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onMuteSoundButtonClicked,this));
 
     auto muteMusicButton = sfg::CheckButton::Create("  Mute Music");
     createSoundGUIButton(muteMusicButton);
-    muteMusicButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onMuteMusicButtonClicked,this));
 
     auto maintable = sfg::Table::Create();
 
@@ -106,13 +107,18 @@ void StateSettings::initSoundSettingsClicked() {
     tableAlignment->SetAlignment(sf::Vector2f(.5f, .5f));
 
     auto soundSettingFrame = sfg::Frame::Create("Music & Sounds");
-    soundSettingFrame->SetId("childsettingsframe");
+    soundSettingFrame->SetId("soundsettingsframe");
     soundSettingFrame->SetAlignment(sf::Vector2f(.5f, .5f));
     soundSettingFrame->Add(alignmentBox);
 
     box->Pack(soundSettingFrame);
     soundSettingsWindow->Add(box);
     desktop->Add(soundSettingsWindow);
+
+    // Signals
+    backButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDestroyClick,this));
+    muteSoundButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onMuteSoundButtonClicked,this));
+    muteMusicButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onMuteMusicButtonClicked,this));
 }
 
 void StateSettings::initControlsSettings() {
@@ -123,13 +129,13 @@ void StateSettings::initControlsSettings() {
 
 
     // Notebook labels
-    auto labelGameplay = sfg::Label::Create(" Gameplay ");
+    auto labelGameplay = sfg::Label::Create("  Gameplay ");
     createLabel(labelGameplay);
 
-    auto labelInventory = sfg::Label::Create(" Inventory ");
+    auto labelInventory = sfg::Label::Create(" Inventory  ");
     createLabel(labelInventory);
 
-    auto labelAbilities = sfg::Label::Create(" Abilities ");
+    auto labelAbilities = sfg::Label::Create(" Abilities  ");
     createLabel(labelAbilities);
 
 

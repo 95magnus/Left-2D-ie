@@ -48,8 +48,6 @@ public:
 protected:
     StateBase* statebase;
     sf::Font *font;
-
-    sfg::Adjustment::Ptr adjustment;
 };
 
 #endif //LEFT2DIE_STATESETTINGS_H

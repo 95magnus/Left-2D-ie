@@ -27,11 +27,11 @@ void StatePlayGame::initButtons() {
     createButton(invisibleButton, sf::Vector2f(0.f, 0.f));
 
     auto singlePlayerButton = sfg::Button::Create("Single Player");
-    createButton(singlePlayerButton, sf::Vector2f(670.0f, 240.0f));
+    createButton(singlePlayerButton, sf::Vector2f(550.0f, 280.0f));
     singlePlayerButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StatePlayGame::buttonSinglePlayerClicked,this));
 
     auto multiplayerButton = sfg::Button::Create("Multiplayer");
-    createButton(multiplayerButton, sf::Vector2f(670.0f, 330.0f));
+    createButton(multiplayerButton, sf::Vector2f(550.0f, 370.0f));
     multiplayerButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StatePlayGame::buttonMultiplayerClicked,this));
 
     auto backButton = sfg::Button::Create("Back");

@@ -15,7 +15,7 @@ Button:PRELIGHT
     BorderWidth: 1;
 }
 
-Window
+SettingsWindow
 {
     BorderWidth: 7;
     BorderColor: #3F3F3F3F;
@@ -27,40 +27,37 @@ SettingsButton
     BorderWidth: 0;
 }
 
-#window
+/*
+Reusing these ID's
+*/
+
+#size30px
+{
+    FontSize: 30.0f;
+}
+
+#size50px
+{
+    FontSize: 50.0f;
+}
+
+/*
+------------------------------------------Main Menu---------------------------------------------------------------------
+*/
+
+#box
+{
+    BackgroundColor: #00000000;
+}
+
+
+/*
+------------------------------------------Settings----------------------------------------------------------------------
+*/
+
+#settingswindow
 {
     BackgroundColor: #696969FF;
-}
-#settingsbutton
-{
-    FontSize: 50.0f;
-}
-
-#settingsframe
-{
-    FontSize: 100.0f;
-    BorderWidth: 0.0f;
-}
-
-#childsettingsframe
-{
-    FontSize: 60.0f;
-    BorderWidth: 0.0f;
-}
-
-#settingsbuttongui
-{
-    FontSize: 50.0f;
-}
-
-#settingscontrols
-{
-    FontSize: 30.0f;
-}
-
-#settingscontrolsgui
-{
-    FontSize: 30.0f;
 }
 
 #imagebutton
@@ -70,17 +67,24 @@ SettingsButton
     FontSize: 30.0f;
 }
 
-#notebook, #frame
-{
-    BorderWidth: 0;
-}
-
 #label
 {
     FontSize: 45px;
 }
 
-#settingslabel
+#settingsframe
 {
-    FontSize: 30px;
+    FontSize: 100.0f;
+    BorderWidth: 0.0f;
+}
+
+#soundsettingsframe
+{
+    FontSize: 60.0f;
+    BorderWidth: 0.0f;
+}
+
+#notebook, #frame
+{
+    BorderWidth: 0;
 }
