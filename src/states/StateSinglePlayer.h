@@ -4,11 +4,11 @@
 #include <SFML/Graphics/Text.hpp>
 #include "../Game.h"
 #include "StateBase.h"
-#include "../modules/MessageBox.h"
+#include "../modules/Message.h"
 
 class InputTester;
 class Level;
-class MessageBox;
+class Message;
 
 class StateSinglePlayer : public StateBase {
 public:
@@ -21,7 +21,7 @@ protected:
     sf::RenderWindow *window;
     sf::View *view;
     Level* level;
-    MessageBox* mb;
+    Message* mb;
 
 };
 

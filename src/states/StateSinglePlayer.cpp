@@ -1,9 +1,9 @@
 #include "StateSinglePlayer.h"
-#include "../modules/MessageBox.h"
+#include "../modules/Message.h"
 
 StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
     level = new Level("testLevel.l2d");
-    mb = new MessageBox(game->getWindow());
+    mb = new Message(game->getWindow());
 
     window = &game->getWindow();
     view = &level->getView();
