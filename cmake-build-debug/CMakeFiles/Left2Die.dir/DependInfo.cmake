@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.cpp" "/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o"
   "/home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.cpp" "/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles/Left2Die.dir/src/input/InputObserver.cpp.o"
   "/home/magnus/Dev environment/Dat220/l2d/src/input/InputTester.cpp" "/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles/Left2Die.dir/src/input/InputTester.cpp.o"
+  "/home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.cpp" "/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o"
   "/home/magnus/Dev environment/Dat220/l2d/src/level/Level.cpp" "/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles/Left2Die.dir/src/level/Level.cpp.o"
   "/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.cpp" "/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles/Left2Die.dir/src/level/tiles/TileBase.cpp.o"
   "/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileDirt.cpp" "/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles/Left2Die.dir/src/level/tiles/TileDirt.cpp.o"

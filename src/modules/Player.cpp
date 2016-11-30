@@ -3,12 +3,12 @@
 //
 
 #include "Player.h"
+#include "../input/InputManager.h"
 
 // Constructor
-Player::Player() {
+Player::Player(sf::RenderWindow &window, InputManager &inputManager) : PlayerController(inputManager), window(window) {
     health = 100;
     armor = 0;
-    speed = 200;
     kills = 0;
     score = 0;
     money = 0;
@@ -16,7 +16,7 @@ Player::Player() {
     sprite.setSize(sf::Vector2f(55, 55));
     scaleFactor = 0.25;
 
-    currentWeapon = new Weapon(0, 4, sprite.getPosition().x, sprite.getPosition().y);
+    currentWeapon = new Weapon(window, 0, 4, sprite.getPosition().x, sprite.getPosition().y);
 
     texture.setSmooth(false);
     texture.setRepeated(false);
@@ -34,6 +34,11 @@ Player::Player() {
         sprite.setTexture(&texture);
     }
 
+    animationDirections.emplace(Up, up);
+    animationDirections.emplace(Down, down);
+    animationDirections.emplace(Left, left);
+    animationDirections.emplace(Right, right);
+
     hitbox.setOutlineThickness(2);
     hitbox.setOutlineColor(sf::Color::Red);
     hitbox.setFillColor(sf::Color(0,0,0,0));
@@ -43,89 +48,62 @@ Player::Player() {
     // Hitboxen ligger rundt karakterens føtter.
     hitbox.setPosition(sprite.getPosition().x, sprite.getPosition().y + 110);
 
+    //shadow.setOrigin(hitbox.getOrigin().x - hitbox.getSize().x/4, hitbox.getOrigin().y - hitbox.getSize().y/4);
+    shadow.setRadius(sprite.getSize().x/3);
+    shadow.setFillColor(sf::Color(0, 0, 0, 128));
+    shadow.setPosition(sprite.getPosition().x, sprite.getPosition().y + 110);
+
     sprite.setOrigin(sprite.getSize().x/2.2, sprite.getSize().y);
     hitbox.setOrigin(sprite.getOrigin());
+
     scale(0.8);
 }
 
-// Deconstructor
+// Destructor
 Player::~Player() {
 
 }
 
-// Action functions
-void Player::moveUp(float dt) {
-    sprite.move(0.f, speed * dt * -1);
-    hitbox.move(0.f, speed * dt * -1);
-    xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
-    currentWeapon->setPosition(xy.x, xy.y);
+void Player::update(float deltaTime) {
+    PlayerController::update(deltaTime);
+
+    sprite.setPosition(xy);
+
+    speedClock.restart();
+    currentWeapon->rotateWeapon();
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        currentWeapon->fire();
+    }
+
 }
 
-void Player::moveDown(float dt) {
-    sprite.move(0.f, speed * dt);
-    hitbox.move(0.f, speed * dt);
-    xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
-    currentWeapon->setPosition(xy.x, xy.y);
-}
+void Player::move(float deltaTime) {
+    if (moveDirection.x != 0 || moveDirection.y != 0) {
+        sprite.move(moveDirection * speed * deltaTime);
+        hitbox.move(moveDirection * speed * deltaTime);
+        shadow.move(moveDirection * speed * deltaTime);
 
-void Player::moveRight(float dt) {
-    sprite.move(speed * dt, 0.f);
-    hitbox.move(speed * dt, 0.f);
-    xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
-    currentWeapon->setPosition(xy.x, xy.y);
-}
+        xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
+        currentWeapon->setPosition(xy.x, xy.y);
 
-void Player::moveLeft(float dt) {
-    sprite.move(speed * dt * -1, 0.f);
-    hitbox.move(speed * dt * -1, 0.f);
-    xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
-    currentWeapon->setPosition(xy.x, xy.y);
+        if (abs(moveDirection.x) >= abs(moveDirection.y))
+            currentDir = (moveDirection.x < 0) ? Left : Right;
+        else
+            currentDir = (moveDirection.y < 0) ? Up : Down;
+
+        animationCycler(animationDirections[currentDir]);
+        moving = true;
+    } else {
+        moving = false;
+    }
 }
 
 void Player::draw(sf::RenderWindow &window) {
-    moving = false;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        moveDown(speedClock.getElapsedTime().asSeconds());
-        moving = true;
-        currentDir = Down;
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        moveUp(speedClock.getElapsedTime().asSeconds());
-        moving = true;
-        currentDir = Up;
+    window.draw(shadow);
+    window.draw(sprite);
+    window.draw(hitbox);
+    //sprite.setPosition(xy);
 
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        moveLeft(speedClock.getElapsedTime().asSeconds());
-        moving = true;
-        currentDir = Left;
-
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        moveRight(speedClock.getElapsedTime().asSeconds());
-        moving = true;
-        currentDir = Right;
-
-    }
-
-    if (currentDir == Up) {
-        animationCycler(up);
-    }
-    if (currentDir == Down) {
-        animationCycler(down);
-    }
-    if (currentDir == Left) {
-        animationCycler(left);
-    }
-    if (currentDir == Right) {
-        animationCycler(right);
-    }
-
-    speedClock.restart();
-    currentWeapon->rotateWeapon(window);
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-        currentWeapon->fire(window);
-    }
 
     if (currentDir == Up) {
         for (auto it = currentWeapon->getBullets().begin(); it != currentWeapon->getBullets().end();) {
@@ -185,7 +163,6 @@ void Player::draw(sf::RenderWindow &window) {
         }
         window.draw(currentWeapon->getSprite());
     }
-    sprite.setPosition(xy);
 }
 
 void Player::scale(float x) {
@@ -193,6 +170,9 @@ void Player::scale(float x) {
     scaleFactor *= x;
     hitbox.setScale(x, x);
     hitbox.move(0, -50*x);
+
+    shadow.setScale(x, x);
+    shadow.move(0, -50*x);
 }
 
 void Player::animationCycler(sf::IntRect dir[5]) {
@@ -350,8 +330,8 @@ void Player::death() {
     // TODO: Legge til dødsanimasjon når health = 0?
     // TODO: (kanskje player faller i bakken og blinker i 3 sek så forsvinner den slik som på gamle spill)
 
-    // Kaller dekonstruktøren for player
-    //delete this;
+    // Kaller destruktøren for player
+    delete this;
 }
 
 // Getters & setters

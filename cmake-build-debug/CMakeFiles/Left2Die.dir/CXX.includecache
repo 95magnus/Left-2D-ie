@@ -73,8 +73,6 @@ InputTester.h
 /home/magnus/Dev environment/Dat220/l2d/src/input/InputTester.h
 InputManager.h
 /home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
-../util/VectorUtil.h
-/home/magnus/Dev environment/Dat220/l2d/src/util/VectorUtil.h
 
 /home/magnus/Dev environment/Dat220/l2d/src/input/InputTester.h
 SFML/Graphics.hpp
@@ -85,10 +83,22 @@ SFML/Graphics/Transformable.hpp
 -
 InputObserver.h
 /home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
+PlayerController.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
 stdlib.h
 -
 time.h
 -
+
+/home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.cpp
+PlayerController.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
+InputObserver.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
+InputManager.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
 
 /home/magnus/Dev environment/Dat220/l2d/src/level/Level.cpp
 Level.h
@@ -175,6 +185,8 @@ SFML/Graphics.hpp
 /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.cpp
 Player.h
 /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
+../input/InputManager.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
 
 /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
 SFML/Graphics.hpp
@@ -183,6 +195,10 @@ SFML/Audio.hpp
 -
 ../Game.h
 /home/magnus/Dev environment/Dat220/l2d/src/Game.h
+../input/InputObserver.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
+../input/PlayerController.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
 Weapon.h
 /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
 Projectile.h
@@ -370,11 +386,5 @@ ResourceLoader.h
 string
 -
 SFML/Graphics/Font.hpp
--
-
-/home/magnus/Dev environment/Dat220/l2d/src/util/VectorUtil.h
-SFML/System/Vector2.hpp
--
-math.h
 -
 

@@ -29,6 +29,8 @@ public:
     StateMachine(Game* game);
     virtual ~StateMachine();
 
+    void initStates();
+
     void update(float deltaTime);
     void draw();
 

@@ -111,6 +111,12 @@
 		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/input/InputTester.h">
 			<Option target="Left2Die"/>
 		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h">
+			<Option target="Left2Die"/>
+		</Unit>
 		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/level/Level.cpp">
 			<Option target="Left2Die"/>
 		</Unit>

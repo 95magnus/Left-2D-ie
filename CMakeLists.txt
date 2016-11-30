@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
 project(Left2Die)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -pedantic")
 
 set(SOURCE_FILES src/main.cpp
         src/Game.cpp
@@ -28,6 +28,8 @@ set(SOURCE_FILES src/main.cpp
         src/input/InputObserver.h
         src/input/InputTester.cpp
         src/input/InputTester.h
+        src/input/PlayerController.cpp
+        src/input/PlayerController.h
         src/util/VectorUtil.h
         src/util/ResourceLoader.cpp
         src/util/ResourceLoader.h
@@ -48,7 +50,7 @@ set(SOURCE_FILES src/main.cpp
         src/level/tiles/TileStone.cpp
         src/level/tiles/TileStone.h
         src/level/tiles/TileDirt.cpp
-        src/level/tiles/TileDirt.h)
+        src/level/tiles/TileDirt.h )
 
 find_package (OpenGL REQUIRED)
 add_executable(Left2Die ${SOURCE_FILES})

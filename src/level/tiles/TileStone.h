@@ -8,6 +8,8 @@ public:
     TileStone(unsigned int tileSize, sf::Texture &texture);
     virtual ~TileStone() {}
 
+    bool isSolid() const;
+
 protected:
 
 };

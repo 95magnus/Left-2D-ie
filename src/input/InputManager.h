@@ -33,6 +33,12 @@ public:
     void initActionStates();
     void mapKeyToAction(Action action, Key key);
 
+    sf::Vector2f checkActionMoveKeys();
+
+    bool isJoystickConnected(int joystickID);
+    unsigned int connectedJoystickCount();
+    sf::Vector2f getStickPosition(int joystickID, sf::Joystick::Axis xAxis, sf::Joystick::Axis yAxis);
+
     void addObserver(InputObserver* observer);
     void removeObserver(InputObserver* observer);
 
@@ -53,10 +59,11 @@ protected:
 
     int konamiIndex = 0;
 
-    const float joystickThreshold = 0.1f;
-    unsigned int connectedJoysticks;
+    bool playWithJoystick = false;
 
-    sf::Vector2f moveDirection;
+    const float joystickThreshold = 15.0f, axisMaxPos = 100.0f;
+    const int rTriggerThreshold = 10;
+    unsigned int connectedJoysticks = 0;
 
     std::vector<InputObserver*> observers;
 
@@ -66,7 +73,6 @@ protected:
 
     sf::RenderWindow *window;
     StateMachine* stateMachine;
-    sfg::Desktop* desktop;
 };
 
 #endif //LEFT2DIE_INPUTMANAGER_H

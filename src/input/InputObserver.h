@@ -8,7 +8,7 @@ class InputManager;
 
 class InputObserver {
 public:
-    InputObserver(InputManager* inputManager);
+    InputObserver(InputManager &inputManager);
     virtual ~InputObserver() {}
 
     virtual void actionMove(sf::Vector2f direction) {}
@@ -19,10 +19,10 @@ public:
     virtual void mouseMoved(int x, int y) {}
     virtual void mouseWheelScrolled(float delta) {}
 
-    virtual void joystickMoved(int x, int y) {}
+    virtual void joystickMoved(sf::Vector2f direction) {}
 
 protected:
-    InputManager* inputManager;
+    InputManager &inputManager;
 };
 
 

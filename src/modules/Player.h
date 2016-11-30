@@ -8,67 +8,29 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "../Game.h"
+#include "../input/InputObserver.h"
+#include "../input/PlayerController.h"
 #include "Weapon.h"
 #include "Projectile.h"
 
 class Weapon;
 class Projectile;
 
-class Player {
+class Player : public PlayerController {
 public:
-    //public stats
-    int speed;
-    int x, y;
+    enum Direction {Up, Down, Left, Right};
 
-    // Model
-    sf::RectangleShape sprite;
-    sf::RectangleShape hitbox;
-    sf::Texture texture;
-    enum Direction {Left, Right, Up, Down};
+    void move(float deltaTime);
 
-    // Animation rotation arrays, worst implementation, please forgive me
-    sf::IntRect left[5] = {{970, 635, 240, 630},
-                           {0, 0, 480, 630},
-                           {0, 1270, 315, 630},
-                           {485, 0, 480, 630},
-                           {970, 0, 480, 630}};
-
-    sf::IntRect right[5] = {{1215, 635, 240, 630},
-                       {1455, 0, 480, 630},
-                       {320, 1270, 315, 630},
-                       {0, 635, 480, 630},
-                       {485, 635, 480, 630}};
-
-    sf::IntRect up[5] = {{1195, 1270, 180, 630},
-                    {1645, 635, 480, 630},
-                     {1645, 635, 480, 630},
-                    {1010, 1270, 180, 630},
-                    {1010, 1270, 180, 630}};
-
-    sf::IntRect down[5] = {{1460, 635, 180 ,630},
-                      {640, 1270, 180, 630},
-                      {825, 1270, 180, 630},
-                      {825, 1270, 180, 630},
-                      {640, 1270, 180, 630}};
-
-    // Sounds
-    sf::SoundBuffer SBuffer;
-    sf::Sound sound;
-
-    // Actions
-    void moveUp(float dt);
-    void moveDown(float dt);
-    void moveRight(float dt);
-    void moveLeft(float dt);
     void scale(float x);
     void animationCycler(sf::IntRect dir[5]);
+
+    void update(float deltaTime);
     void draw(sf::RenderWindow &window);
-
-
 
     void death();
     void hit();
-    Player();
+    Player(sf::RenderWindow &window, InputManager &inputManager);
     ~Player();
 
     // Getters & setters for stats
@@ -98,13 +60,23 @@ private:
 
     // Sprites
 
+    float speed = 175.0f;
+    int x, y;
+
+    sf::RenderWindow &window;
+
+    // Model
+    sf::RectangleShape sprite;
+    sf::CircleShape shadow;
+    sf::RectangleShape hitbox;
+    sf::Texture texture;
+
+    // Sounds
+    sf::SoundBuffer SBuffer;
+    sf::Sound sound;
 
     // Private Stats
-    int health;
-    int armor;
-    int kills;
-    int score;
-    int money;
+    int health, armor, kills, score, money;
     float scaleFactor;
     sf::Clock clock;
     //Speedclock is to ensure that the player doesnt move faster or slower due to
@@ -113,6 +85,35 @@ private:
     bool moving;
     Direction currentDir;
     sf::Vector2f xy;
+
+    // Animation rotation arrays, worst implementation, please forgive me
+
+    sf::IntRect left[5] = {{970, 635, 240, 630},
+                           {0, 0, 480, 630},
+                           {0, 1270, 315, 630},
+                           {485, 0, 480, 630},
+                           {970, 0, 480, 630}};
+
+    sf::IntRect right[5] = {{1215, 635, 240, 630},
+                            {1455, 0, 480, 630},
+                            {320, 1270, 315, 630},
+                            {0, 635, 480, 630},
+                            {485, 635, 480, 630}};
+
+    sf::IntRect up[5] = {{1195, 1270, 180, 630},
+                         {1645, 635, 480, 630},
+                         {1645, 635, 480, 630},
+                         {1010, 1270, 180, 630},
+                         {1010, 1270, 180, 630}};
+
+    sf::IntRect down[5] = {{1460, 635, 180 ,630},
+                           {640, 1270, 180, 630},
+                           {825, 1270, 180, 630},
+                           {825, 1270, 180, 630},
+                           {640, 1270, 180, 630}};
+
+    std::map<Direction, sf::IntRect[5]> animationDirections;
+
 
     // Inventory
     // TODO: 3 plasser o "bagen" til våpenobjekter

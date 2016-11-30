@@ -12,6 +12,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o"
   "CMakeFiles/Left2Die.dir/src/input/InputObserver.cpp.o"
   "CMakeFiles/Left2Die.dir/src/input/InputTester.cpp.o"
+  "CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o"
   "CMakeFiles/Left2Die.dir/src/util/ResourceLoader.cpp.o"
   "CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o"
   "CMakeFiles/Left2Die.dir/src/modules/zombie.cpp.o"

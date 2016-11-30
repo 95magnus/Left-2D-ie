@@ -4,10 +4,10 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(int wepStage, float rps, int posX, int posY) {
+Weapon::Weapon(sf::RenderWindow &window, int wepStage, float rps, int posX, int posY) : window(window){
+    this->rps = rps;
     sprite.setPosition(posX, posY);
     weaponStage = wepStage;
-    this->rps = rps;
     spriteFront = weaponStageIntRectsFront[wepStage];
     spriteSide = weaponStageIntRectsSide[wepStage];
     if (!texture.loadFromFile("resources/textures/spritesheets/weapons.png")) {
@@ -24,8 +24,10 @@ Weapon::Weapon(int wepStage, float rps, int posX, int posY) {
     }
     sprite.setSize(sf::Vector2f(spriteSide.width, spriteSide.height));
     sprite.setTextureRect(spriteSide);
-    sprite.setOrigin(sprite.getSize().x/2, sprite.getOrigin().y/2);
     sprite.scale(0.2, 0.2);
+    sprite.setOrigin(sprite.getSize().x/2, sprite.getSize().y/2);
+    sprite.setOutlineThickness(2);
+    sprite.setOutlineColor(sf::Color::Red);
     sound.setBuffer(soundBuffer);
 }
 
@@ -33,7 +35,7 @@ Weapon::~Weapon() {
 
 }
 
-void Weapon::fire(sf::RenderWindow &window) {
+void Weapon::fire() {
     if (clock.getElapsedTime().asSeconds() > 1/rps) {
         Projectile bullet(window, projectileTexture, projectileIntRect[weaponStage], 100, angle, this->sprite.getPosition().x, this->sprite.getPosition().y);
         bullets.push_back(bullet);
@@ -42,7 +44,7 @@ void Weapon::fire(sf::RenderWindow &window) {
     }
 }
 
-void Weapon::rotateWeapon(sf::RenderWindow &window) {
+void Weapon::rotateWeapon() {
     angle = (float) (atan2(sprite.getPosition().y - mouse.getPosition(window).y, sprite.getPosition().x - mouse.getPosition(window).x)*180/3.1416);
 
     sprite.setRotation(angle);

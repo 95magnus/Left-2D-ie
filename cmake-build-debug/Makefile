@@ -231,6 +231,33 @@ src/input/InputTester.cpp.s:
 	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/input/InputTester.cpp.s
 .PHONY : src/input/InputTester.cpp.s
 
+src/input/PlayerController.o: src/input/PlayerController.cpp.o
+
+.PHONY : src/input/PlayerController.o
+
+# target to build an object file
+src/input/PlayerController.cpp.o:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o
+.PHONY : src/input/PlayerController.cpp.o
+
+src/input/PlayerController.i: src/input/PlayerController.cpp.i
+
+.PHONY : src/input/PlayerController.i
+
+# target to preprocess a source file
+src/input/PlayerController.cpp.i:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.i
+.PHONY : src/input/PlayerController.cpp.i
+
+src/input/PlayerController.s: src/input/PlayerController.cpp.s
+
+.PHONY : src/input/PlayerController.s
+
+# target to generate assembly for a file
+src/input/PlayerController.cpp.s:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.s
+.PHONY : src/input/PlayerController.cpp.s
+
 src/level/Level.o: src/level/Level.cpp.o
 
 .PHONY : src/level/Level.o
@@ -765,6 +792,9 @@ help:
 	@echo "... src/input/InputTester.o"
 	@echo "... src/input/InputTester.i"
 	@echo "... src/input/InputTester.s"
+	@echo "... src/input/PlayerController.o"
+	@echo "... src/input/PlayerController.i"
+	@echo "... src/input/PlayerController.s"
 	@echo "... src/level/Level.o"
 	@echo "... src/level/Level.i"
 	@echo "... src/level/Level.s"

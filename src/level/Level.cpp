@@ -167,6 +167,10 @@ void Level::loadFromFile(const std::string &filename) {
     levelLoaded = true;
 }
 
+void Level::update(float deltaTime) {
+
+}
+
 void Level::draw(sf::RenderWindow &window) {
     if (!levelLoaded)
         return;

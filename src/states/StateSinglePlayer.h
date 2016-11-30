@@ -17,14 +17,21 @@ public:
     StateSinglePlayer(Game* game);
     virtual ~StateSinglePlayer();
 
+    void init();
+
     void update(float deltaTime);
     void draw();
+
 protected:
+    //InputManager* inputManager;
+
     sf::RenderWindow *window;
     sf::View *view;
     Level* level;
     MessageBox* mb;
-    Player* pl;
+
+    Player* player;
+
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H

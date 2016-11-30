@@ -2,8 +2,9 @@
 
 StateBase::StateBase(Game* game) {
     this->game = game;
+    this->desktop = new sfg::Desktop();
+
     paused = false;
-    desktop = new sfg::Desktop();
 }
 
 StateBase::~StateBase() {

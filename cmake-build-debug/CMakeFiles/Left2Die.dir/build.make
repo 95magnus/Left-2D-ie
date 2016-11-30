@@ -369,9 +369,33 @@ CMakeFiles/Left2Die.dir/src/input/InputTester.cpp.o.provides: CMakeFiles/Left2Di
 CMakeFiles/Left2Die.dir/src/input/InputTester.cpp.o.provides.build: CMakeFiles/Left2Die.dir/src/input/InputTester.cpp.o
 
 
+CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o: CMakeFiles/Left2Die.dir/flags.make
+CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o: ../src/input/PlayerController.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o -c "/home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.cpp"
+
+CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.cpp" > CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.i
+
+CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.cpp" -o CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.s
+
+CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o.requires:
+
+.PHONY : CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o.requires
+
+CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o.provides: CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o.provides.build
+.PHONY : CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o.provides
+
+CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o.provides.build: CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o
+
+
 CMakeFiles/Left2Die.dir/src/util/ResourceLoader.cpp.o: CMakeFiles/Left2Die.dir/flags.make
 CMakeFiles/Left2Die.dir/src/util/ResourceLoader.cpp.o: ../src/util/ResourceLoader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Left2Die.dir/src/util/ResourceLoader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Left2Die.dir/src/util/ResourceLoader.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Left2Die.dir/src/util/ResourceLoader.cpp.o -c "/home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.cpp"
 
 CMakeFiles/Left2Die.dir/src/util/ResourceLoader.cpp.i: cmake_force
@@ -395,7 +419,7 @@ CMakeFiles/Left2Die.dir/src/util/ResourceLoader.cpp.o.provides.build: CMakeFiles
 
 CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o: CMakeFiles/Left2Die.dir/flags.make
 CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o: ../src/modules/Player.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o -c "/home/magnus/Dev environment/Dat220/l2d/src/modules/Player.cpp"
 
 CMakeFiles/Left2Die.dir/src/modules/Player.cpp.i: cmake_force
@@ -419,7 +443,7 @@ CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o.provides.build: CMakeFiles/Left
 
 CMakeFiles/Left2Die.dir/src/modules/zombie.cpp.o: CMakeFiles/Left2Die.dir/flags.make
 CMakeFiles/Left2Die.dir/src/modules/zombie.cpp.o: ../src/modules/zombie.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Left2Die.dir/src/modules/zombie.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/Left2Die.dir/src/modules/zombie.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Left2Die.dir/src/modules/zombie.cpp.o -c "/home/magnus/Dev environment/Dat220/l2d/src/modules/zombie.cpp"
 
 CMakeFiles/Left2Die.dir/src/modules/zombie.cpp.i: cmake_force
@@ -443,7 +467,7 @@ CMakeFiles/Left2Die.dir/src/modules/zombie.cpp.o.provides.build: CMakeFiles/Left
 
 CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: CMakeFiles/Left2Die.dir/flags.make
 CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/modules/MessageBox.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o -c "/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.cpp"
 
 CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.i: cmake_force
@@ -467,7 +491,7 @@ CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o.provides.build: CMakeFiles/
 
 CMakeFiles/Left2Die.dir/src/modules/Weapon.cpp.o: CMakeFiles/Left2Die.dir/flags.make
 CMakeFiles/Left2Die.dir/src/modules/Weapon.cpp.o: ../src/modules/Weapon.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/Left2Die.dir/src/modules/Weapon.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/Left2Die.dir/src/modules/Weapon.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Left2Die.dir/src/modules/Weapon.cpp.o -c "/home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.cpp"
 
 CMakeFiles/Left2Die.dir/src/modules/Weapon.cpp.i: cmake_force
@@ -491,7 +515,7 @@ CMakeFiles/Left2Die.dir/src/modules/Weapon.cpp.o.provides.build: CMakeFiles/Left
 
 CMakeFiles/Left2Die.dir/src/modules/Projectile.cpp.o: CMakeFiles/Left2Die.dir/flags.make
 CMakeFiles/Left2Die.dir/src/modules/Projectile.cpp.o: ../src/modules/Projectile.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/Left2Die.dir/src/modules/Projectile.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/Left2Die.dir/src/modules/Projectile.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Left2Die.dir/src/modules/Projectile.cpp.o -c "/home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.cpp"
 
 CMakeFiles/Left2Die.dir/src/modules/Projectile.cpp.i: cmake_force
@@ -515,7 +539,7 @@ CMakeFiles/Left2Die.dir/src/modules/Projectile.cpp.o.provides.build: CMakeFiles/
 
 CMakeFiles/Left2Die.dir/src/level/Level.cpp.o: CMakeFiles/Left2Die.dir/flags.make
 CMakeFiles/Left2Die.dir/src/level/Level.cpp.o: ../src/level/Level.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/Left2Die.dir/src/level/Level.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/Left2Die.dir/src/level/Level.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Left2Die.dir/src/level/Level.cpp.o -c "/home/magnus/Dev environment/Dat220/l2d/src/level/Level.cpp"
 
 CMakeFiles/Left2Die.dir/src/level/Level.cpp.i: cmake_force
@@ -539,7 +563,7 @@ CMakeFiles/Left2Die.dir/src/level/Level.cpp.o.provides.build: CMakeFiles/Left2Di
 
 CMakeFiles/Left2Die.dir/src/level/tiles/TileBase.cpp.o: CMakeFiles/Left2Die.dir/flags.make
 CMakeFiles/Left2Die.dir/src/level/tiles/TileBase.cpp.o: ../src/level/tiles/TileBase.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/Left2Die.dir/src/level/tiles/TileBase.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/Left2Die.dir/src/level/tiles/TileBase.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Left2Die.dir/src/level/tiles/TileBase.cpp.o -c "/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.cpp"
 
 CMakeFiles/Left2Die.dir/src/level/tiles/TileBase.cpp.i: cmake_force
@@ -563,7 +587,7 @@ CMakeFiles/Left2Die.dir/src/level/tiles/TileBase.cpp.o.provides.build: CMakeFile
 
 CMakeFiles/Left2Die.dir/src/level/tiles/TileStone.cpp.o: CMakeFiles/Left2Die.dir/flags.make
 CMakeFiles/Left2Die.dir/src/level/tiles/TileStone.cpp.o: ../src/level/tiles/TileStone.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/Left2Die.dir/src/level/tiles/TileStone.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/Left2Die.dir/src/level/tiles/TileStone.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Left2Die.dir/src/level/tiles/TileStone.cpp.o -c "/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.cpp"
 
 CMakeFiles/Left2Die.dir/src/level/tiles/TileStone.cpp.i: cmake_force
@@ -587,7 +611,7 @@ CMakeFiles/Left2Die.dir/src/level/tiles/TileStone.cpp.o.provides.build: CMakeFil
 
 CMakeFiles/Left2Die.dir/src/level/tiles/TileDirt.cpp.o: CMakeFiles/Left2Die.dir/flags.make
 CMakeFiles/Left2Die.dir/src/level/tiles/TileDirt.cpp.o: ../src/level/tiles/TileDirt.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/Left2Die.dir/src/level/tiles/TileDirt.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/Left2Die.dir/src/level/tiles/TileDirt.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Left2Die.dir/src/level/tiles/TileDirt.cpp.o -c "/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileDirt.cpp"
 
 CMakeFiles/Left2Die.dir/src/level/tiles/TileDirt.cpp.i: cmake_force
@@ -624,6 +648,7 @@ Left2Die_OBJECTS = \
 "CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o" \
 "CMakeFiles/Left2Die.dir/src/input/InputObserver.cpp.o" \
 "CMakeFiles/Left2Die.dir/src/input/InputTester.cpp.o" \
+"CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o" \
 "CMakeFiles/Left2Die.dir/src/util/ResourceLoader.cpp.o" \
 "CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o" \
 "CMakeFiles/Left2Die.dir/src/modules/zombie.cpp.o" \
@@ -651,6 +676,7 @@ Left2Die: CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o
 Left2Die: CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o
 Left2Die: CMakeFiles/Left2Die.dir/src/input/InputObserver.cpp.o
 Left2Die: CMakeFiles/Left2Die.dir/src/input/InputTester.cpp.o
+Left2Die: CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o
 Left2Die: CMakeFiles/Left2Die.dir/src/util/ResourceLoader.cpp.o
 Left2Die: CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o
 Left2Die: CMakeFiles/Left2Die.dir/src/modules/zombie.cpp.o
@@ -665,7 +691,7 @@ Left2Die: CMakeFiles/Left2Die.dir/build.make
 Left2Die: /usr/lib/x86_64-linux-gnu/libGLU.so
 Left2Die: /usr/lib/x86_64-linux-gnu/libGL.so
 Left2Die: CMakeFiles/Left2Die.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable Left2Die"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_25) "Linking CXX executable Left2Die"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Left2Die.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -686,6 +712,7 @@ CMakeFiles/Left2Die.dir/requires: CMakeFiles/Left2Die.dir/src/states/StateSettin
 CMakeFiles/Left2Die.dir/requires: CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o.requires
 CMakeFiles/Left2Die.dir/requires: CMakeFiles/Left2Die.dir/src/input/InputObserver.cpp.o.requires
 CMakeFiles/Left2Die.dir/requires: CMakeFiles/Left2Die.dir/src/input/InputTester.cpp.o.requires
+CMakeFiles/Left2Die.dir/requires: CMakeFiles/Left2Die.dir/src/input/PlayerController.cpp.o.requires
 CMakeFiles/Left2Die.dir/requires: CMakeFiles/Left2Die.dir/src/util/ResourceLoader.cpp.o.requires
 CMakeFiles/Left2Die.dir/requires: CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o.requires
 CMakeFiles/Left2Die.dir/requires: CMakeFiles/Left2Die.dir/src/modules/zombie.cpp.o.requires

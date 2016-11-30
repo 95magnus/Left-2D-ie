@@ -21,6 +21,11 @@ StateMachine::~StateMachine() {
     }
 }
 
+void StateMachine::initStates() {
+    for (auto &state : states)
+        state.second->init();
+}
+
 void StateMachine::update(float deltaTime) {
     currentState->update(deltaTime);
     currentState->updateDesktop();

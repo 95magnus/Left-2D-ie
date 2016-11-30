@@ -17,17 +17,20 @@
 
 class Weapon {
 public:
-    Weapon(int wepStage, float rps, int posX, int posY);
+    Weapon(sf::RenderWindow &window, int wepStage, float rps, int posX, int posY);
 
     virtual ~Weapon();
 
-    void fire(sf::RenderWindow &window);
+    void draw();
+
+    void fire();
+
 
     void flipRight();
 
     void flipLeft();
 
-    void rotateWeapon(sf::RenderWindow &window);
+    void rotateWeapon();
 
     void setPosition(int x, int y);
 
@@ -85,6 +88,8 @@ public:
 
 
 private:
+    sf::RenderWindow &window;
+
     int damage;
     float angle;
     int weaponStage;

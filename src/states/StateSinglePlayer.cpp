@@ -3,12 +3,10 @@
 
 StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
     level = new Level("testLevel.l2d");
-    pl = new Player;
     mb = new MessageBox(game->getWindow());
 
     window = &game->getWindow();
     view = &level->getView();
-
     //view->zoom(0.5f);
 
     //window->setView(*view);
@@ -17,16 +15,24 @@ StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
 StateSinglePlayer::~StateSinglePlayer() {
     delete level;
     delete mb;
+    //delete player;
 
     window->setView(window->getDefaultView());
 }
 
-void StateSinglePlayer::update(float deltaTime) {
+void StateSinglePlayer::init() {
+    player = new Player(game->getWindow(), game->getInputManager());
+}
 
+void StateSinglePlayer::update(float deltaTime) {
+    level->update(deltaTime);
+    player->update(deltaTime);
+
+    player->move(deltaTime);
 }
 
 void StateSinglePlayer::draw() {
     level->draw(game->getWindow());
     mb->draw("Wave x - Good luck", 8, game->getWindow());
-    pl->draw(game->getWindow());
+    player->draw(game->getWindow());
 }
