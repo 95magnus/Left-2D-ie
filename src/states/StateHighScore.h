@@ -10,7 +10,7 @@ public:
     StateHighScore(Game* game);
     virtual ~StateHighScore();
 
-    void update();
+    void update(float deltaTime);
     void draw();
 
     void pause();

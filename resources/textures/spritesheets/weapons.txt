@@ -1,0 +1,4 @@
+ak = 0 0 360 90
+ak_front = 365 0 30 75
+energycannon = 0 95 270 165
+energycannon_front = 0 265 165 165

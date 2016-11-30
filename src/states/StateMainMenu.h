@@ -15,7 +15,7 @@ public:
     StateMainMenu(Game *game);
     virtual ~StateMainMenu();
 
-    virtual void update();
+    virtual void update(float deltaTime);
     virtual void draw();
 
     void pause();

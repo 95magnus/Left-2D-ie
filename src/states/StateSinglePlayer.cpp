@@ -1,11 +1,24 @@
 #include "StateSinglePlayer.h"
+#include "../modules/Message.h"
 
 StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
-    initGameGui();
+    //initGameGui();
+    level = new Level("testLevel.l2d");
+    mb = new Message(game->getWindow());
+
+    window = &game->getWindow();
+    view = &level->getView();
+
+    //view->zoom(0.5f);
+
+    //window->setView(*view);
 }
 
 StateSinglePlayer::~StateSinglePlayer() {
+    delete level;
+    delete mb;
 
+    window->setView(window->getDefaultView());
 }
 
 void StateSinglePlayer::resume() {
@@ -17,21 +30,13 @@ void StateSinglePlayer::pause() {
     desktop->RemoveAll();
 }
 
-void StateSinglePlayer::update() {
+void StateSinglePlayer::update(float deltaTime) {
 
 }
 
 void StateSinglePlayer::draw() {
-    sf::Text title("Left[2D]ie", game->getFont(), 140);
-    title.setFillColor(sf::Color::Red);
-    title.setPosition(275, 50);
-
-    sf::Text text("Single player state", game->getFont());
-    text.setFillColor(sf::Color::Red);
-    text.setPosition(300, 300);
-
-    game->getWindow().draw(text);
-    game->getWindow().draw(title);
+    level->draw(game->getWindow());
+    mb->draw("Wave x - Good luck", 8, game->getWindow());
 }
 
 void StateSinglePlayer::initGameGui() {

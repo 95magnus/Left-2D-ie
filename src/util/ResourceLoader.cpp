@@ -36,3 +36,15 @@ sf::Texture& ResourceLoader::loadTexture(const String &fileName) const {
 void ResourceLoader::loadTexture(sf::Texture* texture, const String &fileName) {
     texture->loadFromFile(resourceDir + textureDir + fileName);
 }
+
+
+sf::Texture& ResourceLoader::loadTextureFromSpritesheet(const String &fileName, int x, int y, int w, int h) const {
+    sf::Texture *texture = new sf::Texture();
+    texture->loadFromFile(resourceDir + tileDir + fileName, sf::IntRect(x * w, y * h, w, h));
+
+    return *texture;
+}
+
+void ResourceLoader::loadTextureFromSpritesheet(sf::Texture* texture, const String &fileName, int x, int y, int w, int h) {
+    texture->loadFromFile(resourceDir + tileDir + fileName, sf::IntRect(x * w, y * h, w, h));
+}

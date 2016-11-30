@@ -12,14 +12,14 @@ InputManager::InputManager(sf::RenderWindow* window, StateMachine* stateMachine)
     window->setJoystickThreshold(joystickThreshold);
 
     setDefaultMappings();
-    initActionStates();
+    //initActionStates();
 }
 
 InputManager::~InputManager() {
     observers.clear();
 }
 
-void InputManager::update() {
+void InputManager::update(float deltaTime) {
     // TODO: Create player controller class for handling movement
     moveDirection = sf::Vector2f(0, 0);
 
@@ -194,22 +194,19 @@ bool InputManager::checkForInput() {
 
             case sf::Event::LostFocus:
                 // Window out of focus -> pause game
-                stateMachine->pause();
+                //stateMachine->pause();
                 break;
 
             case sf::Event::GainedFocus:
                 // Window gained focus -> resume paused game
-                stateMachine->resume();
+                //stateMachine->resume();
                 break;
 
             default:
-
                 break;
-
         }
         stateMachine->getState()->getDesktop()->HandleEvent(event);
     }
-
 
     return true;
 }

@@ -19,10 +19,15 @@ public:
     sf::Image& loadGuiImage(const String &fileName) const;
     void loadGuiImage(sf::Image* image, const String &fileName);
 
+    sf::Texture& loadTextureFromSpritesheet(const String &fileName, int x, int y, int w, int h) const;
+    void loadTextureFromSpritesheet(sf::Texture* texture, const String &fileName, int x, int y, int w, int h);
+
 protected:
     const String fontDir = "fonts/";
     const String textureDir = "textures/";
     const String guiDir = "gui/";
+    const String tileDir = "textures/tiles/";
+
     String resourceDir;
 };
 

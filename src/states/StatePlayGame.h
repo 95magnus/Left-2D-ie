@@ -14,7 +14,7 @@ public:
     StatePlayGame(Game *game);
     virtual ~StatePlayGame();
 
-    void update();
+    void update(float deltaTime);
     void draw();
 
     void resume();

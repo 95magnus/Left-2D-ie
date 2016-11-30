@@ -14,11 +14,12 @@ public:
 
     //virtual void init() = 0;
 
-    virtual void update() = 0;
+    virtual void update(float deltaTime) = 0;
     virtual void draw() = 0;
 
     virtual void pause() { paused = true; }
     virtual void resume() { paused = false; }
+    virtual void switchedState() {};
 
     sfg::Desktop* getDesktop() const { return desktop; }
     void updateDesktop();

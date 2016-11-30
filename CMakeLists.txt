@@ -34,9 +34,29 @@ set(SOURCE_FILES src/main.cpp
         src/modules/Player.cpp
         src/modules/Player.h
         src/modules/zombie.cpp
-        src/modules/zombie.h src src/states/StateShop.cpp src/states/StateShop.h)
+        src/modules/zombie.h src
+        src/states/StateShop.cpp
+        src/states/StateShop.h
+        src/modules/Message.cpp
+        src/modules/Message.h
+        src/modules/Weapon.cpp
+        src/modules/Weapon.h
+        src/modules/Projectile.cpp
+        src/modules/Projectile.h
+        src/level/Level.cpp
+        src/level/Level.h
+        src/level/tiles/TileBase.h
+        src/level/tiles/TileBase.cpp
+        src/level/tiles/TileStone.cpp
+        src/level/tiles/TileStone.h
+        src/level/tiles/TileDirt.cpp
+        src/level/tiles/TileDirt.h)
 
 find_package (OpenGL REQUIRED)
 add_executable(Left2Die ${SOURCE_FILES})
+
+if (UNIX)
+    find_library(sfgui NAMES library PATHS /lib/SFGUI-0.1.1-source)
+endif(UNIX)
 
 target_link_libraries (Left2Die sfml-graphics sfml-window sfml-system sfml-audio sfgui ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})

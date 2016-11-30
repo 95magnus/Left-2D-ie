@@ -36,7 +36,7 @@ public:
     InputManager(sf::RenderWindow* window, StateMachine* stateMachine);
     virtual ~InputManager();
 
-    void update();
+    void update(float deltaTime);
 
     bool checkForInput();
     void setDefaultMappings();

@@ -8,6 +8,10 @@ StateMainMenu::~StateMainMenu() {
 
 }
 
+void StateMainMenu::update(float deltaTime) {
+
+}
+
 void StateMainMenu::resume() {
     StateBase::resume();
     initButtons();
@@ -17,7 +21,15 @@ void StateMainMenu::pause() {
     desktop->RemoveAll();
 }
 
-void StateMainMenu::update() {
+void StateMainMenu::draw() {
+    sf::Text title("Left[2D]ie", game->getFont(), 140);
+
+    // sf::Text does not contain setFillColor() on Linux?
+    //title.setFillColor(sf::Color::Red);
+    title.setColor(sf::Color::Red);
+
+    title.setPosition(275, 50);
+    game->getWindow().draw(title);
 
 }
 
@@ -44,19 +56,6 @@ void StateMainMenu::initButtons() {
     hiscoresButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonHiscoresClicked,this));
     settingsButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonSettingsClicked,this));
     quitButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateMainMenu::buttonQuitClicked,this));
-}
-
-void StateMainMenu::draw() {
-    sf::Text title("Left[2D]ie", game->getFont(), 140);
-    title.setFillColor(sf::Color::Red);
-    title.setPosition(275, 50);
-
-    sf::Text text("Main Menu state", game->getFont());
-    text.setFillColor(sf::Color::Red);
-    text.setPosition(300, 300);
-
-    game->getWindow().draw(text);
-    game->getWindow().draw(title);
 }
 
 void StateMainMenu::buttonPlayClicked() {

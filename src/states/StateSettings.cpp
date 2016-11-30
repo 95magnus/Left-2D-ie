@@ -17,7 +17,8 @@ void StateSettings::resume() {
     initGui();
 }
 
-void StateSettings::update() {
+
+void StateSettings::update(float deltaTime) {
 
 }
 
@@ -69,9 +70,8 @@ void StateSettings::initGui() {
 
 void StateSettings::draw() {
     sf::Text title("Left[2D]ie", game->getFont(), 140);
-    title.setFillColor(sf::Color::Red);
+    title.setColor(sf::Color::Red);
     title.setPosition(275, 50);
-
     game->getWindow().draw(title);
 }
 
