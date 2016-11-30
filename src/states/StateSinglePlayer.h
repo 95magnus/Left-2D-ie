@@ -5,10 +5,12 @@
 #include "../Game.h"
 #include "StateBase.h"
 #include "../modules/MessageBox.h"
+#include "../modules/Player.h"
 
 class InputTester;
 class Level;
 class MessageBox;
+class Player;
 
 class StateSinglePlayer : public StateBase {
 public:
@@ -20,7 +22,7 @@ public:
 protected:
     Level* level;
     MessageBox* mb;
-
+    Player* pl;
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H

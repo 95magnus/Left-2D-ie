@@ -24,7 +24,6 @@ public:
     enum Direction {Left, Right, Up, Down};
 
     // Animation rotation arrays, worst implementation, please forgive me
-
     sf::IntRect left[5] = {{970, 635, 240, 630},
                            {0, 0, 480, 630},
                            {0, 1270, 315, 630},
@@ -49,9 +48,6 @@ public:
                       {825, 1270, 180, 630},
                       {640, 1270, 180, 630}};
 
-
-
-
     // Sounds
     sf::SoundBuffer SBuffer;
     sf::Sound sound;
@@ -63,17 +59,10 @@ public:
     void moveLeft(float dt);
     void scale(float x);
     void animationCycler(sf::IntRect dir[5]);
-
     void draw(sf::RenderWindow &window);
 
-    //Inventory
 
-    /*
-     * TODO: Add weapon actions
-    void primaryWeapon;
-    void secondaryWeapon;
-    void specialWeapon;
-     */
+
     void death();
     void hit();
     Player();
@@ -130,7 +119,13 @@ private:
     // TODO: 3 plasser o "bagen" til våpenobjekter
     // TODO: 1 primary, 1 secondary å 1 special
     Weapon* currentWeapon;
-
+    //Inventory
+        /*
+         * TODO: Add weapon actions
+        void primaryWeapon;
+        void secondaryWeapon;
+        void specialWeapon;
+         */
 };
 
 
