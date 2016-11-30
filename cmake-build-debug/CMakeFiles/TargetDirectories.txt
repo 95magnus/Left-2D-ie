@@ -1,0 +1,3 @@
+/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/magnus/Dev environment/Dat220/l2d/cmake-build-debug/CMakeFiles/Left2Die.dir

@@ -1,0 +1,380 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/magnus/Dev environment/Dat220/l2d/src/Game.cpp
+Game.h
+/home/magnus/Dev environment/Dat220/l2d/src/Game.h
+input/InputManager.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
+input/InputTester.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputTester.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/Game.h
+SFML/Config.hpp
+-
+SFML/Window/Event.hpp
+-
+SFML/Graphics/Font.hpp
+-
+SFML/Graphics/RenderWindow.hpp
+-
+states/StateMachine.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h
+level/Level.h
+/home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
+util/ResourceLoader.h
+/home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.h
+SFGUI/SFGUI.hpp
+-
+SFGUI/Widgets.hpp
+-
+
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.cpp
+iostream
+-
+InputManager.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
+InputObserver.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
+../states/StateMachine.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
+SFML/Window/Keyboard.hpp
+-
+SFML/Window/Event.hpp
+-
+map
+-
+SFML/Graphics/RenderWindow.hpp
+-
+SFGUI/Widgets.hpp
+-
+
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.cpp
+InputObserver.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
+InputManager.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
+SFML/System.hpp
+-
+SFML/Window/Mouse.hpp
+-
+
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputTester.cpp
+InputTester.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputTester.h
+InputManager.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
+../util/VectorUtil.h
+/home/magnus/Dev environment/Dat220/l2d/src/util/VectorUtil.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputTester.h
+SFML/Graphics.hpp
+-
+SFML/Graphics/Drawable.hpp
+-
+SFML/Graphics/Transformable.hpp
+-
+InputObserver.h
+/home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
+stdlib.h
+-
+time.h
+-
+
+/home/magnus/Dev environment/Dat220/l2d/src/level/Level.cpp
+Level.h
+/home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
+sstream
+-
+iostream
+-
+fstream
+-
+map
+-
+SFML/Graphics/View.hpp
+-
+SFML/Graphics/Sprite.hpp
+-
+SFML/Graphics/RenderWindow.hpp
+-
+tiles/TileStone.h
+/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
+../util/ResourceLoader.h
+/home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.cpp
+TileBase.h
+/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
+SFML/Graphics/Drawable.hpp
+-
+SFML/Graphics/Texture.hpp
+-
+SFML/Graphics/RenderTarget.hpp
+-
+SFML/Graphics/Transformable.hpp
+-
+SFML/Graphics/RectangleShape.hpp
+-
+SFML/Graphics/RenderWindow.hpp
+-
+SFML/Graphics/Sprite.hpp
+-
+
+/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileDirt.cpp
+TileDirt.h
+/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileDirt.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileDirt.h
+TileBase.h
+/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.cpp
+TileStone.h
+/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
+TileBase.h
+/home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/main.cpp
+Game.h
+/home/magnus/Dev environment/Dat220/l2d/src/Game.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.cpp
+MessageBox.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
+string
+-
+SFML/System/Clock.hpp
+-
+SFML/Graphics/Font.hpp
+-
+SFML/Graphics/Text.hpp
+-
+SFML/Graphics.hpp
+-
+../Game.h
+/home/magnus/Dev environment/Dat220/l2d/src/Game.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Player.cpp
+Player.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
+SFML/Graphics.hpp
+-
+SFML/Audio.hpp
+-
+../Game.h
+/home/magnus/Dev environment/Dat220/l2d/src/Game.h
+Weapon.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
+Projectile.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.cpp
+Projectile.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
+SFML/Graphics/RectangleShape.hpp
+-
+SFML/Graphics/Texture.hpp
+-
+SFML/Graphics/RenderWindow.hpp
+-
+SFML/Window/Mouse.hpp
+-
+math.h
+-
+
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.cpp
+Weapon.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
+SFML/Graphics/RectangleShape.hpp
+-
+SFML/Graphics/Texture.hpp
+-
+cmath
+-
+SFML/Window/Mouse.hpp
+-
+SFML/Graphics/Sprite.hpp
+-
+SFML/Audio/SoundBuffer.hpp
+-
+SFML/Audio/Sound.hpp
+-
+Projectile.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/modules/zombie.cpp
+zombie.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/zombie.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/modules/zombie.h
+SFML/Graphics.hpp
+-
+SFML/Audio.hpp
+-
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.cpp
+StateBase.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
+SFML/Graphics/RenderWindow.hpp
+-
+SFGUI/Desktop.hpp
+-
+SFGUI/Button.hpp
+-
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.cpp
+StateHighScore.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
+StateBase.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
+../Game.h
+/home/magnus/Dev environment/Dat220/l2d/src/Game.h
+SFML/Graphics/Text.hpp
+-
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.cpp
+StateMachine.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h
+SFML/Graphics/RenderWindow.hpp
+-
+SFML/Graphics/Text.hpp
+-
+map
+-
+../Game.h
+/home/magnus/Dev environment/Dat220/l2d/src/Game.h
+StateMainMenu.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateMainMenu.h
+StatePlayGame.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StatePlayGame.h
+StateSinglePlayer.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateSinglePlayer.h
+StateMultiPlayer.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateMultiPlayer.h
+StateHighScore.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
+StateSettings.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateSettings.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateMainMenu.cpp
+StateMainMenu.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateMainMenu.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateMainMenu.h
+StateBase.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
+../Game.h
+/home/magnus/Dev environment/Dat220/l2d/src/Game.h
+SFML/Graphics/Text.hpp
+-
+SFML/OpenGL.hpp
+-
+SFGUI/SFGUI.hpp
+-
+SFGUI/Widgets.hpp
+-
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateMultiPlayer.cpp
+StateMultiPlayer.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateMultiPlayer.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateMultiPlayer.h
+StateBase.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
+../Game.h
+/home/magnus/Dev environment/Dat220/l2d/src/Game.h
+SFML/Graphics/Text.hpp
+-
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StatePlayGame.cpp
+StatePlayGame.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StatePlayGame.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StatePlayGame.h
+../Game.h
+/home/magnus/Dev environment/Dat220/l2d/src/Game.h
+SFML/Graphics/Text.hpp
+-
+SFGUI/SFGUI.hpp
+-
+SFGUI/Widgets.hpp
+-
+StateBase.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateSettings.cpp
+StateSettings.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateSettings.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateSettings.h
+StateBase.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
+../Game.h
+/home/magnus/Dev environment/Dat220/l2d/src/Game.h
+SFML/Graphics/Text.hpp
+-
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateSinglePlayer.cpp
+StateSinglePlayer.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateSinglePlayer.h
+../modules/MessageBox.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateSinglePlayer.h
+SFML/Graphics/Text.hpp
+-
+../Game.h
+/home/magnus/Dev environment/Dat220/l2d/src/Game.h
+StateBase.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
+../modules/MessageBox.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
+../modules/Player.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.cpp
+ResourceLoader.h
+/home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.h
+string
+-
+SFML/Graphics/Font.hpp
+-
+
+/home/magnus/Dev environment/Dat220/l2d/src/util/VectorUtil.h
+SFML/System/Vector2.hpp
+-
+math.h
+-
+
