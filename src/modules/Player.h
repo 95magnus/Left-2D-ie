@@ -10,10 +10,15 @@
 #include "../Game.h"
 #include "../input/InputObserver.h"
 #include "../input/PlayerController.h"
+#include "Weapon.h"
+#include "Projectile.h"
+
+class Weapon;
+class Projectile;
 
 class Player : public PlayerController {
 public:
-
+    enum Direction {Up, Down, Left, Right};
     /*
     // Actions
     void moveUp(float dt);
@@ -48,6 +53,11 @@ public:
     void setHealth(int health);
     int getSpeed() const;
     void setSpeed(int speed);
+
+    Direction getCurrentDir() const;
+
+    void setCurrentDir(Direction currentDir);
+
     int getScore() const;
     void setScore(int score);
     int getMoney() const;
@@ -82,8 +92,10 @@ private:
     int health, armor, kills, score, money;
     float scaleFactor;
     sf::Clock clock;
+    //Speedclock is to ensure that the player doesnt move faster or slower due to
+    //differences in the power/workload the CPU has
+    sf::Clock speedClock;
     bool moving;
-    enum Direction {Left, Right, Up, Down};
     Direction currentDir;
     sf::Vector2f xy;
 
@@ -119,6 +131,7 @@ private:
     // Inventory
     // TODO: 3 plasser o "bagen" til våpenobjekter
     // TODO: 1 primary, 1 secondary å 1 special
+    Weapon* currentWeapon;
 
 };
 

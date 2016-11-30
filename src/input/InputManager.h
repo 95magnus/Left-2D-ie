@@ -59,7 +59,7 @@ protected:
 
     int konamiIndex = 0;
 
-    bool playWithJoystick = true;
+    bool playWithJoystick = false;
 
     const float joystickThreshold = 15.0f, axisMaxPos = 100.0f;
     const int rTriggerThreshold = 10;

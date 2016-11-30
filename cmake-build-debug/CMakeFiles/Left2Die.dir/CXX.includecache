@@ -199,6 +199,10 @@ SFML/Audio.hpp
 /home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
 ../input/PlayerController.h
 /home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
+Weapon.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
+Projectile.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
 
 /home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.cpp
 Projectile.h
@@ -207,26 +211,36 @@ Projectile.h
 /home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
 SFML/Graphics/RectangleShape.hpp
 -
+SFML/Graphics/Texture.hpp
+-
+SFML/Graphics/RenderWindow.hpp
+-
+SFML/Window/Mouse.hpp
+-
+math.h
+-
 
 /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.cpp
 Weapon.h
 /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
-math.h
--
-SFML/Window/Keyboard.hpp
--
-SFML/Window/Mouse.hpp
--
 
 /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
 SFML/Graphics/RectangleShape.hpp
 -
-SFML/System.hpp
--
-SFML/Graphics/RenderWindow.hpp
--
 SFML/Graphics/Texture.hpp
 -
+cmath
+-
+SFML/Window/Mouse.hpp
+-
+SFML/Graphics/Sprite.hpp
+-
+SFML/Audio/SoundBuffer.hpp
+-
+SFML/Audio/Sound.hpp
+-
+Projectile.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
 
 /home/magnus/Dev environment/Dat220/l2d/src/modules/zombie.cpp
 zombie.h
