@@ -5,7 +5,7 @@
 
 #include "Projectile.h"
 
-Projectile::Projectile(sf::Texture &texture, sf::IntRect rect, int damage, float angle, float x, float y) {
+Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRect rect, int damage, float angle, float x, float y) {
     sprite.setTexture(&texture);
     sprite.setTextureRect(rect);
     sprite.setSize(sf::Vector2f(rect.width, rect.height));
@@ -16,8 +16,8 @@ Projectile::Projectile(sf::Texture &texture, sf::IntRect rect, int damage, float
     speed = 450;
     sprite.setPosition(x, y);
     sprite.setScale(0.1, 0.1);
-    diffX = mouse.getPosition().x - x;
-    diffY = mouse.getPosition().y - y;
+    diffX = mouse.getPosition(window).x - x;
+    diffY = mouse.getPosition(window).y - y;
     magnitude = sqrtf(diffX*diffX + diffY*diffY);
     velX = diffX/magnitude*speed;
     velY = diffY/magnitude*speed;

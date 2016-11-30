@@ -16,7 +16,7 @@
 class Projectile {
 public:
     ~Projectile();
-    Projectile(sf::Texture &texture, sf::IntRect rect, int damage, float angle, float x, float y);
+    Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRect rect, int damage, float angle, float x, float y);
 
     float fRand();
 

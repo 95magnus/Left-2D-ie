@@ -33,19 +33,20 @@ Weapon::~Weapon() {
 
 }
 
-void Weapon::fire() {
+void Weapon::fire(sf::RenderWindow &window) {
     if (clock.getElapsedTime().asSeconds() > 1/rps) {
-        Projectile bullet(projectileTexture, projectileIntRect[weaponStage], 100, angle, this->sprite.getPosition().x, this->sprite.getPosition().y);
+        Projectile bullet(window, projectileTexture, projectileIntRect[weaponStage], 100, angle, this->sprite.getPosition().x, this->sprite.getPosition().y);
         bullets.push_back(bullet);
         clock.restart();
         sound.play();
     }
 }
 
-void Weapon::rotateWeapon() {
-    angle = (float) (atan2(sprite.getPosition().y - mouse.getPosition().y, sprite.getPosition().x - mouse.getPosition().x)*180/3.1416);
+void Weapon::rotateWeapon(sf::RenderWindow &window) {
+    angle = (float) (atan2(sprite.getPosition().y - mouse.getPosition(window).y, sprite.getPosition().x - mouse.getPosition(window).x)*180/3.1416);
+
     sprite.setRotation(angle);
-    if (mouse.getPosition().x > sprite.getPosition().x) {
+    if (mouse.getPosition(window).x > sprite.getPosition().x) {
         flipRight();
     } else {
         flipLeft();

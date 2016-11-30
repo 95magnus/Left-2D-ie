@@ -121,9 +121,9 @@ void Player::draw(sf::RenderWindow &window) {
     }
 
     speedClock.restart();
-    currentWeapon->rotateWeapon();
+    currentWeapon->rotateWeapon(window);
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-        currentWeapon->fire();
+        currentWeapon->fire(window);
     }
 
     if (currentDir == Up) {

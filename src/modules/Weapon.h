@@ -21,13 +21,13 @@ public:
 
     virtual ~Weapon();
 
-    void fire();
+    void fire(sf::RenderWindow &window);
 
     void flipRight();
 
     void flipLeft();
 
-    void rotateWeapon();
+    void rotateWeapon(sf::RenderWindow &window);
 
     void setPosition(int x, int y);
 
