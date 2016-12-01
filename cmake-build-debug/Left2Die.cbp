@@ -84,9 +84,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src">
-			<Option target="Left2Die"/>
-		</Unit>
 		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/Game.cpp">
 			<Option target="Left2Die"/>
 		</Unit>
@@ -144,10 +141,22 @@
 		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/main.cpp">
 			<Option target="Left2Die"/>
 		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/Enemy.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/Enemy.h">
+			<Option target="Left2Die"/>
+		</Unit>
 		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.cpp">
 			<Option target="Left2Die"/>
 		</Unit>
 		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/NormalZombie.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/NormalZombie.h">
 			<Option target="Left2Die"/>
 		</Unit>
 		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/Player.cpp">

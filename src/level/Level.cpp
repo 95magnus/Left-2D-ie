@@ -6,14 +6,17 @@ Level::Level() {
     view = new sf::View();
 }
 
-Level::Level(int width, int height) : Level() {
+Level::Level(sf::Vector2u windowSize, int width, int height) : Level() {
+    this->windowSize = windowSize;
     this->width = width;
     this->height = height;
 
     generateTestLevel();
 }
 
-Level::Level(const String fileName) : Level() {
+Level::Level(sf::Vector2u windowSize, const String fileName) : Level() {
+    this->windowSize = windowSize;
+
     loadFromFile(fileName);
 }
 
@@ -175,17 +178,29 @@ void Level::draw(sf::RenderWindow &window) {
     if (!levelLoaded)
         return;
 
-    /*
-    for (auto &row : testMap) {
-        for (auto &tile : row) {
-            window.draw(*tile);
-        }
-    }
-    */
+    int xTiles = window.getSize().x / tileSize + 2;
 
     for (unsigned int y = 0; y < height; y++) {
         for (unsigned int x = 0; x < width; x++) {
-            tiles[y][x]->draw(window, x * tileSize, y * tileSize);
+            tiles[y][x]->draw(window, x * tileSize - xOffs, y * tileSize - yOffs);
         }
     }
 }
+void Level::setMapOffset(sf::Vector2f offset) {
+    xOffs = offset.x;
+    yOffs = offset.y;
+}
+
+void Level::translateMap(sf::Vector2f offset) {
+    //if (xOffs + offset.x > 0 && xOffs + offset.x < windowSize.x)
+        xOffs += offset.x;
+
+    yOffs += offset.y;
+}
+
+sf::Vector2i Level::worldCoordToTile(sf::Vector2f position) {
+    return sf::Vector2i((position.x - xOffs) / tileSize, (position.y - yOffs) / tileSize);
+}
+
+
+

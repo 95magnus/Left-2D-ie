@@ -36,13 +36,17 @@ set(SOURCE_FILES src/main.cpp
         src/modules/Player.cpp
         src/modules/Player.h
         src/modules/zombie.cpp
-        src/modules/zombie.h src
+        src/modules/zombie.h
         src/modules/MessageBox.cpp
         src/modules/MessageBox.h
         src/modules/Weapon.cpp
         src/modules/Weapon.h
         src/modules/Projectile.cpp
         src/modules/Projectile.h
+        src/modules/Enemy.cpp
+        src/modules/Enemy.h
+        src/modules/NormalZombie.cpp
+        src/modules/NormalZombie.h
         src/level/Level.cpp
         src/level/Level.h
         src/level/tiles/TileBase.h

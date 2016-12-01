@@ -5,12 +5,15 @@
 #include "../Game.h"
 #include "StateBase.h"
 #include "../modules/MessageBox.h"
-#include "../modules/Player.h"
+//#include "../modules/NormalZombie.h"
+//#include "../modules/Enemy.h"
 
 class InputTester;
 class Level;
 class MessageBox;
 class Player;
+//class NormalZombie;
+class Enemy;
 
 class StateSinglePlayer : public StateBase {
 public:
@@ -31,7 +34,8 @@ protected:
     MessageBox* mb;
 
     Player* player;
-
+    std::vector<Player*> players;
+    Enemy* zombie;
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H

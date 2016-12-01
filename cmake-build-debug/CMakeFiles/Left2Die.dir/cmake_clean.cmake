@@ -19,6 +19,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o"
   "CMakeFiles/Left2Die.dir/src/modules/Weapon.cpp.o"
   "CMakeFiles/Left2Die.dir/src/modules/Projectile.cpp.o"
+  "CMakeFiles/Left2Die.dir/src/modules/Enemy.cpp.o"
+  "CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.o"
   "CMakeFiles/Left2Die.dir/src/level/Level.cpp.o"
   "CMakeFiles/Left2Die.dir/src/level/tiles/TileBase.cpp.o"
   "CMakeFiles/Left2Die.dir/src/level/tiles/TileStone.cpp.o"

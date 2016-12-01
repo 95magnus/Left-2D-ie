@@ -20,7 +20,7 @@ class Player : public PlayerController {
 public:
     enum Direction {Up, Down, Left, Right};
 
-    void move(float deltaTime);
+    sf::Vector2f move(float deltaTime);
 
     void scale(float x);
     void animationCycler(sf::IntRect dir[5]);
@@ -33,6 +33,8 @@ public:
     Player(sf::RenderWindow &window, InputManager &inputManager);
     ~Player();
 
+    void mousePressed(int x, int y, sf::Mouse::Button button);
+
     // Getters & setters for stats
     int getHealth() const;
     void setHealth(int health);
@@ -42,6 +44,8 @@ public:
     Direction getCurrentDir() const;
 
     void setCurrentDir(Direction currentDir);
+
+    sf::Vector2f getPosition() { return xy; }
 
     int getScore() const;
     void setScore(int score);

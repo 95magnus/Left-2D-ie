@@ -12,9 +12,11 @@ Player::Player(sf::RenderWindow &window, InputManager &inputManager) : PlayerCon
     kills = 0;
     score = 0;
     money = 0;
-    currentDir = Left;
+    currentDir = Right;
     sprite.setSize(sf::Vector2f(55, 55));
     scaleFactor = 0.25;
+    xy = sf::Vector2f(window.getSize().x/2, window.getSize().y/2);
+    sprite.setPosition(xy);
 
     currentWeapon = new Weapon(window, 0, 4, sprite.getPosition().x, sprite.getPosition().y);
 
@@ -51,12 +53,15 @@ Player::Player(sf::RenderWindow &window, InputManager &inputManager) : PlayerCon
     //shadow.setOrigin(hitbox.getOrigin().x - hitbox.getSize().x/4, hitbox.getOrigin().y - hitbox.getSize().y/4);
     shadow.setRadius(sprite.getSize().x/3);
     shadow.setFillColor(sf::Color(0, 0, 0, 128));
-    shadow.setPosition(sprite.getPosition().x, sprite.getPosition().y + 110);
+    shadow.setPosition(sprite.getPosition().x, sprite.getPosition().y + 80);
+    shadow.setOrigin(shadow.getRadius()/2, shadow.getRadius()/2);
 
     sprite.setOrigin(sprite.getSize().x/2.2, sprite.getSize().y);
     hitbox.setOrigin(sprite.getOrigin());
 
     scale(0.8);
+
+    animationCycler(animationDirections[currentDir]);
 }
 
 // Destructor
@@ -67,7 +72,7 @@ Player::~Player() {
 void Player::update(float deltaTime) {
     PlayerController::update(deltaTime);
 
-    sprite.setPosition(xy);
+    //sprite.setPosition(xy);
 
     speedClock.restart();
     currentWeapon->rotateWeapon();
@@ -75,17 +80,40 @@ void Player::update(float deltaTime) {
         currentWeapon->fire();
     }
 
+    auto it = currentWeapon->getBullets().begin();
+    while(it != currentWeapon->getBullets().end()) {
+        it->update();
+
+        if (it->getClock().getElapsedTime().asSeconds() >= 5) {
+            it = currentWeapon->getBullets().erase(it);
+        } else {
+            ++it;
+        }
+    }
 }
 
-void Player::move(float deltaTime) {
+
+void Player::draw(sf::RenderWindow &window) {
+    window.draw(shadow);
+    window.draw(sprite);
+    window.draw(hitbox);
+
+    for (auto it = currentWeapon->getBullets().begin(); it != currentWeapon->getBullets().end(); ++it) {
+        window.draw(it->getSprite());
+    }
+    window.draw(currentWeapon->getSprite());
+}
+
+sf::Vector2f Player::move(float deltaTime) {
     if (moveDirection.x != 0 || moveDirection.y != 0) {
+        /*
         sprite.move(moveDirection * speed * deltaTime);
         hitbox.move(moveDirection * speed * deltaTime);
         shadow.move(moveDirection * speed * deltaTime);
 
         xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
         currentWeapon->setPosition(xy.x, xy.y);
-
+        */
         if (abs(moveDirection.x) >= abs(moveDirection.y))
             currentDir = (moveDirection.x < 0) ? Left : Right;
         else
@@ -93,75 +121,12 @@ void Player::move(float deltaTime) {
 
         animationCycler(animationDirections[currentDir]);
         moving = true;
+
+        return moveDirection * speed * deltaTime;
     } else {
         moving = false;
-    }
-}
 
-void Player::draw(sf::RenderWindow &window) {
-    window.draw(shadow);
-    window.draw(sprite);
-    window.draw(hitbox);
-    //sprite.setPosition(xy);
-
-
-    if (currentDir == Up) {
-        for (auto it = currentWeapon->getBullets().begin(); it != currentWeapon->getBullets().end();) {
-
-            if (it->getClock().getElapsedTime().asSeconds() >= 4) {
-                currentWeapon->getBullets().erase(it);
-            }
-            // Code below is commented out because it causes the progem to crash, dont know why
-            /*
-            if (it->getSprite().getPosition().x <= 0) {
-                currentWeapon->getBullets().erase(it);
-            }
-            if (it->getSprite().getPosition().x >= window.getSize().x) {
-                currentWeapon->getBullets().erase(it);
-            }
-            if (it->getSprite().getPosition().y <= 0) {
-                currentWeapon->getBullets().erase(it);
-            }
-            if (it->getSprite().getPosition().y <= window.getSize().y) {
-                currentWeapon->getBullets().erase(it);
-            }*/
-            else {
-                it->update();
-                window.draw(it->getSprite());
-                it++;
-            }
-        }
-        window.draw(currentWeapon->getSprite());
-        window.draw(sprite);
-        window.draw(hitbox);
-    } else {
-        window.draw(sprite);
-        window.draw(hitbox);
-        for (auto it = currentWeapon->getBullets().begin(); it != currentWeapon->getBullets().end();) {
-
-            if (it->getClock().getElapsedTime().asSeconds() >= 5) {
-                currentWeapon->getBullets().erase(it);
-            }
-            /*
-            if (it->getSprite().getPosition().x <= 0) {
-                currentWeapon->getBullets().erase(it);
-            }
-            if (it->getSprite().getPosition().x >= window.getSize().x) {
-                currentWeapon->getBullets().erase(it);
-            }
-            if (it->getSprite().getPosition().y <= 0) {
-                currentWeapon->getBullets().erase(it);
-            }
-            if (it->getSprite().getPosition().y <= window.getSize().y) {
-                currentWeapon->getBullets().erase(it);
-            }*/
-            else {
-                it->update();
-                window.draw(it->getSprite());
-                it++;
-            }
-        }
-        window.draw(currentWeapon->getSprite());
+        return sf::Vector2f(0, 0);
     }
 }
 
@@ -311,6 +276,10 @@ void Player::animationCycler(sf::IntRect dir[5]) {
         sprite.setTextureRect(dir[0]);
         sprite.setPosition(xy.x + 15*scaleFactor, xy.y);
     }
+
+}
+
+void Player::mousePressed(int x, int y, sf::Mouse::Button button) {
 
 }
 

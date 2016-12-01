@@ -393,6 +393,33 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/modules/Enemy.o: src/modules/Enemy.cpp.o
+
+.PHONY : src/modules/Enemy.o
+
+# target to build an object file
+src/modules/Enemy.cpp.o:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/Enemy.cpp.o
+.PHONY : src/modules/Enemy.cpp.o
+
+src/modules/Enemy.i: src/modules/Enemy.cpp.i
+
+.PHONY : src/modules/Enemy.i
+
+# target to preprocess a source file
+src/modules/Enemy.cpp.i:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/Enemy.cpp.i
+.PHONY : src/modules/Enemy.cpp.i
+
+src/modules/Enemy.s: src/modules/Enemy.cpp.s
+
+.PHONY : src/modules/Enemy.s
+
+# target to generate assembly for a file
+src/modules/Enemy.cpp.s:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/Enemy.cpp.s
+.PHONY : src/modules/Enemy.cpp.s
+
 src/modules/MessageBox.o: src/modules/MessageBox.cpp.o
 
 .PHONY : src/modules/MessageBox.o
@@ -419,6 +446,33 @@ src/modules/MessageBox.s: src/modules/MessageBox.cpp.s
 src/modules/MessageBox.cpp.s:
 	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.s
 .PHONY : src/modules/MessageBox.cpp.s
+
+src/modules/NormalZombie.o: src/modules/NormalZombie.cpp.o
+
+.PHONY : src/modules/NormalZombie.o
+
+# target to build an object file
+src/modules/NormalZombie.cpp.o:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.o
+.PHONY : src/modules/NormalZombie.cpp.o
+
+src/modules/NormalZombie.i: src/modules/NormalZombie.cpp.i
+
+.PHONY : src/modules/NormalZombie.i
+
+# target to preprocess a source file
+src/modules/NormalZombie.cpp.i:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.i
+.PHONY : src/modules/NormalZombie.cpp.i
+
+src/modules/NormalZombie.s: src/modules/NormalZombie.cpp.s
+
+.PHONY : src/modules/NormalZombie.s
+
+# target to generate assembly for a file
+src/modules/NormalZombie.cpp.s:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.s
+.PHONY : src/modules/NormalZombie.cpp.s
 
 src/modules/Player.o: src/modules/Player.cpp.o
 
@@ -810,9 +864,15 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/modules/Enemy.o"
+	@echo "... src/modules/Enemy.i"
+	@echo "... src/modules/Enemy.s"
 	@echo "... src/modules/MessageBox.o"
 	@echo "... src/modules/MessageBox.i"
 	@echo "... src/modules/MessageBox.s"
+	@echo "... src/modules/NormalZombie.o"
+	@echo "... src/modules/NormalZombie.i"
+	@echo "... src/modules/NormalZombie.s"
 	@echo "... src/modules/Player.o"
 	@echo "... src/modules/Player.i"
 	@echo "... src/modules/Player.s"

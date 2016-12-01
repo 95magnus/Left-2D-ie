@@ -24,24 +24,24 @@ public:
         STONE
     };
 
-    Level(int width, int height);
-    Level(const String fileName);
+    Level(sf::Vector2u windowSize, int width, int height);
+    Level(sf::Vector2u windowSize, const String fileName);
     virtual ~Level();
 
     void initTiles();
     void generateTestLevel();
     void loadFromFile(const std::string &filename);
 
-    /**
-     *
-     * @return
-     */
     sf::Vector2f checkCollision();
 
     void update(float deltaTime);
     void draw(sf::RenderWindow &window);
 
     int tileCoordToPixel();
+    sf::Vector2i worldCoordToTile(sf::Vector2f position);
+
+    void setMapOffset(sf::Vector2f offset);
+    void translateMap(sf::Vector2f offset);
 
     sf::View &getView() { return *view; }
 
@@ -50,8 +50,9 @@ protected:
     const std::string tilesheetFileName = "spritesheet_tiles.png";
     const unsigned int tileSize = 32, tileSpriteSize = 64;
 
-    unsigned int width, height;
+    unsigned int width, height, xOffs = 0, yOffs = 0;
     bool levelLoaded = false;
+    sf::Vector2u windowSize;
 
     Level();
 

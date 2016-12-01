@@ -12,9 +12,6 @@ CMakeFiles/Left2Die.dir/src/Game.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
  /home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h
@@ -29,14 +26,10 @@ CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.cpp
  /home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
  /home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
  /home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h
@@ -80,17 +73,11 @@ CMakeFiles/Left2Die.dir/src/level/tiles/TileStone.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
 CMakeFiles/Left2Die.dir/src/main.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/Game.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
  /home/magnus/Dev environment/Dat220/l2d/src/main.cpp
  /home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h
@@ -100,19 +87,34 @@ CMakeFiles/Left2Die.dir/src/main.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateSettings.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateSinglePlayer.h
  /home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.h
+CMakeFiles/Left2Die.dir/src/modules/Enemy.cpp.o
+ /home/magnus/Dev environment/Dat220/l2d/src/modules/Enemy.cpp
+ /home/magnus/Dev environment/Dat220/l2d/src/modules/Enemy.h
 CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/Game.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
  /home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.cpp
  /home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
+ /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
+ /home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
+ /home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h
+ /home/magnus/Dev environment/Dat220/l2d/src/states/StateMainMenu.h
+ /home/magnus/Dev environment/Dat220/l2d/src/states/StateMultiPlayer.h
+ /home/magnus/Dev environment/Dat220/l2d/src/states/StatePlayGame.h
+ /home/magnus/Dev environment/Dat220/l2d/src/states/StateSettings.h
+ /home/magnus/Dev environment/Dat220/l2d/src/states/StateSinglePlayer.h
+ /home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.h
+CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.o
+ /home/magnus/Dev environment/Dat220/l2d/src/Game.h
+ /home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
+ /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
+ /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
+ /home/magnus/Dev environment/Dat220/l2d/src/modules/Enemy.h
+ /home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
+ /home/magnus/Dev environment/Dat220/l2d/src/modules/NormalZombie.cpp
+ /home/magnus/Dev environment/Dat220/l2d/src/modules/NormalZombie.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h
@@ -159,16 +161,10 @@ CMakeFiles/Left2Die.dir/src/states/StateBase.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
 CMakeFiles/Left2Die.dir/src/states/StateHighScore.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/Game.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
  /home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.cpp
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
@@ -181,16 +177,10 @@ CMakeFiles/Left2Die.dir/src/states/StateHighScore.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.h
 CMakeFiles/Left2Die.dir/src/states/StateMachine.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/Game.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
  /home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.cpp
@@ -203,16 +193,10 @@ CMakeFiles/Left2Die.dir/src/states/StateMachine.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.h
 CMakeFiles/Left2Die.dir/src/states/StateMainMenu.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/Game.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
  /home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h
@@ -225,16 +209,10 @@ CMakeFiles/Left2Die.dir/src/states/StateMainMenu.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.h
 CMakeFiles/Left2Die.dir/src/states/StateMultiPlayer.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/Game.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
  /home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h
@@ -247,16 +225,10 @@ CMakeFiles/Left2Die.dir/src/states/StateMultiPlayer.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.h
 CMakeFiles/Left2Die.dir/src/states/StatePlayGame.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/Game.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
  /home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h
@@ -269,16 +241,10 @@ CMakeFiles/Left2Die.dir/src/states/StatePlayGame.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.h
 CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/Game.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputManager.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/InputObserver.h
- /home/magnus/Dev environment/Dat220/l2d/src/input/PlayerController.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
  /home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
- /home/magnus/Dev environment/Dat220/l2d/src/modules/Weapon.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.h
  /home/magnus/Dev environment/Dat220/l2d/src/states/StateMachine.h
@@ -297,6 +263,7 @@ CMakeFiles/Left2Die.dir/src/states/StateSinglePlayer.cpp.o
  /home/magnus/Dev environment/Dat220/l2d/src/level/Level.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileBase.h
  /home/magnus/Dev environment/Dat220/l2d/src/level/tiles/TileStone.h
+ /home/magnus/Dev environment/Dat220/l2d/src/modules/Enemy.h
  /home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
  /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
  /home/magnus/Dev environment/Dat220/l2d/src/modules/Projectile.h
