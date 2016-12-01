@@ -6,7 +6,9 @@
 #include "../input/InputManager.h"
 
 // Constructor
-Player::Player(sf::RenderWindow &window, InputManager &inputManager) : PlayerController(inputManager), window(window) {
+Player::Player(sf::RenderWindow* window, InputManager &inputManager) : PlayerController(inputManager) {
+
+    this->window = window;
     health = 100;
     armor = 0;
     kills = 0;
@@ -15,10 +17,10 @@ Player::Player(sf::RenderWindow &window, InputManager &inputManager) : PlayerCon
     currentDir = Right;
     sprite.setSize(sf::Vector2f(55, 55));
     scaleFactor = 0.25;
-    xy = sf::Vector2f(window.getSize().x/2, window.getSize().y/2);
+    xy = sf::Vector2f(window->getSize().x/2, window->getSize().y/2);
     sprite.setPosition(xy);
 
-    currentWeapon = new Weapon(window, 0, 4, sprite.getPosition().x, sprite.getPosition().y);
+    currentWeapon = new Weapon(*window, 0, 4, sprite.getPosition().x, sprite.getPosition().y);
 
     texture.setSmooth(false);
     texture.setRepeated(false);
@@ -140,7 +142,7 @@ void Player::scale(float x) {
     shadow.move(0, -50*x);
 }
 
-void Player::animationCycler(sf::IntRect dir[5]) {
+void Player::animationCycler(std::vector<sf::IntRect> dir) {
 
     /* -- ¡IMPORTANT! --
      * I wrote this function to cycle through the animation frames
