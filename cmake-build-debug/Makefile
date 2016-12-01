@@ -420,32 +420,32 @@ src/modules/Enemy.cpp.s:
 	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/Enemy.cpp.s
 .PHONY : src/modules/Enemy.cpp.s
 
-src/modules/MessageBox.o: src/modules/MessageBox.cpp.o
+src/modules/Message.o: src/modules/Message.cpp.o
 
-.PHONY : src/modules/MessageBox.o
+.PHONY : src/modules/Message.o
 
 # target to build an object file
-src/modules/MessageBox.cpp.o:
-	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o
-.PHONY : src/modules/MessageBox.cpp.o
+src/modules/Message.cpp.o:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o
+.PHONY : src/modules/Message.cpp.o
 
-src/modules/MessageBox.i: src/modules/MessageBox.cpp.i
+src/modules/Message.i: src/modules/Message.cpp.i
 
-.PHONY : src/modules/MessageBox.i
+.PHONY : src/modules/Message.i
 
 # target to preprocess a source file
-src/modules/MessageBox.cpp.i:
-	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.i
-.PHONY : src/modules/MessageBox.cpp.i
+src/modules/Message.cpp.i:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/Message.cpp.i
+.PHONY : src/modules/Message.cpp.i
 
-src/modules/MessageBox.s: src/modules/MessageBox.cpp.s
+src/modules/Message.s: src/modules/Message.cpp.s
 
-.PHONY : src/modules/MessageBox.s
+.PHONY : src/modules/Message.s
 
 # target to generate assembly for a file
-src/modules/MessageBox.cpp.s:
-	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.s
-.PHONY : src/modules/MessageBox.cpp.s
+src/modules/Message.cpp.s:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/modules/Message.cpp.s
+.PHONY : src/modules/Message.cpp.s
 
 src/modules/NormalZombie.o: src/modules/NormalZombie.cpp.o
 
@@ -771,6 +771,33 @@ src/states/StateSettings.cpp.s:
 	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.s
 .PHONY : src/states/StateSettings.cpp.s
 
+src/states/StateShop.o: src/states/StateShop.cpp.o
+
+.PHONY : src/states/StateShop.o
+
+# target to build an object file
+src/states/StateShop.cpp.o:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o
+.PHONY : src/states/StateShop.cpp.o
+
+src/states/StateShop.i: src/states/StateShop.cpp.i
+
+.PHONY : src/states/StateShop.i
+
+# target to preprocess a source file
+src/states/StateShop.cpp.i:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.i
+.PHONY : src/states/StateShop.cpp.i
+
+src/states/StateShop.s: src/states/StateShop.cpp.s
+
+.PHONY : src/states/StateShop.s
+
+# target to generate assembly for a file
+src/states/StateShop.cpp.s:
+	$(MAKE) -f CMakeFiles/Left2Die.dir/build.make CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.s
+.PHONY : src/states/StateShop.cpp.s
+
 src/states/StateSinglePlayer.o: src/states/StateSinglePlayer.cpp.o
 
 .PHONY : src/states/StateSinglePlayer.o
@@ -867,9 +894,9 @@ help:
 	@echo "... src/modules/Enemy.o"
 	@echo "... src/modules/Enemy.i"
 	@echo "... src/modules/Enemy.s"
-	@echo "... src/modules/MessageBox.o"
-	@echo "... src/modules/MessageBox.i"
-	@echo "... src/modules/MessageBox.s"
+	@echo "... src/modules/Message.o"
+	@echo "... src/modules/Message.i"
+	@echo "... src/modules/Message.s"
 	@echo "... src/modules/NormalZombie.o"
 	@echo "... src/modules/NormalZombie.i"
 	@echo "... src/modules/NormalZombie.s"
@@ -906,6 +933,9 @@ help:
 	@echo "... src/states/StateSettings.o"
 	@echo "... src/states/StateSettings.i"
 	@echo "... src/states/StateSettings.s"
+	@echo "... src/states/StateShop.o"
+	@echo "... src/states/StateShop.i"
+	@echo "... src/states/StateShop.s"
 	@echo "... src/states/StateSinglePlayer.o"
 	@echo "... src/states/StateSinglePlayer.i"
 	@echo "... src/states/StateSinglePlayer.s"

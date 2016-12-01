@@ -178,11 +178,11 @@ SFML/Graphics/RectangleShape.hpp
 SFML/Graphics/RenderWindow.hpp
 -
 
-/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.cpp
-MessageBox.h
-/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Message.cpp
+Message.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Message.h
 
-/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Message.h
 string
 -
 SFML/System/Clock.hpp
@@ -279,16 +279,18 @@ SFML/Audio.hpp
 -
 
 /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.cpp
+SFML/System/InputStream.hpp
+-
 StateBase.h
 /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
 
 /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
 SFML/Graphics/RenderWindow.hpp
 -
-SFGUI/Desktop.hpp
+SFGUI/Widgets.hpp
 -
-SFGUI/Button.hpp
--
+../util/ResourceLoader.h
+/home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.h
 
 /home/magnus/Dev environment/Dat220/l2d/src/states/StateHighScore.cpp
 StateHighScore.h
@@ -386,9 +388,29 @@ StateBase.h
 SFML/Graphics/Text.hpp
 -
 
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateShop.cpp
+StateShop.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateShop.h
+
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateShop.h
+StateBase.h
+/home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
+../Game.h
+/home/magnus/Dev environment/Dat220/l2d/src/Game.h
+SFML/Graphics/Text.hpp
+-
+SFML/OpenGL.hpp
+-
+SFGUI/SFGUI.hpp
+-
+SFGUI/Widgets.hpp
+-
+
 /home/magnus/Dev environment/Dat220/l2d/src/states/StateSinglePlayer.cpp
 StateSinglePlayer.h
 /home/magnus/Dev environment/Dat220/l2d/src/states/StateSinglePlayer.h
+../modules/Message.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Message.h
 ../modules/Player.h
 /home/magnus/Dev environment/Dat220/l2d/src/modules/Player.h
 ../modules/Enemy.h
@@ -401,8 +423,8 @@ SFML/Graphics/Text.hpp
 /home/magnus/Dev environment/Dat220/l2d/src/Game.h
 StateBase.h
 /home/magnus/Dev environment/Dat220/l2d/src/states/StateBase.h
-../modules/MessageBox.h
-/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h
+../modules/Message.h
+/home/magnus/Dev environment/Dat220/l2d/src/modules/Message.h
 
 /home/magnus/Dev environment/Dat220/l2d/src/util/ResourceLoader.cpp
 ResourceLoader.h

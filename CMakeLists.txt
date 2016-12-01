@@ -37,8 +37,10 @@ set(SOURCE_FILES src/main.cpp
         src/modules/Player.h
         src/modules/zombie.cpp
         src/modules/zombie.h
-        src/modules/MessageBox.cpp
-        src/modules/MessageBox.h
+        src/states/StateShop.cpp
+        src/states/StateShop.h
+        src/modules/Message.cpp
+        src/modules/Message.h
         src/modules/Weapon.cpp
         src/modules/Weapon.h
         src/modules/Projectile.cpp

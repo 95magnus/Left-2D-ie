@@ -1,11 +1,10 @@
 /*
-Using SFGUI built-in Widget class to style buttons
+Using SFGUI built-in Widget class to style widgets like buttons and window, CSS lookalike
 */
 
 Button
 {
     BackgroundColor: #00000000;
-
     BorderWidth: 0;
 }
 
@@ -16,22 +15,85 @@ Button:PRELIGHT
     BorderWidth: 1;
 }
 
-/*Button:SELECTED*/
-/*{*/
-    /*BorderColor: #00DD00FF;*/
-    /*BackgroundColor: #009900FF;*/
-    /*BorderWidth: 1;*/
-/*}*/
+SettingsWindow
+{
+    BorderWidth: 7;
+    BorderColor: #3F3F3F3F;
+}
 
+SettingsButton
+{
+    BackgroundColor: #00000000;
+    BorderWidth: 0;
+}
+
+/*
+Reusing these ID's
+*/
+
+#size30px
+{
+    FontSize: 30.0f;
+}
+
+#size50px
+{
+    FontSize: 50.0f;
+}
+
+<<<<<<< HEAD
 Button:ACTIVE
 {
     BorderColor: #00000000;
     BackgroundColor: #00000000;
     BorderWidth: 0;
 }
+=======
+/*
+------------------------------------------Main Menu---------------------------------------------------------------------
+*/
+>>>>>>> f4b1742485fde60fa37f15df51566a2082d502a9
 
-#button
+#box
 {
-    FontName: resources/fonts/deathrattlebb_reg.ttf;
+    BackgroundColor: #00000000;
+}
 
+
+/*
+------------------------------------------Settings----------------------------------------------------------------------
+*/
+
+#settingswindow
+{
+    BackgroundColor: #696969FF;
+}
+
+#imagebutton
+{
+    BackgroundColor: #00000000;
+    BorderWidth: 5;
+    FontSize: 30.0f;
+}
+
+#label
+{
+    FontSize: 45px;
+}
+
+#settingsframe
+{
+    FontSize: 100.0f;
+    BorderWidth: 0.0f;
+}
+
+#soundsettingsframe
+{
+    FontSize: 60.0f;
+    BorderWidth: 0.0f;
+}
+
+#notebook, #frame
+{
+    BorderWidth: 0;
 }

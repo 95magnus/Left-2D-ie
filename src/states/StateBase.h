@@ -2,8 +2,8 @@
 #define LEFT2DIE_STATEBASE_H
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFGUI/Desktop.hpp>
-#include <SFGUI/Button.hpp>
+#include <SFGUI/Widgets.hpp>
+#include "../util/ResourceLoader.h"
 
 class Game;
 typedef std::string String;
@@ -23,15 +23,31 @@ public:
 
     sfg::Desktop* getDesktop() const { return desktop; }
     void updateDesktop();
-    virtual void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);
 
-    sfg::Desktop* desktop;
+    //// Single Player GUI
+    void createSinglePlayerWindow(sfg::Window::Ptr windowName);
+    void createBoxes(sfg::Button::Ptr boxName);
+    void createImageButton(sfg::Button::Ptr buttonName, const String &filename);
+    void createImage(sfg::Image::Ptr imageName, const String &filename);
+
+    //// Shop GUI
+    void createShopGUIWindow(sfg::Window::Ptr windowName);
+
+    //// Settings GUI
+    virtual void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);
+    virtual void createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position);
+    virtual void createSettingsButton(sfg::Button::Ptr buttonName);
+    virtual void createSoundGUIButton(sfg::CheckButton::Ptr checkButtonName);
+    virtual void createSettingsControlButtons(sfg::Button::Ptr buttonName);
+    virtual void createLabel(sfg::Label::Ptr labelName);
+    virtual void createSettingsLabel(sfg::Label::Ptr labelName);
+    virtual void createSettingsControlGUIButtons(sfg::Button::Ptr buttonName);
 
 protected:
     StateBase(Game* game);
 
     Game* game;
-
+    sfg::Desktop* desktop;
     sf::Clock timer;
 
     const String themePath = "resources/gui/theme.css";

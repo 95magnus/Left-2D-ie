@@ -5,20 +5,19 @@ StatePlayGame::StatePlayGame(Game *game) : StateBase(game) {
 }
 
 StatePlayGame::~StatePlayGame() {
-}
 
+}
 void StatePlayGame::update(float deltaTime) {
 
+}
+
+void StatePlayGame::pause() {
+    desktop->RemoveAll();
 }
 
 void StatePlayGame::resume() {
     StateBase::resume();
     initButtons();
-}
-
-
-void StatePlayGame::pause() {
-    desktop->RemoveAll();
 }
 
 void StatePlayGame::initButtons() {
@@ -27,11 +26,11 @@ void StatePlayGame::initButtons() {
     createButton(invisibleButton, sf::Vector2f(0.f, 0.f));
 
     auto singlePlayerButton = sfg::Button::Create("Single Player");
-    createButton(singlePlayerButton, sf::Vector2f(670.0f, 240.0f));
+    createButton(singlePlayerButton, sf::Vector2f(550.0f, 280.0f));
     singlePlayerButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StatePlayGame::buttonSinglePlayerClicked,this));
 
     auto multiplayerButton = sfg::Button::Create("Multiplayer");
-    createButton(multiplayerButton, sf::Vector2f(670.0f, 330.0f));
+    createButton(multiplayerButton, sf::Vector2f(550.0f, 370.0f));
     multiplayerButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StatePlayGame::buttonMultiplayerClicked,this));
 
     auto backButton = sfg::Button::Create("Back");
@@ -43,6 +42,7 @@ void StatePlayGame::draw() {
     sf::Text title("Left[2D]ie", game->getFont(), 140);
     title.setColor(sf::Color::Red);
     title.setPosition(275, 50);
+
 
     sf::Text text("Play", game->getFont());
     text.setColor(sf::Color::Red);

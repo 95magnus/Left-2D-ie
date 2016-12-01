@@ -2,9 +2,9 @@
 // Created by Eivind Hystad on 03/11/2016.
 //
 
-#include "MessageBox.h"
+#include "Message.h"
 
-MessageBox::MessageBox(sf::RenderWindow &window) {
+Message::Message(sf::RenderWindow &window) {
     font.loadFromFile("resources/fonts/PixelOperator8.ttf");
     message.setFont(font);
     message.setColor(sf::Color::White);
@@ -21,7 +21,7 @@ MessageBox::MessageBox(sf::RenderWindow &window) {
 
 }
 
-void MessageBox::draw(std::string msg, int duration, sf::RenderWindow &window) {
+void Message::draw(std::string msg, int duration, sf::RenderWindow &window) {
     if (!displayed) {
         clock.restart();
     }
@@ -34,7 +34,7 @@ void MessageBox::draw(std::string msg, int duration, sf::RenderWindow &window) {
     }
 }
 
-MessageBox::~MessageBox() {
+Message::~Message() {
     /*
     delete displayed;
     delete message;

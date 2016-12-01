@@ -10,7 +10,7 @@ CMakeFiles/Left2Die.dir/src/Game.cpp.o: ../src/input/PlayerController.h
 CMakeFiles/Left2Die.dir/src/Game.cpp.o: ../src/level/Level.h
 CMakeFiles/Left2Die.dir/src/Game.cpp.o: ../src/level/tiles/TileBase.h
 CMakeFiles/Left2Die.dir/src/Game.cpp.o: ../src/level/tiles/TileStone.h
-CMakeFiles/Left2Die.dir/src/Game.cpp.o: ../src/modules/MessageBox.h
+CMakeFiles/Left2Die.dir/src/Game.cpp.o: ../src/modules/Message.h
 CMakeFiles/Left2Die.dir/src/Game.cpp.o: ../src/states/StateBase.h
 CMakeFiles/Left2Die.dir/src/Game.cpp.o: ../src/states/StateHighScore.h
 CMakeFiles/Left2Die.dir/src/Game.cpp.o: ../src/states/StateMachine.h
@@ -28,7 +28,7 @@ CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o: ../src/input/InputObserver
 CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o: ../src/level/Level.h
 CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o: ../src/level/tiles/TileBase.h
 CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o: ../src/level/tiles/TileStone.h
-CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o: ../src/modules/MessageBox.h
+CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o: ../src/modules/Message.h
 CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o: ../src/states/StateBase.h
 CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o: ../src/states/StateHighScore.h
 CMakeFiles/Left2Die.dir/src/input/InputManager.cpp.o: ../src/states/StateMachine.h
@@ -76,7 +76,7 @@ CMakeFiles/Left2Die.dir/src/main.cpp.o: ../src/level/Level.h
 CMakeFiles/Left2Die.dir/src/main.cpp.o: ../src/level/tiles/TileBase.h
 CMakeFiles/Left2Die.dir/src/main.cpp.o: ../src/level/tiles/TileStone.h
 CMakeFiles/Left2Die.dir/src/main.cpp.o: ../src/main.cpp
-CMakeFiles/Left2Die.dir/src/main.cpp.o: ../src/modules/MessageBox.h
+CMakeFiles/Left2Die.dir/src/main.cpp.o: ../src/modules/Message.h
 CMakeFiles/Left2Die.dir/src/main.cpp.o: ../src/states/StateBase.h
 CMakeFiles/Left2Die.dir/src/main.cpp.o: ../src/states/StateHighScore.h
 CMakeFiles/Left2Die.dir/src/main.cpp.o: ../src/states/StateMachine.h
@@ -90,28 +90,28 @@ CMakeFiles/Left2Die.dir/src/main.cpp.o: ../src/util/ResourceLoader.h
 CMakeFiles/Left2Die.dir/src/modules/Enemy.cpp.o: ../src/modules/Enemy.cpp
 CMakeFiles/Left2Die.dir/src/modules/Enemy.cpp.o: ../src/modules/Enemy.h
 
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/Game.h
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/level/Level.h
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/level/tiles/TileBase.h
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/level/tiles/TileStone.h
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/modules/MessageBox.cpp
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/modules/MessageBox.h
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/states/StateBase.h
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/states/StateHighScore.h
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/states/StateMachine.h
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/states/StateMainMenu.h
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/states/StateMultiPlayer.h
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/states/StatePlayGame.h
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/states/StateSettings.h
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/states/StateSinglePlayer.h
-CMakeFiles/Left2Die.dir/src/modules/MessageBox.cpp.o: ../src/util/ResourceLoader.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/Game.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/level/Level.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/level/tiles/TileBase.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/level/tiles/TileStone.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/modules/Message.cpp
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/modules/Message.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/states/StateBase.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/states/StateHighScore.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/states/StateMachine.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/states/StateMainMenu.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/states/StateMultiPlayer.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/states/StatePlayGame.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/states/StateSettings.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/states/StateSinglePlayer.h
+CMakeFiles/Left2Die.dir/src/modules/Message.cpp.o: ../src/util/ResourceLoader.h
 
 CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.o: ../src/Game.h
 CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.o: ../src/level/Level.h
 CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.o: ../src/level/tiles/TileBase.h
 CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.o: ../src/level/tiles/TileStone.h
 CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.o: ../src/modules/Enemy.h
-CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.o: ../src/modules/MessageBox.h
+CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.o: ../src/modules/Message.h
 CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.o: ../src/modules/NormalZombie.cpp
 CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.o: ../src/modules/NormalZombie.h
 CMakeFiles/Left2Die.dir/src/modules/NormalZombie.cpp.o: ../src/states/StateBase.h
@@ -131,7 +131,7 @@ CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o: ../src/input/PlayerController.
 CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o: ../src/level/Level.h
 CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o: ../src/level/tiles/TileBase.h
 CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o: ../src/level/tiles/TileStone.h
-CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o: ../src/modules/MessageBox.h
+CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o: ../src/modules/Message.h
 CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o: ../src/modules/Player.cpp
 CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o: ../src/modules/Player.h
 CMakeFiles/Left2Die.dir/src/modules/Player.cpp.o: ../src/modules/Projectile.h
@@ -158,12 +158,13 @@ CMakeFiles/Left2Die.dir/src/modules/zombie.cpp.o: ../src/modules/zombie.h
 
 CMakeFiles/Left2Die.dir/src/states/StateBase.cpp.o: ../src/states/StateBase.cpp
 CMakeFiles/Left2Die.dir/src/states/StateBase.cpp.o: ../src/states/StateBase.h
+CMakeFiles/Left2Die.dir/src/states/StateBase.cpp.o: ../src/util/ResourceLoader.h
 
 CMakeFiles/Left2Die.dir/src/states/StateHighScore.cpp.o: ../src/Game.h
 CMakeFiles/Left2Die.dir/src/states/StateHighScore.cpp.o: ../src/level/Level.h
 CMakeFiles/Left2Die.dir/src/states/StateHighScore.cpp.o: ../src/level/tiles/TileBase.h
 CMakeFiles/Left2Die.dir/src/states/StateHighScore.cpp.o: ../src/level/tiles/TileStone.h
-CMakeFiles/Left2Die.dir/src/states/StateHighScore.cpp.o: ../src/modules/MessageBox.h
+CMakeFiles/Left2Die.dir/src/states/StateHighScore.cpp.o: ../src/modules/Message.h
 CMakeFiles/Left2Die.dir/src/states/StateHighScore.cpp.o: ../src/states/StateBase.h
 CMakeFiles/Left2Die.dir/src/states/StateHighScore.cpp.o: ../src/states/StateHighScore.cpp
 CMakeFiles/Left2Die.dir/src/states/StateHighScore.cpp.o: ../src/states/StateHighScore.h
@@ -179,7 +180,7 @@ CMakeFiles/Left2Die.dir/src/states/StateMachine.cpp.o: ../src/Game.h
 CMakeFiles/Left2Die.dir/src/states/StateMachine.cpp.o: ../src/level/Level.h
 CMakeFiles/Left2Die.dir/src/states/StateMachine.cpp.o: ../src/level/tiles/TileBase.h
 CMakeFiles/Left2Die.dir/src/states/StateMachine.cpp.o: ../src/level/tiles/TileStone.h
-CMakeFiles/Left2Die.dir/src/states/StateMachine.cpp.o: ../src/modules/MessageBox.h
+CMakeFiles/Left2Die.dir/src/states/StateMachine.cpp.o: ../src/modules/Message.h
 CMakeFiles/Left2Die.dir/src/states/StateMachine.cpp.o: ../src/states/StateBase.h
 CMakeFiles/Left2Die.dir/src/states/StateMachine.cpp.o: ../src/states/StateHighScore.h
 CMakeFiles/Left2Die.dir/src/states/StateMachine.cpp.o: ../src/states/StateMachine.cpp
@@ -195,7 +196,7 @@ CMakeFiles/Left2Die.dir/src/states/StateMainMenu.cpp.o: ../src/Game.h
 CMakeFiles/Left2Die.dir/src/states/StateMainMenu.cpp.o: ../src/level/Level.h
 CMakeFiles/Left2Die.dir/src/states/StateMainMenu.cpp.o: ../src/level/tiles/TileBase.h
 CMakeFiles/Left2Die.dir/src/states/StateMainMenu.cpp.o: ../src/level/tiles/TileStone.h
-CMakeFiles/Left2Die.dir/src/states/StateMainMenu.cpp.o: ../src/modules/MessageBox.h
+CMakeFiles/Left2Die.dir/src/states/StateMainMenu.cpp.o: ../src/modules/Message.h
 CMakeFiles/Left2Die.dir/src/states/StateMainMenu.cpp.o: ../src/states/StateBase.h
 CMakeFiles/Left2Die.dir/src/states/StateMainMenu.cpp.o: ../src/states/StateHighScore.h
 CMakeFiles/Left2Die.dir/src/states/StateMainMenu.cpp.o: ../src/states/StateMachine.h
@@ -211,7 +212,7 @@ CMakeFiles/Left2Die.dir/src/states/StateMultiPlayer.cpp.o: ../src/Game.h
 CMakeFiles/Left2Die.dir/src/states/StateMultiPlayer.cpp.o: ../src/level/Level.h
 CMakeFiles/Left2Die.dir/src/states/StateMultiPlayer.cpp.o: ../src/level/tiles/TileBase.h
 CMakeFiles/Left2Die.dir/src/states/StateMultiPlayer.cpp.o: ../src/level/tiles/TileStone.h
-CMakeFiles/Left2Die.dir/src/states/StateMultiPlayer.cpp.o: ../src/modules/MessageBox.h
+CMakeFiles/Left2Die.dir/src/states/StateMultiPlayer.cpp.o: ../src/modules/Message.h
 CMakeFiles/Left2Die.dir/src/states/StateMultiPlayer.cpp.o: ../src/states/StateBase.h
 CMakeFiles/Left2Die.dir/src/states/StateMultiPlayer.cpp.o: ../src/states/StateHighScore.h
 CMakeFiles/Left2Die.dir/src/states/StateMultiPlayer.cpp.o: ../src/states/StateMachine.h
@@ -227,7 +228,7 @@ CMakeFiles/Left2Die.dir/src/states/StatePlayGame.cpp.o: ../src/Game.h
 CMakeFiles/Left2Die.dir/src/states/StatePlayGame.cpp.o: ../src/level/Level.h
 CMakeFiles/Left2Die.dir/src/states/StatePlayGame.cpp.o: ../src/level/tiles/TileBase.h
 CMakeFiles/Left2Die.dir/src/states/StatePlayGame.cpp.o: ../src/level/tiles/TileStone.h
-CMakeFiles/Left2Die.dir/src/states/StatePlayGame.cpp.o: ../src/modules/MessageBox.h
+CMakeFiles/Left2Die.dir/src/states/StatePlayGame.cpp.o: ../src/modules/Message.h
 CMakeFiles/Left2Die.dir/src/states/StatePlayGame.cpp.o: ../src/states/StateBase.h
 CMakeFiles/Left2Die.dir/src/states/StatePlayGame.cpp.o: ../src/states/StateHighScore.h
 CMakeFiles/Left2Die.dir/src/states/StatePlayGame.cpp.o: ../src/states/StateMachine.h
@@ -243,7 +244,7 @@ CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o: ../src/Game.h
 CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o: ../src/level/Level.h
 CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o: ../src/level/tiles/TileBase.h
 CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o: ../src/level/tiles/TileStone.h
-CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o: ../src/modules/MessageBox.h
+CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o: ../src/modules/Message.h
 CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o: ../src/states/StateBase.h
 CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o: ../src/states/StateHighScore.h
 CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o: ../src/states/StateMachine.h
@@ -255,6 +256,23 @@ CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o: ../src/states/StateSetti
 CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o: ../src/states/StateSinglePlayer.h
 CMakeFiles/Left2Die.dir/src/states/StateSettings.cpp.o: ../src/util/ResourceLoader.h
 
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/Game.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/level/Level.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/level/tiles/TileBase.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/level/tiles/TileStone.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/modules/Message.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/states/StateBase.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/states/StateHighScore.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/states/StateMachine.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/states/StateMainMenu.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/states/StateMultiPlayer.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/states/StatePlayGame.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/states/StateSettings.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/states/StateShop.cpp
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/states/StateShop.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/states/StateSinglePlayer.h
+CMakeFiles/Left2Die.dir/src/states/StateShop.cpp.o: ../src/util/ResourceLoader.h
+
 CMakeFiles/Left2Die.dir/src/states/StateSinglePlayer.cpp.o: ../src/Game.h
 CMakeFiles/Left2Die.dir/src/states/StateSinglePlayer.cpp.o: ../src/input/InputManager.h
 CMakeFiles/Left2Die.dir/src/states/StateSinglePlayer.cpp.o: ../src/input/InputObserver.h
@@ -263,7 +281,7 @@ CMakeFiles/Left2Die.dir/src/states/StateSinglePlayer.cpp.o: ../src/level/Level.h
 CMakeFiles/Left2Die.dir/src/states/StateSinglePlayer.cpp.o: ../src/level/tiles/TileBase.h
 CMakeFiles/Left2Die.dir/src/states/StateSinglePlayer.cpp.o: ../src/level/tiles/TileStone.h
 CMakeFiles/Left2Die.dir/src/states/StateSinglePlayer.cpp.o: ../src/modules/Enemy.h
-CMakeFiles/Left2Die.dir/src/states/StateSinglePlayer.cpp.o: ../src/modules/MessageBox.h
+CMakeFiles/Left2Die.dir/src/states/StateSinglePlayer.cpp.o: ../src/modules/Message.h
 CMakeFiles/Left2Die.dir/src/states/StateSinglePlayer.cpp.o: ../src/modules/Player.h
 CMakeFiles/Left2Die.dir/src/states/StateSinglePlayer.cpp.o: ../src/modules/Projectile.h
 CMakeFiles/Left2Die.dir/src/states/StateSinglePlayer.cpp.o: ../src/modules/Weapon.h

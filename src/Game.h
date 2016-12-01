@@ -34,7 +34,6 @@ public:
     sfg::Label& getLabel() const { return *label; }
     sf::Font& getFont() const { return *font; }
     sf::RenderWindow& getWindow() const { return *window; }
-    //sfg::Desktop& getDesktop() const { return *sfgDesktop; }
     StateMachine& getStateMachine() const {return *stateMachine; }
     InputManager& getInputManager() const {return *inputManager; }
 
@@ -49,7 +48,6 @@ protected:
     bool running;
 
     InputTester* inputTester;
-
     StateMachine* stateMachine;
     InputManager* inputManager;
 
@@ -59,9 +57,6 @@ protected:
 
     // Create an SFGUI. This is required before doing anything with SFGUI.
     sfg::SFGUI* sfgui;
-
-    //sf::Clock timer;
-    //sfg::Desktop* sfgDesktop;
 };
 
 

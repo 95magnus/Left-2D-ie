@@ -147,10 +147,10 @@
 		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/Enemy.h">
 			<Option target="Left2Die"/>
 		</Unit>
-		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.cpp">
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/Message.cpp">
 			<Option target="Left2Die"/>
 		</Unit>
-		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/MessageBox.h">
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/Message.h">
 			<Option target="Left2Die"/>
 		</Unit>
 		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/modules/NormalZombie.cpp">
@@ -223,6 +223,12 @@
 			<Option target="Left2Die"/>
 		</Unit>
 		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateSettings.h">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateShop.cpp">
+			<Option target="Left2Die"/>
+		</Unit>
+		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateShop.h">
 			<Option target="Left2Die"/>
 		</Unit>
 		<Unit filename="/home/magnus/Dev environment/Dat220/l2d/src/states/StateSinglePlayer.cpp">

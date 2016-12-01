@@ -13,11 +13,11 @@
 #include <SFML/Graphics.hpp>
 #include "../Game.h"
 
-class MessageBox {
+class Message {
 public:
-    MessageBox(sf::RenderWindow &window);
+    Message(sf::RenderWindow &window);
 
-    virtual ~MessageBox();
+    virtual ~Message();
 
     void draw(std::string msg, int duration, sf::RenderWindow &window);
 

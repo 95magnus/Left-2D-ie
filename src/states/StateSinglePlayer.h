@@ -4,13 +4,12 @@
 #include <SFML/Graphics/Text.hpp>
 #include "../Game.h"
 #include "StateBase.h"
-#include "../modules/MessageBox.h"
+#include "../modules/Message.h"
 //#include "../modules/NormalZombie.h"
 //#include "../modules/Enemy.h"
 
-class InputTester;
+class Message;
 class Level;
-class MessageBox;
 class Player;
 //class NormalZombie;
 class Enemy;
@@ -25,17 +24,36 @@ public:
     void update(float deltaTime);
     void draw();
 
+    void pause();
+    void resume();
+
+    void initGameGui();
+    void pauseGameGui();
+    void goToShop();
+
+    void onItemOneBoxMarked();
+    void onItemTwoBoxMarked();
+    void onItemThreeBoxMarked();
+    void onItemFourBoxMarked();
+    void onItemFiveBoxMarked();
+    void onItemSixBoxMarked();
+
+    void onAbilityOneBoxMarked();
+    void onAbilityTwoBoxMarked();
+    void onAbilityThreeBoxMarked();
+    void onAbilityFourBoxMarked();
+
 protected:
     //InputManager* inputManager;
 
     sf::RenderWindow *window;
     sf::View *view;
     Level* level;
-    MessageBox* mb;
 
     Player* player;
     std::vector<Player*> players;
     Enemy* zombie;
+    Message* mb;
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H

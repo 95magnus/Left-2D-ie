@@ -2,6 +2,7 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+<<<<<<< HEAD
       <sourceFolder url="file://$MODULE_DIR$/src/modules/NormalZombie.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/modules/zombie.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/modules/Player.cpp" isTestSource="false" />
@@ -54,6 +55,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputObserver.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputObserver.cpp" isTestSource="false" />
+=======
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+>>>>>>> f4b1742485fde60fa37f15df51566a2082d502a9
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/cmake-build-debug/CMakeFiles" />
     </content>
@@ -61,16 +65,18 @@
     <orderEntry type="module-library">
       <library name="Header Search Paths">
         <CLASSES>
-          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
-          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include" />
-          <root url="file:///usr/include" />
-          <root url="file:///usr/local/include" />
+          <root url="file://C:/Program Files/mingw-w64/x86_64-6.2.0-posix-seh-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include" />
+          <root url="file://C:/Program Files/mingw-w64/x86_64-6.2.0-posix-seh-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include-fixed" />
+          <root url="file://C:/Program Files/mingw-w64/x86_64-6.2.0-posix-seh-rt_v5-rev1/mingw64/x86_64-w64-mingw32/include" />
+          <root url="file://C:/SFGUI/include" />
+          <root url="file://C:/SFML-2.4.0/include" />
         </CLASSES>
         <SOURCES>
-          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
-          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include" />
-          <root url="file:///usr/include" />
-          <root url="file:///usr/local/include" />
+          <root url="file://C:/Program Files/mingw-w64/x86_64-6.2.0-posix-seh-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include" />
+          <root url="file://C:/Program Files/mingw-w64/x86_64-6.2.0-posix-seh-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include-fixed" />
+          <root url="file://C:/Program Files/mingw-w64/x86_64-6.2.0-posix-seh-rt_v5-rev1/mingw64/x86_64-w64-mingw32/include" />
+          <root url="file://C:/SFGUI/include" />
+          <root url="file://C:/SFML-2.4.0/include" />
         </SOURCES>
       </library>
     </orderEntry>
