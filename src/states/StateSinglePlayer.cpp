@@ -57,18 +57,44 @@ void StateSinglePlayer::draw() {
 
 void StateSinglePlayer::initGameGui() {
     // Main game window
-//    desktop->SetProperty("*", "FontName", "resources/fonts/feast-of-flesh-bb.italic.ttf");
-//    auto singlePlayerWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
-//    createSinglePlayerWindow(singlePlayerWindow);
-//
-//    auto hpBar = sfg::Image::Create();
-//    createImage(hpBar, "healthbar_border.png");
+    desktop->SetProperty("*", "FontName", "resources/fonts/feast-of-flesh-bb.italic.ttf");
+    auto singlePlayerWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
+    createSinglePlayerWindow(singlePlayerWindow);
 
-//
-//    singlePlayerWindow->Add(hpBar);
-//    desktop->Add(singlePlayerWindow);
+    hpBar = sfg::Image::Create();
+    createImage(hpBar, "resources/gui/fiveoffivehealth.png");
+    hpBar->SetRequisition(sf::Vector2f(0.f,720.f));
 
+    itemOne = sfg::Button::Create();
+    createBox(itemOne, "resources/gui/ak.png");
+    itemOne->SetId("itemOne");
+    itemOne->SetPosition(sf::Vector2f(0.0f, 200.0f));
+    itemOne->SetRequisition(sf::Vector2f(0.f, 0.f));
+
+    singlePlayerWindow->Add(hpBar);
+    desktop->Add(hpBar);
 }
+
+void StateSinglePlayer::createImage(sfg::Image::Ptr image, const String &filename) {
+    auto temp = new sf::Image;
+    if(temp->loadFromFile(filename)){
+        image->SetImage(*temp);
+    }
+}
+
+void StateSinglePlayer::createBox(sfg::Button::Ptr boxName, const String &filename){
+    auto temp = new sf::Image;
+    auto boxImage = sfg::Image::Create();
+
+    if(temp->loadFromFile(filename)){
+        boxImage->SetImage(*temp);
+    }
+
+    boxName->SetImage(boxImage);
+    boxName->SetZOrder(-1);
+    desktop->Add(boxName);
+    desktop->SetProperty("Box#box", "BorderColor", "#00000000");
+};
 
 void StateSinglePlayer::pauseGameGui() {
 

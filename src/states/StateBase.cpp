@@ -51,15 +51,6 @@ void StateBase::createImageButton(sfg::Button::Ptr buttonName, const String &fil
     buttonName->SetImage(sfgImage);
 }
 
-void StateBase::createImage(sfg::Image::Ptr imageName, const String &filename) {
-    auto guiImage = new sf::Image();
-    ResourceLoader loader("resources/");
-    loader.loadGuiImage(guiImage, filename);
-
-    imageName->SetId("guibutton");
-    imageName->SetRequisition(sf::Vector2f(0.f, 85.0f));
-}
-
 
 //// Shop GUI
 void StateBase::createShopGUIWindow(sfg::Window::Ptr windowName){
@@ -86,7 +77,7 @@ void StateBase::createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &po
 
 // Create settings windows
 void StateBase::createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position) {
-    desktop->SetProperty("SettingsWindow#settingswindow", "FontSize", 150.f);
+    desktop->SetProperty("SettingsWindow#settingswindow", "BackgroundColor", "#696969FF");
     windowName->SetId("settingswindow");
 
     windowName->SetPosition(position);

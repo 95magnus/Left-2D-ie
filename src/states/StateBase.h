@@ -28,7 +28,6 @@ public:
     void createSinglePlayerWindow(sfg::Window::Ptr windowName);
     void createBoxes(sfg::Button::Ptr boxName);
     void createImageButton(sfg::Button::Ptr buttonName, const String &filename);
-    void createImage(sfg::Image::Ptr imageName, const String &filename);
 
     //// Shop GUI
     void createShopGUIWindow(sfg::Window::Ptr windowName);

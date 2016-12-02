@@ -13,7 +13,7 @@
 
 class Player;
 
-class Enemy {
+class Enemy{
 public:
     sf::Texture texture;
     float velX, velY, diffX, diffY, magnitude;

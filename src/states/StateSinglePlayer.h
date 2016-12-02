@@ -43,6 +43,9 @@ public:
     void onAbilityThreeBoxMarked();
     void onAbilityFourBoxMarked();
 
+    void createImage(sfg::Image::Ptr image, const String &filename);
+    void createBox(sfg::Button::Ptr boxName, const String &filename);
+
 protected:
     //InputManager* inputManager;
 
@@ -54,6 +57,12 @@ protected:
     std::vector<Player*> players;
     Enemy* zombie;
     Message* mb;
+
+private:
+    sfg::Image::Ptr hpBar;
+    sfg::Button::Ptr itemOne;
+    sfg::Button::Ptr itemTwo;
+    sfg::Button::Ptr itemThree;
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H

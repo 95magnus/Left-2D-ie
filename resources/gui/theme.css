@@ -2,31 +2,6 @@
 Using SFGUI built-in Widget class to style widgets like buttons and window, CSS lookalike
 */
 
-Button
-{
-    BackgroundColor: #00000000;
-    BorderWidth: 0;
-}
-
-Button:PRELIGHT
-{
-    BorderColor: #00000000;
-    BackgroundColor: #00000000;
-    BorderWidth: 1;
-}
-
-SettingsWindow
-{
-    BorderWidth: 7;
-    BorderColor: #3F3F3F3F;
-}
-
-SettingsButton
-{
-    BackgroundColor: #00000000;
-    BorderWidth: 0;
-}
-
 /*
 Reusing these ID's
 */
@@ -41,28 +16,69 @@ Reusing these ID's
     FontSize: 50.0f;
 }
 
-<<<<<<< HEAD
+/*
+------------------------------------------Main Menu---------------------------------------------------------------------
+*/
+
+Button
+{
+    BackgroundColor: #00000000;
+    BorderWidth: 0;
+}
+
+Button:PRELIGHT
+{
+    BorderColor: #00000000;
+    BackgroundColor: #00000000;
+;
+    BorderWidth: 1;
+}
+
 Button:ACTIVE
 {
     BorderColor: #00000000;
     BackgroundColor: #00000000;
     BorderWidth: 0;
 }
-=======
-/*
-------------------------------------------Main Menu---------------------------------------------------------------------
-*/
->>>>>>> f4b1742485fde60fa37f15df51566a2082d502a9
 
-#box
+
+/*
+------------------------------------------Single Player-----------------------------------------------------------------
+*/
+
+Box:PRELIGHT
 {
-    BackgroundColor: #00000000;
+    BorderColor: #FFFFFFFF;
 }
+
+#itemOne
+{
+    BorderColor: #00000000;
+    BorderWidth: 1;
+}
+
+/*
+------------------------------------------Shop--------------------------------------------------------------------------
+*/
+
+
 
 
 /*
 ------------------------------------------Settings----------------------------------------------------------------------
 */
+
+SettingsWindow
+{
+    BorderWidth: 7;
+    BorderColor: #3F3F3F3F;
+}
+
+SettingsButton
+{
+    BackgroundColor: #00000000;
+    BorderWidth: 0;
+}
 
 #settingswindow
 {
