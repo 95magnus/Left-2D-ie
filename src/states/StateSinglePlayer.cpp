@@ -74,7 +74,7 @@ void StateSinglePlayer::draw() {
     for (int e = 0; e < enemies.size(); e++) {
         enemies[e]->draw(game->getWindow());
     }
-    window->draw(vignette);
+    //window->draw(vignette);
     mb->draw("Wave x - Good luck", 8, game->getWindow());
 }
 
@@ -141,29 +141,31 @@ void StateSinglePlayer::onAbilityFourBoxMarked() {
     // Use ability 4
 }
 
-void StateSinglePlayer::checkForHits(std::vector<Enemy*> enemies, std::vector<Projectile> &bullets) {
-    auto it = bullets.begin();
-    auto jt = enemies.begin();
-    if (!enemies.empty()) {
+void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets) {
+    if (!enemies.empty() && !bullets.empty()) {
+        auto it = bullets.begin();
+        auto jt = enemies.begin();
+
         for (int i = 0; i < bullets.size(); i++, it++) {
             for (int j = 0; j < enemies.size(); j++) {
                 if (bullets[i].getSprite().getPosition().x + 20 >= enemies[j]->sprite.getPosition().x
                     && bullets[i].getSprite().getPosition().x + 20 <= enemies[j]->sprite.getPosition().x + (enemies[j]->hitbox.getSize().x*0.2) &&
                     bullets[i].getSprite().getPosition().y >= enemies[j]->sprite.getPosition().y
                     && bullets[i].getSprite().getPosition().y <= enemies[j]->sprite.getPosition().y + (enemies[j]->hitbox.getSize().y)*0.2) {
-                    bullets.erase(it);
+
                     enemies[j]->getHit(bullets[i].getDamage());
+                    bullets.erase(it);
+
                 }
             }
         }
     }
-    int j = 0;
 
     // Fixed?
     auto enemy = enemies.begin();
     while (enemy != enemies.end()) {
         if ((*enemy)->getHealth() <= 0) {
-            enemies.erase(enemy);
+            enemy = enemies.erase(enemy);
         } else {
             ++enemy;
         }

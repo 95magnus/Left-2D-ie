@@ -47,7 +47,7 @@ public:
     void onAbilityThreeBoxMarked();
     void onAbilityFourBoxMarked();
 
-    void checkForHits(std::vector<Enemy*> enemies, std::vector<Projectile> &bullets);
+    void checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets);
 
 protected:
     //InputManager* inputManager;
