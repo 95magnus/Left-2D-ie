@@ -162,7 +162,7 @@ void StateSinglePlayer::checkForHits(std::vector<Enemy*> enemies, std::vector<Pr
     // Fixed?
     auto enemy = enemies.begin();
     while (enemy != enemies.end()) {
-        if (enemy->getHealth() <= 0) {
+        if ((*enemy)->getHealth() <= 0) {
             enemies.erase(enemy);
         } else {
             ++enemy;
