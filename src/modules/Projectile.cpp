@@ -13,6 +13,7 @@ Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRe
     this->damage = damage;
     this->x = x;
     this->y = y;
+    this->damage = 10;
     speed = 450;
     sprite.setPosition(x, y);
     sprite.setScale(0.1, 0.1);
@@ -26,6 +27,8 @@ Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRe
     hitbox.setSize(sprite.getSize());
     hitbox.setScale(sprite.getScale());
     hitbox.setPosition(sprite.getPosition());
+    hitbox.setOutlineColor(sf::Color::Red);
+    hitbox.setOutlineThickness(3);
 }
 
 float Projectile::fRand()
@@ -153,5 +156,13 @@ void Projectile::setRndY(float rndY) {
 void Projectile::update() {
     sprite.setPosition(x + velX*clock.getElapsedTime().asSeconds()*rndX, y + velY*clock.getElapsedTime().asSeconds()*rndY);
     hitbox.setPosition(sprite.getPosition());
+}
+
+const sf::RectangleShape &Projectile::getHitbox() const {
+    return hitbox;
+}
+
+void Projectile::setHitbox(const sf::RectangleShape &hitbox) {
+    Projectile::hitbox = hitbox;
 }
 

@@ -29,6 +29,7 @@ Weapon::Weapon(sf::RenderWindow &window, int wepStage, float rps, int posX, int 
     sprite.setOutlineThickness(2);
     sprite.setOutlineColor(sf::Color::Red);
     sound.setBuffer(soundBuffer);
+    this->damage = damage;
 }
 
 Weapon::~Weapon() {
@@ -37,7 +38,7 @@ Weapon::~Weapon() {
 
 void Weapon::fire() {
     if (clock.getElapsedTime().asSeconds() > 1/rps) {
-        Projectile bullet(window, projectileTexture, projectileIntRect[weaponStage], 100, angle, this->sprite.getPosition().x, this->sprite.getPosition().y);
+        Projectile bullet(window, projectileTexture, projectileIntRect[weaponStage], 10, angle, this->sprite.getPosition().x, this->sprite.getPosition().y);
         bullets.push_back(bullet);
         clock.restart();
         sound.play();

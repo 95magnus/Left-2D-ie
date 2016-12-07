@@ -55,6 +55,7 @@ public:
     void setArmor(int armor);
     int getKills() const;
     void setKills(int kills);
+    std::vector<Projectile> *getBullets();
 
 private:
     //Components
