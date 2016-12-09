@@ -178,7 +178,8 @@ void Level::draw(sf::RenderWindow &window) {
     if (!levelLoaded)
         return;
 
-    int xTiles = window.getSize().x / tileSize + 2;
+
+
 
     for (unsigned int y = 0; y < height; y++) {
         for (unsigned int x = 0; x < width; x++) {
@@ -186,6 +187,44 @@ void Level::draw(sf::RenderWindow &window) {
         }
     }
 }
+
+void Level::drawTiles(sf::RenderWindow &window, sf::Vector2f worldCoordCenter) {
+    if (!levelLoaded)
+        return;
+
+    // Find bounds of viewport
+    int worldMinX = (int)(worldCoordCenter.x - (windowSize.x/2));
+    int worldMinY = (int)(worldCoordCenter.y - (windowSize.y/2));
+    int worldMaxX = (int)(worldCoordCenter.x + (windowSize.x/2));
+    int worldMaxY = (int)(worldCoordCenter.y + (windowSize.y/2));
+
+    // Find tile bounds within viewport
+    int tileIndexMinX = worldMinX / (int)tileSize;
+    int tileIndexMinY = worldMinY / (int)tileSize;
+    int tileIndexMaxX = worldMaxX / (int)tileSize;
+    int tileIndexMaxY = worldMaxY / (int)tileSize;
+
+    int xScreen = 0, yScreen = 0;
+
+
+    // Draw tiles within viewport
+    for (int y = tileIndexMinY; y < tileIndexMaxY; y++) {
+        if (y < 0 || y >= height)
+            continue;
+
+        yScreen += tileSize;
+
+        for (int x = tileIndexMinX; x < tileIndexMaxX; x++) {
+            if (x < 0 || x >= width)
+                continue;
+
+            xScreen += tileSize;
+
+            tiles[y][x]->draw(window, xScreen, yScreen);
+        }
+    }
+}
+
 void Level::setMapOffset(sf::Vector2f offset) {
     xOffs = offset.x;
     yOffs = offset.y;

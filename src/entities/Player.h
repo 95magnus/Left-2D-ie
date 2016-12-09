@@ -12,26 +12,29 @@
 #include "../input/PlayerController.h"
 #include "Weapon.h"
 #include "Projectile.h"
+#include "Entity.h"
 
 class Weapon;
 class Projectile;
 
-class Player : public PlayerController {
+class Player : public Entity, PlayerController {
 public:
-    enum Direction {Up, Down, Left, Right};
+    enum Direction { Up, Down, Left, Right };
+
+    Player(sf::RenderWindow &window, sf::View &view, InputManager &inputManager, sf::Vector2f pos);
+    ~Player();
+
+    void update(float deltaTime);
+    void draw(sf::RenderWindow &window);
 
     sf::Vector2f move(float deltaTime);
 
     void scale(float x);
     void animationCycler(std::vector<sf::IntRect> dir);
 
-    void update(float deltaTime);
-    void draw(sf::RenderWindow &window);
 
     void death();
     void hit();
-    Player(sf::RenderWindow* window, InputManager &inputManager);
-    ~Player();
 
     void mousePressed(int x, int y, sf::Mouse::Button button);
 
@@ -68,7 +71,8 @@ private:
     float speed = 175.0f;
     int x, y;
 
-    sf::RenderWindow* window;
+    sf::RenderWindow &window;
+    sf::View &view;
 
     // Model
     sf::RectangleShape sprite;

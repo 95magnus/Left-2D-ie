@@ -33,7 +33,7 @@ public:
         ABILITY_4
     };
 
-    InputManager(sf::RenderWindow* window, StateMachine* stateMachine);
+    InputManager(sf::RenderWindow* window);
     virtual ~InputManager();
 
     void update(float deltaTime);
@@ -45,9 +45,13 @@ public:
 
     sf::Vector2f checkActionMoveKeys();
 
+    bool isWindowFocused();
+
     bool isJoystickConnected(int joystickID);
     unsigned int connectedJoystickCount();
     sf::Vector2f getStickPosition(int joystickID, sf::Joystick::Axis xAxis, sf::Joystick::Axis yAxis);
+
+    void setStateMachine(StateMachine *stateMachine);
 
     void addObserver(InputObserver* observer);
     void removeObserver(InputObserver* observer);
@@ -69,7 +73,7 @@ protected:
 
     int konamiIndex = 0;
 
-    bool playWithJoystick = false;
+    bool playWithJoystick = false, windowFocus = false;
 
     const float joystickThreshold = 15.0f, axisMaxPos = 100.0f;
     const int rTriggerThreshold = 10;

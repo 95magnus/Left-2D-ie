@@ -37,6 +37,8 @@ public:
     void update(float deltaTime);
     void draw(sf::RenderWindow &window);
 
+    void drawTiles(sf::RenderWindow &window, sf::Vector2f worldCoordCenter);
+
     int tileCoordToPixel();
     sf::Vector2i worldCoordToTile(sf::Vector2f position);
 

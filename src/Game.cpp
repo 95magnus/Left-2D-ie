@@ -1,6 +1,5 @@
 #include "Game.h"
 #include "input/InputManager.h"
-#include "input/InputTester.h"
 
 Game::Game(const unsigned int width, const unsigned int height, const String &title) {
     this->width = width;
@@ -15,7 +14,6 @@ Game::~Game() {
     delete inputManager;
     delete window;
     delete font;
-    //delete inputTester;
     delete sfgui;
 }
 
@@ -29,27 +27,25 @@ void Game::init() {
             sf::Style::Default,
             settings
     );
+    window->requestFocus();
 
     // We don't use SFML to draw the main menu
     window->resetGLStates();
 
     sfgui = new sfg::SFGUI();
 
+    inputManager = new InputManager(window);
     stateMachine = new StateMachine(this);
-    inputManager = new InputManager(window, stateMachine);
+    inputManager->setStateMachine(stateMachine);
+
     font = new sf::Font();
 
     stateMachine->initStates();
 
-    //inputTester = new InputTester(inputManager);
-
     ResourceLoader loader("resources/");
-
     // Font source: http://www.1001fonts.com/deathrattle-bb-font.html
     loader.loadFont(font, "deathrattlebb_reg.ttf");
     //font = &loader.loadFont("deathrattlebb_reg.ttf");
-
-    //inputTester->setTexture(&loader.loadTexture("player.png"));
 }
 
 void Game::start() {
@@ -108,15 +104,12 @@ void Game::stop() {
 void Game::update(float deltaTime) {
     inputManager->update(deltaTime);
     stateMachine->update(deltaTime);
-
-    //inputTester->update(deltaTime);
 }
 
 void Game::draw() {
     window->clear(sf::Color::Black);
 
-    stateMachine->draw();
-    //window->draw(*inputTester);
+    stateMachine->draw(*window);
 
     sfgui->Display(*window);
     window->display();

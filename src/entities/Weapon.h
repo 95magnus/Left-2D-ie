@@ -15,13 +15,13 @@
 #include <SFML/Audio/Sound.hpp>
 #include "Projectile.h"
 
-class Weapon {
+class Weapon : public Entity {
 public:
     Weapon(sf::RenderWindow &window, int wepStage, float rps, int posX, int posY);
-
     virtual ~Weapon();
 
-    void draw();
+    void update(float deltaTime);
+    void draw(sf::RenderWindow &window);
 
     void fire();
 
@@ -30,7 +30,7 @@ public:
 
     void flipLeft();
 
-    void rotateWeapon();
+    void rotateWeapon(int mouseWorldPosX, int mouseWorldPosY);
 
     void setPosition(int x, int y);
 

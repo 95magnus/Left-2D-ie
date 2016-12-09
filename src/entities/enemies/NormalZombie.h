@@ -6,7 +6,7 @@
 #define LEFT2DIE_NORMALZOMBIE_H
 
 #include <math.h>
-#include "../states/StateSinglePlayer.h"
+#include "../../states/StateSinglePlayer.h"
 #include "Enemy.h"
 
 class Enemy;

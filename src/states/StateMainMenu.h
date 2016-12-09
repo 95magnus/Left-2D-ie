@@ -10,13 +10,13 @@
 
 typedef std::string String;
 
-class StateMainMenu : public StateBase{
+class StateMainMenu : public StateBase {
 public:
     StateMainMenu(Game *game);
     virtual ~StateMainMenu();
 
     virtual void update(float deltaTime);
-    virtual void draw();
+    virtual void draw(sf::RenderWindow &window);
 
     void pause();
     void resume();

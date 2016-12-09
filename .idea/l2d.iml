@@ -2,27 +2,19 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-<<<<<<< HEAD
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/NormalZombie.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/zombie.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/Player.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/NormalZombie.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/MessageBox.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/Enemy.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/Projectile.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/Enemy.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/Projectile.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/Weapon.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/zombie.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/MessageBox.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/Weapon.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/modules/Player.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Game.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/world/Camera.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/world/World.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/world/Camera.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/world/World.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/gui/Message.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/gui/Message.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateMachine.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/states/StateHighScore.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateMainMenu.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/states/StateHighScore.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/states/StateHighScore.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateMultiPlayer.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/states/StateShop.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateSettings.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateMachine.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateSinglePlayer.cpp" isTestSource="false" />
@@ -31,14 +23,28 @@
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateMainMenu.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StatePlayGame.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateMultiPlayer.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/states/StateHighScore.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateSinglePlayer.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StateBase.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/states/StateShop.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/states/StatePlayGame.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Game.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Game.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/VectorUtil.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/util/ResourceLoader.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/entities/Weapon.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/entities/enemies/NormalZombie.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/entities/enemies/Enemy.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/entities/enemies/Enemy.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/entities/enemies/zombie.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/entities/enemies/NormalZombie.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/entities/enemies/zombie.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/entities/Entity.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/entities/Projectile.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/entities/Projectile.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/entities/Weapon.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/entities/Player.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/entities/Player.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileDirt.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileBase.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/level/tiles/TileStone.h" isTestSource="false" />
@@ -55,9 +61,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputManager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputObserver.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/input/InputObserver.cpp" isTestSource="false" />
-=======
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
->>>>>>> f4b1742485fde60fa37f15df51566a2082d502a9
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/cmake-build-debug/CMakeFiles" />
     </content>
@@ -65,18 +68,16 @@
     <orderEntry type="module-library">
       <library name="Header Search Paths">
         <CLASSES>
-          <root url="file://C:/Program Files/mingw-w64/x86_64-6.2.0-posix-seh-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include" />
-          <root url="file://C:/Program Files/mingw-w64/x86_64-6.2.0-posix-seh-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include-fixed" />
-          <root url="file://C:/Program Files/mingw-w64/x86_64-6.2.0-posix-seh-rt_v5-rev1/mingw64/x86_64-w64-mingw32/include" />
-          <root url="file://C:/SFGUI/include" />
-          <root url="file://C:/SFML-2.4.0/include" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include" />
+          <root url="file:///usr/include" />
+          <root url="file:///usr/local/include" />
         </CLASSES>
         <SOURCES>
-          <root url="file://C:/Program Files/mingw-w64/x86_64-6.2.0-posix-seh-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include" />
-          <root url="file://C:/Program Files/mingw-w64/x86_64-6.2.0-posix-seh-rt_v5-rev1/mingw64/lib/gcc/x86_64-w64-mingw32/6.2.0/include-fixed" />
-          <root url="file://C:/Program Files/mingw-w64/x86_64-6.2.0-posix-seh-rt_v5-rev1/mingw64/x86_64-w64-mingw32/include" />
-          <root url="file://C:/SFGUI/include" />
-          <root url="file://C:/SFML-2.4.0/include" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include" />
+          <root url="file:///usr/include" />
+          <root url="file:///usr/local/include" />
         </SOURCES>
       </library>
     </orderEntry>

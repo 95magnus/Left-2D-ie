@@ -3,8 +3,7 @@
 
 #include <SFML/System.hpp>
 #include <SFML/Window/Mouse.hpp>
-
-class InputManager;
+#include "InputManager.h"
 
 class InputObserver {
 public:

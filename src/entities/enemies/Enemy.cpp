@@ -5,7 +5,7 @@
 #include "Enemy.h"
 //#include "Player.h"
 
-Enemy::Enemy() {
+Enemy::Enemy(sf::Vector2f spawnPos) : Entity(spawnPos) {
     // Laster inn texture
     if (!texture.loadFromFile("resources/textures/spritesheets/zombie.png")) {
         printf("Couldn't load zombie texture.");
@@ -17,16 +17,16 @@ Enemy::Enemy() {
     health = 100;
     maxHealth = 100;
     damage = 20;
-    speed = 10;
+    speed = 50;
     hit = 0;
-    sprite.setPosition(800, 100);
+    sprite.setPosition(spawnPos.x, spawnPos.y);
     sprite.setSize(sf::Vector2f(100, 100));
     //hitbox.setSize(sf::Vector2f(40, 40));
     hitbox.setFillColor(sf::Color(255, 255, 255, 00));
     //hitbox.setPosition(sprite.getPosition().x - hitbox.getSize().x*1.5, sprite.getPosition().y + hitbox.getSize().y*1.9);
     hitbox.setOutlineColor(sf::Color::Blue);
     hitbox.setOutlineThickness(3);
-    sprite.setOrigin(sprite.getLocalBounds().width/2, sprite.getLocalBounds().height / 2);
+    sprite.setOrigin(sprite.getSize().x, sprite.getSize().y/ 2);
     hitbox.setOrigin(sprite.getOrigin());
     healthBar.setSize(sf::Vector2f(50,10));
     healthBar.setFillColor(sf::Color::Green);
@@ -36,6 +36,8 @@ Enemy::Enemy() {
     //hpBarBG = healthBar;
     //hpBarBG.setFillColor(sf::Color::Red);
     cycleClock.restart();
+
+    target = sf::Vector2f(0, 0);
 }
 
 void Enemy::animationCycler(float interval) {
@@ -54,6 +56,29 @@ void Enemy::animationCycler(float interval) {
 Enemy::~Enemy() {
 }
 
+void Enemy::update(float deltaTime) {
+    //target = sf::Vector2f(600, 500);
+
+    // Under får zombien en retning å gå, den vil bevege seg likt som prosjektilene
+    diffX = target.x - sprite.getPosition().x;
+    diffY = target.y - sprite.getPosition().y;
+    magnitude = sqrtf(diffX*diffX + diffY*diffY);
+    velX = diffX/magnitude*speed;
+    velY = diffY/magnitude*speed;
+    //hitbox.setSize(sprite.getSize());
+
+    worldPos.x += velX * deltaTime;
+    worldPos.y += velY * deltaTime;
+
+    sprite.setPosition(worldPos);
+    hitbox.setPosition(worldPos);
+
+    //sprite.move(velX*deltaTime, velY*deltaTime);
+    //hitbox.move(velX*deltaTime, velY*deltaTime);
+
+    rewardPoints = 10;
+}
+
 void Enemy::update(std::vector<sf::Vector2f> players, float deltaTime) {
     // Går gjennom lista med spillerenes posisjoner for å finne den nærmeste
     /*for (auto it = players.begin(); it != players.end(); it++) {
@@ -68,7 +93,9 @@ void Enemy::update(std::vector<sf::Vector2f> players, float deltaTime) {
         }
     }*/
 
-    target = sf::Vector2f(600, 500);
+    //target = sf::Vector2f(600, 500);
+    if (target.x == 0 && target.y == 0)
+        return;
 
     // Under får zombien en retning å gå, den vil bevege seg likt som prosjektilene
     diffX = target.x - sprite.getPosition().x;
@@ -137,4 +164,8 @@ int Enemy::getHealth() const {
 
 void Enemy::setHealth(int health) {
     Enemy::health = health;
+}
+
+void Enemy::setTarget(sf::Vector2f pos) {
+    target = pos;
 }

@@ -3,9 +3,8 @@
 #include "InputObserver.h"
 #include "../states/StateMachine.h"
 
-InputManager::InputManager(sf::RenderWindow* window, StateMachine* stateMachine) {
+InputManager::InputManager(sf::RenderWindow* window) {
     this->window = window;
-    this->stateMachine = stateMachine;
 
     window->setJoystickThreshold(joystickThreshold);
 
@@ -117,6 +116,7 @@ bool InputManager::checkForInput() {
 
             case sf::Event::MouseButtonPressed: {
                 auto mouse = event.mouseButton;
+
                 for (auto &observer : observers)
                     observer->mousePressed(mouse.x, mouse.y, mouse.button);
 
@@ -179,13 +179,13 @@ bool InputManager::checkForInput() {
                 break;
 
             case sf::Event::LostFocus:
-                // Window out of focus -> pause game
-                //stateMachine->pause();
+                windowFocus = false;
+
                 break;
 
             case sf::Event::GainedFocus:
-                // Window gained focus -> resume paused game
-                //stateMachine->resume();
+                windowFocus = true;
+
                 break;
 
             default:
@@ -197,7 +197,8 @@ bool InputManager::checkForInput() {
                 obs->actionMove(checkActionMoveKeys());
         }
 
-        stateMachine->getState()->getDesktop()->HandleEvent(event);
+        if (stateMachine)
+            stateMachine->getState()->getDesktop()->HandleEvent(event);
     }
 
     return true;
@@ -264,4 +265,12 @@ sf::Vector2f InputManager::getStickPosition(int joystickID, sf::Joystick::Axis x
         return direction;
 
     return sf::Vector2f();
+}
+
+bool InputManager::isWindowFocused() {
+    return windowFocus;
+}
+
+void InputManager::setStateMachine(StateMachine *stateMachine) {
+    this-> stateMachine = stateMachine;
 }

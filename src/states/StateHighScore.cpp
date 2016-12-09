@@ -32,7 +32,7 @@ void StateHighScore::initButtons() {
     backButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateHighScore::buttonBackClicked,this));
 }
 
-void StateHighScore::draw() {
+void StateHighScore::draw(sf::RenderWindow &window) {
     sf::Text title("Left[2D]ie", game->getFont(), 140);
     title.setColor(sf::Color::Red);
     title.setPosition(275, 50);
@@ -41,8 +41,8 @@ void StateHighScore::draw() {
     text.setColor(sf::Color::Red);
     text.setPosition(300, 300);
 
-    game->getWindow().draw(text);
-    game->getWindow().draw(title);
+    window.draw(text);
+    window.draw(title);
 }
 
 void StateHighScore::buttonBackClicked() {

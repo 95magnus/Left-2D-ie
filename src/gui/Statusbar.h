@@ -8,7 +8,7 @@
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "Player.h"
+#include "../entites/Player.h"
 
 class Statusbar {
 public:

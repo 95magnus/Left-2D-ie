@@ -5,7 +5,8 @@
 
 #include "Projectile.h"
 
-Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRect rect, int damage, float angle, float x, float y) {
+Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRect rect, int damage, float angle, float x, float y)
+        : Entity(sf::Vector2f(x, y)) {
     sprite.setTexture(&texture);
     sprite.setTextureRect(rect);
     sprite.setSize(sf::Vector2f(rect.width, rect.height));
@@ -20,8 +21,13 @@ Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRe
     diffX = mouse.getPosition(window).x - x;
     diffY = mouse.getPosition(window).y - y;
     magnitude = sqrtf(diffX*diffX + diffY*diffY);
-    velX = diffX/magnitude*speed;
-    velY = diffY/magnitude*speed;
+    //velX = diffX/magnitude*speed;
+    //velY = diffY/magnitude*speed;
+
+
+    velX = -cos(angle * M_PI/180) * speed;
+    velY = -sin(angle * M_PI/180) * speed;
+
     rndX = fRand();
     rndY = fRand();
     hitbox.setSize(sprite.getSize());
@@ -153,9 +159,13 @@ void Projectile::setRndY(float rndY) {
     Projectile::rndY = rndY;
 }
 
-void Projectile::update() {
-    sprite.setPosition(x + velX*clock.getElapsedTime().asSeconds()*rndX, y + velY*clock.getElapsedTime().asSeconds()*rndY);
+void Projectile::update(float deltaTime) {
+    sprite.setPosition(x + velX*clock.getElapsedTime().asSeconds()*rndX, y + velY*clock.getElapsedTime().asSeconds()/*rndY*/);
     hitbox.setPosition(sprite.getPosition());
+}
+
+void Projectile::draw(sf::RenderWindow &window) {
+
 }
 
 const sf::RectangleShape &Projectile::getHitbox() const {

@@ -38,7 +38,7 @@ void StatePlayGame::initButtons() {
     backButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StatePlayGame::buttonBackClicked,this));
 }
 
-void StatePlayGame::draw() {
+void StatePlayGame::draw(sf::RenderWindow &window) {
     sf::Text title("Left[2D]ie", game->getFont(), 140);
     title.setColor(sf::Color::Red);
     title.setPosition(275, 50);

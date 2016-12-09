@@ -31,8 +31,8 @@ void StateMachine::update(float deltaTime) {
     currentState->updateDesktop();
 }
 
-void StateMachine::draw() {
-    currentState->draw();
+void StateMachine::draw(sf::RenderWindow &window) {
+    currentState->draw(window);
 }
 
 void StateMachine::pause() {

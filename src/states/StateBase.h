@@ -15,7 +15,7 @@ public:
     virtual void init() {}
 
     virtual void update(float deltaTime) = 0;
-    virtual void draw() = 0;
+    virtual void draw(sf::RenderWindow &window) = 0;
 
     virtual void pause() { paused = true; }
     virtual void resume() { paused = false; }

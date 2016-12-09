@@ -5,10 +5,8 @@
 #include "Player.h"
 #include "../input/InputManager.h"
 
-// Constructor
-Player::Player(sf::RenderWindow* window, InputManager &inputManager) : PlayerController(inputManager) {
-
-    this->window = window;
+Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputManager, sf::Vector2f pos)
+        : Entity(pos), PlayerController(inputManager), window(window), view(view){
     health = 100;
     armor = 0;
     kills = 0;
@@ -17,10 +15,10 @@ Player::Player(sf::RenderWindow* window, InputManager &inputManager) : PlayerCon
     currentDir = Right;
     sprite.setSize(sf::Vector2f(55, 55));
     scaleFactor = 0.25;
-    xy = sf::Vector2f(window->getSize().x/2, window->getSize().y/2);
+    xy = pos;
     sprite.setPosition(xy);
 
-    currentWeapon = new Weapon(*window, 0, 6, sprite.getPosition().x - 5, sprite.getPosition().y + 10);
+    currentWeapon = new Weapon(window, 0, 6, sprite.getPosition().x - 5, sprite.getPosition().y + 10);
 
     texture.setSmooth(false);
     texture.setRepeated(false);
@@ -54,7 +52,7 @@ Player::Player(sf::RenderWindow* window, InputManager &inputManager) : PlayerCon
 
     //shadow.setOrigin(hitbox.getOrigin().x - hitbox.getSize().x/4, hitbox.getOrigin().y - hitbox.getSize().y/4);
     shadow.setRadius(sprite.getSize().x/3);
-    shadow.setFillColor(sf::Color(0, 0, 0, 128));
+    shadow.setFillColor(sf::Color(0, 0, 0, 64));
     shadow.setPosition(sprite.getPosition().x, sprite.getPosition().y + 80);
     shadow.setOrigin(shadow.getRadius()/2, shadow.getRadius()/2);
 
@@ -76,15 +74,24 @@ void Player::update(float deltaTime) {
 
     //sprite.setPosition(xy);
 
+    currentWeapon->update(deltaTime);
+
     speedClock.restart();
-    currentWeapon->rotateWeapon();
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+    auto mousePos = sf::Mouse::getPosition(window);
+    auto worldCoords = window.mapPixelToCoords(mousePos, view);
+    currentWeapon->rotateWeapon(worldCoords.x, worldCoords.y);
+
+    hitbox.setPosition(xy.x, xy.y + 50);
+    shadow.setPosition(xy.x - 5, xy.y + 50);
+    currentWeapon->setPosition(xy.x - 5, xy.y + 10);
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && window.hasFocus()) {
         currentWeapon->fire();
     }
 
     auto it = currentWeapon->getBullets().begin();
     while(it != currentWeapon->getBullets().end()) {
-        it->update();
+        it->update(deltaTime);
 
         if (it->getClock().getElapsedTime().asSeconds() >= 5) {
             it = currentWeapon->getBullets().erase(it);
@@ -93,7 +100,6 @@ void Player::update(float deltaTime) {
         }
     }
 }
-
 
 void Player::draw(sf::RenderWindow &window) {
 
@@ -127,7 +133,7 @@ void Player::draw(sf::RenderWindow &window) {
     for (auto it = currentWeapon->getBullets().begin(); it != currentWeapon->getBullets().end(); ++it) {
         window.draw(it->getSprite());
     }
-    window.draw(currentWeapon->getSprite());
+    currentWeapon->draw(window);
 }
 
 sf::Vector2f Player::move(float deltaTime) {
@@ -147,6 +153,9 @@ sf::Vector2f Player::move(float deltaTime) {
 
         moving = true;
         animationCycler(animationDirections[currentDir]);
+
+        worldPos += moveDirection * speed * deltaTime;
+        xy = worldPos;
 
         return moveDirection * speed * deltaTime;
     } else {

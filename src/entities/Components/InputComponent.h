@@ -5,7 +5,7 @@
 #ifndef LEFT2DIE_INPUTCOMPONENT_H
 #define LEFT2DIE_INPUTCOMPONENT_H
 
-#include "Player.h"
+#include "../Player.h"
 #include "GameObject.h"
 
 class InputComponent {

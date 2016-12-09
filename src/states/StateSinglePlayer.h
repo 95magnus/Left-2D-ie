@@ -5,9 +5,9 @@
 #include <SFML/Graphics/Text.hpp>
 #include "../Game.h"
 #include "StateBase.h"
-#include "../modules/Message.h"
-//#include "../modules/NormalZombie.h"
-//#include "../modules/Enemy.h"
+#include "../gui/Message.h"
+//#include "../entities/NormalZombie.h"
+//#include "../entities/Enemy.h"
 
 class Message;
 class Level;
@@ -24,7 +24,7 @@ public:
     void init();
 
     void update(float deltaTime);
-    void draw();
+    void draw(sf::RenderWindow &window);
 
     void pause();
     void resume();
@@ -34,18 +34,6 @@ public:
     void initGameGui();
     void pauseGameGui();
     void goToShop();
-
-    void onItemOneBoxMarked();
-    void onItemTwoBoxMarked();
-    void onItemThreeBoxMarked();
-    void onItemFourBoxMarked();
-    void onItemFiveBoxMarked();
-    void onItemSixBoxMarked();
-
-    void onAbilityOneBoxMarked();
-    void onAbilityTwoBoxMarked();
-    void onAbilityThreeBoxMarked();
-    void onAbilityFourBoxMarked();
 
     void checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets);
 

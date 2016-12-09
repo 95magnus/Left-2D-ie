@@ -68,7 +68,7 @@ void StateSettings::initGui() {
     doneButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::getToMainMenu,this));
 }
 
-void StateSettings::draw() {
+void StateSettings::draw(sf::RenderWindow &window) {
     sf::Text title("Left[2D]ie", game->getFont(), 140);
     title.setColor(sf::Color::Red);
     title.setPosition(275, 50);

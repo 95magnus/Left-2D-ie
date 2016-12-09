@@ -10,21 +10,25 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "Player.h"
+#include "../Player.h"
 
 class Player;
 
-class Enemy {
+class Enemy : public Entity {
 public:
+    Enemy(sf::Vector2f spawnPos);
+    virtual ~Enemy();
+
     sf::Texture texture;
     float velX, velY, diffX, diffY, magnitude;
     sf::RectangleShape sprite;
     sf::RectangleShape hitbox;
     sf::RectangleShape collisionBox;
-    virtual ~Enemy();
-    Enemy();
+
+    void update(float deltaTime);
     void update(std::vector<sf::Vector2f> players, float deltaTime);
     void draw(sf::RenderWindow &window);
+
     void translate(sf::Vector2f offset);
     void animationCycler(float interval);
     void getHit(int damage);
@@ -36,11 +40,15 @@ public:
 
     void setHealth(int health);
 
+    void setTarget(sf::Vector2f pos);
+
 private:
     sf::RectangleShape healthBar;
     sf::RectangleShape hpBarBG;
     sf::Clock cycleClock;
+
     sf::Vector2f target;
+
     int health;
     int maxHealth;
     int damage;

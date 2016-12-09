@@ -11,16 +11,18 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <math.h>
+#include "Entity.h"
 
 
-class Projectile {
+class Projectile : public Entity {
 public:
-    ~Projectile();
     Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRect rect, int damage, float angle, float x, float y);
+    ~Projectile();
 
     float fRand();
 
-    void update();
+    void update(float deltaTime);
+    void draw(sf::RenderWindow &window);
 
     const sf::RectangleShape &getSprite() const;
 

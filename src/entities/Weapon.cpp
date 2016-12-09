@@ -4,7 +4,8 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(sf::RenderWindow &window, int wepStage, float rps, int posX, int posY) : window(window){
+Weapon::Weapon(sf::RenderWindow &window, int wepStage, float rps, int posX, int posY)
+        : Entity(sf::Vector2f(posX, posY)), window(window){
     this->rps = rps;
     sprite.setPosition(posX, posY);
     weaponStage = wepStage;
@@ -36,20 +37,29 @@ Weapon::~Weapon() {
 
 }
 
+void Weapon::update(float deltaTime) {
+    for (auto &projectile : bullets)
+        projectile.update(deltaTime);
+}
+
+void Weapon::draw(sf::RenderWindow &window) {
+    window.draw(sprite);
+}
+
 void Weapon::fire() {
     if (clock.getElapsedTime().asSeconds() > 1/rps) {
-        Projectile bullet(window, projectileTexture, projectileIntRect[weaponStage], 10, angle, this->sprite.getPosition().x, this->sprite.getPosition().y);
+        Projectile bullet(window, projectileTexture, projectileIntRect[weaponStage], 10, angle, sprite.getPosition().x, sprite.getPosition().y);
         bullets.push_back(bullet);
         clock.restart();
         sound.play();
     }
 }
 
-void Weapon::rotateWeapon() {
-    angle = (float) (atan2(sprite.getPosition().y - mouse.getPosition(window).y, sprite.getPosition().x - mouse.getPosition(window).x)*180/3.1416);
+void Weapon::rotateWeapon(int mouseWorldPosX, int mouseWorldPosY) {
+    angle = (float) (atan2(sprite.getPosition().y - mouseWorldPosY, sprite.getPosition().x - mouseWorldPosX)*180/3.1416);
 
     sprite.setRotation(angle);
-    if (mouse.getPosition(window).x > sprite.getPosition().x) {
+    if (mouseWorldPosX > sprite.getPosition().x) {
         flipRight();
     } else {
         flipLeft();

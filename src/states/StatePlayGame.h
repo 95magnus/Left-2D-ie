@@ -15,7 +15,7 @@ public:
     virtual ~StatePlayGame();
 
     void update(float deltaTime);
-    void draw();
+    void draw(sf::RenderWindow &window);
 
     void resume();
     void pause();

@@ -11,7 +11,7 @@ public:
     virtual ~StateSettings();
 
     void update(float deltaTime);
-    void draw();
+    void draw(sf::RenderWindow &window);
 
     void pause();
     void resume();

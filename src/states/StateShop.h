@@ -17,8 +17,8 @@ class StateShop {
 public:
     StateShop();
     virtual ~StateShop();
-    virtual void update();
-    virtual void draw();
+    void update(float deltaTime);
+    void draw(sf::RenderWindow &window);
 
 
 protected:

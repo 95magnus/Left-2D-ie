@@ -1,7 +1,7 @@
 #include "StateSinglePlayer.h"
-#include "../modules/Message.h"
-#include "../modules/Player.h"
-#include "../modules/Enemy.h"
+#include "../gui/Message.h"
+#include "../entities/Player.h"
+#include "../entities/enemies/Enemy.h"
 
 StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
     //initGameGui();
@@ -22,7 +22,7 @@ StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
     view = &level->getView();
     //view->zoom(0.5f);
     //window->setView(*view);
-    zombie = new Enemy();
+    zombie = new Enemy(sf::Vector2f(0,0));
 }
 
 StateSinglePlayer::~StateSinglePlayer() {
@@ -35,7 +35,8 @@ StateSinglePlayer::~StateSinglePlayer() {
 }
 
 void StateSinglePlayer::init() {
-    player = new Player(&game->getWindow(), game->getInputManager());
+    sf::View *view = new sf::View();
+    player = new Player(game->getWindow(), *view, game->getInputManager(), sf::Vector2f(0, 0));
     players.push_back(player);
     //enemies.push_back(zombie);
     playerPositions.push_back(sf::Vector2f(player->getPosition().x + 100, player->getPosition().y));
@@ -67,7 +68,7 @@ void StateSinglePlayer::update(float deltaTime) {
     }
 }
 
-void StateSinglePlayer::draw() {
+void StateSinglePlayer::draw(sf::RenderWindow &window) {
     level->draw(game->getWindow());
     player->draw(game->getWindow());
     zombie->draw(game->getWindow());
@@ -99,46 +100,6 @@ void StateSinglePlayer::pauseGameGui() {
 
 void StateSinglePlayer::goToShop() {
 
-}
-
-void StateSinglePlayer::onItemOneBoxMarked() {
-    // Use item 1
-}
-
-void StateSinglePlayer::onItemTwoBoxMarked() {
-    // Use item 2
-}
-
-void StateSinglePlayer::onItemThreeBoxMarked() {
-    // Use item 3
-}
-
-void StateSinglePlayer::onItemFourBoxMarked() {
-    // Use item 4
-}
-
-void StateSinglePlayer::onItemFiveBoxMarked() {
-    // Use item 5
-}
-
-void StateSinglePlayer::onItemSixBoxMarked() {
-    // Use item 6
-}
-
-void StateSinglePlayer::onAbilityOneBoxMarked() {
-    // Use ability 1
-}
-
-void StateSinglePlayer::onAbilityTwoBoxMarked() {
-    // Use ability 2
-}
-
-void StateSinglePlayer::onAbilityThreeBoxMarked() {
-    // Use ability 3
-}
-
-void StateSinglePlayer::onAbilityFourBoxMarked() {
-    // Use ability 4
 }
 
 void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets) {
@@ -174,7 +135,7 @@ void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<P
 
 void StateSinglePlayer::spawnWave() {
     for (int e = 0; e < 10 + waveNumber * 3; e++) {
-        Enemy* ny_zombie = new Enemy();
+        Enemy* ny_zombie = new Enemy(sf::Vector2f(0,0));
         enemies.push_back(ny_zombie);
         enemies.back()->sprite.setPosition(rand() % 600, rand() % 600);
     }

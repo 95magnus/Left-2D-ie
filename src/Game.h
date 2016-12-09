@@ -5,11 +5,11 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "states/StateMachine.h"
 #include "level/Level.h"
 #include "util/ResourceLoader.h"
 #include <SFGUI/SFGUI.hpp>
 #include <SFGUI/Widgets.hpp>
+#include "states/StateMachine.h"
 
 typedef std::string String;
 
@@ -47,7 +47,6 @@ protected:
     String title;
     bool running;
 
-    InputTester* inputTester;
     StateMachine* stateMachine;
     InputManager* inputManager;
 

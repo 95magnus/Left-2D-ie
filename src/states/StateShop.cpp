@@ -8,10 +8,10 @@ StateShop::~StateShop() {
 
 }
 
-void StateShop::update() {
+void StateShop::update(float deltaTime) {
 
 }
 
-void StateShop::draw() {
+void StateShop::draw(sf::RenderWindow &window) {
 
 }

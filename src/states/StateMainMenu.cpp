@@ -12,16 +12,7 @@ void StateMainMenu::update(float deltaTime) {
 
 }
 
-void StateMainMenu::resume() {
-    StateBase::resume();
-    initButtons();
-}
-
-void StateMainMenu::pause() {
-    desktop->RemoveAll();
-}
-
-void StateMainMenu::draw() {
+void StateMainMenu::draw(sf::RenderWindow &window) {
     sf::Text title("Left[2D]ie", game->getFont(), 140);
 
     // sf::Text does not contain setFillColor() on Linux?
@@ -31,6 +22,15 @@ void StateMainMenu::draw() {
     title.setPosition(275, 50);
     game->getWindow().draw(title);
 
+}
+
+void StateMainMenu::resume() {
+    StateBase::resume();
+    initButtons();
+}
+
+void StateMainMenu::pause() {
+    desktop->RemoveAll();
 }
 
 void StateMainMenu::initButtons() {
