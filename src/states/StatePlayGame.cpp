@@ -21,10 +21,6 @@ void StatePlayGame::resume() {
 }
 
 void StatePlayGame::initButtons() {
-    // Some weird reason the first button don't match with sfgDesktop in x-axis: making an invisible button
-    auto invisibleButton = sfg::Button::Create("");
-    createButton(invisibleButton, sf::Vector2f(0.f, 0.f));
-
     auto singlePlayerButton = sfg::Button::Create("Single Player");
     createButton(singlePlayerButton, sf::Vector2f(550.0f, 280.0f));
     singlePlayerButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StatePlayGame::buttonSinglePlayerClicked,this));
@@ -43,12 +39,6 @@ void StatePlayGame::draw(sf::RenderWindow &window) {
     title.setColor(sf::Color::Red);
     title.setPosition(275, 50);
 
-
-    sf::Text text("Play", game->getFont());
-    text.setColor(sf::Color::Red);
-    text.setPosition(300, 300);
-
-    game->getWindow().draw(text);
     game->getWindow().draw(title);
 }
 

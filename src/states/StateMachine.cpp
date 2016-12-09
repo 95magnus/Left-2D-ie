@@ -9,6 +9,7 @@ StateMachine::StateMachine(Game* game) {
     states[StateID::MULTI_PLAYER] = new StateMultiPlayer(game);
     states[StateID::HIGH_SCORE] = new StateHighScore(game);
     states[StateID::SETTINGS] = new StateSettings(game);
+    states[StateID::SHOP] = new StateShop(game);
 
     currentState = states[StateID::MAIN_MENU];
 

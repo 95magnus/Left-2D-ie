@@ -87,6 +87,9 @@ bool InputManager::checkForInput() {
                     case Key::Num5:
                         stateMachine->setState(StateMachine::StateID::SETTINGS);
                         break;
+                    case Key::Num6:
+                        stateMachine->setState(StateMachine::StateID::SHOP);
+                        break;
                 }
 
                 break;

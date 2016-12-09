@@ -5,26 +5,22 @@
 #include "../Game.h"
 
 #include <SFML/Graphics/Text.hpp>
-#include <SFML/OpenGL.hpp>
-#include <SFGUI/SFGUI.hpp>
-#include <SFGUI/Widgets.hpp>
-
 
 typedef std::string String;
 
-
-class StateShop {
+class StateShop : public StateBase{
 public:
-    StateShop();
+    StateShop(Game* game);
     virtual ~StateShop();
     void update(float deltaTime);
     void draw(sf::RenderWindow &window);
 
+    void resume();
+    void pause();
+
+    void initShopGui();
 
 protected:
-    sfg::Button::Ptr invisibleButton;
-    sfg::Button::Ptr backButton;
-
     sf::Font *font;
     sfg::Image::Ptr sfgImage;
     sf::Image* guiImage;

@@ -1,5 +1,6 @@
 #include <SFML/System/InputStream.hpp>
 #include "StateBase.h"
+#include "../Game.h"
 
 StateBase::StateBase(Game* game) {
     this->game = game;
@@ -19,15 +20,10 @@ void StateBase::updateDesktop() {
     timer.restart();
 }
 
-
 //// Single Player GUI
-void StateBase::createSinglePlayerWindow(sfg::Window::Ptr windowName) {
-    desktop->SetProperty("SinglePlayerWindow#singleplayerwindow", "FontSize", 150.f);
-
-    windowName->SetId("singleplayerwindow");
-    //Set window size
-    windowName->SetRequisition(sf::Vector2f(1024.f, 720.f));
-    desktop->Add(windowName);
+void StateBase::createPlayerBarLabel(sfg::Label::Ptr labelName) {
+    desktop->SetProperty("Label#label", "FontSize", 53.f);
+    labelName->SetId("label");
 }
 
 void StateBase::createBoxes(sfg::Button::Ptr boxName) {
@@ -51,16 +47,6 @@ void StateBase::createImageButton(sfg::Button::Ptr buttonName, const String &fil
     buttonName->SetImage(sfgImage);
 }
 
-void StateBase::createImage(sfg::Image::Ptr imageName, const String &filename) {
-    auto guiImage = new sf::Image();
-    ResourceLoader loader("resources/");
-    loader.loadGuiImage(guiImage, filename);
-
-    imageName->SetId("guibutton");
-    imageName->SetRequisition(sf::Vector2f(0.f, 85.0f));
-}
-
-
 //// Shop GUI
 void StateBase::createShopGUIWindow(sfg::Window::Ptr windowName){
     desktop->SetProperty("ShopWindow#shopwindow", "FontSize", 150.f);
@@ -70,7 +56,6 @@ void StateBase::createShopGUIWindow(sfg::Window::Ptr windowName){
     windowName->SetRequisition(sf::Vector2f(1024.f, 720.f));
     desktop->Add(windowName);
 }
-
 
 //// Settings GUI
 // Main menu buttons
@@ -86,7 +71,7 @@ void StateBase::createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &po
 
 // Create settings windows
 void StateBase::createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position) {
-    desktop->SetProperty("SettingsWindow#settingswindow", "FontSize", 150.f);
+    desktop->SetProperty("SettingsWindow#settingswindow", "BackgroundColor", "#696969FF");
     windowName->SetId("settingswindow");
 
     windowName->SetPosition(position);

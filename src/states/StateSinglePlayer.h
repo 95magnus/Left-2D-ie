@@ -37,6 +37,8 @@ public:
 
     void checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets);
 
+    void createImage(sfg::Image::Ptr image, const String &filename);
+
 protected:
     //InputManager* inputManager;
 
@@ -55,6 +57,27 @@ protected:
 
 
     Message* mb;
+
+private:
+    sf::RectangleShape* coinsContainer;
+    sf::RectangleShape* hpGreenBar;
+    sf::RectangleShape* hpRedBar;
+
+    sf::Font* font;
+
+    sf::Text* score;
+    sf::Text* coins;
+
+    sfg::Image::Ptr hpBar;
+    sfg::Image::Ptr coinsBar;
+    sfg::Image::Ptr playerBar;
+
+    sfg::Label::Ptr zombieLeft;
+
+    sfg::Button::Ptr itemOne;
+    sfg::Button::Ptr itemTwo;
+
+    bool initialized = false;
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H

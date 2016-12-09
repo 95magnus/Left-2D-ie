@@ -21,7 +21,6 @@ void StateMainMenu::draw(sf::RenderWindow &window) {
 
     title.setPosition(275, 50);
     game->getWindow().draw(title);
-
 }
 
 void StateMainMenu::resume() {
@@ -35,9 +34,6 @@ void StateMainMenu::pause() {
 
 void StateMainMenu::initButtons() {
     desktop->SetProperty("*", "FontName", "resources/fonts/feast-of-flesh-bb.italic.ttf");
-    // Some weird reason the first button don't match with sfgDesktop in x-axis: making an invisible button
-    auto invisibleButton = sfg::Button::Create("");
-    createButton(invisibleButton, sf::Vector2f(0.f, 0.f));
 
     auto playButton = sfg::Button::Create("Play");
     createButton(playButton, sf::Vector2f(670.0f, 240.0f));
