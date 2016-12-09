@@ -33,22 +33,22 @@ set(SOURCE_FILES src/main.cpp
         src/util/VectorUtil.h
         src/util/ResourceLoader.cpp
         src/util/ResourceLoader.h
-        src/modules/Player.cpp
-        src/modules/Player.h
-        src/modules/zombie.cpp
-        src/modules/zombie.h
+        src/entities/Player.cpp
+        src/entities/Player.h
+        src/entities/enemies/zombie.cpp
+        src/entities/enemies/zombie.h
         src/states/StateShop.cpp
         src/states/StateShop.h
-        src/modules/Message.cpp
-        src/modules/Message.h
-        src/modules/Weapon.cpp
-        src/modules/Weapon.h
-        src/modules/Projectile.cpp
-        src/modules/Projectile.h
-        src/modules/Enemy.cpp
-        src/modules/Enemy.h
-        src/modules/NormalZombie.cpp
-        src/modules/NormalZombie.h
+        src/gui/Message.cpp
+        src/gui/Message.h
+        src/entities/Weapon.cpp
+        src/entities/Weapon.h
+        src/entities/Projectile.cpp
+        src/entities/Projectile.h
+        src/entities/enemies/Enemy.cpp
+        src/entities/enemies/Enemy.h
+        src/entities/enemies/NormalZombie.cpp
+        src/entities/enemies/NormalZombie.h
         src/level/Level.cpp
         src/level/Level.h
         src/level/tiles/TileBase.h
@@ -56,7 +56,12 @@ set(SOURCE_FILES src/main.cpp
         src/level/tiles/TileStone.cpp
         src/level/tiles/TileStone.h
         src/level/tiles/TileDirt.cpp
-        src/level/tiles/TileDirt.h )
+        src/level/tiles/TileDirt.h
+        src/world/World.cpp
+        src/world/World.h
+        src/world/Camera.cpp
+        src/world/Camera.h
+        src/entities/Entity.h)
 
 find_package (OpenGL REQUIRED)
 add_executable(Left2Die ${SOURCE_FILES})
