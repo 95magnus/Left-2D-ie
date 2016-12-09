@@ -53,6 +53,7 @@ void StateSinglePlayer::draw() {
     mb->draw("Wave x - Good luck", 8, game->getWindow());
     player->draw(game->getWindow());
     zombie->draw(game->getWindow());
+    game->getWindow().draw(*hpGreenBar);
 }
 
 void StateSinglePlayer::initGameGui() {
@@ -61,18 +62,20 @@ void StateSinglePlayer::initGameGui() {
     auto singlePlayerWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
     createSinglePlayerWindow(singlePlayerWindow);
 
-    hpBar = sfg::Image::Create();
-    createImage(hpBar, "resources/gui/fiveoffivehealth.png");
-    hpBar->SetRequisition(sf::Vector2f(0.f,720.f));
+    auto box = sfg::Box::Create(sfg::Box::Orientation::HORIZONTAL);
+    auto fixed = sfg::Fixed::Create();
 
-    itemOne = sfg::Button::Create();
-    createBox(itemOne, "resources/gui/ak.png");
-    itemOne->SetId("itemOne");
-    itemOne->SetPosition(sf::Vector2f(0.0f, 200.0f));
-    itemOne->SetRequisition(sf::Vector2f(0.f, 0.f));
+    hpBar = sfg::Image::Create();
+    createImage(hpBar, "resources/gui/healthbar.png");
+    hpBar->SetRequisition(sf::Vector2f(game->getWindow().getSize().x, game->getWindow().getSize().y));
+
+    hpGreenBar = new sf::RectangleShape(sf::Vector2f(154.0f, 16.f));
+    hpGreenBar->setFillColor(sf::Color::Green);
+    hpGreenBar->setPosition(91.f, 34.f);
+
+    // TODO: ta hp input fra spilleren
 
     singlePlayerWindow->Add(hpBar);
-    desktop->Add(hpBar);
 }
 
 void StateSinglePlayer::createImage(sfg::Image::Ptr image, const String &filename) {

@@ -1,5 +1,6 @@
 #include <SFML/System/InputStream.hpp>
 #include "StateBase.h"
+#include "../Game.h"
 
 StateBase::StateBase(Game* game) {
     this->game = game;
@@ -19,14 +20,12 @@ void StateBase::updateDesktop() {
     timer.restart();
 }
 
-
 //// Single Player GUI
 void StateBase::createSinglePlayerWindow(sfg::Window::Ptr windowName) {
     desktop->SetProperty("SinglePlayerWindow#singleplayerwindow", "FontSize", 150.f);
 
     windowName->SetId("singleplayerwindow");
-    //Set window size
-    windowName->SetRequisition(sf::Vector2f(1024.f, 720.f));
+    windowName->SetRequisition(sf::Vector2f(game->getWindow().getSize().x, game->getWindow().getSize().y));
     desktop->Add(windowName);
 }
 
@@ -35,7 +34,6 @@ void StateBase::createBoxes(sfg::Button::Ptr boxName) {
     boxName->SetRequisition(sf::Vector2f(20.0f, 20.0f));
     boxName->SetId("box");
 }
-
 
 void StateBase::createImageButton(sfg::Button::Ptr buttonName, const String &filename) {
     desktop->SetProperty("GuiButton#guibutton", "FontSize", 70.f);
@@ -51,7 +49,6 @@ void StateBase::createImageButton(sfg::Button::Ptr buttonName, const String &fil
     buttonName->SetImage(sfgImage);
 }
 
-
 //// Shop GUI
 void StateBase::createShopGUIWindow(sfg::Window::Ptr windowName){
     desktop->SetProperty("ShopWindow#shopwindow", "FontSize", 150.f);
@@ -61,7 +58,6 @@ void StateBase::createShopGUIWindow(sfg::Window::Ptr windowName){
     windowName->SetRequisition(sf::Vector2f(1024.f, 720.f));
     desktop->Add(windowName);
 }
-
 
 //// Settings GUI
 // Main menu buttons

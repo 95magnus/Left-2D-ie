@@ -60,6 +60,9 @@ protected:
 
 private:
     sfg::Image::Ptr hpBar;
+
+    sf::RectangleShape* hpGreenBar;
+    sf::RectangleShape hpRedBar;
     sfg::Button::Ptr itemOne;
     sfg::Button::Ptr itemTwo;
     sfg::Button::Ptr itemThree;
