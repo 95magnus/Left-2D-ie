@@ -57,9 +57,9 @@ Box:PRELIGHT
     BorderWidth: 1;
 }
 
-#zombiecounter
+#zombielabel
 {
-    FontSize: 60;
+    FontSize: 60px;
 }
 
 /*

@@ -21,11 +21,17 @@ void StateBase::updateDesktop() {
 }
 
 //// Single Player GUI
+void StateBase::createPlayerBarLabel(sfg::Label::Ptr labelName) {
+    desktop->SetProperty("Label#label", "FontSize", 53.f);
+    labelName->SetId("label");
+}
+
 void StateBase::createBoxes(sfg::Button::Ptr boxName) {
     desktop->SetProperty("Box#box", "BorderWidth", 3.f);
     boxName->SetRequisition(sf::Vector2f(20.0f, 20.0f));
     boxName->SetId("box");
 }
+
 
 void StateBase::createImageButton(sfg::Button::Ptr buttonName, const String &filename) {
     desktop->SetProperty("GuiButton#guibutton", "FontSize", 70.f);
