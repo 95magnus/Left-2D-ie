@@ -25,7 +25,6 @@ public:
     void updateDesktop();
 
     //// Single Player GUI
-    void createSinglePlayerWindow(sfg::Window::Ptr windowName);
     void createBoxes(sfg::Button::Ptr boxName);
     void createImageButton(sfg::Button::Ptr buttonName, const String &filename);
 

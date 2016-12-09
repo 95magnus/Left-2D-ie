@@ -44,7 +44,6 @@ public:
     void onAbilityFourBoxMarked();
 
     void createImage(sfg::Image::Ptr image, const String &filename);
-    void createBox(sfg::Button::Ptr boxName, const String &filename);
 
 protected:
     //InputManager* inputManager;
@@ -59,13 +58,23 @@ protected:
     Message* mb;
 
 private:
-    sfg::Image::Ptr hpBar;
-
+    sf::RectangleShape* coinsContainer;
     sf::RectangleShape* hpGreenBar;
-    sf::RectangleShape hpRedBar;
+    sf::RectangleShape* hpRedBar;
+
+    sf::Font* font;
+
+    sf::Text* score;
+    sf::Text* coins;
+
+    sfg::Image::Ptr hpBar;
+    sfg::Image::Ptr coinsBar;
+    sfg::Image::Ptr playerBar;
+
+    sfg::Label::Ptr zombieLeft;
+
     sfg::Button::Ptr itemOne;
     sfg::Button::Ptr itemTwo;
-    sfg::Button::Ptr itemThree;
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H

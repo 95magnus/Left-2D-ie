@@ -4,7 +4,6 @@
 #include "../modules/Enemy.h"
 
 StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
-    //initGameGui();
     level = new Level(game->getWindow().getSize(), "testLevel.l2d");
     mb = new Message(game->getWindow());
 
@@ -36,6 +35,10 @@ void StateSinglePlayer::resume() {
 }
 
 void StateSinglePlayer::pause() {
+    delete score;
+    delete coinsContainer;
+    delete coins;
+    delete hpGreenBar;
     desktop->RemoveAll();
 }
 
@@ -53,29 +56,69 @@ void StateSinglePlayer::draw() {
     mb->draw("Wave x - Good luck", 8, game->getWindow());
     player->draw(game->getWindow());
     zombie->draw(game->getWindow());
+    game->getWindow().draw(*score);
     game->getWindow().draw(*hpGreenBar);
+    game->getWindow().draw(*coinsContainer);
+    game->getWindow().draw(*coins);
 }
 
 void StateSinglePlayer::initGameGui() {
-    // Main game window
     desktop->SetProperty("*", "FontName", "resources/fonts/feast-of-flesh-bb.italic.ttf");
-    auto singlePlayerWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
-    createSinglePlayerWindow(singlePlayerWindow);
 
-    auto box = sfg::Box::Create(sfg::Box::Orientation::HORIZONTAL);
-    auto fixed = sfg::Fixed::Create();
+    font = new sf::Font();
+    font->loadFromFile("resources/fonts/feast-of-flesh-bb.italic.ttf");
 
+    // Player bar
+    playerBar = sfg::Image::Create();
+    createImage(playerBar, "resources/gui/playerbar.png");
+    playerBar->SetRequisition(sf::Vector2f(game->getWindowSize()));
+    playerBar->SetPosition(sf::Vector2f(10.f, 615.f));
+
+    // Zombie counter label
+    zombieLeft = sfg::Label::Create("00");
+    zombieLeft->SetId("zombiecounter");
+    zombieLeft->SetPosition(sf::Vector2f(150.f, 615.f));
+
+    // Scoreboard
+    score = new sf::Text("000000", *font, 60);
+    score->setFillColor(sf::Color::White);
+    score->setPosition(sf::Vector2f(400.0f, 10.f));
+    score->setScale(sf::Vector2f(1.0f, 1.0f));
+
+    // Coins
+    coinsBar = sfg::Image::Create();
+    createImage(coinsBar, "resources/gui/coins.png");
+    coinsBar->SetRequisition(sf::Vector2f(game->getWindowSize()));
+    coinsBar->SetPosition(sf::Vector2f(800.f, 10.f));
+
+    // Transparent container
+    coinsContainer = new sf::RectangleShape(sf::Vector2f(219.0f, 66.f));
+    coinsContainer->setFillColor(sf::Color(0,0,0,0));
+    coinsContainer->setPosition(799.f, 7.f);
+
+    // Coins counter
+    coins = new sf::Text("00000", *font, 40);
+    coins->setFillColor(sf::Color::White);
+    coins->setPosition(880.f, 15.f);
+    coins->setScale(sf::Vector2f(1.0f, 1.0f));
+
+    // Health bar
     hpBar = sfg::Image::Create();
     createImage(hpBar, "resources/gui/healthbar.png");
-    hpBar->SetRequisition(sf::Vector2f(game->getWindow().getSize().x, game->getWindow().getSize().y));
+    hpBar->SetRequisition(sf::Vector2f(game->getWindowSize()));
+    hpBar->SetPosition(sf::Vector2f(10.f,10.f));
 
+    // Health
     hpGreenBar = new sf::RectangleShape(sf::Vector2f(154.0f, 16.f));
     hpGreenBar->setFillColor(sf::Color::Green);
-    hpGreenBar->setPosition(91.f, 34.f);
+    hpGreenBar->setPosition(91.f, 33.f);
 
     // TODO: ta hp input fra spilleren
 
-    singlePlayerWindow->Add(hpBar);
+    desktop->Add(zombieLeft);
+    desktop->Add(playerBar);
+    desktop->Add(coinsBar);
+    desktop->Add(hpBar);
 }
 
 void StateSinglePlayer::createImage(sfg::Image::Ptr image, const String &filename) {
@@ -85,26 +128,15 @@ void StateSinglePlayer::createImage(sfg::Image::Ptr image, const String &filenam
     }
 }
 
-void StateSinglePlayer::createBox(sfg::Button::Ptr boxName, const String &filename){
-    auto temp = new sf::Image;
-    auto boxImage = sfg::Image::Create();
-
-    if(temp->loadFromFile(filename)){
-        boxImage->SetImage(*temp);
-    }
-
-    boxName->SetImage(boxImage);
-    boxName->SetZOrder(-1);
-    desktop->Add(boxName);
-    desktop->SetProperty("Box#box", "BorderColor", "#00000000");
-};
-
+/// Pause (P)
 void StateSinglePlayer::pauseGameGui() {
 
 }
 
+/// Round Clear
 void StateSinglePlayer::goToShop() {
-
+    // Timer 5000ms (wait)
+    game->getStateMachine().setState(StateMachine::StateID::SHOP);
 }
 
 void StateSinglePlayer::onItemOneBoxMarked() {

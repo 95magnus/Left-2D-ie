@@ -11,6 +11,7 @@
 #include "StateMultiPlayer.h"
 #include "StateHighScore.h"
 #include "StateSettings.h"
+#include "StateShop.h"
 
 class Game;
 class StateBase;
@@ -23,7 +24,8 @@ public:
         SINGLE_PLAYER,
         MULTI_PLAYER,
         HIGH_SCORE,
-        SETTINGS
+        SETTINGS,
+        SHOP
     };
 
     StateMachine(Game* game);

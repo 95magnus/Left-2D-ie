@@ -21,14 +21,6 @@ void StateBase::updateDesktop() {
 }
 
 //// Single Player GUI
-void StateBase::createSinglePlayerWindow(sfg::Window::Ptr windowName) {
-    desktop->SetProperty("SinglePlayerWindow#singleplayerwindow", "FontSize", 150.f);
-
-    windowName->SetId("singleplayerwindow");
-    windowName->SetRequisition(sf::Vector2f(game->getWindow().getSize().x, game->getWindow().getSize().y));
-    desktop->Add(windowName);
-}
-
 void StateBase::createBoxes(sfg::Button::Ptr boxName) {
     desktop->SetProperty("Box#box", "BorderWidth", 3.f);
     boxName->SetRequisition(sf::Vector2f(20.0f, 20.0f));

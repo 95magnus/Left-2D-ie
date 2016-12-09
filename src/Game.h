@@ -41,6 +41,10 @@ public:
         return sf::Vector2f(getWindow().getSize().x/2, getWindow().getSize().y/2);
     };
 
+    sf::Vector2f getWindowSize() const {
+        return sf::Vector2f(getWindow().getSize().x, getWindow().getSize().y);
+    };
+
 protected:
     const unsigned int updatesPerSecond = 60;
     unsigned int width, height;

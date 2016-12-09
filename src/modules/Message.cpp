@@ -17,7 +17,7 @@ Message::Message(sf::RenderWindow &window) {
     message.setOrigin(message.getLocalBounds().left / 2, message.getLocalBounds().top);
     displayed = false;
 
-    message.setPosition(10, window.getSize().y - message.getLocalBounds().height - 40);
+    message.setPosition(550, window.getSize().y - message.getLocalBounds().height - 40);
 
 }
 
