@@ -122,8 +122,8 @@ void StateSinglePlayer::initGameGui() {
     // TODO: Get health input from player
 
     // Inventory
-    
-    desktop->Add(itemOne);
+
+   // desktop->Add(itemOne);
     desktop->Add(playerBar);
     desktop->Add(zombieLeft);
     desktop->Add(coinsBar);
