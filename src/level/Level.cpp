@@ -193,7 +193,7 @@ void Level::setMapOffset(sf::Vector2f offset) {
 
 void Level::translateMap(sf::Vector2f offset) {
     //if (xOffs + offset.x > 0 && xOffs + offset.x < windowSize.x)
-        xOffs += offset.x;
+    xOffs += offset.x;
 
     yOffs += offset.y;
 }

@@ -23,14 +23,14 @@ public:
     sf::Vector2f move(float deltaTime);
 
     void scale(float x);
-    void animationCycler(sf::IntRect dir[5]);
+    void animationCycler(std::vector<sf::IntRect> dir);
 
     void update(float deltaTime);
     void draw(sf::RenderWindow &window);
 
     void death();
     void hit();
-    Player(sf::RenderWindow &window, InputManager &inputManager);
+    Player(sf::RenderWindow* window, InputManager &inputManager);
     ~Player();
 
     void mousePressed(int x, int y, sf::Mouse::Button button);
@@ -55,6 +55,7 @@ public:
     void setArmor(int armor);
     int getKills() const;
     void setKills(int kills);
+    std::vector<Projectile> *getBullets();
 
 private:
     //Components
@@ -67,7 +68,7 @@ private:
     float speed = 175.0f;
     int x, y;
 
-    sf::RenderWindow &window;
+    sf::RenderWindow* window;
 
     // Model
     sf::RectangleShape sprite;
@@ -92,32 +93,31 @@ private:
 
     // Animation rotation arrays, worst implementation, please forgive me
 
-    sf::IntRect left[5] = {{970, 635, 240, 630},
+    std::vector<sf::IntRect> left = {{970, 635, 240, 630},
                            {0, 0, 480, 630},
                            {0, 1270, 315, 630},
                            {485, 0, 480, 630},
                            {970, 0, 480, 630}};
 
-    sf::IntRect right[5] = {{1215, 635, 240, 630},
+    std::vector<sf::IntRect> right = {{1215, 635, 240, 630},
                             {1455, 0, 480, 630},
                             {320, 1270, 315, 630},
                             {0, 635, 480, 630},
                             {485, 635, 480, 630}};
 
-    sf::IntRect up[5] = {{1195, 1270, 180, 630},
+    std::vector<sf::IntRect> up = {{1195, 1270, 180, 630},
                          {1645, 635, 480, 630},
                          {1645, 635, 480, 630},
                          {1010, 1270, 180, 630},
                          {1010, 1270, 180, 630}};
 
-    sf::IntRect down[5] = {{1460, 635, 180 ,630},
-                           {640, 1270, 180, 630},
-                           {825, 1270, 180, 630},
-                           {825, 1270, 180, 630},
-                           {640, 1270, 180, 630}};
+    std::vector<sf::IntRect> down = {{1460, 635, 180 ,630},
+                            {640, 1270, 180, 630},
+                            {825, 1270, 180, 630},
+                            {825, 1270, 180, 630},
+                            {640, 1270, 180, 630}};;
 
-    std::map<Direction, sf::IntRect[5]> animationDirections;
-
+    std::map<Direction, std::vector<sf::IntRect>> animationDirections;
 
     // Inventory
     // TODO: 3 plasser o "bagen" til våpenobjekter

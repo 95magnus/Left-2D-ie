@@ -78,6 +78,10 @@ public:
 
     void setRndY(float rndY);
 
+    const sf::RectangleShape &getHitbox() const;
+
+    void setHitbox(const sf::RectangleShape &hitbox);
+
 private:
     sf::RectangleShape sprite;
     sf::RectangleShape hitbox;

@@ -10,6 +10,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "Player.h"
 
 class Player;
 
@@ -22,13 +23,33 @@ public:
     sf::RectangleShape collisionBox;
     virtual ~Enemy();
     Enemy();
-    void update(std::vector<Player*> players, float deltaTime);
+    void update(std::vector<sf::Vector2f> players, float deltaTime);
     void draw(sf::RenderWindow &window);
+    void translate(sf::Vector2f offset);
+    void animationCycler(float interval);
+    void getHit(int damage);
+    sf::IntRect rect[3] = {{335, 0, 300, 600},
+                                     {640, 0, 300, 600},
+                                     {0, 0, 330, 600}};
+
+    int getHealth() const;
+
+    void setHealth(int health);
+
 private:
+    sf::RectangleShape healthBar;
+    sf::RectangleShape hpBarBG;
+    sf::Clock cycleClock;
     sf::Vector2f target;
     int health;
+    int maxHealth;
     int damage;
     int speed;
+    int xOffs, yOffs;
+    int rewardPoints;
+    bool goingRight;
+    int hit;
+    sf::Vector2f prev;
 };
 
 #endif //LEFT2DIE_ENEMY_H

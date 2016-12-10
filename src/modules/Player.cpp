@@ -6,7 +6,9 @@
 #include "../input/InputManager.h"
 
 // Constructor
-Player::Player(sf::RenderWindow &window, InputManager &inputManager) : PlayerController(inputManager), window(window) {
+Player::Player(sf::RenderWindow* window, InputManager &inputManager) : PlayerController(inputManager) {
+
+    this->window = window;
     health = 100;
     armor = 0;
     kills = 0;
@@ -15,10 +17,10 @@ Player::Player(sf::RenderWindow &window, InputManager &inputManager) : PlayerCon
     currentDir = Right;
     sprite.setSize(sf::Vector2f(55, 55));
     scaleFactor = 0.25;
-    xy = sf::Vector2f(window.getSize().x/2, window.getSize().y/2);
+    xy = sf::Vector2f(window->getSize().x/2, window->getSize().y/2);
     sprite.setPosition(xy);
 
-    currentWeapon = new Weapon(window, 0, 4, sprite.getPosition().x, sprite.getPosition().y);
+    currentWeapon = new Weapon(*window, 0, 6, sprite.getPosition().x - 5, sprite.getPosition().y + 10);
 
     texture.setSmooth(false);
     texture.setRepeated(false);
@@ -94,6 +96,30 @@ void Player::update(float deltaTime) {
 
 
 void Player::draw(sf::RenderWindow &window) {
+
+    if (!moving) {
+        if (currentDir == Right) {
+            sprite.setSize(sf::Vector2f(right[0].width*scaleFactor, right[0].height*scaleFactor));
+            sprite.setTextureRect(right[0]);
+            sprite.setPosition(xy.x + 15*scaleFactor, xy.y);
+        }
+        if (currentDir == Left) {
+            sprite.setSize(sf::Vector2f(left[0].width*scaleFactor, left[0].height*scaleFactor));
+            sprite.setTextureRect(left[0]);
+            sprite.setPosition(xy.x + 15*scaleFactor, xy.y);
+        }
+        if (currentDir == Up) {
+            sprite.setSize(sf::Vector2f(up[0].width*scaleFactor, up[0].height*scaleFactor));
+            sprite.setTextureRect(up[0]);
+            sprite.setPosition(xy.x + 15*scaleFactor, xy.y);
+        }
+        if (currentDir == Down) {
+            sprite.setSize(sf::Vector2f(down[0].width*scaleFactor, down[0].height*scaleFactor));
+            sprite.setTextureRect(down[0]);
+            sprite.setPosition(xy.x + 15*scaleFactor, xy.y);
+        }
+    }
+
     window.draw(shadow);
     window.draw(sprite);
     window.draw(hitbox);
@@ -119,8 +145,8 @@ sf::Vector2f Player::move(float deltaTime) {
         else
             currentDir = (moveDirection.y < 0) ? Up : Down;
 
-        animationCycler(animationDirections[currentDir]);
         moving = true;
+        animationCycler(animationDirections[currentDir]);
 
         return moveDirection * speed * deltaTime;
     } else {
@@ -140,7 +166,7 @@ void Player::scale(float x) {
     shadow.move(0, -50*x);
 }
 
-void Player::animationCycler(sf::IntRect dir[5]) {
+void Player::animationCycler(std::vector<sf::IntRect> dir) {
 
     /* -- ¡IMPORTANT! --
      * I wrote this function to cycle through the animation frames
@@ -174,6 +200,7 @@ void Player::animationCycler(sf::IntRect dir[5]) {
             if (clock.getElapsedTime().asSeconds() < 0.8*0.66) {
                 sprite.setSize(sf::Vector2f(dir[2].width*scaleFactor, dir[2].height*scaleFactor));
                 sprite.setTextureRect(dir[2]);
+                sprite.setPosition(xy.x + 12*scaleFactor, xy.y);
             }
             if (clock.getElapsedTime().asSeconds() < 0.6*0.66) {
                 sprite.setSize(sf::Vector2f(dir[3].width*scaleFactor, dir[3].height*scaleFactor));
@@ -271,7 +298,7 @@ void Player::animationCycler(sf::IntRect dir[5]) {
             }
         }
 
-    } else {
+    } if (!moving) {
         sprite.setSize(sf::Vector2f(dir[0].width*scaleFactor, dir[0].height*scaleFactor));
         sprite.setTextureRect(dir[0]);
         sprite.setPosition(xy.x + 15*scaleFactor, xy.y);
@@ -358,4 +385,8 @@ Player::Direction Player::getCurrentDir() const {
 
 void Player::setCurrentDir(Player::Direction currentDir) {
     Player::currentDir = currentDir;
+}
+
+std::vector<Projectile> *Player::getBullets() {
+    return &currentWeapon->getBullets();
 }
