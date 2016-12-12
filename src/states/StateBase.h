@@ -34,6 +34,7 @@ public:
 
     //// Settings GUI
     virtual void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);
+    virtual void createToggleButton(sfg::ToggleButton::Ptr buttonName, const sf::Vector2f &position);
     virtual void createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position);
     virtual void createSettingsButton(sfg::Button::Ptr buttonName);
     virtual void createSoundGUIButton(sfg::CheckButton::Ptr checkButtonName);

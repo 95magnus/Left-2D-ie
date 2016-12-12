@@ -5,7 +5,7 @@
 World::World(Game &game, String &levelFileName) : game(game) {
     view = new sf::View(sf::FloatRect(0, 0, game.getWindow().getSize().x, game.getWindow().getSize().y));
     level = new Level(game.getWindow().getSize(), levelFileName);
-    playerSpawn = sf::Vector2f(100, 100);
+    playerSpawn = sf::Vector2f(32 * 10, 32 * 10);
     player =  new Player(game.getWindow(), *view, game.getInputManager(), playerSpawn);
     playerPos = player->getWorldPos();
 
@@ -13,12 +13,12 @@ World::World(Game &game, String &levelFileName) : game(game) {
     // Suggested by CLion, works for some reason:
     entities.push_back((Entity* &&) player);
 
-    for (int i = 0; i < 10; i++)
-        entities.push_back((Entity*) new Enemy(sf::Vector2f(
-                (((float) rand() / RAND_MAX) + 1) * 400,
-                (((float) rand() / RAND_MAX) + 1) * 400)
-                           )
-        );
+    for (int i = 0; i < 10; i++) {
+        float randX = (float) (rand() / RAND_MAX) + 1 + i;
+        float randY = (float) (rand() / RAND_MAX) + 1 + i;
+
+        entities.push_back((Entity*) new Enemy(sf::Vector2f(randX * 400, randY * 400)));
+    }
 }
 
 World::~World() {

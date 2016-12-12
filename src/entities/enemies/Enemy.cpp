@@ -94,7 +94,7 @@ void Enemy::update(std::vector<sf::Vector2f> players, float deltaTime) {
     }*/
 
     //target = sf::Vector2f(600, 500);
-    if (target.x == 0 && target.y == 0)
+    if (worldPos == target)
         return;
 
     // Under får zombien en retning å gå, den vil bevege seg likt som prosjektilene

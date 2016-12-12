@@ -69,6 +69,16 @@ void StateBase::createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &po
     desktop->Add(buttonName);
 }
 
+void StateBase::createToggleButton(sfg::ToggleButton::Ptr buttonName, const sf::Vector2f &position) {
+    desktop->SetProperty("ToggleButton#toggleButton", "FontSize", 70.f);
+
+    buttonName->SetId("toggleButton");
+    buttonName->SetPosition(position);
+    buttonName->SetRequisition(sf::Vector2f(0.f, 85.f));
+
+    desktop->Add(buttonName);
+}
+
 // Create settings windows
 void StateBase::createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position) {
     desktop->SetProperty("SettingsWindow#settingswindow", "BackgroundColor", "#696969FF");

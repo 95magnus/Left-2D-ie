@@ -10,6 +10,9 @@ InputManager::InputManager(sf::RenderWindow* window) {
 
     setDefaultMappings();
     //initActionStates();
+
+    if (sf::Joystick::isConnected(0))
+        playWithJoystick = true;
 }
 
 InputManager::~InputManager() {

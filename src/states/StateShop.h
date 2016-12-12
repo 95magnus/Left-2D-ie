@@ -8,7 +8,7 @@
 
 typedef std::string String;
 
-class StateShop : public StateBase{
+class StateShop : public StateBase {
 public:
     StateShop(Game* game);
     virtual ~StateShop();
