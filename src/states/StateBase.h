@@ -26,11 +26,11 @@ public:
 
     //// Single Player GUI
     void createPlayerBarLabel(sfg::Label::Ptr labelName);
-    void createBoxes(sfg::Button::Ptr boxName);
-    void createImageButton(sfg::Button::Ptr buttonName, const String &filename);
+    void createImageButton(sfg::ToggleButton::Ptr buttonName, const String &filename);
 
     //// Shop GUI
     void createShopGUIWindow(sfg::Window::Ptr windowName);
+    void createShopButtonImage(sfg::Button::Ptr buttonName, const String &filename);
 
     //// Settings GUI
     virtual void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);

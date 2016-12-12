@@ -46,15 +46,28 @@ Button:ACTIVE
 ------------------------------------------Single Player-----------------------------------------------------------------
 */
 
-Box:PRELIGHT
+itemOne
+{
+    BackgroundColor: #FFFFFFFF;
+}
+
+itemOne:PRELIGHT
+{
+    BorderColor: #00000000;
+    BorderColor: #00000000;
+    BorderWidth: 5;
+}
+
+itemOne:ACTIVE
 {
     BorderColor: #FFFFFFFF;
+    BorderWidth: 4;
 }
 
 #itemOne
 {
-    BorderColor: #00000000;
-    BorderWidth: 1;
+    BorderColor: #FFFFFFFF;
+    BorderWidth: 5;
 }
 
 #zombielabel
@@ -66,8 +79,17 @@ Box:PRELIGHT
 ------------------------------------------Shop--------------------------------------------------------------------------
 */
 
+#shopButton
+{
+    FontSize: 56;
+    BorderColor: #FFFFFFFF;
+}
 
-
+#shopwindow
+{
+    BorderWidth: 2;
+    BorderColor: #3F3F3F3F;
+}
 
 /*
 ------------------------------------------Settings----------------------------------------------------------------------

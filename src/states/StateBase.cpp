@@ -26,22 +26,25 @@ void StateBase::createPlayerBarLabel(sfg::Label::Ptr labelName) {
     labelName->SetId("label");
 }
 
-void StateBase::createBoxes(sfg::Button::Ptr boxName) {
-    desktop->SetProperty("Box#box", "BorderWidth", 3.f);
-    boxName->SetRequisition(sf::Vector2f(20.0f, 20.0f));
-    boxName->SetId("box");
-}
-
-
-void StateBase::createImageButton(sfg::Button::Ptr buttonName, const String &filename) {
-    desktop->SetProperty("GuiButton#guibutton", "FontSize", 70.f);
+void StateBase::createImageButton(sfg::ToggleButton::Ptr buttonName, const String &filename) {
+    desktop->SetProperties("GuiButton#guibutton {"
+                                   "	BorderColor: #FFFFFFFF;"
+                                   "}"
+                                   "GuiButton#guibutton:PRELIGHT {"
+                                   "	BorderColor: #FFFFFFFF;"
+                                   "    BorderWidth: 5;"
+                                   "}"
+                                   "GuiButton#guibutton:ACTIVE{"
+                                   "	BorderColor: #FFFFFFFF"
+                                   "	BorderWidth: 10;"
+                                   "}"
+    );
 
     auto guiImage = new sf::Image();
     ResourceLoader loader("resources/");
     loader.loadGuiImage(guiImage, filename);
 
-    buttonName->SetId("guibutton");
-    buttonName->SetRequisition(sf::Vector2f(0.f, 85.0f));
+//    buttonName->SetId("guibutton");
 
     auto sfgImage = sfg::Image::Create(*guiImage);
     buttonName->SetImage(sfgImage);
@@ -49,12 +52,36 @@ void StateBase::createImageButton(sfg::Button::Ptr buttonName, const String &fil
 
 //// Shop GUI
 void StateBase::createShopGUIWindow(sfg::Window::Ptr windowName){
-    desktop->SetProperty("ShopWindow#shopwindow", "FontSize", 150.f);
+    desktop->SetProperty("ShopWindow#shopwindow", "BackgroundColor", "#696969FF");
 
     windowName->SetId("shopwindow");
     //Set window size
     windowName->SetRequisition(sf::Vector2f(1024.f, 720.f));
     desktop->Add(windowName);
+}
+
+void StateBase::createShopButtonImage(sfg::Button::Ptr buttonName, const String &filename) {
+    desktop->SetProperties("GuiButton#guibutton {"
+                                   "	BorderColor: #FFFFFFFF;"
+                                   "}"
+                                   "GuiButton#guibutton:PRELIGHT {"
+                                   "	BorderColor: #FFFFFFFF;"
+                                   "    BorderWidth: 5;"
+                                   "}"
+                                   "GuiButton#guibutton:ACTIVE{"
+                                   "	BorderColor: #FFFFFFFF"
+                                   "	BorderWidth: 10;"
+                                   "}"
+    );
+
+    auto guiImage = new sf::Image();
+    ResourceLoader loader("resources/");
+    loader.loadGuiImage(guiImage, filename);
+
+//    buttonName->SetId("guibutton");
+
+    auto sfgImage = sfg::Image::Create(*guiImage);
+    buttonName->SetImage(sfgImage);
 }
 
 //// Settings GUI

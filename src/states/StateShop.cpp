@@ -8,10 +8,6 @@ StateShop::~StateShop() {
 
 }
 
-void StateShop::update(float deltaTime) {
-
-}
-
 void StateShop::pause() {
     desktop->RemoveAll();
 }
@@ -21,8 +17,13 @@ void StateShop::resume() {
     initShopGui();
 }
 
+void StateShop::update(float deltaTime) {
+
+}
+
 void StateShop::draw(sf::RenderWindow &window) {
-    sf::Text title("Left[2D]ie", game->getFont(), 140);
+    sf::Text title("SHOP", game->getFont(), 140);
+
     title.setColor(sf::Color::Red);
     title.setPosition(275, 50);
 
@@ -30,5 +31,19 @@ void StateShop::draw(sf::RenderWindow &window) {
 }
 
 void StateShop::initShopGui() {
+    desktop->SetProperty("*", "FontName", "resources/fonts/feast-of-flesh-bb.italic.ttf");
 
+    nextButton = sfg::Button::Create();
+    createShopButtonImage(nextButton, "right_arrow.png");
+    nextButton->SetPosition(sf::Vector2f(0.f, 0.f));
+    nextButton->SetRequisition(sf::Vector2f(0.f,0.f));
+
+    desktop->Add(nextButton);
+}
+
+void StateShop::createImage(sfg::Image::Ptr image, const String &filename) {
+    auto temp = new sf::Image;
+    if(temp->loadFromFile(filename)){
+        image->SetImage(*temp);
+    }
 }

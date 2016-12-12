@@ -39,6 +39,13 @@ public:
 
     void createImage(sfg::Image::Ptr image, const String &filename);
 
+    void gameOver();
+
+    void onItemOneBoxMarked();
+    void onItemTwoBoxMarked();
+
+    void onAbilityOneBoxMarked();
+
 protected:
     //InputManager* inputManager;
 
@@ -71,13 +78,16 @@ private:
     sfg::Image::Ptr hpBar;
     sfg::Image::Ptr coinsBar;
     sfg::Image::Ptr playerBar;
+    sfg::Image::Ptr inventoryContainer;
 
     sfg::Label::Ptr zombieLeft;
 
-    sfg::Button::Ptr itemOne;
+    sfg::ToggleButton::Ptr itemOne;
     sfg::Button::Ptr itemTwo;
 
     bool initialized = false;
+
+    sfg::Image::Ptr gameover;
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H
