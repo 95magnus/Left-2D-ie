@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "StateSinglePlayer.h"
 #include "../modules/Message.h"
 #include "../modules/Player.h"
@@ -77,7 +78,6 @@ void StateSinglePlayer::draw() {
 
     game->getWindow().draw(*score);
     game->getWindow().draw(*hpGreenBar);
-    game->getWindow().draw(*coinsContainer);
     game->getWindow().draw(*coins);
 
     for (int e = 0; e < enemies.size(); e++) {
@@ -100,6 +100,7 @@ void StateSinglePlayer::initGameGui() {
     playerBar->SetPosition(sf::Vector2f(10.f, 615.f));
 
     // Zombie counter label
+    //// TODO: Make a counter for zombies left
     zombieLeft = sfg::Label::Create("11");
     createPlayerBarLabel(zombieLeft);
     zombieLeft->SetPosition(sf::Vector2f(125.f, 645.f));
@@ -112,7 +113,7 @@ void StateSinglePlayer::initGameGui() {
     score->setPosition(sf::Vector2f(400.0f, 10.f));
     score->setScale(sf::Vector2f(1.0f, 1.0f));
 
-    //// TODO: Scoreboardsystem
+    //// TODO: Make a scoreboardsystem
 
     // Coins
     coinsBar = sfg::Image::Create();
@@ -120,18 +121,12 @@ void StateSinglePlayer::initGameGui() {
     coinsBar->SetRequisition(sf::Vector2f(game->getWindowSize()));
     coinsBar->SetPosition(sf::Vector2f(800.f, 10.f));
 
-    // Transparent container
-    coinsContainer = new sf::RectangleShape(sf::Vector2f(219.0f, 66.f));
-    coinsContainer->setFillColor(sf::Color(0,0,0,0));
-    coinsContainer->setPosition(799.f, 7.f);
-
     // Coins counter
+    //// TODO: A counter for coins retrieved after killing zombies
     coins = new sf::Text("00000", *font, 40);
     coins->setFillColor(sf::Color::White);
     coins->setPosition(880.f, 15.f);
     coins->setScale(sf::Vector2f(1.0f, 1.0f));
-
-    //// TODO: Coins retrieved after killing zombies
 
     // Health bar
     hpBar = sfg::Image::Create();
@@ -143,16 +138,27 @@ void StateSinglePlayer::initGameGui() {
     hpGreenBar = new sf::RectangleShape(sf::Vector2f(154.0f, 16.f));
     hpGreenBar->setFillColor(sf::Color::Green);
     hpGreenBar->setPosition(91.f, 33.f);
-
     // TODO: Get health input from player
 
-    // Inventory
+    // Inventory container
+//    inventoryContainer = sfg::Image::Create();
+//    createImage(inventoryContainer, "resources/gui/inventoryContainer.png");
+//    inventoryContainer->SetRequisition(sf::Vector2f(game->getWindowSize()));
+//    inventoryContainer->SetPosition(sf::Vector2f(925.f, 225.f));
 
-   // desktop->Add(itemOne);
+    itemOne = sfg::ToggleButton::Create();
+    itemOne->SetId("itemOne");
+    createImageButton(itemOne, "ak.png");
+    itemOne->SetPosition(sf::Vector2f(925.f, 225.f));
+    itemOne->SetRequisition(sf::Vector2f(100.f, 0.f));
+    itemOne->SetActive(true);
+    itemOne->SetId("itemOne");
+
     desktop->Add(playerBar);
     desktop->Add(zombieLeft);
     desktop->Add(coinsBar);
     desktop->Add(hpBar);
+    desktop->Add(itemOne);
 }
 
 void StateSinglePlayer::createImage(sfg::Image::Ptr image, const String &filename) {
@@ -162,15 +168,28 @@ void StateSinglePlayer::createImage(sfg::Image::Ptr image, const String &filenam
     }
 }
 
-/// Pause (P)
+/// Pause (ESC button)
 void StateSinglePlayer::pauseGameGui() {
+    //// TODO: Freeze game
 
 }
 
-/// Round Clear
+/// Round Clear - call this if zombie counter = 0
 void StateSinglePlayer::goToShop() {
+
     // Timer 5000ms (wait)
     game->getStateMachine().setState(StateMachine::StateID::SHOP);
+}
+
+/// Game Over - call this if player health = 0
+void StateSinglePlayer::gameOver() {
+    gameover = sfg::Image::Create();
+    createImage(gameover, "resources/gui/gameover.png");
+    gameover->SetPosition(sf::Vector2f(game->getWindow().getSize().x-670, game->getWindow().getSize().y-512));
+
+    desktop->Add(gameover);
+    // Timer 5000ms
+    game->getStateMachine().setState(StateMachine::StateID::MAIN_MENU);
 }
 
 void StateSinglePlayer::onItemOneBoxMarked() {
@@ -181,36 +200,8 @@ void StateSinglePlayer::onItemTwoBoxMarked() {
     // Use item 2
 }
 
-void StateSinglePlayer::onItemThreeBoxMarked() {
-    // Use item 3
-}
-
-void StateSinglePlayer::onItemFourBoxMarked() {
-    // Use item 4
-}
-
-void StateSinglePlayer::onItemFiveBoxMarked() {
-    // Use item 5
-}
-
-void StateSinglePlayer::onItemSixBoxMarked() {
-    // Use item 6
-}
-
 void StateSinglePlayer::onAbilityOneBoxMarked() {
     // Use ability 1
-}
-
-void StateSinglePlayer::onAbilityTwoBoxMarked() {
-    // Use ability 2
-}
-
-void StateSinglePlayer::onAbilityThreeBoxMarked() {
-    // Use ability 3
-}
-
-void StateSinglePlayer::onAbilityFourBoxMarked() {
-    // Use ability 4
 }
 
 void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets) {

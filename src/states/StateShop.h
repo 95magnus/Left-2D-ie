@@ -21,11 +21,15 @@ public:
 
     void initShopGui();
 
+    void createImage(sfg::Image::Ptr image, const String &filename);
+
 protected:
     sf::Font *font;
-    sfg::Image::Ptr sfgImage;
-    sf::Image* guiImage;
+    sfg::Window::Ptr shopWindow;
 
+    sfg::Button::Ptr nextButton;
+
+    sfg::Image::Ptr gameover;
 };
 
 

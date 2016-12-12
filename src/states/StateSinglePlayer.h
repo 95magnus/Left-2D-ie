@@ -35,21 +35,16 @@ public:
     void pauseGameGui();
     void goToShop();
 
+    void gameOver();
+
     void onItemOneBoxMarked();
     void onItemTwoBoxMarked();
-    void onItemThreeBoxMarked();
-    void onItemFourBoxMarked();
-    void onItemFiveBoxMarked();
-    void onItemSixBoxMarked();
 
     void onAbilityOneBoxMarked();
-    void onAbilityTwoBoxMarked();
-    void onAbilityThreeBoxMarked();
-    void onAbilityFourBoxMarked();
 
     void createImage(sfg::Image::Ptr image, const String &filename);
     void checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets);
-    
+
 protected:
     //InputManager* inputManager;
 
@@ -82,11 +77,14 @@ private:
     sfg::Image::Ptr hpBar;
     sfg::Image::Ptr coinsBar;
     sfg::Image::Ptr playerBar;
+    sfg::Image::Ptr inventoryContainer;
 
     sfg::Label::Ptr zombieLeft;
 
-    sfg::Button::Ptr itemOne;
+    sfg::ToggleButton::Ptr itemOne;
     sfg::Button::Ptr itemTwo;
+
+    sfg::Image::Ptr gameover;
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H
