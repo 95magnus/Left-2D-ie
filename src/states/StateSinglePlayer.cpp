@@ -49,7 +49,6 @@ void StateSinglePlayer::resume() {
 
 void StateSinglePlayer::pause() {
     delete score;
-    delete coinsContainer;
     delete coins;
     delete hpGreenBar;
     desktop->RemoveAll();
@@ -85,7 +84,6 @@ void StateSinglePlayer::draw(sf::RenderWindow &window) {
 
     game->getWindow().draw(*score);
     game->getWindow().draw(*hpGreenBar);
-    game->getWindow().draw(*coinsContainer);
     game->getWindow().draw(*coins);
 }
 
