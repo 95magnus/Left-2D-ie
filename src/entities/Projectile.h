@@ -16,7 +16,7 @@
 
 class Projectile : public Entity {
 public:
-    Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRect rect, int damage, float angle, float x, float y);
+    Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRect rect, int damage, int speed, bool spray, float angle, float x, float y);
     ~Projectile();
 
     float fRand();
@@ -85,8 +85,11 @@ public:
     void setHitbox(const sf::RectangleShape &hitbox);
 
 private:
+    int increasedFireRate;
+    int increasedDamage;
     sf::RectangleShape sprite;
     sf::RectangleShape hitbox;
+    bool spray;
     int damage, speed;
     float x, y;
     sf::Clock clock;

@@ -19,6 +19,11 @@ class Projectile;
 
 class Player : public Entity, PlayerController {
 public:
+
+    void hit();
+
+    void getHit(int damage);
+
     enum Direction { Up, Down, Left, Right };
 
     Player(sf::RenderWindow &window, sf::View &view, InputManager &inputManager, sf::Vector2f pos);
@@ -34,7 +39,6 @@ public:
 
 
     void death();
-    void hit();
 
     void mousePressed(int x, int y, sf::Mouse::Button button);
 
@@ -69,7 +73,7 @@ private:
     // Sprites
 
     float speed = 175.0f;
-    int x, y;
+    int x, y, hitColor;
 
     sf::RenderWindow &window;
     sf::View &view;

@@ -61,7 +61,7 @@ set(SOURCE_FILES src/main.cpp
         src/world/World.h
         src/world/Camera.cpp
         src/world/Camera.h
-        src/entities/Entity.h)
+        src/entities/Entity.h src/entities/enemies/CrawlingZombie.cpp src/entities/enemies/CrawlingZombie.h)
 
 find_package (OpenGL REQUIRED)
 add_executable(Left2Die ${SOURCE_FILES})

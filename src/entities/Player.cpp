@@ -18,7 +18,7 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
     xy = pos;
     sprite.setPosition(xy);
 
-    currentWeapon = new Weapon(window, 0, 6, sprite.getPosition().x - 5, sprite.getPosition().y + 10);
+    currentWeapon = new Weapon(window, 4, 1, 2, true, (int) sprite.getPosition().x - 5, (int) sprite.getPosition().y + 10);
 
     texture.setSmooth(false);
     texture.setRepeated(false);
@@ -35,6 +35,8 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
     } else {
         sprite.setTexture(&texture);
     }
+
+    hitColor = 255;
 
     animationDirections.emplace(Up, up);
     animationDirections.emplace(Down, down);
@@ -124,6 +126,11 @@ void Player::draw(sf::RenderWindow &window) {
             sprite.setTextureRect(down[0]);
             sprite.setPosition(xy.x + 15*scaleFactor, xy.y);
         }
+    }
+
+    sprite.setFillColor(sf::Color(255, hitColor, hitColor));
+    if (hitColor < 255) {
+        hitColor += 1;
     }
 
     window.draw(shadow);
@@ -325,13 +332,14 @@ void Player::hit() {
     sound.setBuffer(SBuffer);
     sound.play();
     //
-    Player::setHealth(Player::getHealth() - 10);
+    hitColor = 0;
 }
 
 void Player::death() {
     SBuffer.loadFromFile("wilhelm_scream.wav");
     sound.setBuffer(SBuffer);
     sound.play();
+
     // TODO: Legge til dødsanimasjon når health = 0?
     // TODO: (kanskje player faller i bakken og blinker i 3 sek så forsvinner den slik som på gamle spill)
 

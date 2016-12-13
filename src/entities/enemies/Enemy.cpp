@@ -27,6 +27,7 @@ Enemy::Enemy(sf::Vector2f spawnPos) : Entity(spawnPos) {
     hitbox.setOutlineColor(sf::Color::Blue);
     hitbox.setOutlineThickness(3);
     sprite.setOrigin(sprite.getSize().x, sprite.getSize().y/ 2);
+    sprite.setOrigin(sprite.getOrigin().x + sprite.getOrigin().x, sprite.getOrigin().y);
     hitbox.setOrigin(sprite.getOrigin());
     healthBar.setSize(sf::Vector2f(50,10));
     healthBar.setFillColor(sf::Color::Green);
@@ -36,8 +37,23 @@ Enemy::Enemy(sf::Vector2f spawnPos) : Entity(spawnPos) {
     //hpBarBG = healthBar;
     //hpBarBG.setFillColor(sf::Color::Red);
     cycleClock.restart();
-
+    rewardPoints = 10;
     target = sf::Vector2f(0, 0);
+}
+
+void Enemy::buff(int percent) {
+    percent /= 100;
+    damage = damage + damage*percent;
+    health = health + health*percent;
+    speed = speed + speed*percent;
+}
+
+void Enemy::dealDamage(Player *player) {
+    if (attackTimer.getElapsedTime().asSeconds() > 1) {
+        player->setHealth(player->getHealth() - damage);
+        player->hit();
+        attackTimer.restart();
+    }
 }
 
 void Enemy::animationCycler(float interval) {
@@ -76,7 +92,7 @@ void Enemy::update(float deltaTime) {
     //sprite.move(velX*deltaTime, velY*deltaTime);
     //hitbox.move(velX*deltaTime, velY*deltaTime);
 
-    rewardPoints = 10;
+
 }
 
 void Enemy::update(std::vector<sf::Vector2f> players, float deltaTime) {
@@ -121,17 +137,19 @@ void Enemy::translate(sf::Vector2f offset) {
 
 void Enemy::draw(sf::RenderWindow &window) {
     animationCycler(0.5);
-    if (target.x > sprite.getPosition().x) {
+    if (target.x>= sprite.getPosition().x) {
         goingRight = false;
     }
-    if (target.x < sprite.getPosition().x) {
+    if (target.x + 10 < sprite.getPosition().x) {
         goingRight = true;
     }
     if (!goingRight) {
+        sf::Vector2f xy = sprite.getPosition();
         sprite.setScale(-0.2, 0.2);
         hitbox.setSize(sprite.getSize());
         hitbox.setScale(sprite.getScale());
         hitbox.setPosition(sprite.getPosition());
+        //sprite.setPosition(xy);
     }
     if (goingRight){
         sprite.setScale(0.2, 0.2);

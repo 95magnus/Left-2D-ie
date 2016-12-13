@@ -210,13 +210,12 @@ void StateSinglePlayer::onAbilityOneBoxMarked() {
 void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets) {
     if (!enemies.empty() && !bullets.empty()) {
         auto it = bullets.begin();
-        auto jt = enemies.begin();
 
         for (int i = 0; i < bullets.size(); i++, it++) {
             for (int j = 0; j < enemies.size(); j++) {
-                if (bullets[i].getSprite().getPosition().x + 20 >= enemies[j]->sprite.getPosition().x
-                    && bullets[i].getSprite().getPosition().x + 20 <= enemies[j]->sprite.getPosition().x + (enemies[j]->hitbox.getSize().x*0.2) &&
-                    bullets[i].getSprite().getPosition().y >= enemies[j]->sprite.getPosition().y
+                if (bullets[i].getSprite().getPosition().x >= enemies[j]->sprite.getPosition().x - enemies[j]->sprite.getSize().x*0.1
+                    && bullets[i].getSprite().getPosition().x<= enemies[j]->sprite.getPosition().x + (enemies[j]->hitbox.getSize().x*0.1) &&
+                    bullets[i].getSprite().getPosition().y >= enemies[j]->sprite.getPosition().y - enemies[j]->sprite.getSize().y*0.015
                     && bullets[i].getSprite().getPosition().y <= enemies[j]->sprite.getPosition().y + (enemies[j]->hitbox.getSize().y)*0.2) {
 
                     enemies[j]->getHit(bullets[i].getDamage());
@@ -241,6 +240,7 @@ void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<P
 void StateSinglePlayer::spawnWave() {
     for (int e = 0; e < 10 + waveNumber * 3; e++) {
         Enemy* ny_zombie = new Enemy(sf::Vector2f(0,0));
+        ny_zombie->buff(20*waveNumber);
         enemies.push_back(ny_zombie);
         enemies.back()->sprite.setPosition(rand() % 600, rand() % 600);
     }

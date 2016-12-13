@@ -4,18 +4,37 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(sf::RenderWindow &window, int wepStage, float rps, int posX, int posY)
+Weapon::Weapon(sf::RenderWindow &window, int wepStage, int penetration, float rps, bool spray, int posX, int posY)
         : Entity(sf::Vector2f(posX, posY)), window(window){
     this->rps = rps;
     sprite.setPosition(posX, posY);
+    this->spray = spray;
     weaponStage = wepStage;
-    spriteFront = weaponStageIntRectsFront[wepStage];
+    this->penetration = penetration;
+    //spriteFront = weaponStageIntRectsFront[wepStage];
     spriteSide = weaponStageIntRectsSide[wepStage];
-    if (!texture.loadFromFile("resources/textures/spritesheets/weapons.png")) {
-        // Spilleren blir blå hvis bildet ikke blir lastet
-        sprite.setFillColor(sf::Color::Green);
+    if (weaponStage > 0) {
+        if (!texture.loadFromFile("resources/textures/spritesheets/weapons1.png")) {
+            // Spilleren blir blå hvis bildet ikke blir lastet
+            sprite.setFillColor(sf::Color::Green);
+        } else {
+            sprite.setTexture(&texture);
+        }
+        if (weaponStage == 5) {
+            if (!texture.loadFromFile("resources/textures/spritesheets/weapons.png")) {
+                // Spilleren blir blå hvis bildet ikke blir lastet
+                sprite.setFillColor(sf::Color::Green);
+            } else {
+                sprite.setTexture(&texture);
+            }
+        }
     } else {
-        sprite.setTexture(&texture);
+        if (!texture.loadFromFile("resources/textures/spritesheets/weapons.png")) {
+            // Spilleren blir blå hvis bildet ikke blir lastet
+            sprite.setFillColor(sf::Color::Green);
+        } else {
+            sprite.setTexture(&texture);
+        }
     }
     if (!projectileTexture.loadFromFile("resources/textures/spritesheets/projectiles.png")) {
 
@@ -23,8 +42,8 @@ Weapon::Weapon(sf::RenderWindow &window, int wepStage, float rps, int posX, int 
     if (soundBuffer.loadFromFile("resources/sound_effects/machinegun_loop1.wav")) {
 
     }
-    sprite.setSize(sf::Vector2f(spriteSide.width, spriteSide.height));
     sprite.setTextureRect(spriteSide);
+    sprite.setSize(sf::Vector2f(spriteSide.width, spriteSide.height));
     sprite.scale(0.2, 0.2);
     sprite.setOrigin(sprite.getSize().x/2, sprite.getSize().y/2);
     sprite.setOutlineThickness(2);
@@ -48,7 +67,7 @@ void Weapon::draw(sf::RenderWindow &window) {
 
 void Weapon::fire() {
     if (clock.getElapsedTime().asSeconds() > 1/rps) {
-        Projectile bullet(window, projectileTexture, projectileIntRect[weaponStage], 10, angle, sprite.getPosition().x, sprite.getPosition().y);
+        Projectile bullet(window, projectileTexture, projectileIntRect[weaponStage], 10, 50, false ,angle, sprite.getPosition().x, sprite.getPosition().y - yOffset[weaponStage]);
         bullets.push_back(bullet);
         clock.restart();
         sound.play();
@@ -158,9 +177,6 @@ const sf::IntRect *Weapon::getWeaponStageIntRectsSide() const {
     return weaponStageIntRectsSide;
 }
 
-const sf::IntRect *Weapon::getWeaponStageIntRectsFront() const {
-    return weaponStageIntRectsFront;
-}
 
 const sf::IntRect *Weapon::getProjectileIntRect() const {
     return projectileIntRect;
