@@ -75,6 +75,7 @@ private:
     sf::Text* score;
     sf::Text* coins;
 
+    sf::Text zombiesLeft;
     sfg::Image::Ptr hpBar;
     sfg::Image::Ptr coinsBar;
     sfg::Image::Ptr playerBar;
@@ -88,6 +89,7 @@ private:
     bool initialized = false;
 
     sfg::Image::Ptr gameover;
+    int zombieCounter;
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H

@@ -7,18 +7,20 @@
 
 Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputManager, sf::Vector2f pos)
         : Entity(pos), PlayerController(inputManager), window(window), view(view){
-    health = 100;
+    maxHealth = 100;
+    health = 50;
     armor = 0;
     kills = 0;
     score = 0;
     money = 0;
     currentDir = Right;
+    isDead = false;
     sprite.setSize(sf::Vector2f(55, 55));
     scaleFactor = 0.25;
     xy = pos;
     sprite.setPosition(xy);
 
-    currentWeapon = new Weapon(window, 4, 1, 2, true, (int) sprite.getPosition().x - 5, (int) sprite.getPosition().y + 10);
+    currentWeapon = new Weapon(window, 0, 1, 5, true, (int) sprite.getPosition().x - 5, (int) sprite.getPosition().y + 10);
 
     texture.setSmooth(false);
     texture.setRepeated(false);
@@ -30,7 +32,7 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
 
     //Load Texture
     if (!texture.loadFromFile("resources/textures/spritesheets/player.png")) {
-        // Spilleren blir blå hvis bildet ikke blir lastet
+        // Spilleren blir grønn hvis bildet ikke blir lastet
         sprite.setFillColor(sf::Color::Green);
     } else {
         sprite.setTexture(&texture);
@@ -406,4 +408,20 @@ void Player::setCurrentDir(Player::Direction currentDir) {
 
 std::vector<Projectile> *Player::getBullets() {
     return &currentWeapon->getBullets();
+}
+
+float Player::getMaxSpeed() const {
+    return maxSpeed;
+}
+
+void Player::setMaxSpeed(float maxSpeed) {
+    Player::maxSpeed = maxSpeed;
+}
+
+int Player::getMaxHealth() const {
+    return maxHealth;
+}
+
+void Player::setMaxHealth(int maxHealth) {
+    Player::maxHealth = maxHealth;
 }

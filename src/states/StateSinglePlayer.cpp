@@ -23,6 +23,7 @@ StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
     //view->zoom(0.5f);
     //window->setView(*view);
     zombie = new Enemy(sf::Vector2f(0,0));
+    zombieCounter = 0;
 }
 
 StateSinglePlayer::~StateSinglePlayer() {
@@ -69,6 +70,11 @@ void StateSinglePlayer::update(float deltaTime) {
     for (int e = 0; e < enemies.size(); e++) {
         enemies[e]->update(playerPositions, deltaTime);
     }
+    zombiesLeft.setString(std::to_string(zombieCounter));
+
+    score->setString(std::to_string(player->getScore()));
+    coins->setString(std::to_string(player->getScore()/10));
+    hpGreenBar->setScale(((float)player->getHealth()/player->getMaxHealth()), 1);
 }
 
 void StateSinglePlayer::draw(sf::RenderWindow &window) {
@@ -85,6 +91,7 @@ void StateSinglePlayer::draw(sf::RenderWindow &window) {
     game->getWindow().draw(*score);
     game->getWindow().draw(*hpGreenBar);
     game->getWindow().draw(*coins);
+    game->getWindow().draw(zombiesLeft);
 }
 
 void StateSinglePlayer::initGameGui() {
@@ -92,6 +99,7 @@ void StateSinglePlayer::initGameGui() {
 
     font = new sf::Font();
     font->loadFromFile("resources/fonts/feast-of-flesh-bb.italic.ttf");
+
 
     // Player bar
     playerBar = sfg::Image::Create();
@@ -101,9 +109,16 @@ void StateSinglePlayer::initGameGui() {
 
     // Zombie counter label
     //// TODO: Make a counter for zombies left
-    zombieLeft = sfg::Label::Create("11");
+    auto zombieLeft = sfg::Label::Create("");
     createPlayerBarLabel(zombieLeft);
     zombieLeft->SetPosition(sf::Vector2f(125.f, 645.f));
+
+
+    zombiesLeft.setFont(*font);
+    zombiesLeft.setCharacterSize(70);
+    zombiesLeft.setFillColor(sf::Color::White);
+    zombiesLeft.setPosition(135.f, 635.f);
+    zombiesLeft.setString(std::to_string(zombieCounter));
 
     //// TODO: A counter zombies left
 
@@ -123,7 +138,7 @@ void StateSinglePlayer::initGameGui() {
 
     // Coins counter
     //// TODO: A counter for coins retrieved after killing zombies
-    coins = new sf::Text("00000", *font, 40);
+    coins = new sf::Text(std::to_string(player->getScore()), *font, 40);
     coins->setColor(sf::Color::White);
     coins->setPosition(880.f, 15.f);
     coins->setScale(sf::Vector2f(1.0f, 1.0f));
@@ -229,8 +244,15 @@ void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<P
     // Fixed?
     auto enemy = enemies.begin();
     while (enemy != enemies.end()) {
+        if (abs((*enemy)->sprite.getPosition().x - player->getPosition().x) < 50 &&
+            abs((*enemy)->sprite.getPosition().y - player->getPosition().y) < 50) {
+            (*enemy)->dealDamage(player);
+
+        }
         if ((*enemy)->getHealth() <= 0) {
             enemy = enemies.erase(enemy);
+            zombieCounter--;
+            player->setScore(player->getScore() + (*enemy)->getScoreReward());
         } else {
             ++enemy;
         }
@@ -243,5 +265,6 @@ void StateSinglePlayer::spawnWave() {
         ny_zombie->buff(20*waveNumber);
         enemies.push_back(ny_zombie);
         enemies.back()->sprite.setPosition(rand() % 600, rand() % 600);
+        zombieCounter++;
     }
 }

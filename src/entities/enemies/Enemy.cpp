@@ -13,6 +13,8 @@ Enemy::Enemy(sf::Vector2f spawnPos) : Entity(spawnPos) {
     } else {
         sprite.setTexture(&texture);
     }
+    isDead = false;
+    scoreReward = 10;
     goingRight = false;
     health = 100;
     maxHealth = 100;
@@ -29,13 +31,13 @@ Enemy::Enemy(sf::Vector2f spawnPos) : Entity(spawnPos) {
     sprite.setOrigin(sprite.getSize().x, sprite.getSize().y/ 2);
     sprite.setOrigin(sprite.getOrigin().x + sprite.getOrigin().x, sprite.getOrigin().y);
     hitbox.setOrigin(sprite.getOrigin());
-    healthBar.setSize(sf::Vector2f(50,10));
+    healthBar.setSize(sf::Vector2f(50,5));
     healthBar.setFillColor(sf::Color::Green);
     healthBar.setOutlineColor(sf::Color::Black);
-    healthBar.setOutlineThickness(2);
-    healthBar.setPosition(sprite.getPosition().x, sprite.getPosition().y - 30);
-    //hpBarBG = healthBar;
-    //hpBarBG.setFillColor(sf::Color::Red);
+    healthBar.setOutlineThickness(1);
+    healthBar.setPosition(sprite.getPosition().x, sprite.getPosition().y);
+    hpBarBG = healthBar;
+    hpBarBG.setFillColor(sf::Color::Red);
     cycleClock.restart();
     rewardPoints = 10;
     target = sf::Vector2f(0, 0);
@@ -157,8 +159,9 @@ void Enemy::draw(sf::RenderWindow &window) {
         hitbox.setScale(sprite.getScale());
         hitbox.setPosition(sprite.getPosition());
     }
-    //hpBarBG.setPosition(healthBar.getPosition());
-    //healthBar.setSize(sf::Vector2f((healthBar.getSize().x - healthBar.getSize().x*((maxHealth - health)/maxHealth)), healthBar.getSize().y));
+    healthBar.setPosition(sprite.getPosition().x - healthBar.getLocalBounds().width/2, sprite.getPosition().y - 20);
+    hpBarBG.setPosition(healthBar.getPosition());
+    healthBar.setScale(((float)health/maxHealth), 1);
     sprite.setFillColor(sf::Color(255, hit, hit));
     if (hit < 255) {
         hit += 5;
@@ -166,8 +169,8 @@ void Enemy::draw(sf::RenderWindow &window) {
     window.draw(sprite);
     window.draw(hitbox);
     window.draw(collisionBox);
-    //window.draw(hpBarBG);
-    //window.draw(healthBar);
+    window.draw(hpBarBG);
+    window.draw(healthBar);
 }
 
 void Enemy::getHit(int damage) {
@@ -186,4 +189,20 @@ void Enemy::setHealth(int health) {
 
 void Enemy::setTarget(sf::Vector2f pos) {
     target = pos;
+}
+
+int Enemy::getScoreReward() const {
+    return scoreReward;
+}
+
+void Enemy::setScoreReward(int scoreReward) {
+    Enemy::scoreReward = scoreReward;
+}
+
+bool Enemy::isIsDead() const {
+    return isDead;
+}
+
+void Enemy::setIsDead(bool isDead) {
+    Enemy::isDead = isDead;
 }

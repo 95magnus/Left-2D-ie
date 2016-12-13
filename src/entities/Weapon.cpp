@@ -67,7 +67,7 @@ void Weapon::draw(sf::RenderWindow &window) {
 
 void Weapon::fire() {
     if (clock.getElapsedTime().asSeconds() > 1/rps) {
-        Projectile bullet(window, projectileTexture, projectileIntRect[weaponStage], 10, 50, false ,angle, sprite.getPosition().x, sprite.getPosition().y - yOffset[weaponStage]);
+        Projectile bullet(window, projectileTexture, projectileIntRect[weaponStage], 5, 300, spray ,angle, sprite.getPosition().x, sprite.getPosition().y - yOffset[weaponStage]);
         bullets.push_back(bullet);
         clock.restart();
         sound.play();

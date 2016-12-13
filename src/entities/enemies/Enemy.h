@@ -54,6 +54,18 @@ protected:
 
     sf::Vector2f target;
 
+    int scoreReward;
+public:
+    int getScoreReward() const;
+
+    void setScoreReward(int scoreReward);
+
+    bool isIsDead() const;
+
+    void setIsDead(bool isDead);
+
+protected:
+    bool isDead;
     int health;
     int maxHealth;
     int damage;
