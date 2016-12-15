@@ -28,7 +28,8 @@ public:
     void buttonQuitClicked();
 
 protected:
-
+    sf::RectangleShape background;
+    sf::Texture* backgroundImage;
 };
 
 #endif //LEFT2DIE_STATEMAINMENU_H

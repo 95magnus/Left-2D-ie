@@ -37,14 +37,7 @@ public:
 
     void checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets);
 
-    void createImage(sfg::Image::Ptr image, const String &filename);
-
     void gameOver();
-
-    void onItemOneBoxMarked();
-    void onItemTwoBoxMarked();
-
-    void onAbilityOneBoxMarked();
 
 protected:
     //InputManager* inputManager;
@@ -62,7 +55,6 @@ protected:
     std::vector<sf::Vector2f> playerPositions;
     Enemy* zombie;
 
-
     Message* mb;
 
 private:
@@ -75,19 +67,9 @@ private:
     sf::Text* score;
     sf::Text* coins;
 
-    sfg::Image::Ptr hpBar;
-    sfg::Image::Ptr coinsBar;
-    sfg::Image::Ptr playerBar;
-    sfg::Image::Ptr inventoryContainer;
-
-    sfg::Label::Ptr zombieLeft;
-
-    sfg::ToggleButton::Ptr itemOne;
-    sfg::Button::Ptr itemTwo;
+    std::string filename;
 
     bool initialized = false;
-
-    sfg::Image::Ptr gameover;
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H

@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFGUI/Widgets.hpp>
+#include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include "../util/ResourceLoader.h"
 
 class Game;
@@ -24,17 +26,23 @@ public:
     sfg::Desktop* getDesktop() const { return desktop; }
     void updateDesktop();
 
+    //// Main Menu GUI
+    void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);
+
     //// Single Player GUI
+    void createSinglePlayerWindow(sfg::Window::Ptr windowName);
     void createPlayerBarLabel(sfg::Label::Ptr labelName);
     void createImageButton(sfg::ToggleButton::Ptr buttonName, const String &filename);
+    void createImage(sfg::Image::Ptr image, const String &filename);
 
     //// Shop GUI
     void createShopGUIWindow(sfg::Window::Ptr windowName);
     void createShopButtonImage(sfg::Button::Ptr buttonName, const String &filename);
+    void createShopImage(sfg::Image::Ptr image, const String &filename);
+    void createShopLabel(sf::Text* text, const sf::Vector2f &position);
+    void createCoinsImage(sf::RectangleShape rectangleShape, sf::Texture* backgroundImage);
 
     //// Settings GUI
-    virtual void createButton(sfg::Button::Ptr buttonName, const sf::Vector2f &position);
-    virtual void createToggleButton(sfg::ToggleButton::Ptr buttonName, const sf::Vector2f &position);
     virtual void createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position);
     virtual void createSettingsButton(sfg::Button::Ptr buttonName);
     virtual void createSoundGUIButton(sfg::CheckButton::Ptr checkButtonName);

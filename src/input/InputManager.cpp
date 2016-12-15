@@ -31,14 +31,8 @@ void InputManager::setDefaultMappings() {
 //    actionKeyMappings[Action::USE]        = Key::E;
 //    actionKeyMappings[Action::ITEM_1]     = Key::Num1;
 //    actionKeyMappings[Action::ITEM_2]     = Key::Num2;
-//    actionKeyMappings[Action::ITEM_3]     = Key::Num3;
-//    actionKeyMappings[Action::ITEM_4]     = Key::Num4;
-//    actionKeyMappings[Action::ITEM_5]     = Key::Num5;
-//    actionKeyMappings[Action::ITEM_6]     = Key::Num6;
 //    actionKeyMappings[Action::ABILITY_1]  = Key::Num7;
-//    actionKeyMappings[Action::ABILITY_2]  = Key::Num8;
-//    actionKeyMappings[Action::ABILITY_3]  = Key::Num9;
-//    actionKeyMappings[Action::ABILITY_4]  = Key::Num4;
+
 
     // Populate the reverse lookup table
     // Key -> sf::Key, value -> Action

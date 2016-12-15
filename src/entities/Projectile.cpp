@@ -25,8 +25,8 @@ Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRe
     //velY = diffY/magnitude*speed;
 
 
-    velX = -cos(angle * M_PI/180) * speed;
-    velY = -sin(angle * M_PI/180) * speed;
+    velX = -cos(angle * 3.1416/180) * speed;
+    velY = -sin(angle * 3.1416/180) * speed;
 
     rndX = fRand();
     rndY = fRand();

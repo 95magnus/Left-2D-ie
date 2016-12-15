@@ -20,16 +20,48 @@ public:
 
     void initShopGui();
 
-    void createImage(sfg::Image::Ptr image, const String &filename);
+    void initGameGui();
 
 protected:
     sf::Font *font;
-    sfg::Window::Ptr shopWindow;
 
-    sfg::Button::Ptr nextButton;
+    sf::Text* nextRoundLabel;
+    sf::Text* totalCoins; // EDIT
+    sf::Text* cost;
+    sf::Text* totalCoinsEarnedLabel;
 
-    sfg::Image::Ptr gameover;
+    sf::Text* currentWeaponName;
+    sf::Text* upgradedWeaponName;
+    sf::Text* currentWeaponLabel;
+    sf::Text* upgradeWeaponLabel;
+    sf::Text* currentFireRateLabel;
+    sf::Text* upgradeFireRateLabel;
+    sf::Text* currentDamageLabel;
+    sf::Text* upgradeDamageLabel;
+    sf::Text* currentHealthLabel;
+    sf::Text* upgradeHealthLabel;
+
+    sf::Text* currentFireRateValue;
+    sf::Text* upgradedFireRateValue;
+    sf::Text* currentDamageValue;
+    sf::Text* upgradedDamageValue;
+    sf::Text* currentHealthValue;
+    sf::Text* upgradedHealthValue;
+
+    sf::Text* upgradeWeaponCost;
+    sf::Text* upgradeFireRateCost;
+    sf::Text* upgradeDamageCost;
+    sf::Text* upgradeHealthCost;
+
+    sf::RectangleShape* inventoryContainer;
+    sf::RectangleShape* fireRateContainer;
+    sf::RectangleShape* damageContainer;
+    sf::RectangleShape* healthContainer;
+    sf::RectangleShape* coinsContainer;
+
+    sfg::Image::Ptr coinsImage;
 };
+
 
 
 #endif //LEFT2DIE_STATESHOP_H

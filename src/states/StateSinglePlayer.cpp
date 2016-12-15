@@ -52,6 +52,7 @@ void StateSinglePlayer::pause() {
     delete coins;
     delete hpGreenBar;
     desktop->RemoveAll();
+
 }
 
 void StateSinglePlayer::update(float deltaTime) {
@@ -88,24 +89,22 @@ void StateSinglePlayer::draw(sf::RenderWindow &window) {
 }
 
 void StateSinglePlayer::initGameGui() {
-    desktop->SetProperty("*", "FontName", "resources/fonts/feast-of-flesh-bb.italic.ttf");
+    auto singlePlayerWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
+    createSinglePlayerWindow(singlePlayerWindow);
 
     font = new sf::Font();
     font->loadFromFile("resources/fonts/feast-of-flesh-bb.italic.ttf");
 
     // Player bar
-    playerBar = sfg::Image::Create();
+    auto playerBar = sfg::Image::Create();
     createImage(playerBar, "resources/gui/playerbar.png");
-    playerBar->SetRequisition(sf::Vector2f(game->getWindowSize()));
     playerBar->SetPosition(sf::Vector2f(10.f, 615.f));
 
     // Zombie counter label
     //// TODO: Make a counter for zombies left
-    zombieLeft = sfg::Label::Create("11");
+    auto zombieLeft = sfg::Label::Create("11");
     createPlayerBarLabel(zombieLeft);
     zombieLeft->SetPosition(sf::Vector2f(125.f, 645.f));
-
-    //// TODO: A counter zombies left
 
     // Scoreboard
     score = new sf::Text("000000", *font, 60);
@@ -116,9 +115,8 @@ void StateSinglePlayer::initGameGui() {
     //// TODO: Make a scoreboardsystem
 
     // Coins
-    coinsBar = sfg::Image::Create();
+    auto coinsBar = sfg::Image::Create();
     createImage(coinsBar, "resources/gui/coins.png");
-    coinsBar->SetRequisition(sf::Vector2f(game->getWindowSize()));
     coinsBar->SetPosition(sf::Vector2f(800.f, 10.f));
 
     // Coins counter
@@ -129,9 +127,9 @@ void StateSinglePlayer::initGameGui() {
     coins->setScale(sf::Vector2f(1.0f, 1.0f));
 
     // Health bar
-    hpBar = sfg::Image::Create();
+    auto hpBar = sfg::Image::Create();
     createImage(hpBar, "resources/gui/healthbar.png");
-    hpBar->SetRequisition(sf::Vector2f(game->getWindowSize()));
+
     hpBar->SetPosition(sf::Vector2f(10.f,10.f));
 
     // Health
@@ -140,40 +138,26 @@ void StateSinglePlayer::initGameGui() {
     hpGreenBar->setPosition(91.f, 33.f);
     // TODO: Get health input from player
 
-    // Inventory
-    
-    //desktop->Add(itemOne);
-    // Inventory container
-//    inventoryContainer = sfg::Image::Create();
-//    createImage(inventoryContainer, "resources/gui/inventoryContainer.png");
-//    inventoryContainer->SetRequisition(sf::Vector2f(game->getWindowSize()));
-//    inventoryContainer->SetPosition(sf::Vector2f(925.f, 225.f));
+    auto box = sfg::Box::Create(sfg::Box::Orientation::VERTICAL, 0.f);
 
-    itemOne = sfg::ToggleButton::Create();
-    itemOne->SetId("itemOne");
+
+    auto itemOne = sfg::ToggleButton::Create();
+    itemOne->SetId("togglebutton");
     createImageButton(itemOne, "ak.png");
-    itemOne->SetPosition(sf::Vector2f(925.f, 225.f));
-    itemOne->SetRequisition(sf::Vector2f(100.f, 0.f));
-    itemOne->SetActive(true);
-    itemOne->SetId("itemOne");
+    itemOne->SetActive(false);
 
-    desktop->Add(playerBar);
-    desktop->Add(zombieLeft);
-    desktop->Add(coinsBar);
-    desktop->Add(hpBar);
-    desktop->Add(itemOne);
+    auto fixed = sfg::Fixed::Create();
+    fixed->Put(itemOne, sf::Vector2f(950.f, 200.f));
+    box->Pack(fixed, true, true);
+
+    singlePlayerWindow->Add(box);
 }
 
-void StateSinglePlayer::createImage(sfg::Image::Ptr image, const String &filename) {
-    auto temp = new sf::Image;
-    if(temp->loadFromFile(filename)){
-        image->SetImage(*temp);
-    }
-}
 
 /// Pause (ESC button)
 void StateSinglePlayer::pauseGameGui() {
     //// TODO: Freeze game
+
 
 }
 
@@ -186,25 +170,13 @@ void StateSinglePlayer::goToShop() {
 
 /// Game Over - call this if player health = 0
 void StateSinglePlayer::gameOver() {
-    gameover = sfg::Image::Create();
+    auto gameover = sfg::Image::Create();
     createImage(gameover, "resources/gui/gameover.png");
     gameover->SetPosition(sf::Vector2f(game->getWindow().getSize().x-670, game->getWindow().getSize().y-512));
 
     desktop->Add(gameover);
     // Timer 5000ms
     game->getStateMachine().setState(StateMachine::StateID::MAIN_MENU);
-}
-
-void StateSinglePlayer::onItemOneBoxMarked() {
-    // Use item 1
-}
-
-void StateSinglePlayer::onItemTwoBoxMarked() {
-    // Use item 2
-}
-
-void StateSinglePlayer::onAbilityOneBoxMarked() {
-    // Use ability 1
 }
 
 void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets) {
@@ -220,8 +192,8 @@ void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<P
                     && bullets[i].getSprite().getPosition().y <= enemies[j]->sprite.getPosition().y + (enemies[j]->hitbox.getSize().y)*0.2) {
 
                     enemies[j]->getHit(bullets[i].getDamage());
-                    bullets.erase(it);
-
+                    bullets.erase(bullets.begin()+i);
+                    i++;
                 }
             }
         }
