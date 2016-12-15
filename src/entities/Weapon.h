@@ -17,14 +17,15 @@
 
 class Weapon : public Entity {
 public:
-    Weapon(sf::RenderWindow &window, int wepStage, float rps, int posX, int posY);
+    int penetration;
+    Weapon(sf::RenderWindow &window, int wepStage, int penetration, float rps, bool spray, int posX, int posY);
     virtual ~Weapon();
 
     void update(float deltaTime);
+
     void draw(sf::RenderWindow &window);
 
     void fire();
-
 
     void flipRight();
 
@@ -101,16 +102,43 @@ private:
     sf::Mouse mouse;
     sf::Clock clock;
     float rps;
+    bool spray;
     sf::SoundBuffer soundBuffer;
     sf::Sound sound;
     std::vector<Projectile> bullets;
-    sf::IntRect weaponStageIntRectsSide[2] = {sf::IntRect(0, 0, 360, 90),
+
+    /* Weapon list 1 to 6
+     * 1: AK
+     * 2: shotgun
+     * 3: tommygun
+     * 4: rifle
+     * 5: sniper
+     * 6: raygun
+     * */
+    sf::IntRect weaponStageIntRectsSide[6] = {sf::IntRect(0, 0, 360, 90),
+                                              sf::IntRect(465, 255, 195, 60),
+                                              sf::IntRect(495, 0, 240, 90),
+                                              sf::IntRect(0, 255, 315, 60),
+                                              sf::IntRect(0, 0, 465, 155),
                                              sf::IntRect(0, 95, 270, 165)};
 
-    sf::IntRect weaponStageIntRectsFront[2] = {sf::IntRect(365, 0, 30, 75),
-                                              sf::IntRect(0, 265, 165, 165)};
 
-    sf::IntRect projectileIntRect[2] = {sf::IntRect(140, 140, 90, 45),
+    /*
+    sf::IntRect weaponStageIntRectsFront[6] = {sf::IntRect(365, 0, 30, 75),
+                                               sf::IntRect(0, 0, 360, 90),
+                                               sf::IntRect(0, 0, 360, 90),
+                                               sf::IntRect(0, 0, 360, 90),
+                                               sf::IntRect(0, 0, 360, 90),
+                                              sf::IntRect(0, 265, 165, 165)};
+    */
+
+    int yOffset[6] = {5, 0, 6, 3, 3, 0};
+
+    sf::IntRect projectileIntRect[6] = {sf::IntRect(140, 140, 90, 45),
+                                        sf::IntRect(140, 140, 90, 45),
+                                        sf::IntRect(140, 140, 90, 45),
+                                        sf::IntRect(140, 140, 90, 45),
+                                        sf::IntRect(140, 140, 90, 45),
                                         sf::IntRect(0, 110, 135, 135)};
 
     void setBullets(const std::vector<Projectile> &bullets);

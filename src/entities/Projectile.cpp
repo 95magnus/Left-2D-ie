@@ -5,7 +5,7 @@
 
 #include "Projectile.h"
 
-Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRect rect, int damage, float angle, float x, float y)
+Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRect rect, int damage, int speed, bool spray, float angle, float x, float y)
         : Entity(sf::Vector2f(x, y)) {
     sprite.setTexture(&texture);
     sprite.setTextureRect(rect);
@@ -15,7 +15,10 @@ Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRe
     this->x = x;
     this->y = y;
     this->damage = 10;
-    speed = 450;
+    this->increasedDamage = 0;
+    this->increasedFireRate = 0;
+    this->speed = speed;
+    this->spray = spray;
     sprite.setPosition(x, y);
     sprite.setScale(0.1, 0.1);
     diffX = mouse.getPosition(window).x - x;
@@ -39,12 +42,26 @@ Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRe
 
 float Projectile::fRand()
 {
-    float rnd = rand() % -1000 + 1000;
-    return rnd / 1000;
+    if (!spray) {
+        return 1;
+    }
+    float rnd = (float) (rand() % -100 + 100);
+    return rnd / 100.0f;
 }
 
 Projectile::~Projectile() {
 
+}
+
+void Projectile::update(float deltaTime) {
+    sf::Vector2f vel(velX * rndX, velY * rndY);
+    float length = sqrt(vel.x * vel.x + vel.y * vel.y);
+    vel /= length;
+
+    x += vel.x * speed * deltaTime;
+    y += vel.y * speed * deltaTime;
+    sprite.setPosition(x, y);
+    hitbox.setPosition(sprite.getPosition());
 }
 
 const sf::RectangleShape &Projectile::getSprite() const {
@@ -157,11 +174,6 @@ float Projectile::getRndY() const {
 
 void Projectile::setRndY(float rndY) {
     Projectile::rndY = rndY;
-}
-
-void Projectile::update(float deltaTime) {
-    sprite.setPosition(x + velX*clock.getElapsedTime().asSeconds()*rndX, y + velY*clock.getElapsedTime().asSeconds()/*rndY*/);
-    hitbox.setPosition(sprite.getPosition());
 }
 
 void Projectile::draw(sf::RenderWindow &window) {

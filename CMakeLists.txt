@@ -41,6 +41,7 @@ set(SOURCE_FILES src/main.cpp
         src/states/StateShop.h
         src/gui/Message.cpp
         src/gui/Message.h
+        src/entities/Entity.h
         src/entities/Weapon.cpp
         src/entities/Weapon.h
         src/entities/Projectile.cpp
@@ -49,6 +50,8 @@ set(SOURCE_FILES src/main.cpp
         src/entities/enemies/Enemy.h
         src/entities/enemies/NormalZombie.cpp
         src/entities/enemies/NormalZombie.h
+        src/entities/enemies/CrawlingZombie.cpp
+        src/entities/enemies/CrawlingZombie.h
         src/level/Level.cpp
         src/level/Level.h
         src/level/tiles/TileBase.h
@@ -60,8 +63,7 @@ set(SOURCE_FILES src/main.cpp
         src/world/World.cpp
         src/world/World.h
         src/world/Camera.cpp
-        src/world/Camera.h
-        src/entities/Entity.h)
+        src/world/Camera.h)
 
 find_package (OpenGL REQUIRED)
 add_executable(Left2Die ${SOURCE_FILES})

@@ -63,11 +63,13 @@ private:
     sf::RectangleShape* hpRedBar;
 
     sf::Font* font;
-
     sf::Text* score;
     sf::Text* coins;
 
     std::string filename;
+
+    sf::Text zombiesLeft;
+    int zombieCounter;
 
     bool initialized = false;
 };

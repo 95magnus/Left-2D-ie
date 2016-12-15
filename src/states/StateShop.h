@@ -31,8 +31,9 @@ protected:
     sf::Text* totalCoinsEarnedLabel;
 
     sf::Text* currentWeaponName;
-    sf::Text* upgradedWeaponName;
     sf::Text* currentWeaponLabel;
+
+    sf::Text* upgradedWeaponName;
     sf::Text* upgradeWeaponLabel;
     sf::Text* currentFireRateLabel;
     sf::Text* upgradeFireRateLabel;

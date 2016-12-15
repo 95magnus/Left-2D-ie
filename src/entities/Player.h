@@ -19,6 +19,11 @@ class Projectile;
 
 class Player : public Entity, PlayerController {
 public:
+
+    void hit();
+
+    void getHit(int damage);
+
     enum Direction { Up, Down, Left, Right };
 
     Player(sf::RenderWindow &window, sf::View &view, InputManager &inputManager, sf::Vector2f pos);
@@ -34,7 +39,6 @@ public:
 
 
     void death();
-    void hit();
 
     void mousePressed(int x, int y, sf::Mouse::Button button);
 
@@ -60,6 +64,14 @@ public:
     void setKills(int kills);
     std::vector<Projectile> *getBullets();
 
+    int getMaxHealth() const;
+
+    void setMaxHealth(int maxHealth);
+
+    float getMaxSpeed() const;
+
+    void setMaxSpeed(float maxSpeed);
+
 private:
     //Components
     //InputComponent input_;
@@ -68,11 +80,13 @@ private:
 
     // Sprites
 
+    float maxSpeed = 175.0f;
     float speed = 175.0f;
-    int x, y;
+    int x, y, hitColor;
 
     sf::RenderWindow &window;
     sf::View &view;
+    sf::Texture graveStone;
 
     // Model
     sf::RectangleShape sprite;
@@ -86,6 +100,7 @@ private:
 
     // Private Stats
     int health, armor, kills, score, money;
+    int maxHealth;
     float scaleFactor;
     sf::Clock clock;
     //Speedclock is to ensure that the player doesnt move faster or slower due to
@@ -94,6 +109,7 @@ private:
     bool moving;
     Direction currentDir;
     sf::Vector2f xy;
+    bool isDead;
 
     // Animation rotation arrays, worst implementation, please forgive me
 

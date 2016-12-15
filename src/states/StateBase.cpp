@@ -103,12 +103,6 @@ void StateBase::createShopLabel(sf::Text* text, const sf::Vector2f &position){
     text->setScale(sf::Vector2f(1.f,1.f));
 }
 
-void StateBase::createCoinsImage(sf::RectangleShape rectangleShape, sf::Texture* backgroundImage) {
-    ResourceLoader loader("resources/");
-    loader.loadTexture(backgroundImage, "coins.png");
-    rectangleShape.setTexture(backgroundImage);
-}
-
 //// Settings GUI
 // Create settings windows
 void StateBase::createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position) {

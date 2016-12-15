@@ -23,6 +23,10 @@ StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
     //view->zoom(0.5f);
     //window->setView(*view);
     zombie = new Enemy(sf::Vector2f(0,0));
+    zombieCounter = 0;
+
+    initGameGui();
+    spawnWave();
 }
 
 StateSinglePlayer::~StateSinglePlayer() {
@@ -30,6 +34,9 @@ StateSinglePlayer::~StateSinglePlayer() {
     delete mb;
     delete player;
     delete zombie;
+    delete score;
+    delete coins;
+    delete hpGreenBar;
 
     window->setView(window->getDefaultView());
 }
@@ -48,9 +55,6 @@ void StateSinglePlayer::resume() {
 }
 
 void StateSinglePlayer::pause() {
-    delete score;
-    delete coins;
-    delete hpGreenBar;
     desktop->RemoveAll();
 
 }
@@ -60,22 +64,31 @@ void StateSinglePlayer::update(float deltaTime) {
     player->update(deltaTime);
     player->move(deltaTime);
     level->translateMap(player->move(deltaTime));
-    zombie->translate(player->move(deltaTime));
-    zombie->update(playerPositions, deltaTime);
+    //zombie->translate(player->move(deltaTime));
+    //zombie->update(playerPositions, deltaTime);
     checkForHits(enemies, *player->getBullets());
     if (enemies.empty()) {
         //TODO: toggle shop and spawn new wave after 60 sec
+
+        //initGameGui();
+        goToShop();
+
         spawnWave();
     }
     for (int e = 0; e < enemies.size(); e++) {
         enemies[e]->update(playerPositions, deltaTime);
     }
+    zombiesLeft.setString(std::to_string(zombieCounter));
+
+    score->setString(std::to_string(player->getScore()));
+    coins->setString(std::to_string(player->getScore()/10));
+    hpGreenBar->setScale(((float)player->getHealth()/player->getMaxHealth()), 1);
 }
 
 void StateSinglePlayer::draw(sf::RenderWindow &window) {
     level->draw(game->getWindow());
     player->draw(game->getWindow());
-    zombie->draw(game->getWindow());
+    //zombie->draw(game->getWindow());
 
     for (int e = 0; e < enemies.size(); e++) {
         enemies[e]->draw(game->getWindow());
@@ -86,6 +99,7 @@ void StateSinglePlayer::draw(sf::RenderWindow &window) {
     game->getWindow().draw(*score);
     game->getWindow().draw(*hpGreenBar);
     game->getWindow().draw(*coins);
+    game->getWindow().draw(zombiesLeft);
 }
 
 void StateSinglePlayer::initGameGui() {
@@ -95,16 +109,23 @@ void StateSinglePlayer::initGameGui() {
     font = new sf::Font();
     font->loadFromFile("resources/fonts/feast-of-flesh-bb.italic.ttf");
 
+
     // Player bar
     auto playerBar = sfg::Image::Create();
     createImage(playerBar, "resources/gui/playerbar.png");
     playerBar->SetPosition(sf::Vector2f(10.f, 615.f));
 
     // Zombie counter label
-    //// TODO: Make a counter for zombies left
-    auto zombieLeft = sfg::Label::Create("11");
+    auto zombieLeft = sfg::Label::Create("");
     createPlayerBarLabel(zombieLeft);
     zombieLeft->SetPosition(sf::Vector2f(125.f, 645.f));
+
+
+    zombiesLeft.setFont(*font);
+    zombiesLeft.setCharacterSize(70);
+    zombiesLeft.setColor(sf::Color::White);
+    zombiesLeft.setPosition(135.f, 635.f);
+    zombiesLeft.setString(std::to_string(zombieCounter));
 
     // Scoreboard
     score = new sf::Text("000000", *font, 60);
@@ -121,7 +142,7 @@ void StateSinglePlayer::initGameGui() {
 
     // Coins counter
     //// TODO: A counter for coins retrieved after killing zombies
-    coins = new sf::Text("00000", *font, 40);
+    coins = new sf::Text(std::to_string(player->getScore()), *font, 40);
     coins->setColor(sf::Color::White);
     coins->setPosition(880.f, 15.f);
     coins->setScale(sf::Vector2f(1.0f, 1.0f));
@@ -163,6 +184,12 @@ void StateSinglePlayer::pauseGameGui() {
 
 /// Round Clear - call this if zombie counter = 0
 void StateSinglePlayer::goToShop() {
+    auto bullets = player->getBullets();
+
+    auto bullet = bullets->begin();
+    while(bullet != bullets->end()) {
+        bullet = bullets->erase(bullet);
+    }
 
     // Timer 5000ms (wait)
     game->getStateMachine().setState(StateMachine::StateID::SHOP);
@@ -182,13 +209,12 @@ void StateSinglePlayer::gameOver() {
 void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets) {
     if (!enemies.empty() && !bullets.empty()) {
         auto it = bullets.begin();
-        auto jt = enemies.begin();
 
         for (int i = 0; i < bullets.size(); i++, it++) {
             for (int j = 0; j < enemies.size(); j++) {
-                if (bullets[i].getSprite().getPosition().x + 20 >= enemies[j]->sprite.getPosition().x
-                    && bullets[i].getSprite().getPosition().x + 20 <= enemies[j]->sprite.getPosition().x + (enemies[j]->hitbox.getSize().x*0.2) &&
-                    bullets[i].getSprite().getPosition().y >= enemies[j]->sprite.getPosition().y
+                if (bullets[i].getSprite().getPosition().x >= enemies[j]->sprite.getPosition().x - enemies[j]->sprite.getSize().x*0.1
+                    && bullets[i].getSprite().getPosition().x<= enemies[j]->sprite.getPosition().x + (enemies[j]->hitbox.getSize().x*0.1) &&
+                    bullets[i].getSprite().getPosition().y >= enemies[j]->sprite.getPosition().y - enemies[j]->sprite.getSize().y*0.015
                     && bullets[i].getSprite().getPosition().y <= enemies[j]->sprite.getPosition().y + (enemies[j]->hitbox.getSize().y)*0.2) {
 
                     enemies[j]->getHit(bullets[i].getDamage());
@@ -202,8 +228,15 @@ void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<P
     // Fixed?
     auto enemy = enemies.begin();
     while (enemy != enemies.end()) {
+        if (abs((*enemy)->sprite.getPosition().x - player->getPosition().x) < 50 &&
+            abs((*enemy)->sprite.getPosition().y - player->getPosition().y) < 50) {
+            (*enemy)->dealDamage(player);
+
+        }
         if ((*enemy)->getHealth() <= 0) {
             enemy = enemies.erase(enemy);
+            zombieCounter--;
+            player->setScore(player->getScore() + (*enemy)->getScoreReward());
         } else {
             ++enemy;
         }
@@ -211,9 +244,11 @@ void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<P
 }
 
 void StateSinglePlayer::spawnWave() {
-    for (int e = 0; e < 10 + waveNumber * 3; e++) {
+    for (int e = 0; e < 1 + waveNumber * 0; e++) {
         Enemy* ny_zombie = new Enemy(sf::Vector2f(0,0));
+        ny_zombie->buff(20*waveNumber);
         enemies.push_back(ny_zombie);
         enemies.back()->sprite.setPosition(rand() % 600, rand() % 600);
+        zombieCounter++;
     }
 }

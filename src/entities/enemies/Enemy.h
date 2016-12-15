@@ -16,6 +16,11 @@ class Player;
 
 class Enemy : public Entity {
 public:
+
+    void buff(int percent);
+
+    void dealDamage(Player *player);
+
     Enemy(sf::Vector2f spawnPos);
     virtual ~Enemy();
 
@@ -42,13 +47,25 @@ public:
 
     void setTarget(sf::Vector2f pos);
 
-private:
+protected:
     sf::RectangleShape healthBar;
     sf::RectangleShape hpBarBG;
-    sf::Clock cycleClock;
+    sf::Clock cycleClock, attackTimer;
 
     sf::Vector2f target;
 
+    int scoreReward;
+public:
+    int getScoreReward() const;
+
+    void setScoreReward(int scoreReward);
+
+    bool isIsDead() const;
+
+    void setIsDead(bool isDead);
+
+protected:
+    bool isDead;
     int health;
     int maxHealth;
     int damage;

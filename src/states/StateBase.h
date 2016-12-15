@@ -40,7 +40,6 @@ public:
     void createShopButtonImage(sfg::Button::Ptr buttonName, const String &filename);
     void createShopImage(sfg::Image::Ptr image, const String &filename);
     void createShopLabel(sf::Text* text, const sf::Vector2f &position);
-    void createCoinsImage(sf::RectangleShape rectangleShape, sf::Texture* backgroundImage);
 
     //// Settings GUI
     virtual void createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position);
