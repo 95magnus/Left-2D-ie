@@ -37,14 +37,21 @@ Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRe
     hitbox.setOutlineThickness(3);
 }
 
+
+Projectile::~Projectile() {
+
+}
+
 float Projectile::fRand()
 {
     float rnd = rand() % -1000 + 1000;
     return rnd / 1000;
 }
 
-Projectile::~Projectile() {
 
+void Projectile::update(float deltaTime) {
+    sprite.setPosition(x + velX*clock.getElapsedTime().asSeconds()*rndX, y + velY*clock.getElapsedTime().asSeconds()/*rndY*/);
+    hitbox.setPosition(sprite.getPosition());
 }
 
 const sf::RectangleShape &Projectile::getSprite() const {
@@ -159,10 +166,6 @@ void Projectile::setRndY(float rndY) {
     Projectile::rndY = rndY;
 }
 
-void Projectile::update(float deltaTime) {
-    sprite.setPosition(x + velX*clock.getElapsedTime().asSeconds()*rndX, y + velY*clock.getElapsedTime().asSeconds()/*rndY*/);
-    hitbox.setPosition(sprite.getPosition());
-}
 
 void Projectile::draw(sf::RenderWindow &window) {
 

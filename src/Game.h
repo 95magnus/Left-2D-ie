@@ -11,6 +11,8 @@
 #include <SFGUI/Widgets.hpp>
 #include "states/StateMachine.h"
 
+#define DEBUG 1
+
 typedef std::string String;
 
 class StateMachine;

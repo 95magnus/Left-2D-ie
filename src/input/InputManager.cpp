@@ -28,17 +28,6 @@ void InputManager::setDefaultMappings() {
     actionKeyMappings[Action::MOVE_DOWN]  = Key::S;
     actionKeyMappings[Action::MOVE_LEFT]  = Key::A;
     actionKeyMappings[Action::MOVE_RIGHT] = Key::D;
-//    actionKeyMappings[Action::USE]        = Key::E;
-//    actionKeyMappings[Action::ITEM_1]     = Key::Num1;
-//    actionKeyMappings[Action::ITEM_2]     = Key::Num2;
-//    actionKeyMappings[Action::ITEM_3]     = Key::Num3;
-//    actionKeyMappings[Action::ITEM_4]     = Key::Num4;
-//    actionKeyMappings[Action::ITEM_5]     = Key::Num5;
-//    actionKeyMappings[Action::ITEM_6]     = Key::Num6;
-//    actionKeyMappings[Action::ABILITY_1]  = Key::Num7;
-//    actionKeyMappings[Action::ABILITY_2]  = Key::Num8;
-//    actionKeyMappings[Action::ABILITY_3]  = Key::Num9;
-//    actionKeyMappings[Action::ABILITY_4]  = Key::Num4;
 
     // Populate the reverse lookup table
     // Key -> sf::Key, value -> Action
@@ -152,13 +141,6 @@ bool InputManager::checkForInput() {
             case sf::Event::JoystickMoved: {
                 auto joystick = event.joystickMove;
 
-                if (joystick.axis == sf::Joystick::Axis::R) {
-                    if (joystick.position > rTriggerThreshold) {
-                        for(auto &observer : observers)
-                            observer->actionShoot();
-                    }
-                }
-
                 break;
             }
 
@@ -248,6 +230,9 @@ sf::Vector2f InputManager::checkActionMoveKeys() {
 }
 
 bool InputManager::isJoystickConnected(int joystickID) {
+    if (joystickID == -1)
+        return false;
+
     return playWithJoystick && sf::Joystick::isConnected(joystickID);
 }
 
@@ -261,9 +246,10 @@ sf::Vector2f InputManager::getStickPosition(int joystickID, sf::Joystick::Axis x
 
     sf::Vector2f direction;
 
-    float x = sf::Joystick::getAxisPosition(0, xAxis);
-    float y = sf::Joystick::getAxisPosition(0, yAxis);
+    float x = sf::Joystick::getAxisPosition(joystickID, xAxis);
+    float y = sf::Joystick::getAxisPosition(joystickID, yAxis);
 
+    // Normalized direction vector
     direction.x = x / axisMaxPos;
     direction.y = y / axisMaxPos;
 
@@ -272,6 +258,14 @@ sf::Vector2f InputManager::getStickPosition(int joystickID, sf::Joystick::Axis x
 
     return sf::Vector2f();
 }
+
+bool InputManager::isTriggerPressed(int joystickID, sf::Joystick::Axis trigger) {
+    if (!isJoystickConnected(joystickID))
+        return false;
+
+    return sf::Joystick::getAxisPosition(joystickID, trigger) > triggerTreshold;
+}
+
 
 bool InputManager::isWindowFocused() {
     return windowFocus;

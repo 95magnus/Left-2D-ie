@@ -49,6 +49,7 @@ public:
     void setCurrentDir(Direction currentDir);
 
     sf::Vector2f getPosition() { return xy; }
+    sf::FloatRect getBounds() { return collisionBox; }
 
     int getScore() const;
     void setScore(int score);
@@ -79,6 +80,8 @@ private:
     sf::CircleShape shadow;
     sf::RectangleShape hitbox;
     sf::Texture texture;
+
+    sf::FloatRect collisionBox;
 
     // Sounds
     sf::SoundBuffer SBuffer;

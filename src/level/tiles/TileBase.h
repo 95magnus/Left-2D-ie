@@ -13,20 +13,36 @@ class TileBase {
 public:
     virtual ~TileBase();
 
-    void draw(sf::RenderWindow &window, int worldX, int worldY);
+    virtual void draw(sf::RenderWindow &window);
 
     void setTexture(sf::Texture &texture);
 
     virtual bool isSolid() const;
 
+    sf::FloatRect getBounds() { return boundingBox; }
+    sf::Vector2i getWorldPos() { return sf::Vector2i(worldX, worldY); }
+
+    void setMovements(int movements);
+    int getMovements() { return movements; }
+    void incrementCost() { movements += 3; }
+
+    void resetMovements() { movementsUpdated = false; }
+    bool isMovementsUpdated() { return movementsUpdated; }
+
 protected:
+    int worldX, worldY, tileSize;
+
+    // Number of movements to player
+    int movements = 0;
+    bool movementsUpdated = false;
+
     sf::Texture* texture;
-    sf::Sprite* sprite;
+    sf::RectangleShape* sprite;
 
-    sf::RectangleShape collisionBox;
+    sf::FloatRect boundingBox;
 
-    TileBase(int width, int height);
-    TileBase(int width, int height, sf::Texture &texture);
+    TileBase(int tileSize, int x, int y);
+    TileBase(int tileSize, int x, int y, sf::Texture &texture);
 };
 
 #endif //LEFT2DIE_TILEBASE_H

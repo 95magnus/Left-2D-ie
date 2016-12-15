@@ -66,6 +66,17 @@ void Weapon::rotateWeapon(int mouseWorldPosX, int mouseWorldPosY) {
     }
 }
 
+void Weapon::rotateWeapon(sf::Vector2f direction) {
+    angle = (float) ((atan2(-direction.y, -direction.x) * 180) / 3.1416);
+
+    sprite.setRotation(angle);
+    if (abs(angle) > 90.0f) {
+        flipRight();
+    } else {
+        flipLeft();
+    }
+}
+
 void Weapon::flipLeft() {
     sprite.setScale(0.2, 0.2);
 }

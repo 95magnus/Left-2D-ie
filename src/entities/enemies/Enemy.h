@@ -40,22 +40,19 @@ public:
 
     void setHealth(int health);
 
-    void setTarget(sf::Vector2f pos);
+    void setTarget(sf::Vector2i pos);
 
 private:
     sf::RectangleShape healthBar;
     sf::RectangleShape hpBarBG;
     sf::Clock cycleClock;
 
-    sf::Vector2f target;
+    sf::Vector2i target;
 
-    int health;
-    int maxHealth;
-    int damage;
-    int speed;
+    int health, maxHealth, damage, speed;
     int xOffs, yOffs;
     int rewardPoints;
-    bool goingRight;
+    bool moving, goingRight;
     int hit;
     sf::Vector2f prev;
 };

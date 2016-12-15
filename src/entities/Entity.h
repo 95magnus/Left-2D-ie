@@ -14,6 +14,7 @@ public:
 
     sf::Vector2f getWorldPos() { return worldPos; }
     void setWorldPos(sf::Vector2f pos) { worldPos = pos; }
+    void setWorldPos(float x, float y) { worldPos = sf::Vector2f(x, y); }
 
 protected:
     sf::Vector2f worldPos;

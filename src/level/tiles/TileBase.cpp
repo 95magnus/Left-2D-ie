@@ -1,40 +1,69 @@
 #include "TileBase.h"
 
-TileBase::TileBase(int width, int height) {
-    collisionBox = sf::RectangleShape(sf::Vector2f(width, height));
+TileBase::TileBase(int tileSize, int x, int y) {
+    this->tileSize = tileSize;
+    this->worldX = x;
+    this->worldY = y;
 
     srand(time(NULL));
     int r = rand() % 255;
     int g = rand() % 255;
     int b = rand() % 255;
 
-    sprite = new sf::Sprite();
-    sprite->setColor(sf::Color(r, g, b));
+    sprite = new sf::RectangleShape(sf::Vector2f(tileSize, tileSize));
+    sprite->setPosition(x, y);
+
+
+    //sprite->setColor(sf::Color(r, g, b));
+
+    boundingBox = sprite->getGlobalBounds();
 }
 
-TileBase::TileBase(int width, int height, sf::Texture &texture) {
-    collisionBox = sf::RectangleShape(sf::Vector2f(width, height));
+TileBase::TileBase(int tileSize, int x, int y, sf::Texture &texture) {
+    this->tileSize = tileSize;
+    this->worldX = x;
+    this->worldY = y;
 
-    sprite = new sf::Sprite(texture);
+    sprite = new sf::RectangleShape(sf::Vector2f(tileSize, tileSize));
+    sprite->setTexture(&texture);
+    sprite->setPosition(x, y);
 
     sf::Vector2u texSize = texture.getSize();
-    float scaleX = width / (float)texSize.x;
-    float scaleY = height / (float)texSize.y;
-    sprite->setScale(scaleX, scaleY);
+    float scaleX = tileSize / (float)texSize.x;
+    float scaleY = tileSize / (float)texSize.y;
+    //sprite->setScale(scaleX, scaleY);
+
+    sprite->setOutlineColor(sf::Color(255, 0, 255));
+    sprite->setOutlineThickness(2);
+
+    boundingBox = sprite->getGlobalBounds();
 }
 
 TileBase::~TileBase() {
     delete sprite;
 }
 
-void TileBase::draw(sf::RenderWindow &window, int worldX, int worldY) {
-    sprite->setPosition(worldX, worldY);
-    window.draw(*sprite);
+void TileBase::draw(sf::RenderWindow &window) {
+    if (sprite)
+        window.draw(*sprite);
 }
 
 void TileBase::setTexture(sf::Texture& texture) {
-    sprite->setTexture(texture);
+    sprite->setTexture(&texture);
+
+    sf::Vector2u texSize = texture.getSize();
+    float scaleX = tileSize / (float)texSize.x;
+    float scaleY = tileSize / (float)texSize.y;
+    sprite->setScale(scaleX, scaleY);
+
+    boundingBox = sprite->getGlobalBounds();
 }
+
+void TileBase::setMovements(int movements) {
+    this->movements = movements;
+    movementsUpdated = true;
+}
+
 
 bool TileBase::isSolid() const {
     return false;

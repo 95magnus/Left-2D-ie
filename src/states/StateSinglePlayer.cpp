@@ -19,7 +19,7 @@ StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
     waveMsg = "Wave ";
 
     window = &game->getWindow();
-    view = &level->getView();
+    //view = &level->getView();
     //view->zoom(0.5f);
     //window->setView(*view);
     zombie = new Enemy(sf::Vector2f(0,0));
@@ -209,25 +209,41 @@ void StateSinglePlayer::onAbilityOneBoxMarked() {
 
 void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets) {
     if (!enemies.empty() && !bullets.empty()) {
-        auto it = bullets.begin();
-        auto jt = enemies.begin();
-
-        for (int i = 0; i < bullets.size(); i++, it++) {
+        for (int i = 0; i < bullets.size(); i++) {
             for (int j = 0; j < enemies.size(); j++) {
                 if (bullets[i].getSprite().getPosition().x + 20 >= enemies[j]->sprite.getPosition().x
-                    && bullets[i].getSprite().getPosition().x + 20 <= enemies[j]->sprite.getPosition().x + (enemies[j]->hitbox.getSize().x*0.2) &&
-                    bullets[i].getSprite().getPosition().y >= enemies[j]->sprite.getPosition().y
-                    && bullets[i].getSprite().getPosition().y <= enemies[j]->sprite.getPosition().y + (enemies[j]->hitbox.getSize().y)*0.2) {
+                    && bullets[i].getSprite().getPosition().x + 20
+                       <= enemies[j]->sprite.getPosition().x + (enemies[j]->hitbox.getSize().x*0.2)
+                    && bullets[i].getSprite().getPosition().y
+                       >= enemies[j]->sprite.getPosition().y
+                    && bullets[i].getSprite().getPosition().y
+                       <= enemies[j]->sprite.getPosition().y + (enemies[j]->hitbox.getSize().y)*0.2) {
 
                     enemies[j]->getHit(bullets[i].getDamage());
-                    bullets.erase(it);
-
+                    bullets.erase(bullets.begin() + i);
+                    i++;
                 }
             }
         }
     }
 
-    // Fixed?
+    /*
+    auto bullet = bullets.begin();
+    auto enemy = enemies.begin();
+    while (bullet != bullets.end()) {
+        while (enemy!= enemies.end()) {
+            if (bullet == enemy) {
+                (*enemy)->getHit((*bullet).getDamage());
+            } else {
+                ++bullet;
+                ++enemy;
+            }
+        }
+
+    }
+
+    */
+
     auto enemy = enemies.begin();
     while (enemy != enemies.end()) {
         if ((*enemy)->getHealth() <= 0) {

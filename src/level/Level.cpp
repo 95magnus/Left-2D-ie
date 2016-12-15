@@ -1,15 +1,20 @@
 #include "Level.h"
+#include "tiles/TileDirt.h"
 
 Level::Level() {
-    initTiles();
+    ResourceLoader loader("resources/");
 
-    view = new sf::View();
+    textures[Tile::DIRT] = &loader.loadTextureFromSpritesheet(tilesheetFileName, 0, 0, tileSpriteSize, tileSpriteSize);
+    textures[Tile::STONE] = &loader.loadTextureFromSpritesheet(tilesheetFileName, 0, 2, tileSpriteSize, tileSpriteSize);
+
+    tileIDs[0] = Tile::DIRT;
+    tileIDs[1] = Tile::STONE;
 }
 
 Level::Level(sf::Vector2u windowSize, int width, int height) : Level() {
     this->windowSize = windowSize;
-    this->width = width;
-    this->height = height;
+    this->levelWidth = width;
+    this->levelHeight = height;
 
     generateTestLevel();
 }
@@ -21,28 +26,12 @@ Level::Level(sf::Vector2u windowSize, const String fileName) : Level() {
 }
 
 Level::~Level() {
-    delete view;
-
     for (auto &row : testMap)
         for (auto &tile : row)
             delete tile;
 
-    // delete tex;
-
-    for (auto &tile : tileRegistry)
+    for (auto &tile : textures)
         delete tile.second;
-}
-
-void Level::initTiles() {
-    ResourceLoader loader("resources/");
-
-    tileRegistry[Tile::DIRT] =
-            new TileStone(tileSize, loader.loadTextureFromSpritesheet(tilesheetFileName, 0, 0, tileSpriteSize, tileSpriteSize));
-    tileRegistry[Tile::STONE] =
-            new TileStone(tileSize, loader.loadTextureFromSpritesheet(tilesheetFileName, 0, 2, tileSpriteSize, tileSpriteSize));
-
-    tileIDs[0] = Tile::DIRT;
-    tileIDs[1] = Tile::STONE;
 }
 
 void Level::generateTestLevel() {
@@ -55,10 +44,10 @@ void Level::generateTestLevel() {
     tex->update(pixels);
 
     srand(time(NULL));
-    for (int y = 0; y < height; y++) {
+    for (int y = 0; y < levelHeight; y++) {
         std::vector<sf::Sprite*> row;
 
-        for (int x = 0; x < width; x++) {
+        for (int x = 0; x < levelWidth; x++) {
             sf::Sprite *sprite = new sf::Sprite();
             sprite->setTexture(*tex);
             sprite->setPosition(x * tileSize, y * tileSize);
@@ -115,10 +104,10 @@ void Level::loadFromFile(const std::string &filename) {
         metadata.push_back(value);
     }
 
-    width = metadata[0];
-    height = metadata[1];
+    levelWidth = metadata[0];
+    levelHeight = metadata[1];
 
-    int rowTiles = 0;
+    int xIndex = 0, yIndex = 0;
 
     // Read level tile data line by line
     while(std::getline(file, line)) {
@@ -131,39 +120,37 @@ void Level::loadFromFile(const std::string &filename) {
         String strTileID;
         TileMapRow row;
 
+        xIndex = 0;
         // Spilt tileIDs by delimiter ' '
         while (std::getline(ss, strTileID, ' ')) {
             int tileID;
             std::istringstream(strTileID) >> tileID;
 
-            TileBase* tile;
-
-            // Check if tileID is valid (contains at least 1 entry)
+            // Check if tileID is valid (map contains at least 1 entry)
             if (tileIDs.count(tileID)) {
-                // Look up tile object from ID
-                tile = tileRegistry[tileIDs[tileID]];   // Valid ID
+                row.push_back(generateTile(tileIDs[tileID], xIndex * tileSize, yIndex * tileSize));   // Valid ID
             } else {
-                tile = tileRegistry[Tile::DIRT];        // Invalid ID
+                row.push_back(generateTile(Tile::DIRT, xIndex * tileSize, yIndex * tileSize));        // Invalid ID
             }
 
-            row.push_back(tile);
+            xIndex++;
         }
 
-        if (width != row.size()) {
+        if (levelWidth != row.size()) {
             std::cerr << "Level loading error in file \"" << filename << "\"\n"
-                      << "Level width " << row.size() << " found at row " << rowTiles
-                      << "\nExpected: " << width;
+                      << "Level levelWidth " << row.size() << " found at row " << yIndex
+                      << "\nExpected: " << levelWidth;
             exit(1);
         }
 
         tiles.push_back(row);
-        rowTiles++;
+        yIndex++;
     }
 
-    if (height != tiles.size()) {
+    if (levelHeight != tiles.size()) {
         std::cerr << "Level loading error in file \"" << filename << "\"\n"
-                  << "Level height " << tiles.size() << " found"
-                  << "\nExpected: " << height;
+                  << "Level levelHeight " << tiles.size() << " found"
+                  << "\nExpected: " << levelHeight;
         exit(1);
     }
 
@@ -178,49 +165,9 @@ void Level::draw(sf::RenderWindow &window) {
     if (!levelLoaded)
         return;
 
-
-
-
-    for (unsigned int y = 0; y < height; y++) {
-        for (unsigned int x = 0; x < width; x++) {
-            tiles[y][x]->draw(window, x * tileSize - xOffs, y * tileSize - yOffs);
-        }
-    }
-}
-
-void Level::drawTiles(sf::RenderWindow &window, sf::Vector2f worldCoordCenter) {
-    if (!levelLoaded)
-        return;
-
-    // Find bounds of viewport
-    int worldMinX = (int)(worldCoordCenter.x - (windowSize.x/2));
-    int worldMinY = (int)(worldCoordCenter.y - (windowSize.y/2));
-    int worldMaxX = (int)(worldCoordCenter.x + (windowSize.x/2));
-    int worldMaxY = (int)(worldCoordCenter.y + (windowSize.y/2));
-
-    // Find tile bounds within viewport
-    int tileIndexMinX = worldMinX / (int)tileSize;
-    int tileIndexMinY = worldMinY / (int)tileSize;
-    int tileIndexMaxX = worldMaxX / (int)tileSize;
-    int tileIndexMaxY = worldMaxY / (int)tileSize;
-
-    int xScreen = 0, yScreen = 0;
-
-
-    // Draw tiles within viewport
-    for (int y = tileIndexMinY; y < tileIndexMaxY; y++) {
-        if (y < 0 || y >= height)
-            continue;
-
-        yScreen += tileSize;
-
-        for (int x = tileIndexMinX; x < tileIndexMaxX; x++) {
-            if (x < 0 || x >= width)
-                continue;
-
-            xScreen += tileSize;
-
-            tiles[y][x]->draw(window, xScreen, yScreen);
+    for (unsigned int y = 0; y < levelHeight; y++) {
+        for (unsigned int x = 0; x < levelWidth; x++) {
+            tiles[y][x]->draw(window);
         }
     }
 }
@@ -231,14 +178,51 @@ void Level::setMapOffset(sf::Vector2f offset) {
 }
 
 void Level::translateMap(sf::Vector2f offset) {
-    //if (xOffs + offset.x > 0 && xOffs + offset.x < windowSize.x)
     xOffs += offset.x;
-
     yOffs += offset.y;
 }
 
-sf::Vector2i Level::worldCoordToTile(sf::Vector2f position) {
-    return sf::Vector2i((position.x - xOffs) / tileSize, (position.y - yOffs) / tileSize);
+sf::Vector2i Level::worldCoordToTileIndex(sf::Vector2f position) {
+    if (position.x >= levelWidth * tileSize
+        || position.x < 0
+        || position.y >= levelHeight * tileSize
+        || position.y < 0) {
+        return sf::Vector2i(-1,-1);
+    }
+
+    return sf::Vector2i((int)(position.x) / tileSize, (int)(position.y) / tileSize);
+}
+
+TileMap &Level::getSurroundingTiles(sf::Vector2i index, int radius) {
+    TileMap* tileSection = new TileMap();
+
+    int xMin = std::max(0, index.x - radius);
+    int xMax = std::min(levelWidth - 1, index.x + radius);
+    int yMin = std::max(0, index.y - radius);
+    int yMax = std::min(levelHeight - 1, index.y + radius);
+
+    for (int y = yMin; y <= yMax; y++) {
+        TileMapRow* row = new TileMapRow();
+
+        for (int x = xMin; x <= xMax; x++) {
+            row->push_back(tiles[y][x]);
+        }
+
+        tileSection->push_back(*row);
+    }
+
+    return *tileSection;
+}
+
+TileBase* Level::generateTile(Level::Tile type, int x, int y) {
+    switch(type) {
+        case Tile::DIRT:
+            return new TileDirt(tileSize, x, y, *textures[Tile::DIRT]);
+        case Tile::STONE:
+            return new TileStone(tileSize, x, y, *textures[Tile::STONE]);
+        default:
+            return nullptr;
+    }
 }
 
 

@@ -5,7 +5,7 @@
 
 class TileDirt : public TileBase {
 public:
-    TileDirt(unsigned int tileSize, sf::Texture &texture);
+    TileDirt(unsigned int tileSize, int x, int y, sf::Texture &texture);
     virtual ~TileDirt() {}
 
 protected:

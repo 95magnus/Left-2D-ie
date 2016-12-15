@@ -22,7 +22,11 @@ public:
 private:
     int joystickID = -1;
 protected:
+    bool usingController = false;
+
     sf::Vector2f moveDirection;
+    sf::Vector2f viewingDirection;
+    bool shooting;
 };
 
 

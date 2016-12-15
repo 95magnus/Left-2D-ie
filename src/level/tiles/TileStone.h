@@ -5,7 +5,7 @@
 
 class TileStone : public TileBase {
 public:
-    TileStone(unsigned int tileSize, sf::Texture &texture);
+    TileStone(unsigned int tileSize, int x, int y, sf::Texture &texture);
     virtual ~TileStone() {}
 
     bool isSolid() const;

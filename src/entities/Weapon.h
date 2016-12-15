@@ -31,6 +31,7 @@ public:
     void flipLeft();
 
     void rotateWeapon(int mouseWorldPosX, int mouseWorldPosY);
+    void rotateWeapon(sf::Vector2f direction);
 
     void setPosition(int x, int y);
 

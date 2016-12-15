@@ -43,6 +43,7 @@ public:
     bool isJoystickConnected(int joystickID);
     unsigned int connectedJoystickCount();
     sf::Vector2f getStickPosition(int joystickID, sf::Joystick::Axis xAxis, sf::Joystick::Axis yAxis);
+    bool isTriggerPressed(int joystickID, sf::Joystick::Axis trigger);
 
     void setStateMachine(StateMachine *stateMachine);
 
@@ -68,8 +69,7 @@ protected:
 
     bool playWithJoystick = false, windowFocus = false;
 
-    const float joystickThreshold = 15.0f, axisMaxPos = 100.0f;
-    const int rTriggerThreshold = 10;
+    const float joystickThreshold = 15.0f, triggerTreshold = 15.0f, axisMaxPos = 100.0f;
     unsigned int connectedJoysticks = 0;
 
     std::vector<InputObserver*> observers;

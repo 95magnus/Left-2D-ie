@@ -6,7 +6,7 @@
 #include "../input/InputManager.h"
 
 Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputManager, sf::Vector2f pos)
-        : Entity(pos), PlayerController(inputManager), window(window), view(view){
+        : Entity(pos), PlayerController(inputManager, 0), window(window), view(view){
     health = 100;
     armor = 0;
     kills = 0;
@@ -15,18 +15,13 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
     currentDir = Right;
     sprite.setSize(sf::Vector2f(55, 55));
     scaleFactor = 0.25;
-    xy = pos;
+    xy = sf::Vector2f(worldPos.x, worldPos.y - 50);
     sprite.setPosition(xy);
 
     currentWeapon = new Weapon(window, 0, 6, sprite.getPosition().x - 5, sprite.getPosition().y + 10);
 
     texture.setSmooth(false);
     texture.setRepeated(false);
-
-    //texture.setSrgb(false);
-
-    hitbox.setOutlineColor(sf::Color::Red);
-    hitbox.setOutlineThickness(1);
 
     //Load Texture
     if (!texture.loadFromFile("resources/textures/spritesheets/player.png")) {
@@ -41,14 +36,20 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
     animationDirections.emplace(Left, left);
     animationDirections.emplace(Right, right);
 
+    #if DEBUG
     hitbox.setOutlineThickness(2);
     hitbox.setOutlineColor(sf::Color::Red);
-    hitbox.setFillColor(sf::Color(0,0,0,0));
+    # endif
 
+    hitbox.setFillColor(sf::Color(0,0,0,0));
     // Hitboxen blir like brei som karakten, og 1/3 av høyden
-    hitbox.setSize(sf::Vector2f(sprite.getSize().x, sprite.getSize().y));
+    //hitbox.setSize(sf::Vector2f(sprite.getSize().x, sprite.getSize().y));
+
+    hitbox.setSize(sf::Vector2f(32, 32));
+    hitbox.setOrigin(hitbox.getSize().x/2, hitbox.getSize().y/2);
+
     // Hitboxen ligger rundt karakterens føtter.
-    hitbox.setPosition(sprite.getPosition().x, sprite.getPosition().y + 110);
+    hitbox.setPosition(sprite.getPosition().x, sprite.getPosition().y + 130);
 
     //shadow.setOrigin(hitbox.getOrigin().x - hitbox.getSize().x/4, hitbox.getOrigin().y - hitbox.getSize().y/4);
     shadow.setRadius(sprite.getSize().x/3);
@@ -56,15 +57,19 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
     shadow.setPosition(sprite.getPosition().x, sprite.getPosition().y + 80);
     shadow.setOrigin(shadow.getRadius()/2, shadow.getRadius()/2);
 
-    sprite.setOrigin(sprite.getSize().x/2.2, sprite.getSize().y);
-    hitbox.setOrigin(sprite.getOrigin());
+    sprite.setOrigin(sprite.getSize().x/2.2f, sprite.getSize().y);
+    //hitbox.setOrigin(sprite.getOrigin().x, sprite.getOrigin().y);
+
+    //sprite.setOutlineThickness(2);
+    //sprite.setOutlineColor(sf::Color(0, 255, 0));
+
+    collisionBox = hitbox.getGlobalBounds();
 
     scale(0.8);
 
     animationCycler(animationDirections[currentDir]);
 }
 
-// Destructor
 Player::~Player() {
 
 }
@@ -72,21 +77,33 @@ Player::~Player() {
 void Player::update(float deltaTime) {
     PlayerController::update(deltaTime);
 
-    //sprite.setPosition(xy);
-
     currentWeapon->update(deltaTime);
 
     speedClock.restart();
     auto mousePos = sf::Mouse::getPosition(window);
-    auto worldCoords = window.mapPixelToCoords(mousePos, view);
-    currentWeapon->rotateWeapon(worldCoords.x, worldCoords.y);
+    auto mouseWorld = window.mapPixelToCoords(mousePos, view);
 
-    hitbox.setPosition(xy.x, xy.y + 50);
+    if (usingController) {
+        if (viewingDirection == sf::Vector2f(0, 0) && currentDir == Left) {
+            sf::Vector2f temp(viewingDirection.x * -1, viewingDirection.y);
+            currentWeapon->rotateWeapon(temp);
+        } else
+            currentWeapon->rotateWeapon(viewingDirection);
+    } else {
+        currentWeapon->rotateWeapon(mouseWorld.x, mouseWorld.y);
+    }
+
+    hitbox.setPosition(worldPos.x, worldPos.y);
+
     shadow.setPosition(xy.x - 5, xy.y + 50);
     currentWeapon->setPosition(xy.x - 5, xy.y + 10);
 
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && window.hasFocus()) {
-        currentWeapon->fire();
+    if (usingController) {
+        if (shooting && window.hasFocus())
+            currentWeapon->fire();
+    } else {
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && window.hasFocus())
+            currentWeapon->fire();
     }
 
     auto it = currentWeapon->getBullets().begin();
@@ -99,10 +116,11 @@ void Player::update(float deltaTime) {
             ++it;
         }
     }
+
+    collisionBox = hitbox.getGlobalBounds();
 }
 
 void Player::draw(sf::RenderWindow &window) {
-
     if (!moving) {
         if (currentDir == Right) {
             sprite.setSize(sf::Vector2f(right[0].width*scaleFactor, right[0].height*scaleFactor));
@@ -127,25 +145,30 @@ void Player::draw(sf::RenderWindow &window) {
     }
 
     window.draw(shadow);
-    window.draw(sprite);
     window.draw(hitbox);
 
-    for (auto it = currentWeapon->getBullets().begin(); it != currentWeapon->getBullets().end(); ++it) {
-        window.draw(it->getSprite());
+    if (currentDir == Up) {
+
+        for (auto it = currentWeapon->getBullets().begin(); it != currentWeapon->getBullets().end(); ++it) {
+            window.draw(it->getSprite());
+        }
+
+        currentWeapon->draw(window);
+
+        window.draw(sprite);
+    } else {
+        window.draw(sprite);
+
+        for (auto it = currentWeapon->getBullets().begin(); it != currentWeapon->getBullets().end(); ++it) {
+            window.draw(it->getSprite());
+        }
+
+        currentWeapon->draw(window);
     }
-    currentWeapon->draw(window);
 }
 
 sf::Vector2f Player::move(float deltaTime) {
     if (moveDirection.x != 0 || moveDirection.y != 0) {
-        /*
-        sprite.move(moveDirection * speed * deltaTime);
-        hitbox.move(moveDirection * speed * deltaTime);
-        shadow.move(moveDirection * speed * deltaTime);
-
-        xy = sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y);
-        currentWeapon->setPosition(xy.x, xy.y);
-        */
         if (abs(moveDirection.x) >= abs(moveDirection.y))
             currentDir = (moveDirection.x < 0) ? Left : Right;
         else
@@ -155,21 +178,21 @@ sf::Vector2f Player::move(float deltaTime) {
         animationCycler(animationDirections[currentDir]);
 
         worldPos += moveDirection * speed * deltaTime;
-        xy = worldPos;
+        xy = sf::Vector2f(worldPos.x, worldPos.y - 50);
 
         return moveDirection * speed * deltaTime;
     } else {
         moving = false;
 
-        return sf::Vector2f(0, 0);
+        return sf::Vector2f();
     }
 }
 
 void Player::scale(float x) {
     sprite.setScale(x, x);
     scaleFactor *= x;
-    hitbox.setScale(x, x);
-    hitbox.move(0, -50*x);
+    //hitbox.setScale(x, x);
+    //hitbox.move(0, -50*x);
 
     shadow.setScale(x, x);
     shadow.move(0, -50*x);
@@ -396,6 +419,6 @@ void Player::setCurrentDir(Player::Direction currentDir) {
     Player::currentDir = currentDir;
 }
 
-std::vector<Projectile> *Player::getBullets() {
+std::vector<Projectile>* Player::getBullets() {
     return &currentWeapon->getBullets();
 }

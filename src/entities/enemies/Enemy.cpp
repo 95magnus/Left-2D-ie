@@ -37,7 +37,7 @@ Enemy::Enemy(sf::Vector2f spawnPos) : Entity(spawnPos) {
     //hpBarBG.setFillColor(sf::Color::Red);
     cycleClock.restart();
 
-    target = sf::Vector2f(0, 0);
+    target = sf::Vector2i(-1, -1);
 }
 
 void Enemy::animationCycler(float interval) {
@@ -57,87 +57,63 @@ Enemy::~Enemy() {
 }
 
 void Enemy::update(float deltaTime) {
-    //target = sf::Vector2f(600, 500);
+    if (target == sf::Vector2i(worldPos.x, worldPos.y)) {
+        moving = false;
+        return;
+    }
 
-    // Under får zombien en retning å gå, den vil bevege seg likt som prosjektilene
-    diffX = target.x - sprite.getPosition().x;
-    diffY = target.y - sprite.getPosition().y;
-    magnitude = sqrtf(diffX*diffX + diffY*diffY);
-    velX = diffX/magnitude*speed;
-    velY = diffY/magnitude*speed;
-    //hitbox.setSize(sprite.getSize());
+    sf::Vector2f direction;
+    direction.x = target.x - worldPos.x;
+    direction.y = target.y - worldPos.y;
 
-    worldPos.x += velX * deltaTime;
-    worldPos.y += velY * deltaTime;
+    float length = sqrt(direction.x * direction.x + direction.y * direction.y);
+    direction /= length;
+
+    worldPos += direction * (speed * deltaTime);
 
     sprite.setPosition(worldPos);
     hitbox.setPosition(worldPos);
 
-    //sprite.move(velX*deltaTime, velY*deltaTime);
-    //hitbox.move(velX*deltaTime, velY*deltaTime);
+    goingRight = direction.x > 0;
+    moving = direction == sf::Vector2f(0, 0);
 
     rewardPoints = 10;
 }
 
 void Enemy::update(std::vector<sf::Vector2f> players, float deltaTime) {
-    // Går gjennom lista med spillerenes posisjoner for å finne den nærmeste
-    /*for (auto it = players.begin(); it != players.end(); it++) {
-        if (abs(target.x - it->x) < target.x && abs(target.y - it->y)) {
-            target = *it;
-        }
-    }
-    for (int i = 0; i < players.size(); i++) {
-        if (abs(players[i].x - sprite.getPosition().x) < abs(target.x - sprite.getPosition().x)
-                && abs(players[i].y - sprite.getPosition().y) < abs(target.y - sprite.getPosition().y)) {
-            target = players[i];
-        }
-    }*/
-
-    //target = sf::Vector2f(600, 500);
-    if (worldPos == target)
-        return;
 
     // Under får zombien en retning å gå, den vil bevege seg likt som prosjektilene
     diffX = target.x - sprite.getPosition().x;
     diffY = target.y - sprite.getPosition().y;
-    magnitude = sqrtf(diffX*diffX + diffY*diffY);
+    magnitude = sqrt(diffX*diffX + diffY*diffY);
     velX = diffX/magnitude*speed;
     velY = diffY/magnitude*speed;
+
+    worldPos.x += velX * deltaTime;
+    worldPos.y += velY * deltaTime;
+
     hitbox.setSize(sprite.getSize());
-    hitbox.setPosition(sprite.getPosition());
-    sprite.move(velX*deltaTime, velY*deltaTime);
-    hitbox.move(velX*deltaTime, velY*deltaTime);
-    rewardPoints = 10;
+    hitbox.setPosition(worldPos);
+    sprite.setPosition(worldPos);
 }
 
 void Enemy::translate(sf::Vector2f offset) {
-    //if (xOffs + offset.x > 0 && xOffs + offset.x < windowSize.x)
-
-
     xOffs += offset.x;
-
     yOffs += offset.y;
 }
 
 void Enemy::draw(sf::RenderWindow &window) {
-    animationCycler(0.5);
-    if (target.x > sprite.getPosition().x) {
-        goingRight = false;
-    }
-    if (target.x < sprite.getPosition().x) {
-        goingRight = true;
-    }
-    if (!goingRight) {
+    if (moving)
+        animationCycler(0.5);
+
+    if (goingRight) {
         sprite.setScale(-0.2, 0.2);
         hitbox.setSize(sprite.getSize());
         hitbox.setScale(sprite.getScale());
-        hitbox.setPosition(sprite.getPosition());
-    }
-    if (goingRight){
+    } else {
         sprite.setScale(0.2, 0.2);
         hitbox.setSize(sprite.getSize());
         hitbox.setScale(sprite.getScale());
-        hitbox.setPosition(sprite.getPosition());
     }
     //hpBarBG.setPosition(healthBar.getPosition());
     //healthBar.setSize(sf::Vector2f((healthBar.getSize().x - healthBar.getSize().x*((maxHealth - health)/maxHealth)), healthBar.getSize().y));
@@ -154,7 +130,7 @@ void Enemy::draw(sf::RenderWindow &window) {
 
 void Enemy::getHit(int damage) {
     health = health - damage;
-    std::cout << std::to_string(health) << std::endl;
+    //std::cout << std::to_string(health) << std::endl;
     hit = 0;
 }
 
@@ -166,6 +142,6 @@ void Enemy::setHealth(int health) {
     Enemy::health = health;
 }
 
-void Enemy::setTarget(sf::Vector2f pos) {
+void Enemy::setTarget(sf::Vector2i pos) {
     target = pos;
 }
