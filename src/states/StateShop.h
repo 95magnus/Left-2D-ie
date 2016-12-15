@@ -3,11 +3,13 @@
 
 #include "StateBase.h"
 #include "../Game.h"
+#include "../entities/Weapon.h"
 
 #include <SFML/Graphics/Text.hpp>
 
 typedef std::string String;
 
+class Player;
 
 class StateShop : public StateBase {
 public:
@@ -23,11 +25,16 @@ public:
 
     void initGameGui();
 
+    void upgradeWeapon();
+    void upgradeFireRate();
+    void upgradeDamage();
+    void upgradeHealth();
+
 protected:
     sf::Font *font;
 
     sf::Text* nextRoundLabel;
-    sf::Text* totalCoins; // EDIT
+    sf::Text* totalCoins;
     sf::Text* cost;
     sf::Text* totalCoinsEarnedLabel;
 
@@ -61,7 +68,9 @@ protected:
     sf::RectangleShape* healthContainer;
     sf::RectangleShape* coinsContainer;
 
-    sfg::Image::Ptr coinsImage;
+
+    Player* player;
+    Weapon* weapon;
 };
 
 

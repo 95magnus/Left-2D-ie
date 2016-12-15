@@ -88,15 +88,6 @@ void StateBase::createShopButtonImage(sfg::Button::Ptr buttonName, const String 
     buttonName->SetImage(sfgImage);
 }
 
-void StateBase::createShopImage(sfg::Image::Ptr image, const String &filename){
-    auto temp = new sf::Image;
-    if(temp->loadFromFile(filename)){
-        image->SetImage(*temp);
-    }
-    image->SetRequisition(sf::Vector2f(game->getWindowSize()));
-    desktop->Add(image);
-}
-
 void StateBase::createShopLabel(sf::Text* text, const sf::Vector2f &position){
     text->setPosition(position);
     text->setColor(sf::Color::White);

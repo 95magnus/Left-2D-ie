@@ -22,7 +22,7 @@ public:
 
     void hit();
 
-    void getHit(int damage);
+//    void getHit(int damage);
 
     enum Direction { Up, Down, Left, Right };
 
@@ -71,6 +71,10 @@ public:
     float getMaxSpeed() const;
 
     void setMaxSpeed(float maxSpeed);
+
+    Weapon* getWeapon(){
+        return currentWeapon;
+    }
 
 private:
     //Components

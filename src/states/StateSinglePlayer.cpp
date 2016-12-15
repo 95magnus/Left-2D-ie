@@ -67,18 +67,29 @@ void StateSinglePlayer::update(float deltaTime) {
     //zombie->translate(player->move(deltaTime));
     //zombie->update(playerPositions, deltaTime);
     checkForHits(enemies, *player->getBullets());
+
+    zombiesLeft.setString(std::to_string(zombieCounter));
+    score->setString(std::to_string(player->getScore()*15));
+    player->setMoney(player->getScore()*3);
+    coins->setString(std::to_string(player->getMoney()));
+
+    // Health bar adjustment
+    float healthPercent = (float)player->getHealth()/player->getMaxHealth();
+    hpGreenBar->setScale(healthPercent, 1);
+    hpGreenBar->setFillColor(interpolate(sf::Color::Red, sf::Color::Green, healthPercent));
+
+    if(healthPercent < 0) {
+        gameOver();
+    }
+
     if (enemies.empty()) {
+        waveNumber++;
         goToShop();
         spawnWave();
     }
     for (int e = 0; e < enemies.size(); e++) {
         enemies[e]->update(playerPositions, deltaTime);
     }
-    zombiesLeft.setString(std::to_string(zombieCounter));
-
-    score->setString(std::to_string(player->getScore()));
-    coins->setString(std::to_string(player->getScore()/10));
-    hpGreenBar->setScale(((float)player->getHealth()/player->getMaxHealth()), 1);
 }
 
 void StateSinglePlayer::draw(sf::RenderWindow &window) {
@@ -90,12 +101,12 @@ void StateSinglePlayer::draw(sf::RenderWindow &window) {
         enemies[e]->draw(game->getWindow());
     }
     //window->draw(vignette);
-    mb->draw("Wave x - Good luck", 8, game->getWindow());
+    mb->draw("Wave " + std::to_string(waveNumber) + " - Good luck", 8, game->getWindow());
 
+    game->getWindow().draw(zombiesLeft);
     game->getWindow().draw(*score);
     game->getWindow().draw(*hpGreenBar);
     game->getWindow().draw(*coins);
-    game->getWindow().draw(zombiesLeft);
 }
 
 void StateSinglePlayer::initGameGui() {
@@ -104,7 +115,6 @@ void StateSinglePlayer::initGameGui() {
 
     font = new sf::Font();
     font->loadFromFile("resources/fonts/feast-of-flesh-bb.italic.ttf");
-
 
     // Player bar
     auto playerBar = sfg::Image::Create();
@@ -116,7 +126,7 @@ void StateSinglePlayer::initGameGui() {
     createPlayerBarLabel(zombieLeft);
     zombieLeft->SetPosition(sf::Vector2f(125.f, 645.f));
 
-
+    // Zombies counter
     zombiesLeft.setFont(*font);
     zombiesLeft.setCharacterSize(70);
     zombiesLeft.setColor(sf::Color::White);
@@ -129,15 +139,12 @@ void StateSinglePlayer::initGameGui() {
     score->setPosition(sf::Vector2f(400.0f, 10.f));
     score->setScale(sf::Vector2f(1.0f, 1.0f));
 
-    //// TODO: Make a scoreboardsystem
-
     // Coins
     auto coinsBar = sfg::Image::Create();
     createImage(coinsBar, "resources/gui/coins.png");
     coinsBar->SetPosition(sf::Vector2f(800.f, 10.f));
 
     // Coins counter
-    //// TODO: A counter for coins retrieved after killing zombies
     coins = new sf::Text("", *font, 40);
     coins->setColor(sf::Color::White);
     coins->setPosition(880.f, 15.f);
@@ -146,17 +153,14 @@ void StateSinglePlayer::initGameGui() {
     // Health bar
     auto hpBar = sfg::Image::Create();
     createImage(hpBar, "resources/gui/healthbar.png");
-
     hpBar->SetPosition(sf::Vector2f(10.f,10.f));
 
     // Health
     hpGreenBar = new sf::RectangleShape(sf::Vector2f(154.0f, 16.f));
     hpGreenBar->setFillColor(sf::Color::Green);
     hpGreenBar->setPosition(91.f, 33.f);
-    // TODO: Get health input from player
 
     auto box = sfg::Box::Create(sfg::Box::Orientation::VERTICAL, 0.f);
-
 
     auto itemOne = sfg::ToggleButton::Create();
     itemOne->SetId("togglebutton");
@@ -174,7 +178,6 @@ void StateSinglePlayer::initGameGui() {
 /// Pause (ESC button)
 void StateSinglePlayer::pauseGameGui() {
     //// TODO: Freeze game
-
 
 }
 
@@ -240,7 +243,7 @@ void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<P
 }
 
 void StateSinglePlayer::spawnWave() {
-    for (int e = 0; e < 1 + waveNumber * 0; e++) {
+    for (int e = 0; e < 10 + waveNumber * 3; e++) {
         Enemy* ny_zombie = new Enemy(sf::Vector2f(0,0));
         ny_zombie->buff(20*waveNumber);
         enemies.push_back(ny_zombie);

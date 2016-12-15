@@ -6,6 +6,7 @@
 #include "../Game.h"
 #include "StateBase.h"
 #include "../gui/Message.h"
+#include <math.h>
 //#include "../entities/NormalZombie.h"
 //#include "../entities/Enemy.h"
 
@@ -38,6 +39,18 @@ public:
     void checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets);
 
     void gameOver();
+
+    Player* getPlayer(){
+        return player;
+    }
+
+    sf::Color interpolate(sf::Color c1, sf::Color c2, float mixPercent) {
+        sf::Color col;
+        col.r = (sf::Uint8) sqrt((1 - mixPercent) * (c1.r * c1.r) + mixPercent * c2.r * c2.r);
+        col.g = (sf::Uint8) sqrt((1 - mixPercent) * (c1.g * c1.g) + mixPercent * c2.g * c2.g);
+        col.b = (sf::Uint8) sqrt((1 - mixPercent) * (c1.b * c1.b) + mixPercent * c2.b * c2.b);
+        return col;
+    }
 
 protected:
     //InputManager* inputManager;

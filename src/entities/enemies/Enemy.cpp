@@ -48,6 +48,7 @@ void Enemy::buff(int percent) {
     damage = damage + damage*percent;
     health = health + health*percent;
     speed = speed + speed*percent;
+    scoreReward = scoreReward + scoreReward*percent;
 }
 
 void Enemy::dealDamage(Player *player) {

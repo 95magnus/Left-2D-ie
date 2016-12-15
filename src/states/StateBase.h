@@ -38,7 +38,6 @@ public:
     //// Shop GUI
     void createShopGUIWindow(sfg::Window::Ptr windowName);
     void createShopButtonImage(sfg::Button::Ptr buttonName, const String &filename);
-    void createShopImage(sfg::Image::Ptr image, const String &filename);
     void createShopLabel(sf::Text* text, const sf::Vector2f &position);
 
     //// Settings GUI

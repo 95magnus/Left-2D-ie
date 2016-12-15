@@ -14,7 +14,7 @@ Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRe
     this->damage = damage;
     this->x = x;
     this->y = y;
-    this->damage = 10;
+//    this->damage = damage;
     this->increasedDamage = 0;
     this->increasedFireRate = 0;
     this->speed = speed;

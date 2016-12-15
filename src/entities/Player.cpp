@@ -8,7 +8,7 @@
 Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputManager, sf::Vector2f pos)
         : Entity(pos), PlayerController(inputManager), window(window), view(view){
     maxHealth = 100;
-    health = 50;
+    health = maxHealth;
     armor = 0;
     kills = 0;
     score = 0;
@@ -20,7 +20,7 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
     xy = pos;
     sprite.setPosition(xy);
 
-    currentWeapon = new Weapon(window, 0, 1, 5, true, (int) sprite.getPosition().x - 5, (int) sprite.getPosition().y + 10);
+    currentWeapon = new Weapon(window, 0, 5, 5, true, (int) sprite.getPosition().x - 5, (int) sprite.getPosition().y + 10);
 
     texture.setSmooth(false);
     texture.setRepeated(false);
@@ -355,7 +355,7 @@ int Player::getHealth() const {
 }
 
 void Player::setHealth(int health) {
-    Player::health = health;
+    this->health = health;
 }
 
 int Player::getSpeed() const {
@@ -363,7 +363,7 @@ int Player::getSpeed() const {
 }
 
 void Player::setSpeed(int speed) {
-    Player::speed = speed;
+    this->speed = speed;
 }
 
 int Player::getScore() const {
@@ -371,7 +371,7 @@ int Player::getScore() const {
 }
 
 void Player::setScore(int score) {
-    Player::score = score;
+    this->score = score;
 }
 
 int Player::getMoney() const {
@@ -379,7 +379,7 @@ int Player::getMoney() const {
 }
 
 void Player::setMoney(int money) {
-    Player::money = money;
+    this->money = money;
 }
 
 int Player::getArmor() const {
@@ -387,7 +387,7 @@ int Player::getArmor() const {
 }
 
 void Player::setArmor(int armor) {
-    Player::armor = armor;
+    this->armor = armor;
 }
 
 int Player::getKills() const {
@@ -395,7 +395,7 @@ int Player::getKills() const {
 }
 
 void Player::setKills(int kills) {
-    Player::kills = kills;
+    this->kills = kills;
 }
 
 Player::Direction Player::getCurrentDir() const {
@@ -403,7 +403,7 @@ Player::Direction Player::getCurrentDir() const {
 }
 
 void Player::setCurrentDir(Player::Direction currentDir) {
-    Player::currentDir = currentDir;
+    this->currentDir = currentDir;
 }
 
 std::vector<Projectile> *Player::getBullets() {
@@ -415,7 +415,7 @@ float Player::getMaxSpeed() const {
 }
 
 void Player::setMaxSpeed(float maxSpeed) {
-    Player::maxSpeed = maxSpeed;
+    this->maxSpeed = maxSpeed;
 }
 
 int Player::getMaxHealth() const {
@@ -423,5 +423,5 @@ int Player::getMaxHealth() const {
 }
 
 void Player::setMaxHealth(int maxHealth) {
-    Player::maxHealth = maxHealth;
+    this->maxHealth = maxHealth;
 }

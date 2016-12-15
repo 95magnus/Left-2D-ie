@@ -17,8 +17,8 @@
 
 class Weapon : public Entity {
 public:
-    int penetration;
-    Weapon(sf::RenderWindow &window, int wepStage, int penetration, float rps, bool spray, int posX, int posY);
+//    int penetration;
+    Weapon(sf::RenderWindow &window, int wepStage, int damage, float rps, bool spray, int posX, int posY);
     virtual ~Weapon();
 
     void update(float deltaTime);
@@ -79,6 +79,10 @@ public:
 
     void setRps(float rps);
 
+    bool isSpray() const;
+
+    void setSpray(bool spray);
+
     const sf::IntRect *getWeaponStageIntRectsSide() const;
 
     const sf::IntRect *getWeaponStageIntRectsFront() const;
@@ -122,6 +126,8 @@ private:
                                               sf::IntRect(0, 0, 465, 155),
                                              sf::IntRect(0, 95, 270, 165)};
 
+
+    sf::Texture text[6];
 
     /*
     sf::IntRect weaponStageIntRectsFront[6] = {sf::IntRect(365, 0, 30, 75),
