@@ -188,3 +188,11 @@ void Projectile::setHitbox(const sf::RectangleShape &hitbox) {
     Projectile::hitbox = hitbox;
 }
 
+int Projectile::getPenetration() const {
+    return penetration;
+}
+
+void Projectile::setPenetration(int penetration) {
+    Projectile::penetration = penetration;
+}
+

@@ -17,8 +17,7 @@
 
 class Weapon : public Entity {
 public:
-    int penetration;
-    Weapon(sf::RenderWindow &window, int wepStage, int penetration, float rps, bool spray, int posX, int posY);
+    Weapon(sf::RenderWindow &window, int wepStage, float rps, bool spray, int posX, int posY);
     virtual ~Weapon();
 
     void update(float deltaTime);
@@ -87,6 +86,9 @@ public:
 
     std::vector<Projectile> &getBullets();
 
+    int getPenetration() const;
+
+    void setPenetration(int penetration);
 
 private:
     sf::RenderWindow &window;
@@ -99,6 +101,9 @@ private:
     sf::IntRect spriteSide;
     sf::Texture texture;
     sf::Texture projectileTexture;
+    sf::Clock reloadTimer;
+    bool reloading;
+    sf::RectangleShape reloadProgress;
     sf::Mouse mouse;
     sf::Clock clock;
     float rps;
@@ -115,6 +120,12 @@ private:
      * 5: sniper
      * 6: raygun
      * */
+
+    int reloadTime[6] = {4, 4, 4, 6, 6, 6};
+    int bulletsFired;
+
+    int magazineSize[6] = {30, 10, 30, 5, 10, 40};
+
     sf::IntRect weaponStageIntRectsSide[6] = {sf::IntRect(0, 0, 360, 90),
                                               sf::IntRect(465, 255, 195, 60),
                                               sf::IntRect(495, 0, 240, 90),

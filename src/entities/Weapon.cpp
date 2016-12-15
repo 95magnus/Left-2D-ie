@@ -4,14 +4,19 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(sf::RenderWindow &window, int wepStage, int penetration, float rps, bool spray, int posX, int posY)
+Weapon::Weapon(sf::RenderWindow &window, int wepStage, float rps, bool spray, int posX, int posY)
         : Entity(sf::Vector2f(posX, posY)), window(window){
     this->rps = rps;
     sprite.setPosition(posX, posY);
     this->spray = spray;
+    reloading = false;
+    reloadProgress.setSize(sf::Vector2f(40, 5));
+    reloadProgress.setPosition(sprite.getPosition());
+    reloadProgress.setFillColor(sf::Color::Yellow);
+    reloadProgress.setOutlineColor(sf::Color::Black);
+    reloadProgress.setOutlineThickness(1);
+    bulletsFired = 0;
     weaponStage = wepStage;
-    this->penetration = penetration;
-    //spriteFront = weaponStageIntRectsFront[wepStage];
     spriteSide = weaponStageIntRectsSide[wepStage];
     if (weaponStage > 0) {
         if (!texture.loadFromFile("resources/textures/spritesheets/weapons1.png")) {
@@ -57,20 +62,54 @@ Weapon::~Weapon() {
 }
 
 void Weapon::update(float deltaTime) {
+    if (bulletsFired > magazineSize[weaponStage]) {
+        if (!reloading) {
+            reloadTimer.restart();
+        }
+        reloading = true;
+        if (reloadTimer.getElapsedTime().asSeconds() >= reloadTime[weaponStage]) {
+            bulletsFired = 0;
+        }
+    } else {
+        reloading = false;
+    }
+    if (reloading) {
+        reloadProgress.setPosition(sprite.getPosition().x - reloadProgress.getSize().x/2 + 5, sprite.getPosition().y + 60);
+        reloadProgress.setScale((reloadTimer.getElapsedTime().asSeconds()/reloadTime[weaponStage]), 1);
+    } else {
+        reloadProgress.setPosition(sprite.getPosition().x - reloadProgress.getSize().x/2 + 5, sprite.getPosition().y + 60);
+        reloadProgress.setScale(((float)(magazineSize[weaponStage] - bulletsFired)/magazineSize[weaponStage]), 1);
+        if (bulletsFired < magazineSize[weaponStage]) {
+            reloadProgress.setFillColor(sf::Color::Red);
+        }
+        if (bulletsFired <= magazineSize[weaponStage]/2) {
+            reloadProgress.setFillColor(sf::Color::Yellow);
+        }
+        if (bulletsFired < magazineSize[weaponStage]/4) {
+            reloadProgress.setFillColor(sf::Color::Green);
+        }
+
+    }
     for (auto &projectile : bullets)
         projectile.update(deltaTime);
 }
 
 void Weapon::draw(sf::RenderWindow &window) {
+    window.draw(reloadProgress);
     window.draw(sprite);
 }
 
 void Weapon::fire() {
-    if (clock.getElapsedTime().asSeconds() > 1/rps) {
-        Projectile bullet(window, projectileTexture, projectileIntRect[weaponStage], 5, 300, spray ,angle, sprite.getPosition().x, sprite.getPosition().y - yOffset[weaponStage]);
-        bullets.push_back(bullet);
-        clock.restart();
-        sound.play();
+    if (!reloading) {
+        if (clock.getElapsedTime().asSeconds() > 1/rps) {
+            Projectile bullet(window, projectileTexture, projectileIntRect[weaponStage], 5, 300, spray, angle, sprite.getPosition().x, sprite.getPosition().y - yOffset[weaponStage]);
+            bullets.push_back(bullet);
+            clock.restart();
+            sound.play();
+            bulletsFired++;
+            reloading = false;
+            reloadTimer.restart();
+        }
     }
 }
 
@@ -201,4 +240,3 @@ int Weapon::getWeaponStage() const {
 void Weapon::setWeaponStage(int weaponStage) {
     Weapon::weaponStage = weaponStage;
 }
-

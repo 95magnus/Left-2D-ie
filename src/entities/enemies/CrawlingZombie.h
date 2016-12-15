@@ -15,6 +15,8 @@ public:
     virtual void dealDamage(Player *player);
 private:
     bool hanging;
+    sf::RectangleShape healthBar;
+    sf::RectangleShape hpBarBG;
 };
 
 

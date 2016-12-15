@@ -74,7 +74,13 @@ void StateSinglePlayer::update(float deltaTime) {
 
     score->setString(std::to_string(player->getScore()));
     coins->setString(std::to_string(player->getScore()/10));
-    hpGreenBar->setScale(((float)player->getHealth()/player->getMaxHealth()), 1);
+
+    //The HPbar doesn't go outside the hpbar borders
+    float hpbar = (float)player->getHealth()/player->getMaxHealth();
+    if (hpbar < 0) {
+        hpbar = 0;
+    }
+    hpGreenBar->setScale(hpbar, 1);
 }
 
 void StateSinglePlayer::draw(sf::RenderWindow &window) {
@@ -232,10 +238,8 @@ void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<P
                     && bullets[i].getSprite().getPosition().x<= enemies[j]->sprite.getPosition().x + (enemies[j]->hitbox.getSize().x*0.1) &&
                     bullets[i].getSprite().getPosition().y >= enemies[j]->sprite.getPosition().y - enemies[j]->sprite.getSize().y*0.015
                     && bullets[i].getSprite().getPosition().y <= enemies[j]->sprite.getPosition().y + (enemies[j]->hitbox.getSize().y)*0.2) {
-
                     enemies[j]->getHit(bullets[i].getDamage());
                     bullets.erase(it);
-
                 }
             }
         }
@@ -247,7 +251,6 @@ void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<P
         if (abs((*enemy)->sprite.getPosition().x - player->getPosition().x) < 50 &&
             abs((*enemy)->sprite.getPosition().y - player->getPosition().y) < 50) {
             (*enemy)->dealDamage(player);
-
         }
         if ((*enemy)->getHealth() <= 0) {
             enemy = enemies.erase(enemy);

@@ -84,7 +84,12 @@ public:
 
     void setHitbox(const sf::RectangleShape &hitbox);
 
+    int getPenetration() const;
+
+    void setPenetration(int penetration);
+
 private:
+    int penetration;
     int increasedFireRate;
     int increasedDamage;
     sf::RectangleShape sprite;

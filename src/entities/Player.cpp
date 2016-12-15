@@ -20,7 +20,7 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
     xy = pos;
     sprite.setPosition(xy);
 
-    currentWeapon = new Weapon(window, 0, 1, 5, true, (int) sprite.getPosition().x - 5, (int) sprite.getPosition().y + 10);
+    currentWeapon = new Weapon(window, 0, 5, true, (int) sprite.getPosition().x - 5, (int) sprite.getPosition().y + 10);
 
     texture.setSmooth(false);
     texture.setRepeated(false);
@@ -36,6 +36,8 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
         sprite.setFillColor(sf::Color::Green);
     } else {
         sprite.setTexture(&texture);
+    }
+    if (!graveStone.loadFromFile("resources/textures/spritesheets/gravestone.png")) {
     }
 
     hitColor = 255;
@@ -103,6 +105,11 @@ void Player::update(float deltaTime) {
             ++it;
         }
     }
+
+    if (health <= 0) {
+
+    }
+
 }
 
 void Player::draw(sf::RenderWindow &window) {
@@ -133,6 +140,16 @@ void Player::draw(sf::RenderWindow &window) {
     sprite.setFillColor(sf::Color(255, hitColor, hitColor));
     if (hitColor < 255) {
         hitColor += 1;
+    }
+
+    if (health <= 0) {
+        isDead = true;
+        sprite.setScale(0.2, 0.2);
+        sprite.setSize(sf::Vector2f(graveStone.getSize().x, graveStone.getSize().y));
+        sprite.setTexture(&graveStone);
+        sprite.setTextureRect(sf::IntRect(0, 0, graveStone.getSize().x, graveStone.getSize().y));
+        sprite.setPosition(sprite.getPosition().x - 25, sprite.getPosition().y + 25);
+        //TODO: Should remove the option to move after this since the player is dead
     }
 
     window.draw(shadow);
