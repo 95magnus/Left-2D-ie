@@ -102,12 +102,11 @@ Nextbutton:PRELIGHT
 ------------------------------------------Settings----------------------------------------------------------------------
 */
 
-SettingsWindow
+Window
 {
     BorderWidth: 7;
-    BorderColor: #3F3F3F3F;
-    BackgroundColor: #80808080;
 }
+
 
 SettingsButton
 {
@@ -115,36 +114,33 @@ SettingsButton
     BorderWidth: 0;
 }
 
-#settingswindow
-{
-    BackgroundColor: #696969FF;
-}
 
-#imagebutton
-{
-    BackgroundColor: #00000000;
-    BorderWidth: 5;
-    FontSize: 30.0f;
-}
+/*#imagebutton*/
+/*{*/
+    /*BackgroundColor: #00000000;*/
+    /*BorderWidth: 5;*/
+    /*FontSize: 30.0;*/
+/*}*/
 
-#label
-{
-    FontSize: 45px;
-}
+/*#label*/
+/*{*/
+    /*FontSize: 45;*/
+/*}*/
 
-#settingsframe
-{
-    FontSize: 100.0f;
-    BorderWidth: 0.0f;
-}
+/*#settingsframe*/
+/*{*/
+    /*BackgroundColor: #80808080;*/
+    /*FontSize: 100;*/
+    /*BorderWidth: 0;*/
+/*}*/
 
-#soundsettingsframe
-{
-    FontSize: 60.0f;
-    BorderWidth: 0.0f;
-}
+/*#soundsettingsframe*/
+/*{*/
+    /*FontSize: 60;*/
+    /*BorderWidth: 0;*/
+/*}*/
 
-#notebook, #frame
-{
-    BorderWidth: 0;
-}
+/*#notebook, #frame*/
+/*{*/
+    /*BorderWidth: 100;*/
+/*}*/

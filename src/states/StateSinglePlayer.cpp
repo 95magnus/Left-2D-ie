@@ -68,11 +68,7 @@ void StateSinglePlayer::update(float deltaTime) {
     //zombie->update(playerPositions, deltaTime);
     checkForHits(enemies, *player->getBullets());
     if (enemies.empty()) {
-        //TODO: toggle shop and spawn new wave after 60 sec
-
-        //initGameGui();
         goToShop();
-
         spawnWave();
     }
     for (int e = 0; e < enemies.size(); e++) {
@@ -142,7 +138,7 @@ void StateSinglePlayer::initGameGui() {
 
     // Coins counter
     //// TODO: A counter for coins retrieved after killing zombies
-    coins = new sf::Text(std::to_string(player->getScore()), *font, 40);
+    coins = new sf::Text("", *font, 40);
     coins->setColor(sf::Color::White);
     coins->setPosition(880.f, 15.f);
     coins->setScale(sf::Vector2f(1.0f, 1.0f));

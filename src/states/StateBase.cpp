@@ -106,13 +106,17 @@ void StateBase::createShopLabel(sf::Text* text, const sf::Vector2f &position){
 //// Settings GUI
 // Create settings windows
 void StateBase::createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position) {
-    desktop->SetProperty("SettingsWindow#settingswindow", "BackgroundColor", "#696969FF");
-    windowName->SetId("settingswindow");
+    desktop->SetProperty("Window#window", "BackgroundColor", "#303030FD");
+    windowName->SetId("window");
 
     windowName->SetPosition(position);
     //Set window size
     windowName->SetRequisition(sf::Vector2f(580.f, 600.f));
     desktop->Add(windowName);
+}
+
+void StateBase::createSettingsFrame(sfg::Frame::Ptr frameName){
+    frameName->SetAlignment(sf::Vector2f(.5f, .5f));
 }
 
 // Settings button
@@ -148,7 +152,7 @@ void StateBase::createSettingsLabel(sfg::Label::Ptr labelName){
 }
 
 // All other settings buttons
-void StateBase::createSettingsControlGUIButtons(sfg::Button::Ptr buttonName) {
+void StateBase::createSettingsControlGUIButtons(sfg::ToggleButton::Ptr buttonName) {
     desktop->SetProperty("SettingsButtonGui#settingscontrols", "FontSize", 0.f);
     buttonName->SetId("size30px");
 }

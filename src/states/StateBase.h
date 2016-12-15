@@ -42,13 +42,14 @@ public:
     void createShopLabel(sf::Text* text, const sf::Vector2f &position);
 
     //// Settings GUI
-    virtual void createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position);
-    virtual void createSettingsButton(sfg::Button::Ptr buttonName);
+    void createSettingsWindow(sfg::Window::Ptr windowName, const sf::Vector2f &position);
+    void createSettingsFrame(sfg::Frame::Ptr frameName);
+    void createSettingsButton(sfg::Button::Ptr buttonName);
     virtual void createSoundGUIButton(sfg::CheckButton::Ptr checkButtonName);
     virtual void createSettingsControlButtons(sfg::Button::Ptr buttonName);
-    virtual void createLabel(sfg::Label::Ptr labelName);
-    virtual void createSettingsLabel(sfg::Label::Ptr labelName);
-    virtual void createSettingsControlGUIButtons(sfg::Button::Ptr buttonName);
+    void createLabel(sfg::Label::Ptr labelName);
+    void createSettingsLabel(sfg::Label::Ptr labelName);
+    virtual void createSettingsControlGUIButtons(sfg::ToggleButton::Ptr buttonName);
 
 protected:
     StateBase(Game* game);
