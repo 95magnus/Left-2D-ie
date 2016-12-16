@@ -5,22 +5,26 @@
 
 #include "Projectile.h"
 
-Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRect rect, int damage, float angle, float x, float y)
+Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRect rect, int damage, int speed, bool spray, float angle, float x, float y)
         : Entity(sf::Vector2f(x, y)) {
     sprite.setTexture(&texture);
     sprite.setTextureRect(rect);
     sprite.setSize(sf::Vector2f(rect.width, rect.height));
     sprite.setRotation(angle);
     this->damage = damage;
-    this->x = x;
-    this->y = y;
-    this->damage = 10;
+
     speed = 450;
     sprite.setPosition(worldPos);
+
+    this->increasedDamage = 0;
+    this->increasedFireRate = 0;
+    this->speed = speed;
+    this->spray = spray;
+
     sprite.setScale(0.1, 0.1);
 
-    velX = -cos(angle * M_PI/180) * speed;
-    velY = -sin(angle * M_PI/180) * speed;
+    velX = -cos(angle * 3.1416/180) * speed;
+    velY = -sin(angle * 3.1416/180) * speed;
 
     rndX = fRand();
     rndY = fRand();
@@ -33,15 +37,21 @@ Projectile::~Projectile() {
 
 }
 
-float Projectile::fRand()
-{
-    float rnd = rand() % -1000 + 1000;
-    return rnd / 1000;
+float Projectile::fRand() {
+    if (!spray) {
+        return 1;
+    }
+    float rnd = (float) (rand() % -100 + 100);
+    return rnd / 100.0f;
 }
 
 void Projectile::update(float deltaTime) {
-    worldPos.x += velX * deltaTime * rndX;
-    worldPos.y += velY * deltaTime * rndY;
+    sf::Vector2f vel(velX * rndX, velY * rndY);
+    float length = sqrt(vel.x * vel.x + vel.y * vel.y);
+    vel /= length;
+
+    worldPos.x += vel.x * speed * deltaTime;
+    worldPos.y += vel.y * speed * deltaTime;
 
     sprite.setPosition(worldPos);
 }
@@ -74,22 +84,6 @@ void Projectile::setSpeed(int speed) {
     Projectile::speed = speed;
 }
 
-float Projectile::getX() const {
-    return x;
-}
-
-void Projectile::setX(float x) {
-    this->x = x;
-}
-
-float Projectile::getY() const {
-    return y;
-}
-
-void Projectile::setY(float y) {
-    this->y = y;
-}
-
 const sf::Clock &Projectile::getClock() const {
     return clock;
 }
@@ -105,68 +99,3 @@ const sf::Mouse &Projectile::getMouse() const {
 void Projectile::setMouse(const sf::Mouse &mouse) {
     this->mouse = mouse;
 }
-
-float Projectile::getVelX() const {
-    return velX;
-}
-
-void Projectile::setVelX(float velX) {
-    this->velX = velX;
-}
-
-float Projectile::getVelY() const {
-    return velY;
-}
-
-void Projectile::setVelY(float velY) {
-    this->velY = velY;
-}
-
-float Projectile::getDiffX() const {
-    return diffX;
-}
-
-void Projectile::setDiffX(float diffX) {
-    this->diffX = diffX;
-}
-
-float Projectile::getDiffY() const {
-    return diffY;
-}
-
-void Projectile::setDiffY(float diffY) {
-    this->diffY = diffY;
-}
-
-float Projectile::getMagnitude() const {
-    return magnitude;
-}
-
-void Projectile::setMagnitude(float magnitude) {
-    this->magnitude = magnitude;
-}
-
-float Projectile::getRndX() const {
-    return rndX;
-}
-
-void Projectile::setRndX(float rndX) {
-    this->rndX = rndX;
-}
-
-float Projectile::getRndY() const {
-    return rndY;
-}
-
-void Projectile::setRndY(float rndY) {
-    this->rndY = rndY;
-}
-
-const sf::RectangleShape &Projectile::getHitbox() const {
-    return hitbox;
-}
-
-void Projectile::setHitbox(const sf::RectangleShape &hitbox) {
-    this->hitbox = hitbox;
-}
-

@@ -7,29 +7,33 @@
 
 Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputManager, sf::Vector2f pos)
         : Entity(pos), PlayerController(inputManager, 0), window(window), view(view){
-    health = 100;
+    maxHealth = 100;
+    health = maxHealth;
     armor = 0;
     kills = 0;
     score = 0;
     money = 0;
     currentDir = Right;
+    isDead = false;
     sprite.setSize(sf::Vector2f(55, 55));
     scaleFactor = 0.25;
     xy = sf::Vector2f(worldPos.x, worldPos.y - 50);
     sprite.setPosition(xy);
 
-    currentWeapon = new Weapon(window, 0, 6, sprite.getPosition().x - 5, sprite.getPosition().y + 10);
+    currentWeapon = new Weapon(window, 0, 5, 5, true, (int) sprite.getPosition().x - 5, (int) sprite.getPosition().y + 10);
 
     texture.setSmooth(false);
     texture.setRepeated(false);
 
     //Load Texture
     if (!texture.loadFromFile("resources/textures/spritesheets/player.png")) {
-        // Spilleren blir blå hvis bildet ikke blir lastet
+        // Spilleren blir grønn hvis bildet ikke blir lastet
         sprite.setFillColor(sf::Color::Green);
     } else {
         sprite.setTexture(&texture);
     }
+
+    hitColor = 255;
 
     animationDirections.emplace(Up, up);
     animationDirections.emplace(Down, down);
@@ -120,10 +124,10 @@ void Player::update(float deltaTime) {
     }
     */
 
-    auto proj = currentWeapon->getProjectiles();
-    for (int i = 0; i < proj.size(); i++) {
-        if (proj[i]->getClock().getElapsedTime().asSeconds() >= 5) {
-            proj.erase(proj.begin() + i);
+    auto proj = &currentWeapon->getProjectiles();
+    for (int i = 0; i < proj->size(); i++) {
+        if (proj->at(i)->getClock().getElapsedTime().asSeconds() >= 5) {
+            proj->erase(proj->begin() + i);
         }
     }
 
@@ -152,6 +156,11 @@ void Player::draw(sf::RenderWindow &window) {
             sprite.setTextureRect(down[0]);
             sprite.setPosition(xy.x + 15*scaleFactor, xy.y);
         }
+    }
+
+    sprite.setFillColor(sf::Color(255, hitColor, hitColor));
+    if (hitColor < 255) {
+        hitColor += 1;
     }
 
     window.draw(shadow);
@@ -350,13 +359,14 @@ void Player::hit() {
     sound.setBuffer(SBuffer);
     sound.play();
     //
-    Player::setHealth(Player::getHealth() - 10);
+    hitColor = 0;
 }
 
 void Player::death() {
     SBuffer.loadFromFile("wilhelm_scream.wav");
     sound.setBuffer(SBuffer);
     sound.play();
+
     // TODO: Legge til dødsanimasjon når health = 0?
     // TODO: (kanskje player faller i bakken og blinker i 3 sek så forsvinner den slik som på gamle spill)
 
@@ -370,7 +380,7 @@ int Player::getHealth() const {
 }
 
 void Player::setHealth(int health) {
-    Player::health = health;
+    this->health = health;
 }
 
 int Player::getSpeed() const {
@@ -378,7 +388,7 @@ int Player::getSpeed() const {
 }
 
 void Player::setSpeed(int speed) {
-    Player::speed = speed;
+    this->speed = speed;
 }
 
 int Player::getScore() const {
@@ -386,7 +396,7 @@ int Player::getScore() const {
 }
 
 void Player::setScore(int score) {
-    Player::score = score;
+    this->score = score;
 }
 
 int Player::getMoney() const {
@@ -394,7 +404,7 @@ int Player::getMoney() const {
 }
 
 void Player::setMoney(int money) {
-    Player::money = money;
+    this->money = money;
 }
 
 int Player::getArmor() const {
@@ -402,7 +412,7 @@ int Player::getArmor() const {
 }
 
 void Player::setArmor(int armor) {
-    Player::armor = armor;
+    this->armor = armor;
 }
 
 int Player::getKills() const {
@@ -410,7 +420,7 @@ int Player::getKills() const {
 }
 
 void Player::setKills(int kills) {
-    Player::kills = kills;
+    this->kills = kills;
 }
 
 Player::Direction Player::getCurrentDir() const {
@@ -418,9 +428,25 @@ Player::Direction Player::getCurrentDir() const {
 }
 
 void Player::setCurrentDir(Player::Direction currentDir) {
-    Player::currentDir = currentDir;
+    this->currentDir = currentDir;
 }
 
 std::vector<Projectile*>& Player::getProjectiles() {
     return currentWeapon->getProjectiles();
+}
+
+float Player::getMaxSpeed() const {
+    return maxSpeed;
+}
+
+void Player::setMaxSpeed(float maxSpeed) {
+    this->maxSpeed = maxSpeed;
+}
+
+int Player::getMaxHealth() const {
+    return maxHealth;
+}
+
+void Player::setMaxHealth(int maxHealth) {
+    this->maxHealth = maxHealth;
 }

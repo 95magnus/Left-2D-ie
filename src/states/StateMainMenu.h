@@ -5,8 +5,11 @@
 #include "../Game.h"
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/OpenGL.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
 #include <SFGUI/SFGUI.hpp>
 #include <SFGUI/Widgets.hpp>
+
 
 typedef std::string String;
 
@@ -28,7 +31,11 @@ public:
     void buttonQuitClicked();
 
 protected:
+    sf::RectangleShape background;
+    sf::Texture* backgroundImage;
 
+    sf::SoundBuffer soundBufferMain;
+    sf::Sound soundMain;
 };
 
 #endif //LEFT2DIE_STATEMAINMENU_H

@@ -2,6 +2,20 @@
 
 StateMainMenu::StateMainMenu(Game *game) : StateBase(game) {
     initButtons();
+
+    ResourceLoader loader("resources/");
+    backgroundImage = new sf::Texture();
+    loader.loadTexture(backgroundImage, "background.png");
+    background.setTexture(backgroundImage);
+    background.setSize(game->getWindowSize());
+
+    if (soundBufferMain.loadFromFile("resources/sound/POL-sky-sanctuary-short.wav")) {
+
+    }
+    soundMain.setBuffer(soundBufferMain);
+    soundMain.setLoop(true);
+    soundMain.setVolume(12.0f);
+    soundMain.play();
 }
 
 StateMainMenu::~StateMainMenu() {
@@ -18,8 +32,9 @@ void StateMainMenu::draw(sf::RenderWindow &window) {
     // sf::Text does not contain setFillColor() on Linux?
     //title.setFillColor(sf::Color::Red);
     title.setColor(sf::Color::Red);
-
     title.setPosition(275, 50);
+
+    game->getWindow().draw(background);
     game->getWindow().draw(title);
 }
 

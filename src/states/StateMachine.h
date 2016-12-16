@@ -43,6 +43,8 @@ public:
     void setState(StateID state);
     StateBase* getState() const { return currentState; }
 
+    StateBase* getState(StateID state);
+
     void togglePause() { paused = !paused; }
 
 protected:

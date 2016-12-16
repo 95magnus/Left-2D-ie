@@ -6,6 +6,7 @@
 #include "../Game.h"
 #include "StateBase.h"
 #include "../gui/Message.h"
+#include <math.h>
 //#include "../entities/NormalZombie.h"
 //#include "../entities/Enemy.h"
 
@@ -31,6 +32,8 @@ public:
     void resume();
 
     void spawnWave();
+    void getCurrentWeaponImage();
+    void getUpgradedWeaponImage();
 
     void initGameGui();
     void pauseGameGui();
@@ -38,14 +41,19 @@ public:
 
     void checkForHits(std::vector<Enemy*> &enemies, std::vector<Projectile> &bullets);
 
-    void createImage(sfg::Image::Ptr image, const String &filename);
-
     void gameOver();
 
-    void onItemOneBoxMarked();
-    void onItemTwoBoxMarked();
+    Player* getPlayer(){
+        return player;
+    }
 
-    void onAbilityOneBoxMarked();
+    sf::Color interpolate(sf::Color c1, sf::Color c2, float mixPercent) {
+        sf::Color col;
+        col.r = (sf::Uint8) sqrt((1 - mixPercent) * (c1.r * c1.r) + mixPercent * c2.r * c2.r);
+        col.g = (sf::Uint8) sqrt((1 - mixPercent) * (c1.g * c1.g) + mixPercent * c2.g * c2.g);
+        col.b = (sf::Uint8) sqrt((1 - mixPercent) * (c1.b * c1.b) + mixPercent * c2.b * c2.b);
+        return col;
+    }
 
 protected:
     //InputManager* inputManager;
@@ -74,27 +82,25 @@ private:
     World* world;
 
     sf::RectangleShape* coinsContainer;
+
+
     sf::RectangleShape* hpGreenBar;
     sf::RectangleShape* hpRedBar;
 
     sf::Font* font;
-
     sf::Text* score;
     sf::Text* coins;
 
-    sfg::Image::Ptr hpBar;
-    sfg::Image::Ptr coinsBar;
-    sfg::Image::Ptr playerBar;
-    sfg::Image::Ptr inventoryContainer;
+    sf::Text zombiesLeft;
+    int zombieCounter;
 
-    sfg::Label::Ptr zombieLeft;
-
-    sfg::ToggleButton::Ptr itemOne;
-    sfg::Button::Ptr itemTwo;
+    String currentWeaponImage;
+    String upgradedWeaponImage;
 
     bool initialized = false;
 
-    sfg::Image::Ptr gameover;
+//    String currentWeapon[] = {"resources/gui/ak.png", "resources/gui/shotgun.png", "resources/gui/tommygun.png",
+//                              "resources/gui/rifle.png", "resources/gui/sniper.png", "resources/gui/raygun.png"};
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H

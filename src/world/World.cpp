@@ -2,6 +2,7 @@
 #include "World.h"
 #include "../entities/Player.h"
 #include "../entities/enemies/Enemy.h"
+#include "../entities/enemies/CrawlingZombie.h"
 
 World::World(Game &game, String &levelFileName) : game(game) {
     view = new sf::View(sf::FloatRect(0, 0, game.getWindow().getSize().x, game.getWindow().getSize().y));
@@ -14,6 +15,7 @@ World::World(Game &game, String &levelFileName) : game(game) {
 
     spawnWave(currentWave++);
     updateEnemyToPlayerMovements();
+
 }
 
 World::~World() {
@@ -24,6 +26,12 @@ World::~World() {
 }
 
 void World::update(float deltaTime) {
+    if (entities.size() <= 1) {
+        goToShop();
+        spawnWave(++currentWave);
+    }
+
+
     handlePlayerMovement(deltaTime);
 
     for (auto &entity : entities) {
@@ -54,7 +62,6 @@ void World::update(float deltaTime) {
     }
 
     updateBulletCollisions();
-
 }
 
 void World::draw(sf::RenderWindow &window) {
@@ -296,6 +303,12 @@ void World::updateBulletCollisions() {
         }
     }
 
+    for (auto &enemy : enemies) {
+        if (enemy->sprite.getGlobalBounds().intersects(player->getBounds())) {
+            enemy->dealDamage(player);
+        }
+    }
+
     for (auto &projectile : *projectiles) {
         for (auto &enemy : enemies) {
             auto projectileBounds = projectile->getSprite().getGlobalBounds();
@@ -398,6 +411,10 @@ void World::updateBulletCollisions() {
      */
 }
 
+void World::goToShop() {
+
+}
+
 void World::spawnWave(int wave) {
     for (int i = 0; i < minEnemyCount + wave * enemiesPerWave; i++) {
         float x = rand() % ((level->levelWidth - 2) * level->tileSize) + level->tileSize;
@@ -407,11 +424,13 @@ void World::spawnWave(int wave) {
     }
 }
 
+void World::spawnWave() {
+    spawnWave(++currentWave);
+}
+
 bool World::entityDrawOrder(Entity* e1, Entity* e2) {
     int y1 = e1->getWorldPos().y;
     int y2 = e2->getWorldPos().y;
 
     return y1 < y2;
 }
-
-

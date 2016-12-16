@@ -16,6 +16,11 @@ class Player;
 
 class Enemy : public Entity {
 public:
+
+    void buff(int percent);
+
+    void dealDamage(Player *player);
+
     Enemy(sf::Vector2f spawnPos);
     virtual ~Enemy();
 
@@ -37,22 +42,27 @@ public:
                                      {0, 0, 330, 600}};
 
     int getHealth() const;
-
     void setHealth(int health);
 
     void setTarget(sf::Vector2i pos);
     bool requestingNewTarget() { return requestNewTarget; }
 
-private:
+
+    int getScoreReward() const;
+    void setScoreReward(int scoreReward);
+
+protected:
     sf::RectangleShape healthBar;
     sf::RectangleShape hpBarBG;
-    sf::Clock cycleClock;
+    sf::Clock cycleClock, attackTimer;
 
     sf::Vector2i target;
 
     bool requestNewTarget = true;
 
     int health, maxHealth, damage, speed;
+    int scoreReward;
+
     int xOffs, yOffs;
     int rewardPoints;
     bool moving, goingRight;

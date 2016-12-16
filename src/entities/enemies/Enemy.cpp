@@ -13,6 +13,7 @@ Enemy::Enemy(sf::Vector2f spawnPos) : Entity(spawnPos) {
     } else {
         sprite.setTexture(&texture);
     }
+    scoreReward = 10;
     goingRight = false;
     health = 100;
     maxHealth = 100;
@@ -27,17 +28,34 @@ Enemy::Enemy(sf::Vector2f spawnPos) : Entity(spawnPos) {
     hitbox.setOutlineColor(sf::Color::Blue);
     hitbox.setOutlineThickness(3);
     sprite.setOrigin(sprite.getSize().x, sprite.getSize().y/ 2);
+    sprite.setOrigin(sprite.getOrigin().x + sprite.getOrigin().x, sprite.getOrigin().y);
     hitbox.setOrigin(sprite.getOrigin());
-    healthBar.setSize(sf::Vector2f(50,10));
+    healthBar.setSize(sf::Vector2f(50,5));
     healthBar.setFillColor(sf::Color::Green);
     healthBar.setOutlineColor(sf::Color::Black);
-    healthBar.setOutlineThickness(2);
-    healthBar.setPosition(sprite.getPosition().x, sprite.getPosition().y - 30);
-    //hpBarBG = healthBar;
-    //hpBarBG.setFillColor(sf::Color::Red);
+    healthBar.setOutlineThickness(1);
+    healthBar.setPosition(sprite.getPosition().x, sprite.getPosition().y);
+    hpBarBG = healthBar;
+    hpBarBG.setFillColor(sf::Color::Red);
     cycleClock.restart();
-
+    rewardPoints = 10;
     target = sf::Vector2i(-1, -1);
+}
+
+void Enemy::buff(int percent) {
+    percent /= 100;
+    damage = damage + damage*percent;
+    health = health + health*percent;
+    speed = speed + speed*percent;
+    scoreReward = scoreReward + scoreReward*percent;
+}
+
+void Enemy::dealDamage(Player *player) {
+    if (attackTimer.getElapsedTime().asSeconds() > 1) {
+        player->setHealth(player->getHealth() - damage);
+        player->hit();
+        attackTimer.restart();
+    }
 }
 
 void Enemy::animationCycler(float interval) {
@@ -83,7 +101,7 @@ void Enemy::update(float deltaTime) {
     if (moving)
         animationCycler(0.5);
 
-    rewardPoints = 10;
+
 }
 
 void Enemy::update(std::vector<sf::Vector2f> players, float deltaTime) {
@@ -118,8 +136,9 @@ void Enemy::draw(sf::RenderWindow &window) {
         hitbox.setSize(sprite.getSize());
         hitbox.setScale(sprite.getScale());
     }
-    //hpBarBG.setPosition(healthBar.getPosition());
-    //healthBar.setSize(sf::Vector2f((healthBar.getSize().x - healthBar.getSize().x*((maxHealth - health)/maxHealth)), healthBar.getSize().y));
+    healthBar.setPosition(sprite.getPosition().x - healthBar.getLocalBounds().width/2, sprite.getPosition().y - 20);
+    hpBarBG.setPosition(healthBar.getPosition());
+    healthBar.setScale(((float)health/maxHealth), 1);
     sprite.setFillColor(sf::Color(255, hit, hit));
     if (hit < 255) {
         hit += 5;
@@ -127,8 +146,8 @@ void Enemy::draw(sf::RenderWindow &window) {
     window.draw(sprite);
     window.draw(hitbox);
     window.draw(collisionBox);
-    //window.draw(hpBarBG);
-    //window.draw(healthBar);
+    window.draw(hpBarBG);
+    window.draw(healthBar);
 }
 
 void Enemy::getHit(int damage) {
@@ -148,4 +167,12 @@ void Enemy::setHealth(int health) {
 void Enemy::setTarget(sf::Vector2i pos) {
     target = pos;
     requestNewTarget = false;
+}
+
+int Enemy::getScoreReward() const {
+    return scoreReward;
+}
+
+void Enemy::setScoreReward(int scoreReward) {
+    Enemy::scoreReward = scoreReward;
 }

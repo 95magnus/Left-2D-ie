@@ -57,3 +57,7 @@ void StateMachine::setState(StateID state) {
     currentState = states[state];
     currentState->resume();
 }
+
+StateBase *StateMachine::getState(StateMachine::StateID state) {
+    return states[state];
+}

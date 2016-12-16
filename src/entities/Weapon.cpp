@@ -2,36 +2,46 @@
 // Created by Eivind Hystad on 20/11/2016.
 //
 
+#include <iostream>
 #include "Weapon.h"
 #include "../util/ResourceLoader.h"
 
-Weapon::Weapon(sf::RenderWindow &window, int wepStage, float rps, int posX, int posY)
+Weapon::Weapon(sf::RenderWindow &window, int wepStage, int damage, float rps, bool spray, int posX, int posY)
         : Entity(sf::Vector2f(posX, posY)), window(window){
     this->rps = rps;
     this->damage = damage;
 
     sprite.setPosition(posX, posY);
+    this->spray = spray;
     weaponStage = wepStage;
-    spriteFront = weaponStageIntRectsFront[wepStage];
+//    this->penetration = penetration;
+    //spriteFront = weaponStageIntRectsFront[wepStage];
     spriteSide = weaponStageIntRectsSide[wepStage];
 
     ResourceLoader loader("resources/");
 
-    texture = &loader.loadTexture("spritesheets/weapons.png");
     projectileTexture = &loader.loadTexture("spritesheets/projectiles.png");
+
+    texture = &loader.loadTexture("spritesheets/weapons1.png");
+    text[1] = texture;
+    text[2] = texture;
+    text[3] = texture;
+    text[4] = texture;
+
+    texture = &loader.loadTexture("spritesheets/weapons.png");
+    text[0] = texture;
+    text[5] = texture;
 
     soundBuffer.loadFromFile("resources/sound_effects/machinegun_loop1.wav");
 
     sprite.setTexture(texture);
     sprite.setSize(sf::Vector2f(spriteSide.width, spriteSide.height));
-    sprite.setTextureRect(spriteSide);
-    sprite.scale(0.2, 0.2);
-    sprite.setOrigin(sprite.getSize().x/2, sprite.getSize().y/2);
+
     sprite.setOutlineThickness(2);
     sprite.setOutlineColor(sf::Color::Red);
     sound.setBuffer(soundBuffer);
 
-    projectiles.push_back(new Projectile(window, *projectileTexture, projectileIntRect[weaponStage], 10, angle, sprite.getPosition().x, sprite.getPosition().y));
+    projectiles.push_back(new Projectile(window, *text[weaponStage], projectileIntRect[weaponStage], 10, 400, spray, angle, sprite.getPosition().x, sprite.getPosition().y));
 }
 
 Weapon::~Weapon() {
@@ -40,6 +50,14 @@ Weapon::~Weapon() {
 }
 
 void Weapon::update(float deltaTime) {
+    for (auto &projectile : projectiles)
+        projectile->update(deltaTime);
+
+    std::cout << weaponStage << std::endl;
+    sprite.setTexture(text[weaponStage]);
+    sprite.setTextureRect(weaponStageIntRectsSide[weaponStage]);
+    sprite.setOrigin(sprite.getLocalBounds().width/2, sprite.getLocalBounds().height/2);
+    sprite.setSize(sf::Vector2f(weaponStageIntRectsSide[weaponStage].width,weaponStageIntRectsSide[weaponStage].height));
     for (auto &projectile : projectiles)
         projectile->update(deltaTime);
 }
@@ -53,7 +71,7 @@ void Weapon::draw(sf::RenderWindow &window) {
 
 void Weapon::fire() {
     if (clock.getElapsedTime().asSeconds() > 1/rps) {
-        projectiles.push_back(new Projectile(window, *projectileTexture, projectileIntRect[weaponStage], 10, angle, sprite.getPosition().x, sprite.getPosition().y));
+        projectiles.push_back(new Projectile(window, *text[weaponStage], projectileIntRect[weaponStage], 10, 400, spray, angle, sprite.getPosition().x, sprite.getPosition().y));
         clock.restart();
         sound.play();
     }
@@ -102,7 +120,7 @@ int Weapon::getDamage() const {
 }
 
 void Weapon::setDamage(int damage) {
-    Weapon::damage = damage;
+    this->damage = damage;
 }
 
 const sf::RectangleShape &Weapon::getSprite() const {
@@ -110,7 +128,7 @@ const sf::RectangleShape &Weapon::getSprite() const {
 }
 
 void Weapon::setSprite(const sf::RectangleShape &sprite) {
-    Weapon::sprite = sprite;
+    this->sprite = sprite;
 }
 
 const sf::IntRect &Weapon::getSpriteFront() const {
@@ -118,7 +136,7 @@ const sf::IntRect &Weapon::getSpriteFront() const {
 }
 
 void Weapon::setSpriteFront(const sf::IntRect &spriteFront) {
-    Weapon::spriteFront = spriteFront;
+    this->spriteFront = spriteFront;
 }
 
 const sf::IntRect &Weapon::getSpriteSide() const {
@@ -126,7 +144,7 @@ const sf::IntRect &Weapon::getSpriteSide() const {
 }
 
 void Weapon::setSpriteSide(const sf::IntRect &spriteSide) {
-    Weapon::spriteSide = spriteSide;
+    this->spriteSide = spriteSide;
 }
 
 const sf::Texture &Weapon::getTexture() const {
@@ -150,7 +168,7 @@ const sf::Mouse &Weapon::getMouse() const {
 }
 
 void Weapon::setMouse(const sf::Mouse &mouse) {
-    Weapon::mouse = mouse;
+    this->mouse = mouse;
 }
 
 const sf::Clock &Weapon::getClock() const {
@@ -158,7 +176,7 @@ const sf::Clock &Weapon::getClock() const {
 }
 
 void Weapon::setClock(const sf::Clock &clock) {
-    Weapon::clock = clock;
+    this->clock = clock;
 }
 
 float Weapon::getRps() const {
@@ -173,9 +191,6 @@ const sf::IntRect *Weapon::getWeaponStageIntRectsSide() const {
     return weaponStageIntRectsSide;
 }
 
-const sf::IntRect *Weapon::getWeaponStageIntRectsFront() const {
-    return weaponStageIntRectsFront;
-}
 
 const sf::IntRect *Weapon::getProjectileIntRect() const {
     return projectileIntRect;
@@ -200,4 +215,13 @@ int Weapon::getWeaponStage() const {
 void Weapon::setWeaponStage(int weaponStage) {
     this->weaponStage = weaponStage;
 }
+
+bool Weapon::isSpray() const {
+    return spray;
+}
+
+void Weapon::setSpray(bool spray) {
+    Weapon::spray = spray;
+}
+
 

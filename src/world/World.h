@@ -17,10 +17,12 @@ public:
     void draw(sf::RenderWindow &window);
 
     void handlePlayerMovement(float deltaTime);
+    void spawnWave();
     void spawnWave(int wave);
+    void goToShop();
 
     Player* getPlayer() { return player; }
-    std::vector<Entity*> getEntities() {return entities; }
+    std::vector<Entity*>& getEntities() { return entities; }
 
 protected:
     int minEnemyCount = 10, enemiesPerWave = 2, currentWave = 1;

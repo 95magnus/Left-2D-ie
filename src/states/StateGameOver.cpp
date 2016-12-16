@@ -23,7 +23,8 @@ StateGameOver::~StateGameOver() {
 }
 
 void StateGameOver::update(float deltaTime) {
-
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+        game->getStateMachine().setState(StateMachine::StateID::MAIN_MENU);
 }
 
 void StateGameOver::draw(sf::RenderWindow &window) {

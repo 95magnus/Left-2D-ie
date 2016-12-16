@@ -30,7 +30,6 @@ Button:PRELIGHT
 {
     BorderColor: #00000000;
     BackgroundColor: #00000000;
-;
     BorderWidth: 1;
 }
 
@@ -46,60 +45,68 @@ Button:ACTIVE
 ------------------------------------------Single Player-----------------------------------------------------------------
 */
 
-itemOne
+
+ToggleButton
 {
-    BackgroundColor: #FFFFFFFF;
+    BackgroundColor: #80808080;
+    BorderWidth: 1;
 }
 
-itemOne:PRELIGHT
+ToggleButton:PRELIGHT
 {
-    BorderColor: #00000000;
-    BorderColor: #00000000;
-    BorderWidth: 5;
+    BorderColor: #80808080;
+    BorderWidth: 0;
+    BackgroundColor: #80808080;
 }
 
-itemOne:ACTIVE
+ToggleButton:ACTIVE
 {
-    BorderColor: #FFFFFFFF;
-    BorderWidth: 4;
+    BorderColor: #80808080;
+    BorderWidth: 1;
+    BackgroundColor: #80808080;
 }
 
-#itemOne
+ToggleButton:SELECTED
 {
-    BorderColor: #FFFFFFFF;
-    BorderWidth: 5;
-}
-
-#zombielabel
-{
-    FontSize: 60px;
+    BorderColor: #80808080;
+    BorderWidth: 1;
+    BackgroundColor: #80808080;
 }
 
 /*
 ------------------------------------------Shop--------------------------------------------------------------------------
 */
 
-#shopButton
+Nextbutton:PRELIGHT
 {
-    FontSize: 56;
-    BorderColor: #FFFFFFFF;
+    BorderColor: #00000000;
+    BackgroundColor: #00000000;
+;
+    BorderWidth: 1;
+}
+
+#nextbutton
+{
+    BackgroundColor: #00000000;
+    BorderColor: #00000000;
+    BorderWidth: 0;
 }
 
 #shopwindow
 {
-    BorderWidth: 2;
-    BorderColor: #3F3F3F3F;
+    BorderWidth: 5;
+    BorderColor: #80808080;
 }
 
 /*
 ------------------------------------------Settings----------------------------------------------------------------------
 */
 
-SettingsWindow
+Window
 {
     BorderWidth: 7;
-    BorderColor: #3F3F3F3F;
 }
+
 
 SettingsButton
 {
@@ -107,36 +114,33 @@ SettingsButton
     BorderWidth: 0;
 }
 
-#settingswindow
-{
-    BackgroundColor: #696969FF;
-}
 
-#imagebutton
-{
-    BackgroundColor: #00000000;
-    BorderWidth: 5;
-    FontSize: 30.0f;
-}
+/*#imagebutton*/
+/*{*/
+    /*BackgroundColor: #00000000;*/
+    /*BorderWidth: 5;*/
+    /*FontSize: 30.0;*/
+/*}*/
 
-#label
-{
-    FontSize: 45px;
-}
+/*#label*/
+/*{*/
+    /*FontSize: 45;*/
+/*}*/
 
-#settingsframe
-{
-    FontSize: 100.0f;
-    BorderWidth: 0.0f;
-}
+/*#settingsframe*/
+/*{*/
+    /*BackgroundColor: #80808080;*/
+    /*FontSize: 100;*/
+    /*BorderWidth: 0;*/
+/*}*/
 
-#soundsettingsframe
-{
-    FontSize: 60.0f;
-    BorderWidth: 0.0f;
-}
+/*#soundsettingsframe*/
+/*{*/
+    /*FontSize: 60;*/
+    /*BorderWidth: 0;*/
+/*}*/
 
-#notebook, #frame
-{
-    BorderWidth: 0;
-}
+/*#notebook, #frame*/
+/*{*/
+    /*BorderWidth: 100;*/
+/*}*/

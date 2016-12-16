@@ -24,7 +24,7 @@ void Game::init() {
     window = new sf::RenderWindow(
             sf::VideoMode(width, height),
             title,
-            sf::Style::Default,
+            sf::Style::Close,
             settings
     );
     window->requestFocus();

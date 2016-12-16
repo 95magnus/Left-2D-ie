@@ -23,6 +23,8 @@ void StateSettings::update(float deltaTime) {
 }
 
 void StateSettings::initGui() {
+    desktop->SetProperty("Frame#frame", "BorderWidth", 0);
+    desktop->SetProperty("Frame#frame", "FontSize", 100);
     // Main settings window
     auto settingsWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
     createSettingsWindow(settingsWindow, sf::Vector2f(222.0f, 85.0f));
@@ -54,8 +56,8 @@ void StateSettings::initGui() {
     tableAlignment->SetAlignment(sf::Vector2f(.5f, .5f));
 
     auto settingsFrame = sfg::Frame::Create("Settings");
-    settingsFrame->SetId("settingsframe");
-    settingsFrame->SetAlignment(sf::Vector2f(.5f, .5f));
+    settingsFrame->SetId("frame");
+    createSettingsFrame(settingsFrame);
     settingsFrame->Add(alignmentBox);
 
     box->Pack(settingsFrame);
@@ -69,13 +71,11 @@ void StateSettings::initGui() {
 }
 
 void StateSettings::draw(sf::RenderWindow &window) {
-    sf::Text title("Left[2D]ie", game->getFont(), 140);
-    title.setColor(sf::Color::Red);
-    title.setPosition(275, 50);
-    game->getWindow().draw(title);
 }
 
 void StateSettings::initSoundSettingsClicked() {
+    desktop->SetProperty("Frame#soundframe", "FontSize", 70);
+    desktop->SetProperty("Frame#soundframe", "BorderWidth", 0);
     // Music and sounds settings window
     auto soundSettingsWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
     createSettingsWindow(soundSettingsWindow, sf::Vector2f(222.0f, 85.0f));
@@ -107,7 +107,7 @@ void StateSettings::initSoundSettingsClicked() {
     tableAlignment->SetAlignment(sf::Vector2f(.5f, .5f));
 
     auto soundSettingFrame = sfg::Frame::Create("Music & Sounds");
-    soundSettingFrame->SetId("soundsettingsframe");
+    soundSettingFrame->SetId("soundframe");
     soundSettingFrame->SetAlignment(sf::Vector2f(.5f, .5f));
     soundSettingFrame->Add(alignmentBox);
 
@@ -126,7 +126,7 @@ void StateSettings::initControlsSettings() {
     auto mainWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
     createSettingsWindow(mainWindow, sf::Vector2f(222.0f, 85.0f));
     desktop->SetProperty("*", "FontName", "resources/fonts/feast-of-flesh-bb.italic.ttf");
-
+    desktop->SetProperty("Frame#controlframe", "BorderWidth", 0);
 
     // Notebook labels
     auto labelGameplay = sfg::Label::Create("  Gameplay ");
@@ -165,25 +165,22 @@ void StateSettings::initControlsSettings() {
     createSettingsLabel(itemSixLabel);
 
     // Gameplay labels
-    auto actionLabel1 = sfg::Label::Create("     Actions");
+    auto actionLabel1 = sfg::Label::Create("Actions");
     createLabel(actionLabel1);
 
     auto keysLabel1 = sfg::Label::Create("     Keys");
     createLabel(keysLabel1);
 
-    auto attackLabel = sfg::Label::Create("Attack");
-    createSettingsLabel(attackLabel);
-
-    auto moveUpLabel = sfg::Label::Create("  Move up");
+    auto moveUpLabel = sfg::Label::Create("Move up");
     createSettingsLabel(moveUpLabel);
 
-    auto moveDownLabel = sfg::Label::Create("       Move down");
+    auto moveDownLabel = sfg::Label::Create("Move down");
     createSettingsLabel(moveDownLabel);
 
-    auto moveLeftLabel = sfg::Label::Create("    Move left");
+    auto moveLeftLabel = sfg::Label::Create("Move left");
     createSettingsLabel(moveLeftLabel);
 
-    auto moveRightLabel = sfg::Label::Create("     Move right");
+    auto moveRightLabel = sfg::Label::Create("Move right");
     createSettingsLabel(moveRightLabel);
 
     // Ability labels
@@ -207,51 +204,48 @@ void StateSettings::initControlsSettings() {
 
 
     // Inventory buttons
-    auto itemOneButton = sfg::Button::Create("          1");
+    auto itemOneButton = sfg::ToggleButton::Create("          1");
     createSettingsControlGUIButtons(itemOneButton);
 
-    auto itemTwoButton = sfg::Button::Create("          2");
+    auto itemTwoButton = sfg::ToggleButton::Create("          2");
     createSettingsControlGUIButtons(itemTwoButton);
 
-    auto itemThreeButton = sfg::Button::Create("          3");
+    auto itemThreeButton = sfg::ToggleButton::Create("          3");
     createSettingsControlGUIButtons(itemThreeButton);
 
-    auto itemFourButton = sfg::Button::Create("          4");
+    auto itemFourButton = sfg::ToggleButton::Create("          4");
     createSettingsControlGUIButtons(itemFourButton);
 
-    auto itemFiveButton = sfg::Button::Create("          5");
+    auto itemFiveButton = sfg::ToggleButton::Create("          5");
     createSettingsControlGUIButtons(itemFiveButton);
 
-    auto itemSixButton = sfg::Button::Create("          6");
+    auto itemSixButton = sfg::ToggleButton::Create("          6");
     createSettingsControlGUIButtons(itemSixButton);
 
     // Ability buttons
-    auto abilityOneButton = sfg::Button::Create("       7");
+    auto abilityOneButton = sfg::ToggleButton::Create("       7");
     createSettingsControlGUIButtons(abilityOneButton);
 
-    auto abilityTwoButton = sfg::Button::Create("       8");
+    auto abilityTwoButton = sfg::ToggleButton::Create("       8");
     createSettingsControlGUIButtons(abilityTwoButton);
 
-    auto abilityThreeButton = sfg::Button::Create("       9");
+    auto abilityThreeButton = sfg::ToggleButton::Create("       9");
     createSettingsControlGUIButtons(abilityThreeButton);
 
-    auto abilityFourButton = sfg::Button::Create("       0");
+    auto abilityFourButton = sfg::ToggleButton::Create("       0");
     createSettingsControlGUIButtons(abilityFourButton);
 
     // Gameplay buttons
-    auto attackButton = sfg::Button::Create("     MOUSE LEFT");
-    createSettingsControlGUIButtons(attackButton);
-
-    auto moveUpButton = sfg::Button::Create(" MOVE UP");
+    auto moveUpButton = sfg::ToggleButton::Create("W");
     createSettingsControlGUIButtons(moveUpButton);
 
-    auto moveDownButton = sfg::Button::Create("      MOVE DOWN");
+    auto moveDownButton = sfg::ToggleButton::Create("A");
     createSettingsControlGUIButtons(moveDownButton);
 
-    auto moveLeftButton = sfg::Button::Create("   MOVE LEFT");
+    auto moveLeftButton = sfg::ToggleButton::Create("S");
     createSettingsControlGUIButtons(moveLeftButton);
 
-    auto moveRightButton = sfg::Button::Create("     MOVE RIGHT");
+    auto moveRightButton = sfg::ToggleButton::Create("D");
     createSettingsControlGUIButtons(moveRightButton);
 
     // Handle buttons
@@ -303,30 +297,28 @@ void StateSettings::initControlsSettings() {
 
     auto mainframe1 = sfg::Frame::Create();
     mainframe1->Add(boxToolbar1);
-    mainframe1->SetId("frame");
+    mainframe1->SetId("controlframe");
 
     auto mainframe2 = sfg::Frame::Create();
     mainframe2->Add(boxToolbar2);
-    mainframe2->SetId("frame");
+    mainframe2->SetId("controlframe");
 
     auto mainframe3 = sfg::Frame::Create();
     mainframe3->Add(boxToolbar3);
-    mainframe3->SetId("frame");
+    mainframe3->SetId("controlframe");
 
     // Table to manage label and button position
     auto gameplayTable = sfg::Table::Create();
-    gameplayTable->Attach(actionLabel, sf::Rect<sf::Uint32>(0,0,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
+    gameplayTable->Attach(actionLabel, sf::Rect<sf::Uint32>(0,0,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND, sf::Vector2f(10.f, 0.f));
     gameplayTable->Attach(keysLabel, sf::Rect<sf::Uint32>(5,0,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
-    gameplayTable->Attach(attackLabel, sf::Rect<sf::Uint32>(0,1,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND);
-    gameplayTable->Attach(attackButton, sf::Rect<sf::Uint32>(5,1,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(0.f, 0.f));
     gameplayTable->Attach(moveUpLabel, sf::Rect<sf::Uint32>(0,2,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND);
-    gameplayTable->Attach(moveUpButton, sf::Rect<sf::Uint32>(5,2,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(0.f, 0.f));
+    gameplayTable->Attach(moveUpButton, sf::Rect<sf::Uint32>(5,2,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(15.f, 0.f));
     gameplayTable->Attach(moveDownLabel, sf::Rect<sf::Uint32>(0,3,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND);
-    gameplayTable->Attach(moveDownButton, sf::Rect<sf::Uint32>(5,3,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(0.f, 0.f));
+    gameplayTable->Attach(moveDownButton, sf::Rect<sf::Uint32>(5,3,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(15.f, 0.f));
     gameplayTable->Attach(moveLeftLabel, sf::Rect<sf::Uint32>(0,4,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND);
-    gameplayTable->Attach(moveLeftButton, sf::Rect<sf::Uint32>(5,4,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(0.f, 0.f));
+    gameplayTable->Attach(moveLeftButton, sf::Rect<sf::Uint32>(5,4,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(15.f, 0.f));
     gameplayTable->Attach(moveRightLabel, sf::Rect<sf::Uint32>(0,5,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND);
-    gameplayTable->Attach(moveRightButton, sf::Rect<sf::Uint32>(5,5,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(0.f, 0.f));
+    gameplayTable->Attach(moveRightButton, sf::Rect<sf::Uint32>(5,5,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(15.f, 0.f));
 
     auto inventoryTable = sfg::Table::Create();
     inventoryTable->Attach(actionLabel1, sf::Rect<sf::Uint32>(0,0,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
@@ -379,6 +371,7 @@ void StateSettings::initControlsSettings() {
 
     // Notebook
     auto notebook1 = sfg::Notebook::Create();
+    desktop->SetProperty("Notebook#notebook", "BackgroundColor", "#303030FD");
     notebook1->SetId("notebook");
     notebook1->AppendPage(gameplayBox, labelGameplay);
     notebook1->AppendPage(inventoryBox, labelInventory);
@@ -400,7 +393,6 @@ void StateSettings::initControlsSettings() {
     applyButton2->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onApplyButtonClick,this));
     defaultButton2->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDefaultButtonClick,this));
 
-    attackButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onDestroyClick,this));
     moveUpButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onMoveUpButtonClick,this));
     moveDownButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onMoveDownButtonClick,this));
     moveLeftButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateSettings::onMoveLeftButtonClick,this));
@@ -445,6 +437,7 @@ void StateSettings::onMuteMusicButtonClicked() {
     // Mute music
 }
 
+//// Functions below are for further extension of this game
 void StateSettings::onDefaultButtonClick() {
     // Default values
 }

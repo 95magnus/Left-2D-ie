@@ -3,10 +3,13 @@
 
 #include "StateBase.h"
 #include "../Game.h"
+#include "../entities/Weapon.h"
 
 #include <SFML/Graphics/Text.hpp>
 
 typedef std::string String;
+
+class Player;
 
 class StateShop : public StateBase {
 public:
@@ -20,16 +23,79 @@ public:
 
     void initShopGui();
 
-    void createImage(sfg::Image::Ptr image, const String &filename);
+    void initGameGui();
+
+    void upgradeWeapon();
+    void upgradeFireRate();
+    void upgradeDamage();
+    void upgradeHealth();
 
 protected:
     sf::Font *font;
-    sfg::Window::Ptr shopWindow;
 
-    sfg::Button::Ptr nextButton;
+    sf::Text* nextRoundLabel;
+    sf::Text* totalCoins;
+    sf::Text* cost;
+    sf::Text* totalCoinsEarnedLabel;
 
-    sfg::Image::Ptr gameover;
+    sf::Text* currentWeaponName;
+    sf::Text* currentWeaponLabel;
+
+    sf::Text* upgradedWeaponName;
+    sf::Text* upgradeWeaponLabel;
+    sf::Text* currentFireRateLabel;
+    sf::Text* upgradeFireRateLabel;
+    sf::Text* currentDamageLabel;
+    sf::Text* upgradeDamageLabel;
+    sf::Text* currentHealthLabel;
+    sf::Text* upgradeHealthLabel;
+
+    sf::Text* currentFireRateValue;
+    sf::Text* upgradedFireRateValue;
+    sf::Text* currentDamageValue;
+    sf::Text* upgradedDamageValue;
+    sf::Text* currentHealthValue;
+    sf::Text* upgradedHealthValue;
+
+    sf::Text* upgradeWeaponCost;
+    sf::Text* upgradeFireRateCost;
+    sf::Text* upgradeDamageCost;
+    sf::Text* upgradeHealthCost;
+
+    sf::RectangleShape* inventoryContainer;
+    sf::RectangleShape* fireRateContainer;
+    sf::RectangleShape* damageContainer;
+    sf::RectangleShape* healthContainer;
+    sf::RectangleShape* coinsContainer;
+
+    Player* player;
+    Weapon* weapon;
+
+    int weaponCost = 700;
+    int fireRateCost = 350;
+    int damageCost = 100;
+    int healthCost = 350;
+
+    std::vector<sfg::Image::Ptr> weaponImages;
+    int weaponStage;
+
+
+//    String currentThemePath[] =  {"resources/gui/resized_ak.png", "resources/gui/resized_shotgun.png", "resources/gui/tommygun.png",
+//    "resources/gui/resized_rifle.png", "resources/gui/resized_sniper.png", "resources/gui/resized_raygun.png"};
+//    String::iterator currentThemePathIterator;
+//
+    std::vector<String> upgradedThemePath = {
+            "resources/gui/resized_shotgun.png",
+            "resources/gui/resized_tommygun.png",
+            "resources/gui/resized_rifle.png",
+            "resources/gui/resized_sniper.png",
+            "resources/gui/resized_raygun.png"
+    };
+
+    void refreshWeaponImages();
+
 };
+
 
 
 #endif //LEFT2DIE_STATESHOP_H
