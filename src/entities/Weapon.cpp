@@ -1,21 +1,24 @@
-//
-// Created by Eivind Hystad on 20/11/2016.
-//
-
 #include <iostream>
 #include "Weapon.h"
 #include "../util/ResourceLoader.h"
 
-Weapon::Weapon(sf::RenderWindow &window, int wepStage, int damage, float rps, bool spray, int posX, int posY)
+
+Weapon::Weapon(sf::RenderWindow &window, int wepStage, float rps, bool spray, int posX, int posY)
         : Entity(sf::Vector2f(posX, posY)), window(window){
     this->rps = rps;
-    this->damage = damage;
+    this->damage = 10;
 
     sprite.setPosition(posX, posY);
     this->spray = spray;
+    reloading = false;
+    reloadProgress.setSize(sf::Vector2f(40, 5));
+    reloadProgress.setPosition(sprite.getPosition());
+    reloadProgress.setFillColor(sf::Color::Yellow);
+    reloadProgress.setOutlineColor(sf::Color::Black);
+    reloadProgress.setOutlineThickness(1);
+    bulletsFired = 0;
     weaponStage = wepStage;
-//    this->penetration = penetration;
-    //spriteFront = weaponStageIntRectsFront[wepStage];
+
     spriteSide = weaponStageIntRectsSide[wepStage];
 
     ResourceLoader loader("resources/");
@@ -40,8 +43,6 @@ Weapon::Weapon(sf::RenderWindow &window, int wepStage, int damage, float rps, bo
     sprite.setOutlineThickness(2);
     sprite.setOutlineColor(sf::Color::Red);
     sound.setBuffer(soundBuffer);
-
-    projectiles.push_back(new Projectile(window, *text[weaponStage], projectileIntRect[weaponStage], 10, 400, spray, angle, sprite.getPosition().x, sprite.getPosition().y));
 }
 
 Weapon::~Weapon() {
@@ -53,28 +54,66 @@ void Weapon::update(float deltaTime) {
     for (auto &projectile : projectiles)
         projectile->update(deltaTime);
 
-    std::cout << weaponStage << std::endl;
+    //std::cout << weaponStage << std::endl;
     sprite.setTexture(text[weaponStage]);
     sprite.setTextureRect(weaponStageIntRectsSide[weaponStage]);
     sprite.setOrigin(sprite.getLocalBounds().width/2, sprite.getLocalBounds().height/2);
     sprite.setSize(sf::Vector2f(weaponStageIntRectsSide[weaponStage].width,weaponStageIntRectsSide[weaponStage].height));
     for (auto &projectile : projectiles)
         projectile->update(deltaTime);
+
+    if (bulletsFired > magazineSize[weaponStage]) {
+        if (!reloading) {
+            reloadTimer.restart();
+        }
+        reloading = true;
+        if (reloadTimer.getElapsedTime().asSeconds() >= reloadTime[weaponStage]) {
+            bulletsFired = 0;
+        }
+    } else {
+        reloading = false;
+    }
+    if (reloading) {
+        reloadProgress.setPosition(sprite.getPosition().x - reloadProgress.getSize().x/2 + 5, sprite.getPosition().y + 60);
+        reloadProgress.setScale((reloadTimer.getElapsedTime().asSeconds()/reloadTime[weaponStage]), 1);
+    } else {
+        reloadProgress.setPosition(sprite.getPosition().x - reloadProgress.getSize().x/2 + 5, sprite.getPosition().y + 60);
+        reloadProgress.setScale(((float)(magazineSize[weaponStage] - bulletsFired)/magazineSize[weaponStage]), 1);
+        if (bulletsFired < magazineSize[weaponStage]) {
+            reloadProgress.setFillColor(sf::Color::Red);
+        }
+        if (bulletsFired <= magazineSize[weaponStage]/2) {
+            reloadProgress.setFillColor(sf::Color::Yellow);
+        }
+        if (bulletsFired < magazineSize[weaponStage]/4) {
+            reloadProgress.setFillColor(sf::Color::Green);
+        }
+
+    }
+    for (auto &projectile : projectiles)
+        projectile->update(deltaTime);
 }
 
 void Weapon::draw(sf::RenderWindow &window) {
-    for (auto &projectile : projectiles)
-        projectile->draw(window);
+    //window.draw(reloadProgress);
+    for (auto &proj : projectiles)
+        proj->draw(window);
 
     window.draw(sprite);
 }
 
 void Weapon::fire() {
-    if (clock.getElapsedTime().asSeconds() > 1/rps) {
-        projectiles.push_back(new Projectile(window, *text[weaponStage], projectileIntRect[weaponStage], 10, 400, spray, angle, sprite.getPosition().x, sprite.getPosition().y));
-        clock.restart();
-        sound.play();
-    }
+    //if (!reloading) {
+        if (clock.getElapsedTime().asSeconds() > 1/rps) {
+            projectiles.push_back(new Projectile(window, *projectileTexture, projectileIntRect[weaponStage], 10, 400, spray, angle, sprite.getPosition().x, sprite.getPosition().y));
+            clock.restart();
+            sound.play();
+
+            bulletsFired++;
+            reloading = false;
+            reloadTimer.restart();
+        }
+//    }
 }
 
 void Weapon::rotateWeapon(int mouseWorldPosX, int mouseWorldPosY) {
@@ -223,5 +262,4 @@ bool Weapon::isSpray() const {
 void Weapon::setSpray(bool spray) {
     Weapon::spray = spray;
 }
-
 

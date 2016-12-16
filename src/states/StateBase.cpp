@@ -37,7 +37,7 @@ void StateBase::createSinglePlayerWindow(sfg::Window::Ptr windowName){
     windowName->SetId("singleplayerwindow");
     windowName->SetPosition(sf::Vector2f(0.f,0.f));
     windowName->SetRequisition(sf::Vector2f(game->getWindowSize()));
-    desktop->Add(windowName);
+//    desktop->Add(windowName);
 }
 
 void StateBase::createPlayerBarLabel(sfg::Label::Ptr labelName) {

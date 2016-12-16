@@ -1,6 +1,4 @@
-#include <stdlib.h>
 #include "StateSinglePlayer.h"
-#include "../gui/Message.h"
 #include "../entities/Player.h"
 #include "../entities/enemies/Enemy.h"
 #include "StateGameOver.h"
@@ -30,6 +28,12 @@ StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
 
     window = &game->getWindow();
     player = world->getPlayer();
+
+    musicBuffer.loadFromFile("resources/music/soundtrack_1.wav");
+    music = sf::Sound(musicBuffer);
+    music.setLoop(true);
+    music.stop();
+    music.setVolume(0.8f);
 }
 
 StateSinglePlayer::~StateSinglePlayer() {
@@ -57,10 +61,12 @@ void StateSinglePlayer::resume() {
     StateBase::resume();
     desktop->RemoveAll();
     initGameGui();
+    music.play();
 }
 
 void StateSinglePlayer::pause() {
     desktop->RemoveAll();
+    music.stop();
 
 }
 
@@ -68,43 +74,35 @@ void StateSinglePlayer::update(float deltaTime) {
     if (!paused)
         world->update(deltaTime);
 
-    if (player->getHealth() <= 0)
+    if (player->getHealth() <= 0) {
+        player->onDeath();
         gameOver();
 
+        player->setHealth(player->getMaxHealth());
+    }
 
     if (world->getEntities().size() <= 1) {
         goToShop();
         world->spawnWave();
     }
 
-    /*
+    score->setString(std::to_string(player->getScore()));
+    coins->setString(std::to_string(player->getScore()));
+    zombiesLeft.setString(std::to_string(world->getEntities().size()-1));
 
-    zombiesLeft.setString(std::to_string(zombieCounter));
-    score->setString(std::to_string(player->getScore()*15));
-    player->setMoney(player->getScore()*3);
-    coins->setString(std::to_string(player->getMoney()));
-
-    // Health bar adjustment
-    float healthPercent = (float)player->getHealth()/player->getMaxHealth();
-    hpGreenBar->setScale(healthPercent, 1);
-    hpGreenBar->setFillColor(interpolate(sf::Color::Red, sf::Color::Green, healthPercent));
-
-    if(healthPercent < 0) {
-        gameOver();
+    //The HPbar doesn't go outside the hpbar borders
+    float hpbar = (float)player->getHealth() / player->getMaxHealth();
+    if (hpbar < 0) {
+        hpbar = 0;
     }
 
-    if (enemies.empty()) {
-        waveNumber++;
-        goToShop();
-        spawnWave();
-    }
-     */
+    hpGreenBar->setFillColor(interpolateColors(sf::Color::Red, sf::Color::Green, hpbar));
+    hpGreenBar->setScale(hpbar, 1);
 }
 
 void StateSinglePlayer::draw(sf::RenderWindow &window) {
     world->draw(window);
 
-    //window->draw(vignette);
     mb->draw("Wave " + std::to_string(waveNumber) + " - Good luck", 8, game->getWindow());
 
     game->getWindow().draw(zombiesLeft);
@@ -197,13 +195,12 @@ void StateSinglePlayer::goToShop() {
 
 }
 
-/// Game Over - call this if player health = 0
 void StateSinglePlayer::gameOver() {
-    if (auto gameOver = dynamic_cast<StateGameOver*>(game->getStateMachine().getState())) {
-        gameOver->setScore(-1);
-    }
-
     game->getStateMachine().setState(StateMachine::StateID::GAME_OVER);
+
+    if (auto gameOver = dynamic_cast<StateGameOver*>(game->getStateMachine().getState())) {
+        gameOver->setScore(player->getScore());
+    }
 }
 
 void StateSinglePlayer::getCurrentWeaponImage() {
@@ -212,4 +209,13 @@ void StateSinglePlayer::getCurrentWeaponImage() {
 
 void StateSinglePlayer::getUpgradedWeaponImage() {
 
+}
+
+sf::Color StateSinglePlayer::interpolateColors(sf::Color c1, sf::Color c2, float mixPercent) {
+    sf::Color col;
+    col.r = (sf::Uint8) sqrt((1 - mixPercent) * (c1.r * c1.r) + mixPercent * c2.r * c2.r);
+    col.g = (sf::Uint8) sqrt((1 - mixPercent) * (c1.g * c1.g) + mixPercent * c2.g * c2.g);
+    col.b = (sf::Uint8) sqrt((1 - mixPercent) * (c1.b * c1.b) + mixPercent * c2.b * c2.b);
+
+    return col;
 }

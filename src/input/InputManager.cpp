@@ -65,6 +65,7 @@ bool InputManager::checkForInput() {
                         stateMachine->getState()->togglePause();
                         break;
 
+#if DEBUG
                     case Key::Num1:
                         stateMachine->setState(StateMachine::StateID::MAIN_MENU);
                         break;
@@ -83,6 +84,7 @@ bool InputManager::checkForInput() {
                     case Key::Num6:
                         stateMachine->setState(StateMachine::StateID::SHOP);
                         break;
+#endif
                 }
 
                 break;

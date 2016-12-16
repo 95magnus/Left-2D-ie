@@ -1,7 +1,3 @@
-//
-// Created by Eivind Hystad on 13/12/2016.
-//
-
 #ifndef LEFT2DIE_CRAWLINGZOMBIE_H
 #define LEFT2DIE_CRAWLINGZOMBIE_H
 
@@ -15,6 +11,8 @@ public:
     virtual void dealDamage(Player *player);
 private:
     bool hanging;
+    sf::RectangleShape healthBar;
+    sf::RectangleShape hpBarBG;
 };
 
 

@@ -7,6 +7,7 @@
 #include "StateBase.h"
 #include "../gui/Message.h"
 #include <math.h>
+#include "SFML/Audio.hpp"
 //#include "../entities/NormalZombie.h"
 //#include "../entities/Enemy.h"
 
@@ -47,13 +48,7 @@ public:
         return player;
     }
 
-    sf::Color interpolate(sf::Color c1, sf::Color c2, float mixPercent) {
-        sf::Color col;
-        col.r = (sf::Uint8) sqrt((1 - mixPercent) * (c1.r * c1.r) + mixPercent * c2.r * c2.r);
-        col.g = (sf::Uint8) sqrt((1 - mixPercent) * (c1.g * c1.g) + mixPercent * c2.g * c2.g);
-        col.b = (sf::Uint8) sqrt((1 - mixPercent) * (c1.b * c1.b) + mixPercent * c2.b * c2.b);
-        return col;
-    }
+    sf::Color interpolateColors(sf::Color c1, sf::Color c2, float mixPercent);
 
 protected:
     //InputManager* inputManager;
@@ -93,6 +88,9 @@ private:
 
     sf::Text zombiesLeft;
     int zombieCounter;
+
+    sf::SoundBuffer musicBuffer;
+    sf::Sound music;
 
     String currentWeaponImage;
     String upgradedWeaponImage;

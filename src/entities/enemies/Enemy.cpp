@@ -1,9 +1,4 @@
-//
-// Created by Eivind Hystad on 30/11/2016.
-//
-
 #include "Enemy.h"
-//#include "Player.h"
 
 Enemy::Enemy(sf::Vector2f spawnPos) : Entity(spawnPos) {
     // Laster inn texture
@@ -13,7 +8,7 @@ Enemy::Enemy(sf::Vector2f spawnPos) : Entity(spawnPos) {
     } else {
         sprite.setTexture(&texture);
     }
-    scoreReward = 10;
+    scoreReward = 20;
     goingRight = false;
     health = 100;
     maxHealth = 100;
@@ -38,7 +33,6 @@ Enemy::Enemy(sf::Vector2f spawnPos) : Entity(spawnPos) {
     hpBarBG = healthBar;
     hpBarBG.setFillColor(sf::Color::Red);
     cycleClock.restart();
-    rewardPoints = 10;
     target = sf::Vector2i(-1, -1);
 }
 
@@ -100,8 +94,6 @@ void Enemy::update(float deltaTime) {
 
     if (moving)
         animationCycler(0.5);
-
-
 }
 
 void Enemy::update(std::vector<sf::Vector2f> players, float deltaTime) {
@@ -119,11 +111,6 @@ void Enemy::update(std::vector<sf::Vector2f> players, float deltaTime) {
     hitbox.setSize(sprite.getSize());
     hitbox.setPosition(worldPos);
     sprite.setPosition(worldPos);
-}
-
-void Enemy::translate(sf::Vector2f offset) {
-    xOffs += offset.x;
-    yOffs += offset.y;
 }
 
 void Enemy::draw(sf::RenderWindow &window) {
@@ -144,7 +131,7 @@ void Enemy::draw(sf::RenderWindow &window) {
         hit += 5;
     }
     window.draw(sprite);
-    window.draw(hitbox);
+    //window.draw(hitbox);
     window.draw(collisionBox);
     window.draw(hpBarBG);
     window.draw(healthBar);

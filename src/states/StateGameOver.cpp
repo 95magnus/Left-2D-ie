@@ -12,10 +12,9 @@ StateGameOver::StateGameOver(Game *game) : StateBase(game) {
     gameOverTitle.setColor(sf::Color::Red);
     gameOverTitle.setStyle(sf::Text::Bold);
 
-    score = sf::Text("Score: 0", game->getFont(), 64);
+    score = sf::Text("Score:  ", game->getFont(), 64);
     score.setPosition(350, 560);
     score.setColor(sf::Color::White);
-
 }
 
 StateGameOver::~StateGameOver() {
@@ -34,5 +33,5 @@ void StateGameOver::draw(sf::RenderWindow &window) {
 }
 
 void StateGameOver::setScore(int score) {
-    this->score.setString("Score: " + score);
+    this->score.setString("Score: " + std::to_string(score));
 }

@@ -11,13 +11,18 @@ TileBase::TileBase(int tileSize, int x, int y, sf::Texture &texture) : TileBase(
     sprite->setTexture(&texture);
     sprite->setPosition(x, y);
 
+    //
+    /*
     sf::Vector2u texSize = texture.getSize();
     float scaleX = tileSize / (float)texSize.x;
     float scaleY = tileSize / (float)texSize.y;
     //sprite->setScale(scaleX, scaleY);
+    */
 
+    /*
     sprite->setOutlineColor(sf::Color::Magenta);
     sprite->setOutlineThickness(2);
+    */
 }
 
 TileBase::~TileBase() {

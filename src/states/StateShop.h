@@ -68,22 +68,21 @@ protected:
     sf::RectangleShape* healthContainer;
     sf::RectangleShape* coinsContainer;
 
+    sf::Sprite currentWeaponImage, nextWeaponImage;
+
     Player* player;
     Weapon* weapon;
+
+    sfg::Window::Ptr singlePlayerWindow;
 
     int weaponCost = 700;
     int fireRateCost = 350;
     int damageCost = 100;
     int healthCost = 350;
 
-    std::vector<sfg::Image::Ptr> weaponImages;
+    std::vector<sf::Texture*> weaponImages;
     int weaponStage;
 
-
-//    String currentThemePath[] =  {"resources/gui/resized_ak.png", "resources/gui/resized_shotgun.png", "resources/gui/tommygun.png",
-//    "resources/gui/resized_rifle.png", "resources/gui/resized_sniper.png", "resources/gui/resized_raygun.png"};
-//    String::iterator currentThemePathIterator;
-//
     std::vector<String> upgradedThemePath = {
             "resources/gui/resized_shotgun.png",
             "resources/gui/resized_tommygun.png",
@@ -91,11 +90,6 @@ protected:
             "resources/gui/resized_sniper.png",
             "resources/gui/resized_raygun.png"
     };
-
-    void refreshWeaponImages();
-
 };
-
-
 
 #endif //LEFT2DIE_STATESHOP_H

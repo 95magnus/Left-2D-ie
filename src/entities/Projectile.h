@@ -1,10 +1,5 @@
-//
-// Created by Eivind Hystad on 17/11/2016.
-//
-
 #ifndef LEFT2DIE_PROJECTILE_H
 #define LEFT2DIE_PROJECTILE_H
-
 
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -12,7 +7,6 @@
 #include <SFML/Window/Mouse.hpp>
 #include <math.h>
 #include "Entity.h"
-
 
 class Projectile : public Entity {
 public:
@@ -43,17 +37,13 @@ public:
     void setMouse(const sf::Mouse &mouse);
 
 private:
-    int increasedFireRate;
-    int increasedDamage;
     sf::RectangleShape sprite;
-    sf::RectangleShape hitbox;
     bool spray;
     int damage, speed;
     float x, y;
     sf::Clock clock;
     sf::Mouse mouse;
-    float velX, velY, diffX, diffY, magnitude, rndX, rndY;
+    float velX, velY, rndX, rndY;
 };
-
 
 #endif //LEFT2DIE_PROJECTILE_H

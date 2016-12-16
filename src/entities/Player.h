@@ -20,10 +20,6 @@ class Projectile;
 class Player : public Entity, PlayerController {
 public:
 
-    void hit();
-
-//    void getHit(int damage);
-
     enum Direction { Up, Down, Left, Right };
 
     Player(sf::RenderWindow &window, sf::View &view, InputManager &inputManager, sf::Vector2f pos);
@@ -37,22 +33,21 @@ public:
     void scale(float x);
     void animationCycler(std::vector<sf::IntRect> dir);
 
-    void death();
+    void hit();
+    void onDeath();
 
-    void mousePressed(int x, int y, sf::Mouse::Button button);
-
-    // Getters & setters for stats
     int getHealth() const;
     void setHealth(int health);
     int getSpeed() const;
     void setSpeed(int speed);
 
     Direction getCurrentDir() const;
-
     void setCurrentDir(Direction currentDir);
 
     sf::Vector2f getPosition() { return xy; }
     sf::FloatRect getBounds() { return collisionBox; }
+
+    void addScore(int add) { money += add; score += add; }
 
     int getScore() const;
     void setScore(int score);
@@ -65,25 +60,14 @@ public:
     std::vector<Projectile*>& getProjectiles();
 
     int getMaxHealth() const;
-
     void setMaxHealth(int maxHealth);
 
     float getMaxSpeed() const;
-
     void setMaxSpeed(float maxSpeed);
 
-    Weapon* getWeapon(){
-        return currentWeapon;
-    }
+    Weapon* getWeapon() { return currentWeapon; }
 
 private:
-    //Components
-    //InputComponent input_;
-    //GraphicsComponent graphics_;
-    //PhysicsComponent physics_;
-
-    // Sprites
-
     float maxSpeed = 175.0f;
     float speed = 175.0f;
     int x, y, hitColor;
@@ -101,12 +85,10 @@ private:
     sf::FloatRect collisionBox;
 
     // Sounds
-    sf::SoundBuffer SBuffer;
-    sf::Sound sound;
+    sf::SoundBuffer hitBuffer, diedBuffer;
+    sf::Sound hitSound, deathSound;
 
-    // Private Stats
-    int health, armor, kills, score, money;
-    int maxHealth;
+    int health, armor, kills, score, money, maxHealth;
     float scaleFactor;
     sf::Clock clock;
     //Speedclock is to ensure that the player doesnt move faster or slower due to
@@ -115,9 +97,8 @@ private:
     bool moving;
     Direction currentDir;
     sf::Vector2f xy;
-    bool isDead;
 
-    // Animation rotation arrays, worst implementation, please forgive me
+    Weapon* currentWeapon;
 
     std::vector<sf::IntRect> left = {{970, 635, 240, 630},
                            {0, 0, 480, 630},
@@ -145,17 +126,6 @@ private:
 
     std::map<Direction, std::vector<sf::IntRect>> animationDirections;
 
-    // Inventory
-    // TODO: 3 plasser o "bagen" til våpenobjekter
-    // TODO: 1 primary, 1 secondary å 1 special
-    Weapon* currentWeapon;
-    //Inventory
-        /*
-         * TODO: Add weapon actions
-        void primaryWeapon;
-        void secondaryWeapon;
-        void specialWeapon;
-         */
 };
 
 

@@ -19,7 +19,6 @@ public:
     void handlePlayerMovement(float deltaTime);
     void spawnWave();
     void spawnWave(int wave);
-    void goToShop();
 
     Player* getPlayer() { return player; }
     std::vector<Entity*>& getEntities() { return entities; }

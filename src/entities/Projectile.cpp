@@ -1,8 +1,3 @@
-//
-// Created by Eivind Hystad on 17/11/2016.
-//
-
-
 #include "Projectile.h"
 
 Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRect rect, int damage, int speed, bool spray, float angle, float x, float y)
@@ -16,8 +11,6 @@ Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRe
     speed = 450;
     sprite.setPosition(worldPos);
 
-    this->increasedDamage = 0;
-    this->increasedFireRate = 0;
     this->speed = speed;
     this->spray = spray;
 

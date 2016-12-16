@@ -2,17 +2,17 @@
 #include "../entities/Player.h"
 
 StateShop::StateShop(Game *game) : StateBase(game){
+    ResourceLoader loader("resources/");
+
     for (int i = 0; i < upgradedThemePath.size(); i++) {
-        auto temp = new sf::Image;
-        auto image = sfg::Image::Create();
+        auto tex = new sf::Texture();
+        tex->loadFromFile(upgradedThemePath[i]);
 
-        if(temp->loadFromFile(upgradedThemePath[i])){
-            image->SetImage(*temp);
-        }
-        image->SetRequisition(sf::Vector2f(game->getWindowSize()));
-
-        weaponImages.push_back(image);
+        weaponImages.push_back(tex);
     }
+
+    currentWeaponImage.setPosition(sf::Vector2f(220.f, 210.f));
+    nextWeaponImage.setPosition(sf::Vector2f(650.f, 210.f));
 }
 
 StateShop::~StateShop() {
@@ -54,12 +54,6 @@ void StateShop::pause() {
     delete damageContainer;
     delete healthContainer;
     delete coinsContainer;
-
-    if (weapon->getWeaponStage() < weaponImages.size())
-        desktop->Remove(weaponImages[weapon->getWeaponStage()]);
-    if (weapon->getWeaponStage() < weaponImages.size()-1)
-        desktop->Remove(weaponImages[weapon->getWeaponStage()+1]);
-
 }
 
 void StateShop::resume() {
@@ -76,6 +70,7 @@ void StateShop::update(float deltaTime) {
     upgradedHealthValue->setString(std::to_string(player->getMaxHealth()+25));
     player->setHealth(player->getMaxHealth());
     //weapon->setWeaponStage(weapon->getWeaponStage());
+    totalCoins->setString(std::to_string(player->getMoney()));
 
     if(weapon->getWeaponStage()>=5){
         weapon->setWeaponStage(5);
@@ -83,6 +78,12 @@ void StateShop::update(float deltaTime) {
             weapon->setSpray(false);
         }
     }
+
+    if (weapon->getWeaponStage() < weaponImages.size())
+    currentWeaponImage.setTexture(*weaponImages[weapon->getWeaponStage()]);
+
+    if (weapon->getWeaponStage() < weaponImages.size() - 1)
+        nextWeaponImage.setTexture(*weaponImages[weapon->getWeaponStage() + 1]);
 }
 
 void StateShop::draw(sf::RenderWindow &window) {
@@ -125,16 +126,22 @@ void StateShop::draw(sf::RenderWindow &window) {
     game->getWindow().draw(*damageContainer);
     game->getWindow().draw(*healthContainer);
     game->getWindow().draw(*coinsContainer);
+
+    game->getWindow().draw(currentWeaponImage);
+    game->getWindow().draw(nextWeaponImage);
 }
 
 void StateShop::initShopGui() {
-    font = new sf::Font();
-    font->loadFromFile("resources/fonts/feast-of-flesh-bb.italic.ttf");
-
     if (auto singlePlayerState= dynamic_cast<StateSinglePlayer*>(game->getStateMachine().getState(StateMachine::StateID::SINGLE_PLAYER))) {
         player = singlePlayerState->getPlayer();
         weapon = player->getWeapon();
     }
+
+    singlePlayerWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
+    createSinglePlayerWindow(singlePlayerWindow);
+
+    font = new sf::Font();
+    font->loadFromFile("resources/fonts/feast-of-flesh-bb.italic.ttf");
 
     // Shop window
     auto shopWindow = sfg::Window::Create(sfg::Window::Style::BACKGROUND);
@@ -289,8 +296,6 @@ void StateShop::initShopGui() {
         desktop->Add(weaponImages[weapon->getWeaponStage() + 1]);
     }
     */
-    refreshWeaponImages();
-
     // Firerate icons
     auto currentFirerate = sfg::Image::Create();
     createImage(currentFirerate, "resources/gui/firerate.png");
@@ -378,8 +383,6 @@ void StateShop::upgradeWeapon() {
             weapon->setSpray(false);
         }
     }
-
-    refreshWeaponImages();
 }
 
 void StateShop::upgradeFireRate() {
@@ -392,19 +395,4 @@ void StateShop::upgradeDamage() {
 
 void StateShop::upgradeHealth() {
     player->setMaxHealth(player->getMaxHealth()+25);
-}
-
-void StateShop::refreshWeaponImages() {
-    if (weapon->getWeaponStage() < weaponImages.size()){
-        desktop->Remove(weaponImages[weapon->getWeaponStage()]);
-        weaponImages[weapon->getWeaponStage()]->SetPosition(sf::Vector2f(220.f, 210.f));
-        desktop->Add(weaponImages[weapon->getWeaponStage()]);
-    }
-
-    // Upgraded weapon
-    if (weapon->getWeaponStage() < weaponImages.size() - 1){
-        desktop->Remove(weaponImages[weapon->getWeaponStage()+1]);
-        weaponImages[weapon->getWeaponStage()+1]->SetPosition(sf::Vector2f(650.f, 210.f));
-        desktop->Add(weaponImages[weapon->getWeaponStage() + 1]);
-    }
 }

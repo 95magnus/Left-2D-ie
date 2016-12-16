@@ -430,7 +430,7 @@ void StateSettings::getToMainMenu() {
 
 
 void StateSettings::onMuteSoundButtonClicked() {
-    // Mute sound
+    // Mute music
 }
 
 void StateSettings::onMuteMusicButtonClicked() {

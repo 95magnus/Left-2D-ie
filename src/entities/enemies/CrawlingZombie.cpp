@@ -17,6 +17,13 @@ CrawlingZombie::CrawlingZombie(const sf::Vector2f &spawnPos) : Enemy(spawnPos) {
     speed /= 2;
     damage /= 2;
     hanging = false;
+    healthBar.setSize(sf::Vector2f(50,5));
+    healthBar.setFillColor(sf::Color::Green);
+    healthBar.setOutlineColor(sf::Color::Black);
+    healthBar.setOutlineThickness(1);
+    healthBar.setPosition(sprite.getPosition().x, sprite.getPosition().y);
+    hpBarBG = healthBar;
+    hpBarBG.setFillColor(sf::Color::Red);
 }
 
 void CrawlingZombie::dealDamage(Player *player) {
@@ -24,7 +31,7 @@ void CrawlingZombie::dealDamage(Player *player) {
         if (attackTimer.getElapsedTime().asSeconds() > 1) {
             player->setHealth(player->getHealth() - damage);
             player->hit();
-            player->setSpeed(player->getSpeed()*1.5);
+            player->setSpeed(player->getSpeed()/1.8);
             attackTimer.restart();
         }
     }
@@ -88,8 +95,9 @@ void CrawlingZombie::draw(sf::RenderWindow &window) {
         hitbox.setScale(sprite.getScale());
         hitbox.setPosition(sprite.getPosition());
     }
-    //hpBarBG.setPosition(healthBar.getPosition());
-    //healthBar.setSize(sf::Vector2f((healthBar.getSize().x - healthBar.getSize().x*((maxHealth - health)/maxHealth)), healthBar.getSize().y));
+    healthBar.setPosition(sprite.getPosition().x - healthBar.getLocalBounds().width/2, sprite.getPosition().y - 20);
+    hpBarBG.setPosition(healthBar.getPosition());
+    healthBar.setScale(((float)health/maxHealth), 1);
     sprite.setFillColor(sf::Color(255, hit, hit));
     if (hit < 255) {
         hit += 5;
@@ -102,8 +110,8 @@ void CrawlingZombie::draw(sf::RenderWindow &window) {
     window.draw(sprite);
     window.draw(hitbox);
     window.draw(collisionBox);
-    //window.draw(hpBarBG);
-    //window.draw(healthBar);
+    window.draw(hpBarBG);
+    window.draw(healthBar);
 
     if (hanging) {
         sprite.setPosition(sprite.getPosition().x + 40, sprite.getPosition().y - 30);

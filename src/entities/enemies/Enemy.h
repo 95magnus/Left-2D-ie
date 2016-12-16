@@ -1,10 +1,5 @@
-//
-// Created by Eivind Hystad on 30/11/2016.
-//
-
 #ifndef LEFT2DIE_ENEMY_H
 #define LEFT2DIE_ENEMY_H
-
 
 #include <math.h>
 #include <SFML/Graphics/Texture.hpp>
@@ -34,7 +29,6 @@ public:
     void update(std::vector<sf::Vector2f> players, float deltaTime);
     void draw(sf::RenderWindow &window);
 
-    void translate(sf::Vector2f offset);
     void animationCycler(float interval);
     void getHit(int damage);
     sf::IntRect rect[3] = {{335, 0, 300, 600},
@@ -58,16 +52,9 @@ protected:
 
     sf::Vector2i target;
 
-    bool requestNewTarget = true;
+    bool moving, goingRight, requestNewTarget = true;
 
-    int health, maxHealth, damage, speed;
-    int scoreReward;
-
-    int xOffs, yOffs;
-    int rewardPoints;
-    bool moving, goingRight;
-    int hit;
-    sf::Vector2f prev;
+    int health, maxHealth, damage, speed, scoreReward, hit;
 };
 
 #endif //LEFT2DIE_ENEMY_H

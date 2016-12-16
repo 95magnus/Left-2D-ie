@@ -26,12 +26,6 @@ World::~World() {
 }
 
 void World::update(float deltaTime) {
-    if (entities.size() <= 1) {
-        goToShop();
-        spawnWave(++currentWave);
-    }
-
-
     handlePlayerMovement(deltaTime);
 
     for (auto &entity : entities) {
@@ -231,6 +225,7 @@ void World::updateEnemyToPlayerMovements() {
         }
     }
 
+    /*
     for (auto &row : level->getTileMap()){
         for (auto &tile : row) {
             std::cout << tile->getMovements() << "\t";
@@ -239,7 +234,7 @@ void World::updateEnemyToPlayerMovements() {
     }
 
     std::cout << "--------------------------------------------------------" << std::endl;
-
+    */
 }
 
 sf::Vector2i World::findBestNeighborTile(sf::Vector2i tileIndex) {
@@ -261,8 +256,8 @@ sf::Vector2i World::findBestNeighborTile(sf::Vector2i tileIndex) {
     for (int y = yMin; y < yMax; y++) {
         for (int x = xMin; x < xMax; x++) {
             // Ignore original location tile
-            //if (sf::Vector2i(x, y) == tileIndex)
-             //   continue;
+            if (sf::Vector2i(x, y) == tileIndex)
+             continue;
 
             int movements = tileMap->at(y).at(x)->getMovements();
 
@@ -273,10 +268,10 @@ sf::Vector2i World::findBestNeighborTile(sf::Vector2i tileIndex) {
         }
     }
 
-    /*
+    /* Used for debugging
     if (sf::Keyboard::isKeyPressed(Key::Space))
         std::cout << bestTile.x << ", " << bestTile.y << " - " << bestMovements << std::endl;
-*/
+    */
 
     return bestTile;
 }
@@ -318,8 +313,10 @@ void World::updateBulletCollisions() {
                 enemy->getHit(projectile->getDamage());
                 projectile->setDead();
 
-                if (enemy->getHealth() <= 0)
+                if (enemy->getHealth() <= 0){
                     enemy->setDead();
+                    player->addScore(enemy->getScoreReward());
+                }
             }
         }
 
@@ -354,68 +351,15 @@ void World::updateBulletCollisions() {
             projectiles->erase(projectiles->begin() + i);
     }
 
+    /* Used for debugging
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         std::cout << "";
-
-
-    /*
-    // TODO: Optimize search
-    if (!enemies.empty() && !projectiles.empty()) {
-        for (int i = 0; i < projectiles.size(); i++) {
-            for (int j = 0; j < enemies.size(); j++) {
-                if (projectiles[i]->getSprite().getPosition().x + 20 >= enemies[j]->sprite.getPosition().x
-                    && projectiles[i]->getSprite().getPosition().x + 20
-                       <= enemies[j]->sprite.getPosition().x + (enemies[j]->hitbox.getSize().x*0.2)
-                    && projectiles[i]->getSprite().getPosition().y
-                       >= enemies[j]->sprite.getPosition().y
-                    && projectiles[i]->getSprite().getPosition().y
-                       <= enemies[j]->sprite.getPosition().y + (enemies[j]->hitbox.getSize().y)*0.2) {
-
-                    enemies[j]->getHit(projectiles[i]->getDamage());
-                    projectiles.erase(projectiles.begin() + i);
-                    i++;
-                }
-            }
-        }
-    }
-
-    auto enemy = enemies.begin();
-    while (enemy != enemies.end()) {
-        if ((*enemy)->getHealth() <= 0) {
-            enemy = enemies.erase(enemy);
-        } else {
-            ++enemy;
-        }
-    }
-
-
-    auto projectile = projectiles.begin();
-    while(projectile != projectiles.end()) {
-        sf::Vector2i tilePos = level->worldCoordToTileIndex((*projectile)->getWorldPos());
-
-        if (tilePos != sf::Vector2i(-1, -1)) {
-            ++projectile;
-            continue;
-        }
-
-        auto projectileBounds = (*projectile)->getSprite().getLocalBounds();
-        auto tile = level->getTileMap().at(tilePos.y).at(tilePos.x);
-
-        // Projectile collided with solid tile
-        if (tile->isSolid() && projectileBounds.intersects(tile->getBounds())){
-            projectile = projectiles.erase(projectile);
-        } else {
-            ++projectile;
-        }
-    }
-     */
-}
-
-void World::goToShop() {
-
+    */
 }
 
 void World::spawnWave(int wave) {
+    srand(time(NULL));
+
     for (int i = 0; i < minEnemyCount + wave * enemiesPerWave; i++) {
         float x = rand() % ((level->levelWidth - 2) * level->tileSize) + level->tileSize;
         float y = rand() % ((level->levelHeight - 2) * level->tileSize) + level->tileSize;

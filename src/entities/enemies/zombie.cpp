@@ -73,7 +73,7 @@ void Zombie::setSpeed(int speed) {
 void Zombie::hit() {
     //life loss at hit
     Zombie::setHealth(Zombie::getHealth() - 5);
-    //hit sound effect
+    //hit music effect
     SBuffer.loadFromFile("damage_hit1.wav");
     sound.setBuffer(SBuffer);
     sound.play();

@@ -9,7 +9,7 @@ StateMainMenu::StateMainMenu(Game *game) : StateBase(game) {
     background.setTexture(backgroundImage);
     background.setSize(game->getWindowSize());
 
-    if (soundBufferMain.loadFromFile("resources/sound/POL-sky-sanctuary-short.wav")) {
+    if (soundBufferMain.loadFromFile("resources/music/soundtrack_1.wav")) {
 
     }
     soundMain.setBuffer(soundBufferMain);

@@ -14,13 +14,12 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
     score = 0;
     money = 0;
     currentDir = Right;
-    isDead = false;
     sprite.setSize(sf::Vector2f(55, 55));
     scaleFactor = 0.25;
     xy = sf::Vector2f(worldPos.x, worldPos.y - 50);
     sprite.setPosition(xy);
 
-    currentWeapon = new Weapon(window, 0, 5, 5, true, (int) sprite.getPosition().x - 5, (int) sprite.getPosition().y + 10);
+    currentWeapon = new Weapon(window, 0, 5, true, (int) sprite.getPosition().x - 5, (int) sprite.getPosition().y + 10);
 
     texture.setSmooth(false);
     texture.setRepeated(false);
@@ -32,6 +31,8 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
     } else {
         sprite.setTexture(&texture);
     }
+    if (!graveStone.loadFromFile("resources/textures/spritesheets/gravestone.png")) {
+    }
 
     hitColor = 255;
 
@@ -40,10 +41,8 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
     animationDirections.emplace(Left, left);
     animationDirections.emplace(Right, right);
 
-    #if DEBUG
     hitbox.setOutlineThickness(2);
     hitbox.setOutlineColor(sf::Color::Red);
-    # endif
 
     hitbox.setFillColor(sf::Color(0,0,0,0));
     // Hitboxen blir like brei som karakten, og 1/3 av høyden
@@ -72,6 +71,13 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
     scale(0.8);
 
     animationCycler(animationDirections[currentDir]);
+
+
+    hitBuffer.loadFromFile("resources/sound_effects/damage_hit1.wav");
+    hitSound.setBuffer(hitBuffer);
+
+    diedBuffer.loadFromFile("resources/sound_effects/wilhelm_scream.wav");
+    deathSound.setBuffer(diedBuffer);
 }
 
 Player::~Player() {
@@ -110,20 +116,6 @@ void Player::update(float deltaTime) {
             currentWeapon->fire();
     }
 
-
-    /*
-    auto it = currentWeapon->getProjectiles().begin();
-    while(it != currentWeapon->getProjectiles().end()) {
-        //(*it)->update(deltaTime);
-
-        if ((*it)->getClock().getElapsedTime().asSeconds() >= 5) {
-            it = currentWeapon->getProjectiles().erase(it);
-        } else {
-            ++it;
-        }
-    }
-    */
-
     auto proj = &currentWeapon->getProjectiles();
     for (int i = 0; i < proj->size(); i++) {
         if (proj->at(i)->getClock().getElapsedTime().asSeconds() >= 5) {
@@ -132,6 +124,7 @@ void Player::update(float deltaTime) {
     }
 
     collisionBox = hitbox.getGlobalBounds();
+
 }
 
 void Player::draw(sf::RenderWindow &window) {
@@ -161,6 +154,14 @@ void Player::draw(sf::RenderWindow &window) {
     sprite.setFillColor(sf::Color(255, hitColor, hitColor));
     if (hitColor < 255) {
         hitColor += 1;
+    }
+
+    if (health <= 0) {
+        sprite.setScale(0.2, 0.2);
+        sprite.setSize(sf::Vector2f(graveStone.getSize().x, graveStone.getSize().y));
+        sprite.setTexture(&graveStone);
+        sprite.setTextureRect(sf::IntRect(0, 0, graveStone.getSize().x, graveStone.getSize().y));
+        sprite.setPosition(sprite.getPosition().x - 25, sprite.getPosition().y + 25);
     }
 
     window.draw(shadow);
@@ -202,15 +203,12 @@ sf::Vector2f Player::move(float deltaTime) {
 void Player::scale(float x) {
     sprite.setScale(x, x);
     scaleFactor *= x;
-    //hitbox.setScale(x, x);
-    //hitbox.move(0, -50*x);
 
     shadow.setScale(x, x);
     shadow.move(0, -50*x);
 }
 
 void Player::animationCycler(std::vector<sf::IntRect> dir) {
-
     /* -- ¡IMPORTANT! --
      * I wrote this function to cycle through the animation frames
      * there were some issues when cycling.
@@ -222,17 +220,11 @@ void Player::animationCycler(std::vector<sf::IntRect> dir) {
      * or there will be issues. It's best just not to alter anything.
      *
      * I've learned from my mistakes and the same thing can't happen to the enemies,
-     * since the frames doesnt differ in dimentions
+     * since the frames doesnt differ in dimenions
      *
+     * This function has brought shame upon my ancestors
      * Forgive me.
      * - EH
-     * */
-
-    // this function has brought shame upon my ancestors
-    /*
-     * for (int e = 0; e <= 100; e++) {
-     *      printf("sorry for this!");
-     * }
      * */
 
     if (moving) {
@@ -341,40 +333,23 @@ void Player::animationCycler(std::vector<sf::IntRect> dir) {
             }
         }
 
-    } if (!moving) {
+    }
+    if (!moving) {
         sprite.setSize(sf::Vector2f(dir[0].width*scaleFactor, dir[0].height*scaleFactor));
         sprite.setTextureRect(dir[0]);
         sprite.setPosition(xy.x + 15*scaleFactor, xy.y);
     }
-
-}
-
-void Player::mousePressed(int x, int y, sf::Mouse::Button button) {
-
 }
 
 void Player::hit() {
-    //sounds effects on hit.
-    SBuffer.loadFromFile("damage_hit1.wav");
-    sound.setBuffer(SBuffer);
-    sound.play();
-    //
+    hitSound.play();
     hitColor = 0;
 }
 
-void Player::death() {
-    SBuffer.loadFromFile("wilhelm_scream.wav");
-    sound.setBuffer(SBuffer);
-    sound.play();
-
-    // TODO: Legge til dødsanimasjon når health = 0?
-    // TODO: (kanskje player faller i bakken og blinker i 3 sek så forsvinner den slik som på gamle spill)
-
-    // Kaller destruktøren for player
-    delete this;
+void Player::onDeath() {
+    deathSound.play();
 }
 
-// Getters & setters
 int Player::getHealth() const {
     return health;
 }
