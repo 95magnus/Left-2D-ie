@@ -58,7 +58,7 @@ Enemy::~Enemy() {
 
 void Enemy::update(float deltaTime) {
     if (target == sf::Vector2i(worldPos.x, worldPos.y)) {
-        moving = false;
+        requestNewTarget = true;
         return;
     }
 
@@ -69,13 +69,19 @@ void Enemy::update(float deltaTime) {
     float length = sqrt(direction.x * direction.x + direction.y * direction.y);
     direction /= length;
 
+    if (requestNewTarget)
+        direction = sf::Vector2f(0, 0);
+
     worldPos += direction * (speed * deltaTime);
 
     sprite.setPosition(worldPos);
     hitbox.setPosition(worldPos);
 
     goingRight = direction.x > 0;
-    moving = direction == sf::Vector2f(0, 0);
+    moving = direction != sf::Vector2f(0, 0);
+
+    if (moving)
+        animationCycler(0.5);
 
     rewardPoints = 10;
 }
@@ -103,9 +109,6 @@ void Enemy::translate(sf::Vector2f offset) {
 }
 
 void Enemy::draw(sf::RenderWindow &window) {
-    if (moving)
-        animationCycler(0.5);
-
     if (goingRight) {
         sprite.setScale(-0.2, 0.2);
         hitbox.setSize(sprite.getSize());
@@ -144,4 +147,5 @@ void Enemy::setHealth(int health) {
 
 void Enemy::setTarget(sf::Vector2i pos) {
     target = pos;
+    requestNewTarget = false;
 }

@@ -1,4 +1,5 @@
 #include "StateMachine.h"
+#include "StateGameOver.h"
 
 StateMachine::StateMachine(Game* game) {
     this->game = game;
@@ -10,6 +11,7 @@ StateMachine::StateMachine(Game* game) {
     states[StateID::HIGH_SCORE] = new StateHighScore(game);
     states[StateID::SETTINGS] = new StateSettings(game);
     states[StateID::SHOP] = new StateShop(game);
+    states[StateID::GAME_OVER] = new StateGameOver(game);
 
     currentState = states[StateID::MAIN_MENU];
 

@@ -3,26 +3,26 @@
 //
 
 #include "Weapon.h"
+#include "../util/ResourceLoader.h"
 
 Weapon::Weapon(sf::RenderWindow &window, int wepStage, float rps, int posX, int posY)
         : Entity(sf::Vector2f(posX, posY)), window(window){
     this->rps = rps;
+    this->damage = damage;
+
     sprite.setPosition(posX, posY);
     weaponStage = wepStage;
     spriteFront = weaponStageIntRectsFront[wepStage];
     spriteSide = weaponStageIntRectsSide[wepStage];
-    if (!texture.loadFromFile("resources/textures/spritesheets/weapons.png")) {
-        // Spilleren blir blå hvis bildet ikke blir lastet
-        sprite.setFillColor(sf::Color::Green);
-    } else {
-        sprite.setTexture(&texture);
-    }
-    if (!projectileTexture.loadFromFile("resources/textures/spritesheets/projectiles.png")) {
 
-    }
-    if (soundBuffer.loadFromFile("resources/sound_effects/machinegun_loop1.wav")) {
+    ResourceLoader loader("resources/");
 
-    }
+    texture = &loader.loadTexture("spritesheets/weapons.png");
+    projectileTexture = &loader.loadTexture("spritesheets/projectiles.png");
+
+    soundBuffer.loadFromFile("resources/sound_effects/machinegun_loop1.wav");
+
+    sprite.setTexture(texture);
     sprite.setSize(sf::Vector2f(spriteSide.width, spriteSide.height));
     sprite.setTextureRect(spriteSide);
     sprite.scale(0.2, 0.2);
@@ -30,26 +30,30 @@ Weapon::Weapon(sf::RenderWindow &window, int wepStage, float rps, int posX, int 
     sprite.setOutlineThickness(2);
     sprite.setOutlineColor(sf::Color::Red);
     sound.setBuffer(soundBuffer);
-    this->damage = damage;
+
+    projectiles.push_back(new Projectile(window, *projectileTexture, projectileIntRect[weaponStage], 10, angle, sprite.getPosition().x, sprite.getPosition().y));
 }
 
 Weapon::~Weapon() {
-
+    for (auto &projectile : projectiles)
+        delete projectile;
 }
 
 void Weapon::update(float deltaTime) {
-    for (auto &projectile : bullets)
-        projectile.update(deltaTime);
+    for (auto &projectile : projectiles)
+        projectile->update(deltaTime);
 }
 
 void Weapon::draw(sf::RenderWindow &window) {
+    for (auto &projectile : projectiles)
+        projectile->draw(window);
+
     window.draw(sprite);
 }
 
 void Weapon::fire() {
     if (clock.getElapsedTime().asSeconds() > 1/rps) {
-        Projectile bullet(window, projectileTexture, projectileIntRect[weaponStage], 10, angle, sprite.getPosition().x, sprite.getPosition().y);
-        bullets.push_back(bullet);
+        projectiles.push_back(new Projectile(window, *projectileTexture, projectileIntRect[weaponStage], 10, angle, sprite.getPosition().x, sprite.getPosition().y));
         clock.restart();
         sound.play();
     }
@@ -89,8 +93,8 @@ void Weapon::setPosition(int x, int y) {
     sprite.setPosition(x, y);
 }
 
-std::vector<Projectile> &Weapon::getBullets() {
-    return bullets;
+std::vector<Projectile*>& Weapon::getProjectiles() {
+    return projectiles;
 }
 
 int Weapon::getDamage() const {
@@ -126,19 +130,19 @@ void Weapon::setSpriteSide(const sf::IntRect &spriteSide) {
 }
 
 const sf::Texture &Weapon::getTexture() const {
-    return texture;
+    return *texture;
 }
 
-void Weapon::setTexture(const sf::Texture &texture) {
-    Weapon::texture = texture;
+void Weapon::setTexture(sf::Texture* texture) {
+    this->texture = texture;
 }
 
 const sf::Texture &Weapon::getProjectileTexture() const {
-    return projectileTexture;
+    return *projectileTexture;
 }
 
-void Weapon::setProjectileTexture(const sf::Texture &projectileTexture) {
-    Weapon::projectileTexture = projectileTexture;
+void Weapon::setProjectileTexture(sf::Texture* projectileTexture) {
+    this->projectileTexture = projectileTexture;
 }
 
 const sf::Mouse &Weapon::getMouse() const {
@@ -162,7 +166,7 @@ float Weapon::getRps() const {
 }
 
 void Weapon::setRps(float rps) {
-    Weapon::rps = rps;
+    this->rps = rps;
 }
 
 const sf::IntRect *Weapon::getWeaponStageIntRectsSide() const {
@@ -177,8 +181,8 @@ const sf::IntRect *Weapon::getProjectileIntRect() const {
     return projectileIntRect;
 }
 
-void Weapon::setBullets(const std::vector<Projectile> &bullets) {
-    Weapon::bullets = bullets;
+void Weapon::setProjectiles(const std::vector<Projectile*> bullets) {
+    this->projectiles = projectiles;
 }
 
 float Weapon::getAngle() const {
@@ -186,7 +190,7 @@ float Weapon::getAngle() const {
 }
 
 void Weapon::setAngle(float angle) {
-    Weapon::angle = angle;
+    this->angle = angle;
 }
 
 int Weapon::getWeaponStage() const {
@@ -194,6 +198,6 @@ int Weapon::getWeaponStage() const {
 }
 
 void Weapon::setWeaponStage(int weaponStage) {
-    Weapon::weaponStage = weaponStage;
+    this->weaponStage = weaponStage;
 }
 

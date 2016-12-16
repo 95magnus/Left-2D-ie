@@ -9,6 +9,7 @@
 //#include "../entities/NormalZombie.h"
 //#include "../entities/Enemy.h"
 
+class World;
 class Message;
 class Level;
 class Player;
@@ -62,10 +63,16 @@ protected:
     std::vector<sf::Vector2f> playerPositions;
     Enemy* zombie;
 
-
     Message* mb;
 
 private:
+    String levelFileName = "level_1.l2d";
+
+    sf::RectangleShape screenFade;
+    sf::Text pauseText;
+
+    World* world;
+
     sf::RectangleShape* coinsContainer;
     sf::RectangleShape* hpGreenBar;
     sf::RectangleShape* hpRedBar;

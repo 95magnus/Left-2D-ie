@@ -18,6 +18,9 @@ public:
 protected:
     String levelFileName = "testLevel.l2d";
 
+    sf::RectangleShape screenShadow;
+    sf::Text pauseText;
+
     World* world;
 };
 

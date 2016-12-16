@@ -3,10 +3,20 @@
 #include "../gui/Message.h"
 #include "../entities/Player.h"
 #include "../entities/enemies/Enemy.h"
+#include "StateGameOver.h"
+#include "../world/World.h"
 
 StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
     level = new Level(game->getWindow().getSize(), "testLevel.l2d");
     mb = new Message(game->getWindow());
+    world = new World(*game, levelFileName);
+
+    screenFade.setSize(game->getWindowSize());
+    screenFade.setFillColor(sf::Color(0, 0, 0, 128));
+
+    pauseText = sf::Text("Game paused!\n\nPress ESC to resume.", game->getFont(), 80);
+    pauseText.setPosition(250, 230);
+    pauseText.setColor(sf::Color::White);
 
     if (!vignetteText.loadFromFile("resources/textures/spritesheets/vignette.png")) {
 
@@ -22,24 +32,25 @@ StateSinglePlayer::StateSinglePlayer(Game* game) : StateBase(game) {
     //view = &level->getView();
     //view->zoom(0.5f);
     //window->setView(*view);
-    zombie = new Enemy(sf::Vector2f(0,0));
+    //zombie = new Enemy(sf::Vector2f(0,0));
 }
 
 StateSinglePlayer::~StateSinglePlayer() {
-    delete level;
+    //delete level;
     delete mb;
-    delete player;
-    delete zombie;
+    //delete player;
+    //delete zombie;
+    delete world;
 
     window->setView(window->getDefaultView());
 }
 
 void StateSinglePlayer::init() {
-    sf::View *view = new sf::View();
-    player = new Player(game->getWindow(), *view, game->getInputManager(), sf::Vector2f(0, 0));
-    players.push_back(player);
+    //sf::View *view = new sf::View();
+    //player = new Player(game->getWindow(), *view, game->getInputManager(), sf::Vector2f(0, 0));
+    //players.push_back(player);
     //enemies.push_back(zombie);
-    playerPositions.push_back(sf::Vector2f(player->getPosition().x + 100, player->getPosition().y));
+    //playerPositions.push_back(sf::Vector2f(player->getPosition().x + 100, player->getPosition().y));
 }
 
 void StateSinglePlayer::resume() {
@@ -55,6 +66,10 @@ void StateSinglePlayer::pause() {
 }
 
 void StateSinglePlayer::update(float deltaTime) {
+    if (!paused)
+        world->update(deltaTime);
+
+    /*
     level->update(deltaTime);
     player->update(deltaTime);
     player->move(deltaTime);
@@ -69,9 +84,11 @@ void StateSinglePlayer::update(float deltaTime) {
     for (int e = 0; e < enemies.size(); e++) {
         enemies[e]->update(playerPositions, deltaTime);
     }
+     */
 }
 
 void StateSinglePlayer::draw(sf::RenderWindow &window) {
+    /*
     level->draw(game->getWindow());
     player->draw(game->getWindow());
     zombie->draw(game->getWindow());
@@ -79,12 +96,21 @@ void StateSinglePlayer::draw(sf::RenderWindow &window) {
     for (int e = 0; e < enemies.size(); e++) {
         enemies[e]->draw(game->getWindow());
     }
+    */
+
+    world->draw(window);
+
     //window->draw(vignette);
     mb->draw("Wave x - Good luck", 8, game->getWindow());
 
     game->getWindow().draw(*score);
     game->getWindow().draw(*hpGreenBar);
     game->getWindow().draw(*coins);
+
+    if (paused) {
+        window.draw(screenFade);
+        window.draw(pauseText);
+    }
 }
 
 void StateSinglePlayer::initGameGui() {
@@ -182,17 +208,26 @@ void StateSinglePlayer::goToShop() {
 
     // Timer 5000ms (wait)
     game->getStateMachine().setState(StateMachine::StateID::SHOP);
+
 }
 
 /// Game Over - call this if player health = 0
 void StateSinglePlayer::gameOver() {
+    /*
     gameover = sfg::Image::Create();
     createImage(gameover, "resources/gui/gameover.png");
     gameover->SetPosition(sf::Vector2f(game->getWindow().getSize().x-670, game->getWindow().getSize().y-512));
 
     desktop->Add(gameover);
+    */
     // Timer 5000ms
-    game->getStateMachine().setState(StateMachine::StateID::MAIN_MENU);
+
+    game->getStateMachine().setState(StateMachine::StateID::GAME_OVER);
+
+    if (auto gameOver = dynamic_cast<StateGameOver*>(game->getStateMachine().getState())) {
+        gameOver->setScore(-1);
+    }
+
 }
 
 void StateSinglePlayer::onItemOneBoxMarked() {
@@ -227,23 +262,6 @@ void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<P
         }
     }
 
-    /*
-    auto bullet = bullets.begin();
-    auto enemy = enemies.begin();
-    while (bullet != bullets.end()) {
-        while (enemy!= enemies.end()) {
-            if (bullet == enemy) {
-                (*enemy)->getHit((*bullet).getDamage());
-            } else {
-                ++bullet;
-                ++enemy;
-            }
-        }
-
-    }
-
-    */
-
     auto enemy = enemies.begin();
     while (enemy != enemies.end()) {
         if ((*enemy)->getHealth() <= 0) {
@@ -251,13 +269,5 @@ void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<P
         } else {
             ++enemy;
         }
-    }
-}
-
-void StateSinglePlayer::spawnWave() {
-    for (int e = 0; e < 10 + waveNumber * 3; e++) {
-        Enemy* ny_zombie = new Enemy(sf::Vector2f(0,0));
-        enemies.push_back(ny_zombie);
-        enemies.back()->sprite.setPosition(rand() % 600, rand() % 600);
     }
 }

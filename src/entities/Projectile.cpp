@@ -16,27 +16,18 @@ Projectile::Projectile(sf::RenderWindow &window, sf::Texture &texture, sf::IntRe
     this->y = y;
     this->damage = 10;
     speed = 450;
-    sprite.setPosition(x, y);
+    sprite.setPosition(worldPos);
     sprite.setScale(0.1, 0.1);
-    diffX = mouse.getPosition(window).x - x;
-    diffY = mouse.getPosition(window).y - y;
-    magnitude = sqrtf(diffX*diffX + diffY*diffY);
-    //velX = diffX/magnitude*speed;
-    //velY = diffY/magnitude*speed;
-
 
     velX = -cos(angle * M_PI/180) * speed;
     velY = -sin(angle * M_PI/180) * speed;
 
     rndX = fRand();
     rndY = fRand();
-    hitbox.setSize(sprite.getSize());
-    hitbox.setScale(sprite.getScale());
-    hitbox.setPosition(sprite.getPosition());
-    hitbox.setOutlineColor(sf::Color::Red);
-    hitbox.setOutlineThickness(3);
-}
 
+    sprite.setOutlineColor(sf::Color::Cyan);
+    sprite.setOutlineThickness(2);
+}
 
 Projectile::~Projectile() {
 
@@ -48,10 +39,15 @@ float Projectile::fRand()
     return rnd / 1000;
 }
 
-
 void Projectile::update(float deltaTime) {
-    sprite.setPosition(x + velX*clock.getElapsedTime().asSeconds()*rndX, y + velY*clock.getElapsedTime().asSeconds()/*rndY*/);
-    hitbox.setPosition(sprite.getPosition());
+    worldPos.x += velX * deltaTime * rndX;
+    worldPos.y += velY * deltaTime * rndY;
+
+    sprite.setPosition(worldPos);
+}
+
+void Projectile::draw(sf::RenderWindow &window) {
+    window.draw(sprite);
 }
 
 const sf::RectangleShape &Projectile::getSprite() const {
@@ -59,7 +55,7 @@ const sf::RectangleShape &Projectile::getSprite() const {
 }
 
 void Projectile::setSprite(const sf::RectangleShape &sprite) {
-    Projectile::sprite = sprite;
+    this->sprite = sprite;
 }
 
 int Projectile::getDamage() const {
@@ -67,7 +63,7 @@ int Projectile::getDamage() const {
 }
 
 void Projectile::setDamage(int damage) {
-    Projectile::damage = damage;
+    this->damage = damage;
 }
 
 int Projectile::getSpeed() const {
@@ -83,7 +79,7 @@ float Projectile::getX() const {
 }
 
 void Projectile::setX(float x) {
-    Projectile::x = x;
+    this->x = x;
 }
 
 float Projectile::getY() const {
@@ -91,7 +87,7 @@ float Projectile::getY() const {
 }
 
 void Projectile::setY(float y) {
-    Projectile::y = y;
+    this->y = y;
 }
 
 const sf::Clock &Projectile::getClock() const {
@@ -99,7 +95,7 @@ const sf::Clock &Projectile::getClock() const {
 }
 
 void Projectile::setClock(const sf::Clock &clock) {
-    Projectile::clock = clock;
+    this->clock = clock;
 }
 
 const sf::Mouse &Projectile::getMouse() const {
@@ -107,7 +103,7 @@ const sf::Mouse &Projectile::getMouse() const {
 }
 
 void Projectile::setMouse(const sf::Mouse &mouse) {
-    Projectile::mouse = mouse;
+    this->mouse = mouse;
 }
 
 float Projectile::getVelX() const {
@@ -115,7 +111,7 @@ float Projectile::getVelX() const {
 }
 
 void Projectile::setVelX(float velX) {
-    Projectile::velX = velX;
+    this->velX = velX;
 }
 
 float Projectile::getVelY() const {
@@ -123,7 +119,7 @@ float Projectile::getVelY() const {
 }
 
 void Projectile::setVelY(float velY) {
-    Projectile::velY = velY;
+    this->velY = velY;
 }
 
 float Projectile::getDiffX() const {
@@ -131,7 +127,7 @@ float Projectile::getDiffX() const {
 }
 
 void Projectile::setDiffX(float diffX) {
-    Projectile::diffX = diffX;
+    this->diffX = diffX;
 }
 
 float Projectile::getDiffY() const {
@@ -139,7 +135,7 @@ float Projectile::getDiffY() const {
 }
 
 void Projectile::setDiffY(float diffY) {
-    Projectile::diffY = diffY;
+    this->diffY = diffY;
 }
 
 float Projectile::getMagnitude() const {
@@ -147,7 +143,7 @@ float Projectile::getMagnitude() const {
 }
 
 void Projectile::setMagnitude(float magnitude) {
-    Projectile::magnitude = magnitude;
+    this->magnitude = magnitude;
 }
 
 float Projectile::getRndX() const {
@@ -155,7 +151,7 @@ float Projectile::getRndX() const {
 }
 
 void Projectile::setRndX(float rndX) {
-    Projectile::rndX = rndX;
+    this->rndX = rndX;
 }
 
 float Projectile::getRndY() const {
@@ -163,12 +159,7 @@ float Projectile::getRndY() const {
 }
 
 void Projectile::setRndY(float rndY) {
-    Projectile::rndY = rndY;
-}
-
-
-void Projectile::draw(sf::RenderWindow &window) {
-
+    this->rndY = rndY;
 }
 
 const sf::RectangleShape &Projectile::getHitbox() const {
@@ -176,6 +167,6 @@ const sf::RectangleShape &Projectile::getHitbox() const {
 }
 
 void Projectile::setHitbox(const sf::RectangleShape &hitbox) {
-    Projectile::hitbox = hitbox;
+    this->hitbox = hitbox;
 }
 

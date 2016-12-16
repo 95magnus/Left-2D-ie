@@ -62,7 +62,8 @@ bool InputManager::checkForInput() {
 
                 switch (event.key.code) {
                     case Key::Escape:
-                        return false;
+                        stateMachine->getState()->togglePause();
+                        break;
 
                     case Key::Num1:
                         stateMachine->setState(StateMachine::StateID::MAIN_MENU);
@@ -145,6 +146,9 @@ bool InputManager::checkForInput() {
             }
 
             case sf::Event::JoystickButtonPressed:
+                if (event.joystickButton.button == 7) // 7 => XBox controller START button
+                    stateMachine->getState()->togglePause();
+
                 break;
 
             case sf::Event::JoystickButtonReleased:

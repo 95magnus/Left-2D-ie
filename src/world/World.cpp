@@ -10,16 +10,10 @@ World::World(Game &game, String &levelFileName) : game(game) {
     player =  new Player(game.getWindow(), *view, game.getInputManager(), playerSpawn);
     prevPlayerTileIndex = level->worldCoordToTileIndex(player->getWorldPos());
 
-    // Doesn't work: entities.push_back((Entity*) player);
-    // Suggested by CLion, works for some reason:
     entities.push_back((Entity* &&) player);
 
-    for (int i = 0; i < 30; i++) {
-        float randX = (float) (rand() % 600);
-        float randY = (float) (rand() % 600);
-
-        entities.push_back((Entity*) new Enemy(sf::Vector2f(randX, randY)));
-    }
+    spawnWave(currentWave++);
+    updateEnemyToPlayerMovements();
 }
 
 World::~World() {
@@ -36,6 +30,19 @@ void World::update(float deltaTime) {
         entity->update(deltaTime);
 
         if (Enemy* enemy = dynamic_cast<Enemy*>(entity)) {
+            sf::Vector2i pos = level->worldCoordToTileIndex(enemy->getWorldPos());
+
+            if (pos == sf::Vector2i(-1, -1))
+                continue;
+
+            auto tile = level->getTileMap().at(pos.y).at(pos.x);
+
+            if (tile->getMovements() != -1)
+                tile->incrementCost();
+
+            if (!enemy->requestingNewTarget())
+                continue;
+
             auto enemyTileIndex = level->worldCoordToTileIndex(enemy->getWorldPos());
             auto targetTile = findBestNeighborTile(enemyTileIndex);
 
@@ -45,6 +52,9 @@ void World::update(float deltaTime) {
             enemy->setTarget(targetTile * (int)level->tileSize);
         }
     }
+
+    updateBulletCollisions();
+
 }
 
 void World::draw(sf::RenderWindow &window) {
@@ -207,10 +217,10 @@ void World::updateEnemyToPlayerMovements() {
             if (pos == sf::Vector2i(-1, -1))
                 continue;
 
-            auto tile = tileMap->at(current.y).at(current.x);
+            auto tile = tileMap->at(pos.y).at(pos.x);
 
-            if (tile->getMovements() != -1)
-                tile->incrementCost();
+//            if (tile->getMovements() != -1)
+  //              tile->incrementCost();
         }
     }
 
@@ -222,6 +232,7 @@ void World::updateEnemyToPlayerMovements() {
     }
 
     std::cout << "--------------------------------------------------------" << std::endl;
+
 }
 
 sf::Vector2i World::findBestNeighborTile(sf::Vector2i tileIndex) {
@@ -236,47 +247,31 @@ sf::Vector2i World::findBestNeighborTile(sf::Vector2i tileIndex) {
     int yMin = std::max(0, tileIndex.y - 1);
     int yMax = std::min(level->levelHeight, tileIndex.y + 1);
 
-    // Currently best tile with least movements found
-    sf::Vector2i bestTile(-1, -1);
-    int bestMovements = INFINITY;
+    // Currently best tile with least movements found, start with origin tile
+    sf::Vector2i bestTile = tileIndex;
+    int bestMovements = INFINITY;//tileMap->at(bestTile.y).at(bestTile.x)->getMovements();
 
     for (int y = yMin; y < yMax; y++) {
         for (int x = xMin; x < xMax; x++) {
             // Ignore original location tile
-            if (sf::Vector2i(x, y) == tileIndex)
-                continue;
-
-            // First loop, assign neighbor
-            if (bestTile == sf::Vector2i(-1, -1)){
-                bestTile = sf::Vector2i(x, y);
-                bestMovements = tileMap->at(y).at(x)->getMovements();
-                continue;
-            }
+            //if (sf::Vector2i(x, y) == tileIndex)
+             //   continue;
 
             int movements = tileMap->at(y).at(x)->getMovements();
 
-            // Tile is solid, ignore
-            if (movements == -1)
-                continue;
-
-            if (movements < bestMovements) {
+            if (movements > -1 && movements < bestMovements) {
                 bestMovements = movements;
                 bestTile = sf::Vector2i(x, y);
             }
         }
     }
 
+    /*
     if (sf::Keyboard::isKeyPressed(Key::Space))
         std::cout << bestTile.x << ", " << bestTile.y << " - " << bestMovements << std::endl;
+*/
 
     return bestTile;
-}
-
-bool World::entityDrawOrder(Entity *e1, Entity *e2) {
-    int y1 = e1->getWorldPos().y;
-    int y2 = e2->getWorldPos().y;
-
-    return y1 < y2;
 }
 
 void World::setMovementAtTile(sf::Vector2i tileIndex, int movements) {
@@ -289,6 +284,134 @@ void World::setMovementAtTile(sf::Vector2i tileIndex, int movements) {
         tile->setMovements(movements);
     else
         tile->setMovements(-1);
+}
+
+void World::updateBulletCollisions() {
+    auto  projectiles = &player->getProjectiles();
+    std::vector<Enemy*> enemies;
+
+    for (auto &entity : entities) {
+        if (auto enemy = dynamic_cast<Enemy*>(entity)) {
+            enemies.push_back(enemy);
+        }
+    }
+
+    for (auto &projectile : *projectiles) {
+        for (auto &enemy : enemies) {
+            auto projectileBounds = projectile->getSprite().getGlobalBounds();
+            auto enemyBounds = enemy->sprite.getGlobalBounds();
+
+            if (projectileBounds.intersects(enemyBounds)) {
+                enemy->getHit(projectile->getDamage());
+                projectile->setDead();
+
+                if (enemy->getHealth() <= 0)
+                    enemy->setDead();
+            }
+        }
+
+        sf::Vector2i tilePos = level->worldCoordToTileIndex(projectile->getWorldPos());
+
+        if (tilePos == sf::Vector2i(-1, -1)
+            || tilePos.x > level->levelWidth
+            || tilePos.y > level->levelHeight
+            || tilePos.x < 0
+            || tilePos.y < 0)
+            continue;
+
+        auto projectileBounds = projectile->getSprite().getGlobalBounds();
+        auto projectileTileIndex = level->worldCoordToTileIndex(projectile->getWorldPos());
+        auto surroundingTiles = &level->getSurroundingTiles(projectileTileIndex, 1);
+
+        for (auto &tileRow : *surroundingTiles) {
+            for (auto &tile : tileRow) {
+                if (tile->isSolid() && projectileBounds.intersects(tile->getBounds()))
+                    projectile->setDead();
+            }
+        }
+    }
+
+    for (int i = 0; i < enemies.size(); i++) {
+        if (enemies[i]->isDead())
+            entities.erase(std::remove(entities.begin(), entities.end(), enemies[i]), entities.end());
+    }
+
+    for (int i = 0; i < projectiles->size(); i++) {
+        if (projectiles->at(i)->isDead())
+            projectiles->erase(projectiles->begin() + i);
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        std::cout << "";
+
+
+    /*
+    // TODO: Optimize search
+    if (!enemies.empty() && !projectiles.empty()) {
+        for (int i = 0; i < projectiles.size(); i++) {
+            for (int j = 0; j < enemies.size(); j++) {
+                if (projectiles[i]->getSprite().getPosition().x + 20 >= enemies[j]->sprite.getPosition().x
+                    && projectiles[i]->getSprite().getPosition().x + 20
+                       <= enemies[j]->sprite.getPosition().x + (enemies[j]->hitbox.getSize().x*0.2)
+                    && projectiles[i]->getSprite().getPosition().y
+                       >= enemies[j]->sprite.getPosition().y
+                    && projectiles[i]->getSprite().getPosition().y
+                       <= enemies[j]->sprite.getPosition().y + (enemies[j]->hitbox.getSize().y)*0.2) {
+
+                    enemies[j]->getHit(projectiles[i]->getDamage());
+                    projectiles.erase(projectiles.begin() + i);
+                    i++;
+                }
+            }
+        }
+    }
+
+    auto enemy = enemies.begin();
+    while (enemy != enemies.end()) {
+        if ((*enemy)->getHealth() <= 0) {
+            enemy = enemies.erase(enemy);
+        } else {
+            ++enemy;
+        }
+    }
+
+
+    auto projectile = projectiles.begin();
+    while(projectile != projectiles.end()) {
+        sf::Vector2i tilePos = level->worldCoordToTileIndex((*projectile)->getWorldPos());
+
+        if (tilePos != sf::Vector2i(-1, -1)) {
+            ++projectile;
+            continue;
+        }
+
+        auto projectileBounds = (*projectile)->getSprite().getLocalBounds();
+        auto tile = level->getTileMap().at(tilePos.y).at(tilePos.x);
+
+        // Projectile collided with solid tile
+        if (tile->isSolid() && projectileBounds.intersects(tile->getBounds())){
+            projectile = projectiles.erase(projectile);
+        } else {
+            ++projectile;
+        }
+    }
+     */
+}
+
+void World::spawnWave(int wave) {
+    for (int i = 0; i < minEnemyCount + wave * enemiesPerWave; i++) {
+        float x = rand() % ((level->levelWidth - 2) * level->tileSize) + level->tileSize;
+        float y = rand() % ((level->levelHeight - 2) * level->tileSize) + level->tileSize;
+
+        entities.push_back(new Enemy(sf::Vector2f(x, y)));
+    }
+}
+
+bool World::entityDrawOrder(Entity* e1, Entity* e2) {
+    int y1 = e1->getWorldPos().y;
+    int y2 = e2->getWorldPos().y;
+
+    return y1 < y2;
 }
 
 

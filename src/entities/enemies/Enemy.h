@@ -41,6 +41,7 @@ public:
     void setHealth(int health);
 
     void setTarget(sf::Vector2i pos);
+    bool requestingNewTarget() { return requestNewTarget; }
 
 private:
     sf::RectangleShape healthBar;
@@ -48,6 +49,8 @@ private:
     sf::Clock cycleClock;
 
     sf::Vector2i target;
+
+    bool requestNewTarget = true;
 
     int health, maxHealth, damage, speed;
     int xOffs, yOffs;

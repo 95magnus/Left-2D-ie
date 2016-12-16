@@ -16,8 +16,13 @@ public:
     void setWorldPos(sf::Vector2f pos) { worldPos = pos; }
     void setWorldPos(float x, float y) { worldPos = sf::Vector2f(x, y); }
 
+    bool isDead() { return dead; }
+    void setDead() { dead = true; }
+
 protected:
     sf::Vector2f worldPos;
+
+    bool dead = false;
 };
 
 #endif //LEFT2DIE_ENTITY_H

@@ -32,7 +32,6 @@ public:
     void scale(float x);
     void animationCycler(std::vector<sf::IntRect> dir);
 
-
     void death();
     void hit();
 
@@ -59,7 +58,7 @@ public:
     void setArmor(int armor);
     int getKills() const;
     void setKills(int kills);
-    std::vector<Projectile> *getBullets();
+    std::vector<Projectile*>& getProjectiles();
 
 private:
     //Components

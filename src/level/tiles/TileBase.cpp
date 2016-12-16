@@ -4,26 +4,9 @@ TileBase::TileBase(int tileSize, int x, int y) {
     this->tileSize = tileSize;
     this->worldX = x;
     this->worldY = y;
-
-    srand(time(NULL));
-    int r = rand() % 255;
-    int g = rand() % 255;
-    int b = rand() % 255;
-
-    sprite = new sf::RectangleShape(sf::Vector2f(tileSize, tileSize));
-    sprite->setPosition(x, y);
-
-
-    //sprite->setColor(sf::Color(r, g, b));
-
-    boundingBox = sprite->getGlobalBounds();
 }
 
-TileBase::TileBase(int tileSize, int x, int y, sf::Texture &texture) {
-    this->tileSize = tileSize;
-    this->worldX = x;
-    this->worldY = y;
-
+TileBase::TileBase(int tileSize, int x, int y, sf::Texture &texture) : TileBase(tileSize, x, y) {
     sprite = new sf::RectangleShape(sf::Vector2f(tileSize, tileSize));
     sprite->setTexture(&texture);
     sprite->setPosition(x, y);
@@ -33,10 +16,8 @@ TileBase::TileBase(int tileSize, int x, int y, sf::Texture &texture) {
     float scaleY = tileSize / (float)texSize.y;
     //sprite->setScale(scaleX, scaleY);
 
-    sprite->setOutlineColor(sf::Color(255, 0, 255));
+    sprite->setOutlineColor(sf::Color::Magenta);
     sprite->setOutlineThickness(2);
-
-    boundingBox = sprite->getGlobalBounds();
 }
 
 TileBase::~TileBase() {
@@ -55,8 +36,6 @@ void TileBase::setTexture(sf::Texture& texture) {
     float scaleX = tileSize / (float)texSize.x;
     float scaleY = tileSize / (float)texSize.y;
     sprite->setScale(scaleX, scaleY);
-
-    boundingBox = sprite->getGlobalBounds();
 }
 
 void TileBase::setMovements(int movements) {

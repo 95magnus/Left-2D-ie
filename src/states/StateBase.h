@@ -24,6 +24,8 @@ public:
     sfg::Desktop* getDesktop() const { return desktop; }
     void updateDesktop();
 
+    void togglePause() { paused = !paused; }
+
     //// Single Player GUI
     void createPlayerBarLabel(sfg::Label::Ptr labelName);
     void createImageButton(sfg::ToggleButton::Ptr buttonName, const String &filename);
@@ -52,7 +54,7 @@ protected:
 
     const String themePath = "resources/gui/theme.css";
 
-    bool paused;
+    bool paused = false;
 };
 
 #endif //LEFT2DIE_STATEBASE_H

@@ -106,14 +106,24 @@ void Player::update(float deltaTime) {
             currentWeapon->fire();
     }
 
-    auto it = currentWeapon->getBullets().begin();
-    while(it != currentWeapon->getBullets().end()) {
-        it->update(deltaTime);
 
-        if (it->getClock().getElapsedTime().asSeconds() >= 5) {
-            it = currentWeapon->getBullets().erase(it);
+    /*
+    auto it = currentWeapon->getProjectiles().begin();
+    while(it != currentWeapon->getProjectiles().end()) {
+        //(*it)->update(deltaTime);
+
+        if ((*it)->getClock().getElapsedTime().asSeconds() >= 5) {
+            it = currentWeapon->getProjectiles().erase(it);
         } else {
             ++it;
+        }
+    }
+    */
+
+    auto proj = currentWeapon->getProjectiles();
+    for (int i = 0; i < proj.size(); i++) {
+        if (proj[i]->getClock().getElapsedTime().asSeconds() >= 5) {
+            proj.erase(proj.begin() + i);
         }
     }
 
@@ -149,19 +159,11 @@ void Player::draw(sf::RenderWindow &window) {
 
     if (currentDir == Up) {
 
-        for (auto it = currentWeapon->getBullets().begin(); it != currentWeapon->getBullets().end(); ++it) {
-            window.draw(it->getSprite());
-        }
-
         currentWeapon->draw(window);
 
         window.draw(sprite);
     } else {
         window.draw(sprite);
-
-        for (auto it = currentWeapon->getBullets().begin(); it != currentWeapon->getBullets().end(); ++it) {
-            window.draw(it->getSprite());
-        }
 
         currentWeapon->draw(window);
     }
@@ -419,6 +421,6 @@ void Player::setCurrentDir(Player::Direction currentDir) {
     Player::currentDir = currentDir;
 }
 
-std::vector<Projectile>* Player::getBullets() {
-    return &currentWeapon->getBullets();
+std::vector<Projectile*>& Player::getProjectiles() {
+    return currentWeapon->getProjectiles();
 }

@@ -19,7 +19,7 @@ public:
 
     virtual bool isSolid() const;
 
-    sf::FloatRect getBounds() { return boundingBox; }
+    sf::FloatRect getBounds() { return sprite->getGlobalBounds(); }
     sf::Vector2i getWorldPos() { return sf::Vector2i(worldX, worldY); }
 
     void setMovements(int movements);
@@ -38,8 +38,6 @@ protected:
 
     sf::Texture* texture;
     sf::RectangleShape* sprite;
-
-    sf::FloatRect boundingBox;
 
     TileBase(int tileSize, int x, int y);
     TileBase(int tileSize, int x, int y, sf::Texture &texture);

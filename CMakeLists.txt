@@ -59,9 +59,7 @@ set(SOURCE_FILES src/main.cpp
         src/level/tiles/TileDirt.h
         src/world/World.cpp
         src/world/World.h
-        src/world/Camera.cpp
-        src/world/Camera.h
-        src/entities/Entity.h)
+        src/entities/Entity.h src/states/StateGameOver.cpp src/states/StateGameOver.h)
 
 find_package (OpenGL REQUIRED)
 add_executable(Left2Die ${SOURCE_FILES})

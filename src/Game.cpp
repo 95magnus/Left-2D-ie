@@ -33,12 +33,12 @@ void Game::init() {
     window->resetGLStates();
 
     sfgui = new sfg::SFGUI();
+    font = new sf::Font();
 
     inputManager = new InputManager(window);
     stateMachine = new StateMachine(this);
     inputManager->setStateMachine(stateMachine);
 
-    font = new sf::Font();
 
     stateMachine->initStates();
 

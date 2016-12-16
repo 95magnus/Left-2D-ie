@@ -25,9 +25,7 @@ public:
 
     void fire();
 
-
     void flipRight();
-
     void flipLeft();
 
     void rotateWeapon(int mouseWorldPosX, int mouseWorldPosY);
@@ -36,75 +34,62 @@ public:
     void setPosition(int x, int y);
 
     int getDamage() const;
-
     void setDamage(int damage);
 
     float getAngle() const;
-
     void setAngle(float angle);
 
     int getWeaponStage() const;
-
     void setWeaponStage(int weaponStage);
 
     const sf::RectangleShape &getSprite() const;
-
     void setSprite(const sf::RectangleShape &sprite);
 
     const sf::IntRect &getSpriteFront() const;
-
     void setSpriteFront(const sf::IntRect &spriteFront);
 
     const sf::IntRect &getSpriteSide() const;
-
     void setSpriteSide(const sf::IntRect &spriteSide);
 
     const sf::Texture &getTexture() const;
-
-    void setTexture(const sf::Texture &texture);
+    void setTexture(sf::Texture* texture);
 
     const sf::Texture &getProjectileTexture() const;
-
-    void setProjectileTexture(const sf::Texture &projectileTexture);
+    void setProjectileTexture(sf::Texture* projectileTexture);
 
     const sf::Mouse &getMouse() const;
-
     void setMouse(const sf::Mouse &mouse);
 
     const sf::Clock &getClock() const;
-
     void setClock(const sf::Clock &clock);
 
     float getRps() const;
-
     void setRps(float rps);
 
     const sf::IntRect *getWeaponStageIntRectsSide() const;
-
     const sf::IntRect *getWeaponStageIntRectsFront() const;
-
     const sf::IntRect *getProjectileIntRect() const;
 
-    std::vector<Projectile> &getBullets();
-
+    std::vector<Projectile*>& getProjectiles();
 
 private:
     sf::RenderWindow &window;
 
-    int damage;
-    float angle;
-    int weaponStage;
+    int damage, weaponStage;
+    float angle, rps;
+
     sf::RectangleShape sprite;
-    sf::IntRect spriteFront;
-    sf::IntRect spriteSide;
-    sf::Texture texture;
-    sf::Texture projectileTexture;
+    sf::IntRect spriteFront, spriteSide;
+    sf::Texture* texture;
+    sf::Texture* projectileTexture;
     sf::Mouse mouse;
     sf::Clock clock;
-    float rps;
+
     sf::SoundBuffer soundBuffer;
     sf::Sound sound;
-    std::vector<Projectile> bullets;
+
+    std::vector<Projectile*> projectiles;
+
     sf::IntRect weaponStageIntRectsSide[2] = {sf::IntRect(0, 0, 360, 90),
                                              sf::IntRect(0, 95, 270, 165)};
 
@@ -114,7 +99,7 @@ private:
     sf::IntRect projectileIntRect[2] = {sf::IntRect(140, 140, 90, 45),
                                         sf::IntRect(0, 110, 135, 135)};
 
-    void setBullets(const std::vector<Projectile> &bullets);
+    void setProjectiles(const std::vector<Projectile*> bullets);
 };
 
 #endif //LEFT2DIE_WEAPON_H

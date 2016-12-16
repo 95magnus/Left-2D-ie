@@ -26,6 +26,8 @@ public:
 
     const sf::RectangleShape &getSprite() const;
 
+    sf::FloatRect getBounds() { return sprite.getGlobalBounds(); }
+
     void setSprite(const sf::RectangleShape &sprite);
 
     int getDamage() const;

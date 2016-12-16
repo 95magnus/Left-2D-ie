@@ -25,7 +25,8 @@ public:
         MULTI_PLAYER,
         HIGH_SCORE,
         SETTINGS,
-        SHOP
+        SHOP,
+        GAME_OVER
     };
 
     StateMachine(Game* game);
