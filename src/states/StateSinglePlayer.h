@@ -31,6 +31,8 @@ public:
     void resume();
 
     void spawnWave();
+    void getCurrentWeaponImage();
+    void getUpgradedWeaponImage();
 
     void initGameGui();
     void pauseGameGui();
@@ -71,7 +73,6 @@ protected:
     Message* mb;
 
 private:
-    sf::RectangleShape* coinsContainer;
     sf::RectangleShape* hpGreenBar;
     sf::RectangleShape* hpRedBar;
 
@@ -79,12 +80,16 @@ private:
     sf::Text* score;
     sf::Text* coins;
 
-    std::string filename;
-
     sf::Text zombiesLeft;
     int zombieCounter;
 
+    String currentWeaponImage;
+    String upgradedWeaponImage;
+
     bool initialized = false;
+
+//    String currentWeapon[] = {"resources/gui/ak.png", "resources/gui/shotgun.png", "resources/gui/tommygun.png",
+//                              "resources/gui/rifle.png", "resources/gui/sniper.png", "resources/gui/raygun.png"};
 };
 
 #endif //LEFT2DIE_STATESINGLEPLAYER_H

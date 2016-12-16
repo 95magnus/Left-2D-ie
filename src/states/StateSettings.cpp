@@ -165,22 +165,22 @@ void StateSettings::initControlsSettings() {
     createSettingsLabel(itemSixLabel);
 
     // Gameplay labels
-    auto actionLabel1 = sfg::Label::Create("     Actions");
+    auto actionLabel1 = sfg::Label::Create("Actions");
     createLabel(actionLabel1);
 
     auto keysLabel1 = sfg::Label::Create("     Keys");
     createLabel(keysLabel1);
 
-    auto moveUpLabel = sfg::Label::Create("  Move up");
+    auto moveUpLabel = sfg::Label::Create("Move up");
     createSettingsLabel(moveUpLabel);
 
-    auto moveDownLabel = sfg::Label::Create("       Move down");
+    auto moveDownLabel = sfg::Label::Create("Move down");
     createSettingsLabel(moveDownLabel);
 
-    auto moveLeftLabel = sfg::Label::Create("    Move left");
+    auto moveLeftLabel = sfg::Label::Create("Move left");
     createSettingsLabel(moveLeftLabel);
 
-    auto moveRightLabel = sfg::Label::Create("     Move right");
+    auto moveRightLabel = sfg::Label::Create("Move right");
     createSettingsLabel(moveRightLabel);
 
     // Ability labels
@@ -236,16 +236,16 @@ void StateSettings::initControlsSettings() {
     createSettingsControlGUIButtons(abilityFourButton);
 
     // Gameplay buttons
-    auto moveUpButton = sfg::ToggleButton::Create(" MOVE UP");
+    auto moveUpButton = sfg::ToggleButton::Create("W");
     createSettingsControlGUIButtons(moveUpButton);
 
-    auto moveDownButton = sfg::ToggleButton::Create("      MOVE DOWN");
+    auto moveDownButton = sfg::ToggleButton::Create("A");
     createSettingsControlGUIButtons(moveDownButton);
 
-    auto moveLeftButton = sfg::ToggleButton::Create("   MOVE LEFT");
+    auto moveLeftButton = sfg::ToggleButton::Create("S");
     createSettingsControlGUIButtons(moveLeftButton);
 
-    auto moveRightButton = sfg::ToggleButton::Create("     MOVE RIGHT");
+    auto moveRightButton = sfg::ToggleButton::Create("D");
     createSettingsControlGUIButtons(moveRightButton);
 
     // Handle buttons
@@ -309,16 +309,16 @@ void StateSettings::initControlsSettings() {
 
     // Table to manage label and button position
     auto gameplayTable = sfg::Table::Create();
-    gameplayTable->Attach(actionLabel, sf::Rect<sf::Uint32>(0,0,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
+    gameplayTable->Attach(actionLabel, sf::Rect<sf::Uint32>(0,0,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND, sf::Vector2f(10.f, 0.f));
     gameplayTable->Attach(keysLabel, sf::Rect<sf::Uint32>(5,0,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));
     gameplayTable->Attach(moveUpLabel, sf::Rect<sf::Uint32>(0,2,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND);
-    gameplayTable->Attach(moveUpButton, sf::Rect<sf::Uint32>(5,2,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(0.f, 0.f));
+    gameplayTable->Attach(moveUpButton, sf::Rect<sf::Uint32>(5,2,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(15.f, 0.f));
     gameplayTable->Attach(moveDownLabel, sf::Rect<sf::Uint32>(0,3,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND);
-    gameplayTable->Attach(moveDownButton, sf::Rect<sf::Uint32>(5,3,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(0.f, 0.f));
+    gameplayTable->Attach(moveDownButton, sf::Rect<sf::Uint32>(5,3,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(15.f, 0.f));
     gameplayTable->Attach(moveLeftLabel, sf::Rect<sf::Uint32>(0,4,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND);
-    gameplayTable->Attach(moveLeftButton, sf::Rect<sf::Uint32>(5,4,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(0.f, 0.f));
+    gameplayTable->Attach(moveLeftButton, sf::Rect<sf::Uint32>(5,4,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(15.f, 0.f));
     gameplayTable->Attach(moveRightLabel, sf::Rect<sf::Uint32>(0,5,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND);
-    gameplayTable->Attach(moveRightButton, sf::Rect<sf::Uint32>(5,5,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(0.f, 0.f));
+    gameplayTable->Attach(moveRightButton, sf::Rect<sf::Uint32>(5,5,1,1), sfg::Table::FILL | sfg::Table::EXPAND, sfg::Table::FILL, sf::Vector2f(15.f, 0.f));
 
     auto inventoryTable = sfg::Table::Create();
     inventoryTable->Attach(actionLabel1, sf::Rect<sf::Uint32>(0,0,2,1), sfg::Table::FILL , sfg::Table::FILL | sfg::Table::EXPAND, sf::Vector2f(0.f, 0.f));

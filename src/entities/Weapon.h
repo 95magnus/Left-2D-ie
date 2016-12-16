@@ -65,6 +65,8 @@ public:
 
     const sf::Texture &getProjectileTexture() const;
 
+    const sf::Texture *getText() const;
+
     void setProjectileTexture(const sf::Texture &projectileTexture);
 
     const sf::Mouse &getMouse() const;
@@ -115,7 +117,7 @@ private:
      * 1: AK
      * 2: shotgun
      * 3: tommygun
-     * 4: rifle
+     * 4: riflerr
      * 5: sniper
      * 6: raygun
      * */

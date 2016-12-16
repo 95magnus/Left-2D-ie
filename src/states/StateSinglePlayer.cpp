@@ -51,6 +51,7 @@ void StateSinglePlayer::init() {
 
 void StateSinglePlayer::resume() {
     StateBase::resume();
+    desktop->RemoveAll();
     initGameGui();
 }
 
@@ -243,11 +244,19 @@ void StateSinglePlayer::checkForHits(std::vector<Enemy*> &enemies, std::vector<P
 }
 
 void StateSinglePlayer::spawnWave() {
-    for (int e = 0; e < 10 + waveNumber * 3; e++) {
+    for (int e = 0; e < 1 + waveNumber * 0; e++) {
         Enemy* ny_zombie = new Enemy(sf::Vector2f(0,0));
         ny_zombie->buff(20*waveNumber);
         enemies.push_back(ny_zombie);
         enemies.back()->sprite.setPosition(rand() % 600, rand() % 600);
         zombieCounter++;
     }
+}
+
+void StateSinglePlayer::getCurrentWeaponImage() {
+
+}
+
+void StateSinglePlayer::getUpgradedWeaponImage() {
+
 }

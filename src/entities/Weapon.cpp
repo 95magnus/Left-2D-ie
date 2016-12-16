@@ -244,3 +244,7 @@ void Weapon::setSpray(bool spray) {
     Weapon::spray = spray;
 }
 
+const sf::Texture *Weapon::getText() const {
+    return text;
+}
+

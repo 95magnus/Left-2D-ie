@@ -8,6 +8,14 @@ StateMainMenu::StateMainMenu(Game *game) : StateBase(game) {
     loader.loadTexture(backgroundImage, "background.png");
     background.setTexture(backgroundImage);
     background.setSize(game->getWindowSize());
+
+    if (soundBufferMain.loadFromFile("resources/sound/POL-sky-sanctuary-short.wav")) {
+
+    }
+    soundMain.setBuffer(soundBufferMain);
+    soundMain.setLoop(true);
+    soundMain.setVolume(12.0f);
+    soundMain.play();
 }
 
 StateMainMenu::~StateMainMenu() {

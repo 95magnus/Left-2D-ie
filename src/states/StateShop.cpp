@@ -2,6 +2,17 @@
 #include "../entities/Player.h"
 
 StateShop::StateShop(Game *game) : StateBase(game){
+    for (int i = 0; i < upgradedThemePath.size(); i++) {
+        auto temp = new sf::Image;
+        auto image = sfg::Image::Create();
+
+        if(temp->loadFromFile(upgradedThemePath[i])){
+            image->SetImage(*temp);
+        }
+        image->SetRequisition(sf::Vector2f(game->getWindowSize()));
+
+        weaponImages.push_back(image);
+    }
 }
 
 StateShop::~StateShop() {
@@ -43,6 +54,12 @@ void StateShop::pause() {
     delete damageContainer;
     delete healthContainer;
     delete coinsContainer;
+
+    if (weapon->getWeaponStage() < weaponImages.size())
+        desktop->Remove(weaponImages[weapon->getWeaponStage()]);
+    if (weapon->getWeaponStage() < weaponImages.size()-1)
+        desktop->Remove(weaponImages[weapon->getWeaponStage()+1]);
+
 }
 
 void StateShop::resume() {
@@ -54,11 +71,18 @@ void StateShop::update(float deltaTime) {
     currentFireRateValue->setString(std::to_string((int)weapon->getRps()));
     upgradedFireRateValue->setString(std::to_string((int)weapon->getRps()+1));
     currentDamageValue->setString(std::to_string(weapon->getDamage()));
-    upgradedDamageValue->setString(std::to_string(weapon->getDamage()+5));
+    upgradedDamageValue->setString(std::to_string(weapon->getDamage()+2));
     currentHealthValue->setString(std::to_string(player->getMaxHealth()));
     upgradedHealthValue->setString(std::to_string(player->getMaxHealth()+25));
     player->setHealth(player->getMaxHealth());
-    weapon->setWeaponStage(weapon->getWeaponStage());
+    //weapon->setWeaponStage(weapon->getWeaponStage());
+
+    if(weapon->getWeaponStage()>=5){
+        weapon->setWeaponStage(5);
+        if(weapon->getWeaponStage()>=4){
+            weapon->setSpray(false);
+        }
+    }
 }
 
 void StateShop::draw(sf::RenderWindow &window) {
@@ -101,7 +125,6 @@ void StateShop::draw(sf::RenderWindow &window) {
     game->getWindow().draw(*damageContainer);
     game->getWindow().draw(*healthContainer);
     game->getWindow().draw(*coinsContainer);
-
 }
 
 void StateShop::initShopGui() {
@@ -120,7 +143,7 @@ void StateShop::initShopGui() {
     //// SFML widgets
     // Continue label
     nextRoundLabel = new sf::Text("Continue", *font, 30);
-    createShopLabel(nextRoundLabel, sf::Vector2f(770.f, 50.f));
+    createShopLabel(nextRoundLabel, sf::Vector2f(770.f, 52.f));
 
     // Total coins
     totalCoinsEarnedLabel = new sf::Text("Total coins earned", *font, 30);
@@ -131,7 +154,7 @@ void StateShop::initShopGui() {
     totalCoins->setPosition(835.f, 640.f);
     totalCoins->setScale(sf::Vector2f(1.0f, 1.0f));
 
-    // Weapon name //// TODO: Change image and weapon
+    // Weapon name
     currentWeaponName = new sf::Text("AK-47", *font, 20);
     createShopLabel(currentWeaponName, sf::Vector2f(260.f, 190.f));
 
@@ -142,16 +165,16 @@ void StateShop::initShopGui() {
     cost = new sf::Text("Cost", *font, 30);
     createShopLabel(cost, sf::Vector2f(875.f, 190.f));
 
-    upgradeWeaponCost = new sf::Text("1000", *font, 30);
+    upgradeWeaponCost = new sf::Text(std::to_string(weaponCost), *font, 30);
     createShopLabel(upgradeWeaponCost, sf::Vector2f(865.f, 260.f));
 
-    upgradeFireRateCost = new sf::Text("350", *font, 30);
+    upgradeFireRateCost = new sf::Text(std::to_string(fireRateCost), *font, 30);
     createShopLabel(upgradeFireRateCost, sf::Vector2f(865.f, 350.f));
 
-    upgradeDamageCost = new sf::Text("100", *font, 30);
+    upgradeDamageCost = new sf::Text(std::to_string(damageCost), *font, 30);
     createShopLabel(upgradeDamageCost, sf::Vector2f(865.f, 450.f));
 
-    upgradeHealthCost = new sf::Text("350", *font, 30);
+    upgradeHealthCost = new sf::Text(std::to_string(healthCost), *font, 30);
     createShopLabel(upgradeHealthCost, sf::Vector2f(865.f, 550.f));
 
     // Current and upgraded values of firerate, damage and health
@@ -164,7 +187,7 @@ void StateShop::initShopGui() {
     currentDamageValue = new sf::Text(std::to_string(weapon->getDamage()), *font, 30);
     createShopLabel(currentDamageValue, sf::Vector2f(210.f, 450.f));
 
-    upgradedDamageValue = new sf::Text(std::to_string(weapon->getDamage()+1), *font, 30);
+    upgradedDamageValue = new sf::Text(std::to_string(weapon->getDamage()+2), *font, 30);
     createShopLabel(upgradedDamageValue, sf::Vector2f(655.f, 450.f));
 
     currentHealthValue = new sf::Text(std::to_string(player->getMaxHealth()), *font, 30);
@@ -219,7 +242,7 @@ void StateShop::initShopGui() {
     coinsContainer->setFillColor(sf::Color(192,192,192,20));
     coinsContainer->setPosition(845.f,240.f);
 
-    // Coins image
+    // Coins image to all the categories
     auto coinsImage1 = sfg::Image::Create();
     createImage(coinsImage1, "resources/gui/coin.png");
     coinsImage1->SetPosition(sf::Vector2f(930.f, 255.f));
@@ -243,12 +266,8 @@ void StateShop::initShopGui() {
     //// SFGUI widgets
     auto box = sfg::Box::Create(sfg::Box::Orientation::VERTICAL);
 
-    auto nextButton = sfg::Button::Create();
-    createShopButtonImage(nextButton, "right_arrow.png");
-    auto fixedNextButton = sfg::Fixed::Create();
-    fixedNextButton->Put(nextButton, sf::Vector2f(900.0f, 28.f));
-    box->Pack(fixedNextButton, false);
-
+    //// Images
+    /*
     // Weapons icons
     auto ak = sfg::Image::Create();
     createImage(ak, "resources/gui/resized_ak.png");
@@ -257,6 +276,20 @@ void StateShop::initShopGui() {
     auto shotgun = sfg::Image::Create();
     createImage(shotgun, "resources/gui/resized_shotgun.png");
     shotgun->SetPosition(sf::Vector2f(650.f, 210.f));
+
+    // Current weapon
+    if (weapon->getWeaponStage() < weaponImages.size()){
+        weaponImages[weapon->getWeaponStage()]->SetPosition(sf::Vector2f(220.f, 210.f));
+        desktop->Add(weaponImages[weapon->getWeaponStage()]);
+    }
+
+    // Upgraded weapon
+    if (weapon->getWeaponStage() < weaponImages.size() - 1){
+        weaponImages[weapon->getWeaponStage()+1]->SetPosition(sf::Vector2f(650.f, 210.f));
+        desktop->Add(weaponImages[weapon->getWeaponStage() + 1]);
+    }
+    */
+    refreshWeaponImages();
 
     // Firerate icons
     auto currentFirerate = sfg::Image::Create();
@@ -285,35 +318,43 @@ void StateShop::initShopGui() {
     createImage(upgradedHealth, "resources/gui/health.png");
     upgradedHealth->SetPosition(sf::Vector2f(735.f, 535.f));
 
+    //// Buttons
+    // Continue to next round
+    auto nextButton = sfg::Button::Create();
+    createShopButtonImage(nextButton, "right_arrow.png");
+    auto fixedNextButton = sfg::Fixed::Create();
+    fixedNextButton->Put(nextButton, sf::Vector2f(915.0f, 40.f));
+    box->Pack(fixedNextButton, false);
+
     // Upgrades buttons
     auto upgradeWeapon = sfg::Button::Create();
     createShopButtonImage(upgradeWeapon, "greater_than.png");
     auto fixedUpgradeWeaponButton = sfg::Fixed::Create();
-    fixedUpgradeWeaponButton->Put(upgradeWeapon, sf::Vector2f(525.f, 142.f));
+    fixedUpgradeWeaponButton->Put(upgradeWeapon, sf::Vector2f(525.f, 145.f));
     box->Pack(fixedUpgradeWeaponButton, false);
 
     auto upgradeFireRate = sfg::Button::Create();
     createShopButtonImage(upgradeFireRate, "greater_than.png");
     auto fixedUpgradeFireRateButton = sfg::Fixed::Create();
-    fixedUpgradeFireRateButton->Put(upgradeFireRate, sf::Vector2f(525.f, 41.f));
+    fixedUpgradeFireRateButton->Put(upgradeFireRate, sf::Vector2f(525.f, 42.f));
     box->Pack(fixedUpgradeFireRateButton, false);
 
     auto upgradeDamageRate = sfg::Button::Create();
     createShopButtonImage(upgradeDamageRate, "greater_than.png");
     auto fixedUpgradeDamageButton = sfg::Fixed::Create();
-    fixedUpgradeDamageButton->Put(upgradeDamageRate, sf::Vector2f(525.f, 41.f));
+    fixedUpgradeDamageButton->Put(upgradeDamageRate, sf::Vector2f(525.f, 40.f));
     box->Pack(fixedUpgradeDamageButton, false);
 
     auto upgradeHealth = sfg::Button::Create();
     createShopButtonImage(upgradeHealth, "greater_than.png");
     auto fixedUpgradeHealthButton = sfg::Fixed::Create();
-    fixedUpgradeHealthButton->Put(upgradeHealth, sf::Vector2f(525.f, 41.f));
+    fixedUpgradeHealthButton->Put(upgradeHealth, sf::Vector2f(525.f, 40.f));
     box->Pack(fixedUpgradeHealthButton, false);
 
     auto boxmain = sfg::Box::Create(sfg::Box::Orientation::VERTICAL);
 
     boxmain->Pack(box, false);
-    shopWindow->Add(boxmain);
+    desktop->Add(boxmain);
 
     // Signals
     nextButton->GetSignal(sfg::Button::OnLeftClick).Connect(std::bind(&StateShop::initGameGui,this));
@@ -328,14 +369,17 @@ void StateShop::initGameGui() {
 }
 
 void StateShop::upgradeWeapon() {
-    if(weapon->getWeaponStage()<6){
-        weapon->setWeaponStage(weapon->getWeaponStage()+1);
-        if(weapon->getWeaponStage()>=4){
+//    if(player->getMoney()>weaponCost)
+    if(weapon->getWeaponStage()<6) {
+        weapon->setWeaponStage(weapon->getWeaponStage() + 1);
+        weapon->setRps(weapon->getRps() + 1);
+        weapon->setDamage(weapon->getDamage() + 2);
+        if (weapon->getWeaponStage() >= 4) {
             weapon->setSpray(false);
         }
     }
-    //weapon = new Weapon(game->getWindow(), 4, weapon->getDamage()+2, weapon->getRps()+2, true, (int)weapon->getSprite().getPosition().x, (int)weapon->getSprite().getPosition().y);
 
+    refreshWeaponImages();
 }
 
 void StateShop::upgradeFireRate() {
@@ -348,4 +392,19 @@ void StateShop::upgradeDamage() {
 
 void StateShop::upgradeHealth() {
     player->setMaxHealth(player->getMaxHealth()+25);
+}
+
+void StateShop::refreshWeaponImages() {
+    if (weapon->getWeaponStage() < weaponImages.size()){
+        desktop->Remove(weaponImages[weapon->getWeaponStage()]);
+        weaponImages[weapon->getWeaponStage()]->SetPosition(sf::Vector2f(220.f, 210.f));
+        desktop->Add(weaponImages[weapon->getWeaponStage()]);
+    }
+
+    // Upgraded weapon
+    if (weapon->getWeaponStage() < weaponImages.size() - 1){
+        desktop->Remove(weaponImages[weapon->getWeaponStage()+1]);
+        weaponImages[weapon->getWeaponStage()+1]->SetPosition(sf::Vector2f(650.f, 210.f));
+        desktop->Add(weaponImages[weapon->getWeaponStage() + 1]);
+    }
 }
