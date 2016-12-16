@@ -5,8 +5,6 @@ PlayerController::PlayerController(InputManager &inputManager) : InputObserver(i
 PlayerController::PlayerController(InputManager &inputManager, int joystickID)
         : PlayerController(inputManager){
     this->joystickID = joystickID;
-
-    usingController = true;
 }
 
 PlayerController::~PlayerController() {

@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "../input/InputManager.h"
 
-Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputManager, sf::Vector2f pos)
+Player::Player(sf::RenderWindow &window, sf::View &view, InputManager &inputManager, sf::Vector2f pos)
         : Entity(pos), PlayerController(inputManager, 0), window(window), view(view){
     maxHealth = 100;
     health = maxHealth;
@@ -78,6 +78,8 @@ Player:: Player(sf::RenderWindow &window, sf::View &view, InputManager &inputMan
 
     diedBuffer.loadFromFile("resources/sound_effects/wilhelm_scream.wav");
     deathSound.setBuffer(diedBuffer);
+
+    usingController = sf::Joystick::isConnected(0);
 }
 
 Player::~Player() {
